@@ -8,19 +8,33 @@ import {
 } from "react-router-dom";
 
 
+//Onboarding Routes
+import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
+import LoginScreen from "../supervisors_page/onboarding_screens/LoginScreen";
+import CreateAccountScreen from "../supervisors_page/onboarding_screens/CreateAccountScreen";
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    // <Route path="/">
-    //   <Route path="/" element={<LandingPage />} ></Route>
-    //   <Route path="/login" element={<LoginForm />}>
-    //   </Route>
-    //   <Route path="/register" element={<Registration />} >
-
-    //   </Route>
-    //   <Route path="dashboard/*" element={<Dashboard />} />
-    // </Route>
+    <Route path="/">
+      <Route path="/" element={<WelcomeScreen />} ></Route>
+      <Route path="/login" element={<LoginScreen />}></Route>
+      <Route path="/createaccount" element={<CreateAccountScreen />}></Route>
+      {/* <Route path="/login" element={<LoginForm />}>
+        <Route path="" element={<Login />} />
+        <Route path="/login/forgotpassword" element={<ForgottenPassword />} />
+        <Route path="/login/otp" element={<LoginOtpVerify />} />
+        <Route path="/login/createpassword" element={<CreateNewPassword />} />
+      </Route> */}
+      {/* <Route path="/register" element={<Registration />} >
+        <Route path="/register" element={<Member />} />
+        <Route path="/register/member" element={<Member />} />
+        <Route path="/register/farm" element={<Farm />} />
+        <Route path="/register/guarantor" element={<Guarantor />} />
+      </Route> */}
+     
+      {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
+    </Route>
   )
 )
 
