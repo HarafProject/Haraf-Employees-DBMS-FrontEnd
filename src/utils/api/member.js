@@ -14,8 +14,6 @@ export const RegisterMember = async (user) => {
   }
 };
 
-
-
 export const VerifyOTP = async (token) => {
   try {
     const { data } = await api.put(`/api/users`, token);
@@ -188,7 +186,6 @@ export const GetWallet = async (signal) => {
   }
 };
 
-
 export const MyLoan = async (signal) => {
   try {
     const { data } = await api.get(`/api/users/myLoan`, signal);
@@ -206,7 +203,6 @@ export const GetTransactions = async (type) => {
     throw error.response.data;
   }
 };
-
 
 export const AddSaving = async (savings) => {
   try {
@@ -227,7 +223,10 @@ export const ValidatePayment = async (reference) => {
 
 export const WithdrawalRequest = async (withdrawal) => {
   try {
-    const { data } = await api.post(`/api/users/savings/withdrawal`, withdrawal);
+    const { data } = await api.post(
+      `/api/users/savings/withdrawal`,
+      withdrawal
+    );
     return data;
   } catch (error) {
     throw error.response.data;
