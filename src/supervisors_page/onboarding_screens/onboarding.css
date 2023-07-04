@@ -3,17 +3,19 @@
     ;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+   
+    height: auto;
 }
-
+.welcome-screen-content{
+    text-align: center;
+}
 
 .welcome-screen-content,
 .signup-content {
     color: #FFFFFF;
     line-height: normal;
     white-space: nowrap;
-    text-align: center;
+    
 }
 
 .welcome-screen-content img {
@@ -21,19 +23,22 @@
 }
 
 .signup-content img {
-    width: 40%
+    width: 30%
 }
 
 .welcome-screen-content h1 {
-    font-size: 35px;
+    font-size: 32px;
     font-weight: 400;
     line-height: normal;
 
 }
 
-.signup-content p.title {
+.signup-content p.title,
+.welcome-screen-content p {
     font-size: 18px;
+    font-family: 'CustomFont', sans-serif;
     font-weight: 400;
+    /* Bold font weight */
     line-height: normal;
 }
 
@@ -43,15 +48,11 @@
     line-height: normal
 }
 
-.welcome-screen-content p {
-    font-size: 24px;
-    font-weight: 300;
-}
 
 .welcome-screen-button .btn,
 .signup-content .btn {
     width: 350px;
-   
+
     border-radius: 50px;
     padding: 5px 10px;
     font-size: 24px;
@@ -72,13 +73,13 @@
 }
 
 .signup-content .form-field {
-display: flex;
-align-items: center;
-width: 350px;
-/* justify-content: center; */
+    display: flex;
+    align-items: center;
+    width: 350px;
+    /* justify-content: center; */
     padding: 5px 20px;
     border-radius: 50px;
-    border: 2px solid #FFFFFF;
+    border: 1px solid #FFFFFF;
     margin: 10px solid;
 
 }
@@ -90,16 +91,31 @@ width: 350px;
     border: none;
     background-color: transparent;
     font-size: 16px;
-    font-weight: lighter;
     line-height: normal;
     color: #FFFFFF;
     font-family: 'Lexend Deca', sans-serif;
 
 }
 
+.signup-content .form-field select option {
+    color: #000;
+}
+
+.signup-content .form-field select {
+    width: 350px;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    color: #FFFFFF;
+    background-color: transparent;
+    font-size: 16px;
+    line-height: normal;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+
 .signup-content .form-field input::placeholder {
     color: #FFFFFF;
-    font-weight: lighter;
     background-color: transparent !important;
     font-family: 'Lexend Deca', sans-serif;
 }
@@ -111,6 +127,24 @@ width: 350px;
     color: transparent !important;
 }
 
+.signup-content .form-field input:-webkit-autofill,
+.signup-content .form-field input:-webkit-autofill:hover,
+.signup-content .form-field input:-webkit-autofill:focus,
+.signup-content .form-field input:-webkit-autofill:active {
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
+}
+.signup-content .form-field select {
+    appearance: none;
+    background-image: url('../../assets/arrow.png');
+    background-repeat: no-repeat;
+    background-position: right 15px;
+    background-size: 1em auto;
+  }
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
 .eye .iconify {
     font-size: 20px;
 }
@@ -125,6 +159,10 @@ width: 350px;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+}
+
+.text-danger{
+    color: red;
 }
 
 

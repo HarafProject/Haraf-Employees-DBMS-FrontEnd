@@ -24,14 +24,14 @@ const fieldName = `field_${Date.now()}`;
     return (
         <div className="onboarding-screen">
             {/* <div className="login-screen"> */}
-            <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content">
-                <div className="signup-logo">
+            <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
+                <div className="signup-logo text-center">
                     <img src={profile} alt="" />
-                    <p className='my-1 title'>Employees Database {<br />} Management System (EDMS)</p>
+                    <p className='my-1 title'>LIPW Management System{<br />}(LIPWMS)</p>
                 </div>
 
                 <form action="" className="mt-3">
-                    <p className='screen-title mt-5'>SUPERVISOR LOGIN</p>
+                    <p className='screen-title text-center mt-5'>SUPERVISOR LOGIN</p>
 
                     <div>
 
@@ -52,7 +52,7 @@ const fieldName = `field_${Date.now()}`;
 
 
                 <div className="d-flex flex-column login-screen-button mt-3">
-                    <button onClick={() => { navigate("/profile"); }} className="btn login my-4">Login</button>
+                    <button onClick={() => { navigate("/employeeemptylist"); }} className="btn login my-4">Login</button>
                 </div>
                 <p className='forgot-password'>Forgotten Password? <span> Reset Here</span> </p>
             </div>
