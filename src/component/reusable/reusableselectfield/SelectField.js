@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './selectfield.css';
+import React, { useState } from "react";
+import "./selectfield.css";
 
 const SelectField = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Default option*');
+  const [selectedOption, setSelectedOption] = useState("Default option*");
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -35,35 +35,35 @@ const SelectField = () => {
                 <li
                   className="dropdown__select-option"
                   role="option"
-                  onClick={() => handleOptionSelect('Option 1')}
+                  onClick={() => handleOptionSelect("Option 1")}
                 >
                   Option 1
                 </li>
                 <li
                   className="dropdown__select-option"
                   role="option"
-                  onClick={() => handleOptionSelect('Option 2')}
+                  onClick={() => handleOptionSelect("Option 2")}
                 >
                   Option 2
                 </li>
                 <li
                   className="dropdown__select-option"
                   role="option"
-                  onClick={() => handleOptionSelect('Option 3')}
+                  onClick={() => handleOptionSelect("Option 3")}
                 >
                   Option 3
                 </li>
                 <li
                   className="dropdown__select-option"
                   role="option"
-                  onClick={() => handleOptionSelect('Option 4')}
+                  onClick={() => handleOptionSelect("Option 4")}
                 >
                   Option 4
                 </li>
                 <li
                   className="dropdown__select-option"
                   role="option"
-                  onClick={() => handleOptionSelect('Option 5')}
+                  onClick={() => handleOptionSelect("Option 5")}
                 >
                   Option 5
                 </li>

@@ -1,5 +1,5 @@
-import './App.css';
-import RoutingPage from './routes/RoutingPage';
+import "./App.css";
+import RoutingPage from "./routes/RoutingPage";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 

@@ -1,102 +1,97 @@
-.filter-option-section p{
-font-size: 36px;
-font-weight: 600;
-line-height: normal;
-color: #0280CA;
-
+.filter-option-section p {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: normal;
+  color: #0280ca;
 }
 
 .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
-
-    width: 200px ;
-    border-radius: 16px !important;
-    letter-spacing: 0;
-font-size: 14px;
-font-weight: 400;
-line-height: normal;
-color: #7A7575;
-
+  width: 200px;
+  border-radius: 16px !important;
+  letter-spacing: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  color: #7a7575;
 }
-.css-ahj2mt-MuiTypography-root, .css-ahj2mt-MuiTypography-root:first-child {
-    margin: 0;font-weight: 400;
-    
-font-size: 14px;
-font-weight: 400;
-line-height: normal;
+.css-ahj2mt-MuiTypography-root,
+.css-ahj2mt-MuiTypography-root:first-child {
+  margin: 0;
+  font-weight: 400;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
 }
-.filter-option-section .form-field{
-border-radius: 33px;
-border: 0.6px solid #444444;
-padding: 0 15px;
+.filter-option-section .form-field {
+  border-radius: 33px;
+  border: 0.6px solid #444444;
+  padding: 0 15px;
 }
 .filter-option-section .form-field select {
-    width: 130px;
-    padding: 10px 0;
-    outline: none;
-    border: none;
-    color: #7A7575;
-    background-color: transparent;
-    font-size: 14px;
-    line-height: normal;
-     
+  width: 130px;
+  padding: 10px 0;
+  outline: none;
+  border: none;
+  color: #7a7575;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: normal;
 }
-.filter-option-section .form-field select option:first-child{
-    color:  #a6a6a68c;
+.filter-option-section .form-field select option:first-child {
+  color: #a6a6a68c;
 }
 
 .filter-option-section .form-field select {
-    appearance: none;
-    background-image: url('../../../assets/arrow.png');
-    background-repeat: no-repeat;
-    background-position: center right ;
-    background-size: 0.8em auto;
+  appearance: none;
+  background-image: url("../../../assets/arrow.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: 0.8em auto;
 }
 
-.search-button{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-border-radius: 45px;
-border: 0.6px solid #444444;
-color: #444444;
-height: fit-content;
-
+.search-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  border-radius: 45px;
+  border: 0.6px solid #444444;
+  color: #444444;
+  height: fit-content;
 }
-.search-icon{
-    font-size: 25px;
-    color: #7A7575;
-
+.search-icon {
+  font-size: 25px;
+  color: #7a7575;
 }
 .filter-option-section .search-button input {
-    /* width: 400px; */
-    padding: 10px 0;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    font-size: 14px;
-    line-height: normal;
-    color: #7A7575;
+  /* width: 400px; */
+  padding: 10px 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: normal;
+  color: #7a7575;
 }
 
 .filter-option-section .search-button input::placeholder {
-    color: #7A7575;
-    background-color: transparent !important;
-     
+  color: #7a7575;
+  background-color: transparent !important;
 }
 
 .filter-option-section .search-button input:-internal-autofill-selected {
-    appearance: none !important;
-    background-image: none !important;
-    background-color: -internal-light-dark(transparent, transparent) !important;
-    color: transparent !important;
+  appearance: none !important;
+  background-image: none !important;
+  background-color: -internal-light-dark(transparent, transparent) !important;
+  color: transparent !important;
 }
 
 .filter-option-section .search-button input:-webkit-autofill,
 .filter-option-section .search-button input:-webkit-autofill:hover,
 .filter-option-section .search-button input:-webkit-autofill:focus,
 .filter-option-section .search-button input:-webkit-autofill:active {
-    -webkit-transition-delay: 9999s;
-    transition-delay: 9999s;
+  -webkit-transition-delay: 9999s;
+  transition-delay: 9999s;
 }

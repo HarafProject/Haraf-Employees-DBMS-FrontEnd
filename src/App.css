@@ -1,63 +1,73 @@
- @import url('https://fonts.cdnfonts.com/css/lexend-deca');
+@import url("https://fonts.cdnfonts.com/css/lexend-deca");
 
- @font-face {
-  font-family: 'LexendFont';
+@font-face {
+  font-family: "LexendFont";
   font-weight: 200;
-  src: url('./font/LexendDeca-Thin.ttf') format('truetype');
+  src: url("./font/LexendDeca-Thin.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'LexendFont';
+  font-family: "LexendFont";
   font-weight: 300;
-  src: url('./font/LexendDeca-Light.ttf') format('truetype');
+  src: url("./font/LexendDeca-Light.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'LexendFont';
+  font-family: "LexendFont";
   font-weight: 400;
-  src: url('./font/LexendDeca-Regular.ttf') format('truetype');
+  src: url("./font/LexendDeca-Regular.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'LexendFont';
+  font-family: "LexendFont";
   font-weight: 500;
-  src: url('./font/LexendDeca-Medium.ttf') format('truetype');
+  src: url("./font/LexendDeca-Medium.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'LexendFont';
+  font-family: "LexendFont";
   font-weight: 600;
-  src: url('./font/LexendDeca-SemiBold.ttf') format('truetype');
+  src: url("./font/LexendDeca-SemiBold.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'LexendFont';
+  font-family: "LexendFont";
   font-weight: 700;
-  src: url('./font/LexendDeca-Bold.ttf') format('truetype');
+  src: url("./font/LexendDeca-Bold.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'LexendFont';
+  font-family: "LexendFont";
   font-weight: 800;
-  src: url('./font/LexendDeca-ExtraBold.ttf') format('truetype');
+  src: url("./font/LexendDeca-ExtraBold.ttf") format("truetype");
 }
 
-          
-
-
-*, body, html {
+*,
+body,
+html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
 }
 
-p{
+p {
   margin-bottom: 0;
-  font-family: 'CustomFont', sans-serif;
+  font-family: "CustomFont", sans-serif;
   font-weight: 300; /* Bold font weight */
 }
 
-
-input, input::placeholder, select, select option{
-  font-family: 'CustomFont', sans-serif;
-  font-weight: 200 !important
+input,
+input::placeholder,
+select,
+select option {
+  font-family: "CustomFont", sans-serif;
+  font-weight: 200 !important;
 }
-h1, h2, h3, h4, h5, h6, button{
-  font-family: 'CustomFont', sans-serif; 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: "CustomFont", sans-serif;
+}
+.error {
+  color: rgb(236, 26, 26);
 }
