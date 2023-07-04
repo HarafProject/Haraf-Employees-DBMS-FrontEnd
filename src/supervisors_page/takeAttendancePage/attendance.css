@@ -1,0 +1,242 @@
+.margin {
+  margin-top: 8rem;
+}
+/* Select Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: normal;
+}
+
+.check {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+input[type='checkbox']:checked {
+  background-color: #f99c39;
+}
+
+.select-typ {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
+}
+.header h3 {
+  font-size: 28px;
+  color: #0280ca;
+}
+
+.wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid label {
+  margin: 1rem 0;
+}
+
+.toggle {
+  color: #444444;
+}
+
+.toggle div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.toggle p {
+  color: red;
+  font-size: 12px;
+  padding: 0 2rem;
+}
+
+.select-typ button {
+  display: block;
+  width: 40%;
+  margin: 0 auto;
+  border: none;
+  padding: 0.5rem 2rem;
+  background-color: #0280ca;
+  color: #fff;
+  border-radius: 25px;
+}
+
+.last-check {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 3rem 0;
+  color: #444444;
+}
+/* End of select typography */
+
+/* Attendance list */
+
+.attendance {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.attendance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.attendance-header h3 {
+  color: #0280ca;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.attendance-header h4 {
+  font-size: 24px;
+}
+
+.attendance-sub-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.attendance-sub-head h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.attendance-sub-head p {
+  color: red;
+  font-size: 14px;
+}
+
+.center-container {
+  position: fixed;
+  top: 80%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.center-button {
+  border: none;
+  font-size: 12px;
+  padding: 0.5rem 2rem;
+  background-color: #0280ca;
+  color: #fff;
+  border-radius: 25px;
+}
+/* End of Attendance List */
+
+/* Attendance Report */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.summary h1 {
+  color: #f99c39;
+  font-size: 40px;
+}
+.select-typ-report {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.select-typ-report h4 {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444444;
+}
+
+.header-report {
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.header-report h3 {
+  font-size: 28px;
+  color: #0280ca;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  margin: 2rem 0;
+}
+
+.report p {
+  text-align: center;
+  color: #444444;
+}
+
+.report h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.msg-area {
+  width: 60%;
+  margin: 6rem auto;
+}
+
+.msg-area p {
+  text-align: center;
+  color: #444444;
+}
+
+.message {
+  width: 100%;
+  padding: 0.5rem;
+  resize: none;
+}
+
+.btns {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+.select-typ-report button {
+  width: 30%;
+  display: block;
+  padding: 0.7rem 0;
+  border-radius: 25px;
+}
+.btn-submit {
+  background-color: #0280ca;
+  color: #fff;
+  border: 1px;
+}
+
+.btn-back {
+  color: #0280ca;
+  background-color: #fff;
+  border: 2px solid #0280ca;
+}

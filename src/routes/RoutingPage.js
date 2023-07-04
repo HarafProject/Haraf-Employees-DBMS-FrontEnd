@@ -5,21 +5,23 @@ import {
   // Router,
   createRoutesFromElements,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom'
 
+// TakeAttendancePage
 
-//Onboarding Routes
-import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
-import LoginScreen from "../supervisors_page/onboarding_screens/LoginScreen";
-import CreateAccountScreen from "../supervisors_page/onboarding_screens/CreateAccountScreen";
-
+import SelectTypography from '../supervisors_page/takeAttendancePage/SelectTypography'
+import TakeAttendance from '../supervisors_page/takeAttendancePage/TakeAttendance'
+import AttendanceReport from '../supervisors_page/takeAttendancePage/AttendanceReport'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
-      <Route path="/" element={<WelcomeScreen />} ></Route>
-      <Route path="/login" element={<LoginScreen />}></Route>
-      <Route path="/createaccount" element={<CreateAccountScreen />}></Route>
+    <Route path='/'>
+      {/* <Route path='/' element={<SelectTypography />}></Route>
+      <Route path='/take-attendance' element={<TakeAttendance />}></Route> */}
+      <Route path='/' element={<AttendanceReport />}></Route>
+
+      {/* <Route path="/take-attendance" element={<TakeAttendance/>} ></Route> */}
+
       {/* <Route path="/login" element={<LoginForm />}>
         <Route path="" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgottenPassword />} />
@@ -32,7 +34,7 @@ const router = createBrowserRouter(
         <Route path="/register/farm" element={<Farm />} />
         <Route path="/register/guarantor" element={<Guarantor />} />
       </Route> */}
-     
+
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>
   )
@@ -41,9 +43,8 @@ const router = createBrowserRouter(
 function RoutingPage({ user }) {
   return (
     <div>
-
       <RouterProvider router={router} context={{ user }} />
     </div>
   )
 }
-export default RoutingPage;
+export default RoutingPage
