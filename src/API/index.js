@@ -1,4 +1,5 @@
 import axios from "axios";
+import GetToken from "../utils/getToken";
 
 const baseURL = "https://haraf-edm.onrender.com";
 
@@ -10,7 +11,7 @@ const api = axios.create({
 // Add an interceptor to include JWT in request headers if available
 api.interceptors.request.use(
   (config) => {
-    const jwt = ""; // Replace getJWT() with the function to get the JWT from your storage or state
+    const jwt = GetToken(); // Replace getJWT() with the function to get the JWT from your storage or state
 
     if (jwt) {
       config.headers.Authorization = `Bearer ${jwt}`;
