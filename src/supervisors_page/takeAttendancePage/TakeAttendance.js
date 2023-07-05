@@ -18,8 +18,8 @@ export default function TakeAttendance() {
           <div className='attendance-sub-head'>
             <h4>Health Typology</h4>
             <p>
-              Note: Attendance report must be <br /> sent between 09:00am -
-              4:00pm
+              Note: Attendance report must be <br /> sent between
+              <span>09:00am - 4:00pm</span>
             </p>
           </div>
         </div>

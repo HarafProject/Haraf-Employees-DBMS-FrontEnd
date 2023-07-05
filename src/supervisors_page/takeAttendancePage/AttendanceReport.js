@@ -11,10 +11,10 @@ export default function AttendanceReport() {
       <div className='margin '>
         <div className='select-typ-report'>
           <div className='header-report'>
-            <h3>Select Typology</h3>
+            <h3>Attendance Report Upload</h3>
             <p>
               Please choose the employee typology for whom you will be taking
-              attendance.
+              attendance
             </p>
           </div>
           <h4>Attendance Summary</h4>

@@ -1,39 +1,19 @@
 const tableData = [
   {
+    id: 1,
     image: '',
     name: 'Kadwama Lazarus',
     role: 'Health Typology - Banjiram Ward',
-    present: false,
-    absent: true,
+    isPresent: true,
+    isAbsent: null,
   },
   {
+    id: 2,
     image: '',
     name: 'Kadwama Lazarus',
     role: 'Health Typology - Banjiram Ward',
-    present: false,
-    absent: false,
+    isPresent: true,
+    isAbsent: null,
   },
-  {
-    image: '',
-    name: 'Kadwama Lazarus',
-    role: 'Health Typology - Banjiram Ward',
-    present: false,
-    absent: false,
-  },
-  {
-    image: '',
-    name: 'Kadwama Lazarus',
-    role: 'Health Typology - Banjiram Ward',
-    present: false,
-    absent: false,
-  },
-  {
-    image: '',
-    name: 'Kadwama Lazarus',
-    role: 'Health Typology - Banjiram Ward',
-    present: false,
-    absent: false,
-  },
-  // Add more data objects for additional rows
 ]
 export default tableData
