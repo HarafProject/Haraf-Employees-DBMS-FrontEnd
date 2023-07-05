@@ -11,11 +11,16 @@ import {
 //Onboarding Routes
 import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
 import LoginScreen from "../supervisors_page/onboarding_screens/LoginScreen";
+import ForgottenPassword from "../supervisors_page/onboarding_screens/ForgottenPassword";
+import LoginOtpVerify from "../supervisors_page/onboarding_screens/OtpVerification";
+import CreateNewPassword from "../supervisors_page/onboarding_screens/CreateNewPassword";
 import CreateAccountScreen from "../supervisors_page/onboarding_screens/CreateAccountScreen";
 import EmptyEmployeeList from "../supervisors_page/employeepage/employeelistpage/EmptyEmployeeListScreen";
-import AddEmployeeScreen from "../supervisors_page/employeepage/addemployee/AddEmployee";
+import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/AddEmployee";
 import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
 import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
+
+
 
 
 const router = createBrowserRouter(
@@ -23,6 +28,9 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route path="/" element={<WelcomeScreen />}  />
       <Route path="/login" element={<LoginScreen />} />
+      <Route path="/forgotpassword" element={<ForgottenPassword />} />
+      <Route path="/sendotp" element={<LoginOtpVerify />} />
+      <Route path="/createpassword" element={<CreateNewPassword />} />
       <Route path="/createaccount" element={<CreateAccountScreen />} />
       <Route path="/employeeemptylist" element={<EmptyEmployeeList />} />
       <Route path="/addemployee" element={<AddEmployeeScreen />} />

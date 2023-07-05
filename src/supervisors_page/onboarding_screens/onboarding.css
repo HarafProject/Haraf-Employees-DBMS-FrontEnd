@@ -1,10 +1,13 @@
 .onboarding-screen {
     background-color: #03293E;
-    ;
     display: flex;
-    justify-content: center;
-   
+    justify-content: center;   
+    align-items: center;
     height: auto;
+    height: fit-content;
+}
+.welcome-screen, .login-screen{
+    height: 100vh;
 }
 .welcome-screen-content{
     text-align: center;
@@ -38,7 +41,6 @@
     font-size: 18px;
     font-family: 'CustomFont', sans-serif;
     font-weight: 400;
-    /* Bold font weight */
     line-height: normal;
 }
 

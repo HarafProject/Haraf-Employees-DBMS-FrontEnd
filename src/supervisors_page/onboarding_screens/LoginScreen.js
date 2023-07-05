@@ -22,23 +22,23 @@ export default function LoginScreen() {
 
 const fieldName = `field_${Date.now()}`;
     return (
-        <div className="onboarding-screen">
+        <div className="onboarding-screen login-screen">
             {/* <div className="login-screen"> */}
-            <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
+            <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-3">
                 <div className="signup-logo text-center">
                     <img src={profile} alt="" />
-                    <p className='my-1 title'>LIPW Management System{<br />}(LIPWMS)</p>
+                    <p className=' title'>LIPW Management System{<br />}(LIPWMS)</p>
                 </div>
 
-                <form action="" className="mt-3">
+                <form action="" className="mt-5">
                     <p className='screen-title text-center mt-5'>SUPERVISOR LOGIN</p>
 
                     <div>
 
-                        <div className="form-field my-4">
+                        <div className="form-field my-3">
                             <input autocomplete="new-email" type="email" name="" placeholder='Email Address *' />
                         </div>
-                        <div className="form-field d-flex align-items-center justify-content-between my-4">
+                        <div className="form-field d-flex align-items-center justify-content-between my-3">
                             <input autocomplete="new-password" className='' placeholder="Password *" type={passwordType ? "password" : "text"} name="password" />
                             <div onClick={togglePasswordVisiblity} className="eye">
                                 <Icon icon={icon ? "mdi:eye" : "mdi:eye-off"} />
@@ -51,10 +51,10 @@ const fieldName = `field_${Date.now()}`;
 
 
 
-                <div className="d-flex flex-column login-screen-button mt-3">
-                    <button onClick={() => { navigate("/employeeemptylist"); }} className="btn login my-4">Login</button>
+                <div className="d-flex flex-column login-screen-button mt-5">
+                    <button onClick={() => { navigate("/employeeemptylist"); }} className="btn login ">Login</button>
                 </div>
-                <p className='forgot-password'>Forgotten Password? <span> Reset Here</span> </p>
+                <p className='forgot-password mt-3'>Forgotten Password? <span onClick={() => { navigate("/forgotpassword"); }}> Reset Here</span> </p>
             </div>
             {/* </div> */}
         </div>

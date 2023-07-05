@@ -28,7 +28,11 @@
     margin: 0 5px;
 
 }
-
+.sucess-icon {
+    width: 75px;
+    height: 75px;
+    color: #0280CA;
+}
 .sendrequest-modal .modal-title .error-icon {
     font-size: 30px;
     color: #F99C39;
