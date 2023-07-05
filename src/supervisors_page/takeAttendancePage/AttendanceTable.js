@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import tableData from './tableData'
 
-export default function MyTable() {
+export default function AttendanceTable() {
   return (
     <TableContainer
       component={Paper}

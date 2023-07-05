@@ -18,11 +18,8 @@ const router = createBrowserRouter(
     <Route path='/'>
       <Route path='/' element={<SelectTypography />}></Route>
       <Route path='/take-attendance' element={<TakeAttendance />}></Route>
-      <Route
-        path='/attendance-report'
-        element={<AttendanceReport />}
-      ></Route>{' '}
-      {/* This page is only available after the user has finished selecting all typology */}
+      <Route path='/attendance-report' element={<AttendanceReport />}></Route>
+      {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
     </Route>
   )
 )
