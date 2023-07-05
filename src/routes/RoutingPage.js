@@ -16,26 +16,13 @@ import AttendanceReport from '../supervisors_page/takeAttendancePage/AttendanceR
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
-      {/* <Route path='/' element={<SelectTypography />}></Route>
-      <Route path='/take-attendance' element={<TakeAttendance />}></Route> */}
-      <Route path='/' element={<AttendanceReport />}></Route>
-
-      {/* <Route path="/take-attendance" element={<TakeAttendance/>} ></Route> */}
-
-      {/* <Route path="/login" element={<LoginForm />}>
-        <Route path="" element={<Login />} />
-        <Route path="/login/forgotpassword" element={<ForgottenPassword />} />
-        <Route path="/login/otp" element={<LoginOtpVerify />} />
-        <Route path="/login/createpassword" element={<CreateNewPassword />} />
-      </Route> */}
-      {/* <Route path="/register" element={<Registration />} >
-        <Route path="/register" element={<Member />} />
-        <Route path="/register/member" element={<Member />} />
-        <Route path="/register/farm" element={<Farm />} />
-        <Route path="/register/guarantor" element={<Guarantor />} />
-      </Route> */}
-
-      {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
+      <Route path='/' element={<SelectTypography />}></Route>
+      <Route path='/take-attendance' element={<TakeAttendance />}></Route>
+      <Route
+        path='/attendance-report'
+        element={<AttendanceReport />}
+      ></Route>{' '}
+      {/* This page is only available after the user has finished selecting all typology */}
     </Route>
   )
 )

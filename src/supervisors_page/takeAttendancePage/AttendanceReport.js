@@ -4,15 +4,7 @@ import ReusableHeader from '../../component/reusable/reusableheader/ReusableHead
 
 export default function AttendanceReport() {
   const navigate = useNavigate()
-  const [isOpen, setIsOpen] = useState(false)
-
-  const handleButtonClick = () => {
-    setIsOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-  }
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <section>
@@ -82,7 +74,7 @@ export default function AttendanceReport() {
             <button
               className='btn-submit'
               onClick={() => {
-                navigate('/')
+                setModalOpen(true)
               }}
             >
               Submit Result

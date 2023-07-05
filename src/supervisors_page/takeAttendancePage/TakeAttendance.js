@@ -1,6 +1,6 @@
 import ReusableHeader from '../../component/reusable/reusableheader/ReusableHeader'
 import { useNavigate } from 'react-router-dom'
-
+import MyTable from './MyTable'
 export default function TakeAttendance() {
   const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ export default function TakeAttendance() {
             </p>
           </div>
         </div>
-
+        <MyTable />
         <div className='center-container'>
           <button
             className='center-button'
