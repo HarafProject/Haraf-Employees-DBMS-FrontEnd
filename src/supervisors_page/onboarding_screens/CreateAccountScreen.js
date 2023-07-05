@@ -105,6 +105,7 @@ export default function CreateAccountScreen() {
   });
   useEffect(() => {
     dataOBJs.getZone().then((zone) => {
+      console.log(zone,'zones')
       setZones(zone);
     });
     if (formik.values.zonalRegion) {
