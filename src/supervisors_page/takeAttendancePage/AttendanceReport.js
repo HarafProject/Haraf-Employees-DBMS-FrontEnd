@@ -4,10 +4,9 @@ import ReusableHeader from '../../component/reusable/reusableheader/ReusableHead
 
 export default function AttendanceReport() {
   const navigate = useNavigate()
-  const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <section>
+    <sectin>
       <ReusableHeader />
       <div className='margin '>
         <div className='select-typ-report'>
@@ -29,14 +28,14 @@ export default function AttendanceReport() {
               <p>Absent</p>
             </div>
             <div className='summary'>
-              <h1>11:30am</h1>
+              <h1>11:59pm</h1>
               <p>Submission Time</p>
             </div>
           </div>
           <div className='report-grid'>
             <div className='report'>
               <p>Report For:</p>
-              <h4> 3rd July 2023</h4>
+              <h4>3rd July 2023</h4>
             </div>
             <div className='report'>
               <p>Report From:</p>
@@ -66,22 +65,17 @@ export default function AttendanceReport() {
             <button
               className='btn-back'
               onClick={() => {
-                navigate('/')
+                navigate('/take-attendance')
               }}
             >
               Back to attendance
             </button>
-            <button
-              className='btn-submit'
-              onClick={() => {
-                setModalOpen(true)
-              }}
-            >
+            <button className='btn-submit' onClick={() => {}}>
               Submit Result
             </button>
           </div>
         </div>
       </div>
-    </section>
+    </sectin>
   )
 }
