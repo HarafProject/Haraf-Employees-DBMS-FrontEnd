@@ -2,9 +2,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
+import Modal from 'react-modal';
 import profile from '../../assets/logo-light.png';
 import './onboarding.css'
-import SelectField from "../../component/reusable/reusableselectfield/SelectField";
+import AccountCreateSuccessModal from "../../component/reusable/modalscontent/AccountCreatedSuccessModal";
 
 
 export default function CreateAccountScreen() {
@@ -16,17 +17,26 @@ export default function CreateAccountScreen() {
 
     const [passwordType, setPasswordType] = useState("false");
     const [confirmPasswordType, setConfirmPasswordType] = useState("false");
-    const [icon1, setIcon1] = useState("mdi:eye");
-    const [icon2, setIcon2] = useState("mdi:eye");
+    const [iconPassword, seticonPassword] = useState("mdi:eye");
+    const [iconConfirmPassword, seticonConfirmPassword] = useState("mdi:eye");
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const togglePasswordVisiblity = () => {
         setPasswordType(passwordType ? false : true);
-        setIcon1(!icon1);
+        seticonPassword(!iconPassword);
     };
     const toggleConfirmPasswordVisiblity = () => {
         setConfirmPasswordType(confirmPasswordType ? false : true);
-        setIcon2(!icon2);
+        seticonConfirmPassword(!iconConfirmPassword);
     };
+
+    function openModal() {
+        setIsOpen(true);
+    }
+    function closeModal() {
+        setIsOpen(false);
+    }
+    
 
 
     return (
@@ -61,7 +71,7 @@ export default function CreateAccountScreen() {
                             <div className="form-field d-flex align-items-center justify-content-between my-4">
                                 <input autocomplete="new-password" className='' placeholder="Password *" type={passwordType ? "password" : "text"} name="password" />
                                 <div onClick={togglePasswordVisiblity} className="eye">
-                                    <Icon icon={icon1 ? "mdi:eye" : "mdi:eye-off"} />
+                                    <Icon icon={iconPassword ? "mdi:eye" : "mdi:eye-off"} />
                                 </div>
                             </div>
                             <span className="">Must be at least 8 characters {<br />}
@@ -91,7 +101,7 @@ export default function CreateAccountScreen() {
                             <div className="form-field d-flex align-items-center justify-content-between my-4">
                                 <input autocomplete="new-password" className='' placeholder="Confirm Password *" type={confirmPasswordType ? "password" : "text"} name="password" />
                                 <div onClick={toggleConfirmPasswordVisiblity} className="eye">
-                                    <Icon icon={icon2 ? "mdi:eye" : "mdi:eye-off"} />
+                                    <Icon icon={iconConfirmPassword ? "mdi:eye" : "mdi:eye-off"} />
                                 </div>
                             </div>
                             <span className="float-end">Both passwords must match</span>
@@ -105,11 +115,31 @@ export default function CreateAccountScreen() {
 
 
                 <div className="d-flex flex-column login-screen-button mt-3">
-                    <button onClick={() => { navigate("/login"); }} className="btn login my-4">Create Account</button>
+                    <button onClick={openModal}  className="btn login my-4">Create Account</button>
                 </div>
                 <p className='forgot-password'>Already have an account? <span onClick={() => { navigate("/login"); }}> Click here</span> </p>
             </div>
             {/* </div> */}
+            <Modal
+                        isOpen={modalIsOpen}
+                        // onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="Example Modal"
+                        className={{
+                            base: 'modal-base',
+                            afterOpen: 'modal-base_after-open',
+                            beforeClose: 'modal-base_before-close'
+                        }}
+                        overlayClassName={{
+                            base: 'overlay-base',
+                            afterOpen: 'overlay-base_after-open',
+                            beforeClose: 'overlay-base_before-close'
+                        }}
+                        shouldCloseOnOverlayClick={true}
+                        closeTimeoutMS={2000}
+                    >
+                        <AccountCreateSuccessModal closeModal={closeModal} />
+                    </Modal>
         </div>
 
     )

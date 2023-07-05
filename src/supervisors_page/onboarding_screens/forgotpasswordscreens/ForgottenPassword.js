@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import './onboarding.css';
+import './forgotpassword.css';
 import { RotatingLines } from "react-loader-spinner";
 
 export default function ForgottenPassword() {
@@ -71,22 +71,22 @@ export default function ForgottenPassword() {
     // }
 
     return (
-        <div className="login-page pt-3 px-5">
+        <div className="forgotpassword-screen ">
             <div className=''>
 
-                <div className="form d-flex flex-column align-items-center mt-5 px-5 pt-3">
+                <div className="form d-flex flex-column align-items-center p-5">
                     <h1>Forgotten Password</h1>
-                    To reset your password, an OTP will be sent to your email, please input the email address you registered with below
+                   <p> To reset your password, an OTP will be sent to your email, please input the email address you registered with below</p>
                     <form className='d-flex flex-column my-5'>
-                        <input type="email" name="email" placeholder='email' required value={user.email} onChange={handleChange} />
+                        <input type="email" name="email" placeholder='email' required value={user.email} onChange={handleChange} className="email-input"/>
 
-                        {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button onClick={() => { navigate("/sendotp"); }} className='login-btn mt-4 mx-auto' >Send OTP</button>}
+                        {isLoading && <button className='btn forgotpassword-btn mt-4 mx-auto'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button onClick={() => { navigate("/sendotp"); }} className='btn forgotpassword-btn mt-4 mx-auto' >Send OTP</button>}
 
 
 
                     </form>
-                    <p>Having Issues or don’t have access to email? <span  style={{ color: "#FB9129", fontWeight: "600" }}>Contact Admin</span></p>
+                    <p>Having Issues or don’t have access to email? <span >Contact Admin</span></p>
                 </div>
             </div>
         </div>

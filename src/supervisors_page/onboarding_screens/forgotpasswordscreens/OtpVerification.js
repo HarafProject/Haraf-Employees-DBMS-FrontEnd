@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from 'react-router-dom';
-import './onboarding.css'
+import './forgotpassword.css'
 import { Icon } from '@iconify/react';
 
 export default function LoginOtpVerify() {
@@ -59,12 +59,12 @@ export default function LoginOtpVerify() {
 
 
     return (
-        <div className="login-page pt-3 px-5">
+        <div className="forgotpassword-screen">
             <div className=''>
 
-                <div className="form d-flex flex-column align-items-center mt-5 px-5 pt-3">
+                <div className="form d-flex flex-column align-items-center p-5">
                     <h1>OTP Verification</h1>
-                    A One Time Pin (OTP) has been sent to your registered phone number, kindly input the pin below
+                    <p>A One Time Pin (OTP) has been sent to your registered phone number, kindly input the pin below</p>
                     <form className='d-flex flex-column my-5'>
                         <div className="otp-input">
                             {otp.map((digit, index) => (
@@ -84,7 +84,7 @@ export default function LoginOtpVerify() {
 
                         {/* {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
                         {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>} */}
-                        <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>
+                        <button className='btn forgotpassword-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>
 
                     </form>
                     {showSnackbar ? (<button className=' d-flex align-items-center btn mx-4 profile-saved' >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
-import './sendrequestmodal.css'
+import './modalscreen.css'
 
 export default function SendRequestModal({ closeModal }) {
     const [requestText, setRequestText] = useState('');
@@ -31,7 +31,7 @@ export default function SendRequestModal({ closeModal }) {
     }, [showSnackbar]);
 
     return (
-        <div className='sendrequest-modal px-5 py-1 my-3' isOpen={true} onRequestClose={closeModal}>
+        <div className='modal-screen sendrequest-modal px-5 py-1 my-3' isOpen={true} onRequestClose={closeModal}>
             <div className="">
                 <button className="btn close-button" onClick={closeModal}>
                     <Icon icon="icons8:cancel" className='close-icon' />
@@ -47,7 +47,7 @@ export default function SendRequestModal({ closeModal }) {
 
                     <textarea className="textarea mt-3 p-2" placeholder='Type here' value={requestText} onChange={handleRequestTextChange} />
 
-                    <button className="btn send-button my-4" onClick={handleSendRequest}>
+                    <button className="btn modal-button my-4" onClick={handleSendRequest}>
                         Send Request
                     </button>
                 </div>

@@ -1,12 +1,12 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './onboarding.css'
-import { LoginMember } from "../../utils/api/member";
+import './forgotpassword.css'
+import { LoginMember } from "../../../utils/api/member";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import Modal from 'react-modal';
-import PasswordChangeSuccessModal from "../../component/reusable/modalscontent/PasswordChangeSuccessModal";
+import PasswordChangeSuccessModal from "../../../component/reusable/modalscontent/PasswordChangeSuccessModal";
 
 
 
@@ -89,26 +89,24 @@ export default function CreateNewPassword() {
 
     }
     return (
-        <div className="login-page pt-3 px-5">
-            <div className="form text-center mt-5 px-5 py-3">
+        <div className="forgotpassword-screen ">
+            <div className="">
+                 <div className="form d-flex flex-column align-items-center p-5">
                 <h1>Create New Password</h1>
-                Create new password to use for logging into your active farmers account, do not share your new password with anyone
-                <form className='d-flex flex-column my-4 '>
+                <p>Create new password to use for logging into your active farmers account, do not share your new password with anyone</p>
+                <form className='d-flex flex-column mt-5 '>
 
                     <div className="my-2">
-                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} />
-                        <p className="text-end my-0 create">Both passwords must match</p>
+                        <input type="password" name="password" placeholder='password' required  onChange={handleChange} />
+                        <p className="text-end  create">Must be at least 6 characters</p>
                     </div>
                     <div className="my-2">
-                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} />
-                        <p className="text-end my-0 create">Both passwords must match</p>
+                        <input type="password" name="password" placeholder='password' required  onChange={handleChange} />
+                        <p className="text-end  create">Both passwords must match</p>
                     </div>
 
-
-
-                    
-                    {isLoading && <button className='login-btn mt-3'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                    {!isLoading && <button className='login-btn mx-auto mt-3' onClick={openModal}>Done</button>}
+                    {isLoading && <button className='btn forgotpassword-btn mt-4 mx-auto'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='btn forgotpassword-btn mt-4 mx-auto' onClick={openModal}>Done</button>}
 
 
 
@@ -138,6 +136,8 @@ export default function CreateNewPassword() {
                 </Modal>
                 
             </div>
+            </div>
+           
         </div>
     )
 }

@@ -11,9 +11,9 @@ import {
 //Onboarding Routes
 import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
 import LoginScreen from "../supervisors_page/onboarding_screens/LoginScreen";
-import ForgottenPassword from "../supervisors_page/onboarding_screens/ForgottenPassword";
-import LoginOtpVerify from "../supervisors_page/onboarding_screens/OtpVerification";
-import CreateNewPassword from "../supervisors_page/onboarding_screens/CreateNewPassword";
+import ForgottenPassword from "../supervisors_page/onboarding_screens/forgotpasswordscreens/ForgottenPassword";
+import LoginOtpVerify from "../supervisors_page/onboarding_screens/forgotpasswordscreens/OtpVerification";
+import CreateNewPassword from "../supervisors_page/onboarding_screens/forgotpasswordscreens/CreateNewPassword";
 import CreateAccountScreen from "../supervisors_page/onboarding_screens/CreateAccountScreen";
 import EmptyEmployeeList from "../supervisors_page/employeepage/employeelistpage/EmptyEmployeeListScreen";
 import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/AddEmployee";
@@ -36,18 +36,7 @@ const router = createBrowserRouter(
       <Route path="/addemployee" element={<AddEmployeeScreen />} />
       <Route path="/employeeslist" element={<EmployeeListTable />} />
       <Route path="/employeeprofile/:id" element={<EmployeeProfilePage />} />
-      {/* <Route path="/login" element={<LoginForm />}>
-        <Route path="" element={<Login />} />
-        <Route path="/login/forgotpassword" element={<ForgottenPassword />} />
-        <Route path="/login/otp" element={<LoginOtpVerify />} />
-        <Route path="/login/createpassword" element={<CreateNewPassword />} />
-      </Route> */}
-      {/* <Route path="/register" element={<Registration />} >
-        <Route path="/register" element={<Member />} />
-        <Route path="/register/member" element={<Member />} />
-        <Route path="/register/farm" element={<Farm />} />
-        <Route path="/register/guarantor" element={<Guarantor />} />
-      </Route> */}
+   
      
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>

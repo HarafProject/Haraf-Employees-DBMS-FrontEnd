@@ -13,7 +13,7 @@ const users = [
       "bank_name": "gtb",
       "work_typology": "health",
       "marital_status": "single",
-      "special_ability": "hearing",
+      "special_disability": "hearing",
       "household_size": 4,
       "head_of_house": "women headed",
       "sex": "male"
@@ -30,7 +30,7 @@ const users = [
       "bank_name": "fcm",
       "work_typology": "education",
       "marital_status": "married",
-      "special_ability": "visibility impairment",
+      "special_disability": "visibility impairment",
       "household_size": 2,
       "head_of_house": "youth headed",
       "sex": "female"
@@ -47,7 +47,7 @@ const users = [
       "bank_name": "firstbank",
       "work_typology": "wash",
       "marital_status": "married",
-      "special_ability": "physical impairment",
+      "special_disability": "physical impairment",
       "household_size": 3,
       "head_of_house": "women headed",
       "sex": "male"
@@ -64,7 +64,7 @@ const users = [
       "bank_name": "zenith bank",
       "work_typology": "transport",
       "marital_status": "single",
-      "special_ability": "mental impairment",
+      "special_disability": "mental impairment",
       "household_size": 1,
       "head_of_house": "youth headed",
       "sex": "female"
@@ -81,7 +81,7 @@ const users = [
       "bank_name": "gtb",
       "work_typology": "agriculture",
       "marital_status": "married",
-      "special_ability": "speech impairment",
+      "special_disability": "speech impairment",
       "household_size": 5,
       "head_of_house": "women headed",
       "sex": "male"
@@ -98,7 +98,7 @@ const users = [
       "bank_name": "fcm",
       "work_typology": "education",
       "marital_status": "divorced",
-      "special_ability": "visibility impairment",
+      "special_disability": "visibility impairment",
       "household_size": 2,
       "head_of_house": "idp",
       "sex": "female"
@@ -115,7 +115,7 @@ const users = [
       "bank_name": "firstbank",
       "work_typology": "health",
       "marital_status": "married",
-      "special_ability": "physical impairment",
+      "special_disability": "physical impairment",
       "household_size": 3,
       "head_of_house": "women headed",
       "sex": "male"
@@ -132,7 +132,7 @@ const users = [
       "bank_name": "zenith bank",
       "work_typology": "wash",
       "marital_status": "single",
-      "special_ability": "hearing",
+      "special_disability": "hearing",
       "household_size": 1,
       "head_of_house": "youth headed",
       "sex": "female"
@@ -149,7 +149,7 @@ const users = [
       "bank_name": "fcm",
       "work_typology": "transport",
       "marital_status": "married",
-      "special_ability": "speech impairment",
+      "special_disability": "speech impairment",
       "household_size": 4,
       "head_of_house": "women headed",
       "sex": "male"
@@ -166,7 +166,7 @@ const users = [
       "bank_name": "gtb",
       "work_typology": "agriculture",
       "marital_status": "single",
-      "special_ability": "mental impairment",
+      "special_disability": "mental impairment",
       "household_size": 2,
       "head_of_house": "women headed",
       "sex": "female"

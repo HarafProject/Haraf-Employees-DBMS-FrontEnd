@@ -163,7 +163,7 @@
     cursor: pointer;
 }
 
-.text-danger{
+.text-danger, .password-mismatch{
     color: red;
 }
 

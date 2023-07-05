@@ -116,8 +116,8 @@ export default function AddEmployeeScreen() {
                                 </div>
                                 
                                 <div className="form-field my-4">
-                                    <select name="specialability" id="">
-                                        <option>Special Ability</option>
+                                    <select name="specialdisability" id="">
+                                        <option>Special Disability</option>
                                         <option value="nil">N/A</option>
                                         <option value="visibility">Visibility impairment</option>
                                         <option value="hearing">Hearing impairment</option>

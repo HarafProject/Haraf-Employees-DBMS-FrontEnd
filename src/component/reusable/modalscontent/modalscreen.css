@@ -1,5 +1,5 @@
-.sendrequest-modal {
-    width: auto;
+.modal-screen {
+    width: 500px;
     height: auto;
     display: flex;
     align-items: center;
@@ -8,11 +8,15 @@
     margin: 0 auto;
     border-radius: 22px;
 }
+.sendrequest-modal {
+    width: auto;
+    height: auto;
+}
 
 .close-button {
     outline: none;
     border: none;
-    font-size: 45px;
+    font-size: 40px;
     float: right;
 }
 
@@ -21,24 +25,30 @@
     outline: none;
 }
 
-.sendrequest-modal .modal-title span {
+.modal-screen .modal-title span {
     font-size: 24px;
     font-weight: 400;
     line-height: normal;
     margin: 0 5px;
 
 }
-.sucess-icon {
+.modal-screen p.no-network {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: normal;
+
+}
+.success-icon, .network-icon {
     width: 75px;
     height: 75px;
     color: #0280CA;
 }
-.sendrequest-modal .modal-title .error-icon {
+.modal-screen .modal-title .error-icon {
     font-size: 30px;
     color: #F99C39;
 }
 
-.sendrequest-modal p {
+.modal-screen p {
     font-size: 16px;
     font-weight: 300;
     line-height: normal;
@@ -47,7 +57,7 @@
     width: 450px;
 }
 
-.sendrequest-modal .textarea {
+.modal-screen .textarea {
     width: 450px;
     height: 150px;
     border-radius: 7px;
@@ -65,13 +75,12 @@
 
 }
 
-.sendrequest-modal .btn.send-button {
+.modal-screen .btn.modal-button {
     width: 250px;
     border-radius: 45px;
     background: #0173BC;
     font-size: 22px;
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 500;
     text-align: center;
     color: #ffffff;
 
@@ -86,19 +95,13 @@
 }
 
 .modal-base {
-    top: 15%;
+    top: 10%;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin: auto;
-    width: 800px;
-    height: 350px;
-    border-radius: 22px; */
+    justify-content: center;
     opacity: 0;
-    /* -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    transform: scale(0.8); */
 }
 
 
@@ -119,9 +122,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(19, 18, 18, 0.75);
-    opacity: 0;
+background: rgba(0, 0, 0, 0.9);
     transition: all 0.3s ease-out;
+    z-index: 500;
 }
 
 .overlay-base_after-open {

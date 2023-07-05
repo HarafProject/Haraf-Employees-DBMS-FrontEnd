@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import './modalscreen.css'
+import './sendrequestmodal.css'
 
-export default function PasswordChangeSuccessModal({ closeModal }) {
+export default function ReportSentSuccessModal({ closeModal }) {
     const navigate = useNavigate();
 
     
@@ -18,12 +18,12 @@ export default function PasswordChangeSuccessModal({ closeModal }) {
                         <Icon icon="ep:success-filled" className='success-icon my-3' />
 
 
-                        <p className='mt-4'>Password Changed Successfully </p>
-                    <span >Proceed to login, remember to use your new password</span>
+                        <p className='mt-4'>Report Sent Successfully</p>
+                    <span >Your report for today has been sent successfully</span>
 
 
-                    <button className="btn modal-button my-4" onClick={() => { navigate("/login"); }}>
-                        Login
+                    <button className="btn modal-button my-4" onClick={closeModal}>
+                        OK
                     </button>
                 </div>
 
