@@ -7,13 +7,12 @@ class supervisorOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/auth/register", data);
-        console.log(response,'from class');
-        //store response in redux
+        return response;
       } else {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err;
+      throw err?.response?.data;
     }
   };
 
@@ -22,16 +21,66 @@ class supervisorOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/auth/register", data);
+        const response = await api.post("api/auth/login", data);
         console.log(response);
         //store res data
       } else {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err;
+      throw err?.response?.data;
     }
   };
+
+  //supervisors forgot password
+  forgotPassword = async (data) => {
+    try {
+      //check if data is empty
+      if (data) {
+        const response = await api.post("api/auth/forgot-pw", data);
+        console.log(response);
+        //store res data
+      } else {
+        throw new Error("please fill in the fields");
+      }
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  //supervisors password reset otp
+  passwordResetOTP = async (data) => {
+    try {
+      //check if data is empty
+      if (data) {
+        const response = await api.post("api/auth/verify-token", data);
+        console.log(response);
+        //store res data
+      } else {
+        throw new Error("please fill in the fields");
+      }
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  //supervisors password reset 
+  ResetPassword = async (data) => {
+    try {
+      //check if data is empty
+      if (data) {
+        const response = await api.put("api/auth/reset-pw", data);
+        console.log(response);
+        //store res data
+      } else {
+        throw new Error("please fill in the fields");
+      }
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+
 }
 
 const supervisor = new supervisorOBJ();
