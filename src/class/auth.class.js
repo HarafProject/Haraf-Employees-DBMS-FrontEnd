@@ -1,7 +1,7 @@
 import api from "../API";
 
-class supervisorOBJ {
-  //supervisors reg
+class authOBJ {
+  //auths reg
   register = async (data) => {
     try {
       //check if data is empty
@@ -16,7 +16,7 @@ class supervisorOBJ {
     }
   };
 
-  //supervisors login
+  //auths login
   login = async (data) => {
     try {
       //check if data is empty
@@ -33,7 +33,7 @@ class supervisorOBJ {
     }
   };
 
-  //supervisors forgot password
+  //auths forgot password
   forgotPassword = async (data) => {
     try {
       //check if data is empty
@@ -50,7 +50,7 @@ class supervisorOBJ {
     }
   };
 
-  //supervisors password reset otp
+  //auths password reset otp
   passwordResetOTP = async (data) => {
     try {
       //check if data is empty
@@ -66,7 +66,7 @@ class supervisorOBJ {
     }
   };
 
-  //supervisors password reset
+  //auths password reset
   ResetPassword = async (data) => {
     try {
       //check if data is empty
@@ -83,5 +83,5 @@ class supervisorOBJ {
   };
 }
 
-const supervisor = new supervisorOBJ();
-export default supervisor;
+const auth = new authOBJ();
+export default auth;

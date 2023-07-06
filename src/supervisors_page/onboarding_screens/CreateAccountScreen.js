@@ -7,7 +7,7 @@ import profile from "../../assets/logo-light.png";
 import "./onboarding.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import supervisor from "../../class/supervisors.class";
+import auth from "../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dataOBJs from "../../class/data.class";
@@ -91,7 +91,7 @@ export default function CreateAccountScreen() {
         password: values.password,
       };
 
-      supervisor
+      auth
         .register(data)
         .then((res) => {
           console.log(res);
@@ -129,7 +129,7 @@ export default function CreateAccountScreen() {
         </div>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">Supervisor SIGNUP</p>
+          <p className="screen-title text-center mt-5">auth SIGNUP</p>
           <div className="d-flex align-items-start">
             <div className="mx-3">
               <div className="form-field my-4">

@@ -4,7 +4,7 @@ import "./forgotpassword.css";
 import { Icon } from "@iconify/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import supervisor from "../../../class/supervisors.class";
+import auth from "../../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RotatingLines } from "react-loader-spinner";
@@ -29,7 +29,7 @@ export default function LoginOtpVerify() {
     validationSchema,
     onSubmit: (values) => {
       setIsLoading(true);
-      supervisor
+      auth
         .passwordResetOTP({ token: values.otp.join("") })
         .then((res) => {
           console.log(res);

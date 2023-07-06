@@ -4,7 +4,7 @@ import "./forgotpassword.css";
 import { RotatingLines } from "react-loader-spinner";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import supervisor from "../../../class/supervisors.class";
+import auth from "../../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,7 +25,7 @@ export default function ForgottenPassword() {
     onSubmit: (values) => {
       console.log(values, "values");
       setIsLoading(true);
-      supervisor
+      auth
         .register(values)
         .then((res) => {
           console.log(res);
