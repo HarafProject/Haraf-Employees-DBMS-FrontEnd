@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import supervisor from "../../class/supervisors.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import dataOBJs from "../../class/data.class";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
 
@@ -123,7 +122,7 @@ export default function LoginScreen() {
             </button>
           </div>
           <p className="forgot-password">
-            Forgotten Password? <span> Reset Here</span>{" "}
+            Forgotten Password? <span> <a href="/forgotpassword">Reset Here</a></span>{" "}
           </p>
         </form>
       </div>
