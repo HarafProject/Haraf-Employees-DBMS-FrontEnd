@@ -6,7 +6,7 @@ import "./onboarding.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
-import supervisor from "../../class/supervisors.class";
+import auth from "../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +50,7 @@ export default function LoginScreen() {
         password: values.password,
       };
 
-      supervisor
+      auth
         .login(data)
         .then((res) => {
           console.log(res);
@@ -76,7 +76,7 @@ export default function LoginScreen() {
         </div>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">SUPERVISOR LOGIN</p>
+          <p className="screen-title text-center mt-5">auth LOGIN</p>
 
           <div>
             <div className="form-field my-4">

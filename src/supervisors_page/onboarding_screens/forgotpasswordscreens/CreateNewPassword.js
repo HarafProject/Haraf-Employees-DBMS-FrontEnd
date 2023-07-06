@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import Modal from "react-modal";
 import PasswordChangeSuccessModal from "../../../component/reusable/modalscontent/PasswordChangeSuccessModal";
-import supervisor from "../../../class/supervisors.class";
+import auth from "../../../class/auth.class";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function CreateNewPassword() {
@@ -40,7 +40,7 @@ export default function CreateNewPassword() {
     onSubmit: (values) => {
       // Handle form submission here
       setIsLoading(true);
-      supervisor
+      auth
         .ResetPassword({ password: values.password })
         .then((res) => {
           console.log(res);
