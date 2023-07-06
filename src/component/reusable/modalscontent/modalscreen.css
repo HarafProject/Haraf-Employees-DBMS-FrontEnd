@@ -85,6 +85,13 @@
     color: #ffffff;
 
 }
+.modal-screen .btn.modal-button.delete-btn{
+    background-color: #C20A0A;
+
+}
+.delete-close-btn{
+    color: #444444;
+}
 
 
 

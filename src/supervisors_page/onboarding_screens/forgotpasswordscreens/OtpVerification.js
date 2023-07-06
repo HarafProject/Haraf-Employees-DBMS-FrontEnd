@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './forgotpassword.css'
 import { Icon } from '@iconify/react';
 
@@ -8,13 +8,23 @@ export default function LoginOtpVerify() {
     const [countdown, setCountdown] = useState(0);
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        setShowSnackbar(true);
-        setTimeout(() => {
-            setShowSnackbar(false);
-            
-        }, 3000);navigate('/createpassword');
-    };
+    // useEffect(() => {
+    //     let timeout;
+    
+    //     if (showSnackbar) {
+    //       timeout = setTimeout(() => {
+    //         setShowSnackbar(false);
+    //         navigate('/createpassword');
+    //       }, 3000); // Show snackbar for 3 seconds
+    //     }
+    
+    //     return () => clearTimeout(timeout);
+    //   }, [showSnackbar, navigate]);
+    
+      const handleClick = () => {
+        // setShowSnackbar(true);
+        navigate('/create-new-password');
+      };
 
     useEffect(() => {
         let timer;
@@ -82,35 +92,33 @@ export default function LoginOtpVerify() {
 
 
 
-                        {/* {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>} */}
+
                         <button className='btn forgotpassword-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>
 
                     </form>
-                    {showSnackbar ? (<button className=' d-flex align-items-center btn mx-4 profile-saved' >
-                        <p>Verification Successful</p><Icon icon="clarity:success-standard-line" className='btn-icon' />
-                    </button>)
-                        : (
-                            <p>
-                            Yet to receive OTP?
-                            {countdown > 0 ? (
-                              <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                    {showSnackbar && (<div><span className=' d-flex align-items-center justify-content-around mx-4 snackbar py-2' >
+                        <p>Verification Successful</p><Icon icon="clarity:success-standard-line" className='snackbar-icon' />
+                    </span></div>)}
+
+                    <p>
+                        Yet to receive OTP?
+                        {countdown > 0 ? (
+                            <span style={{ color: "#FB9129", fontWeight: "600" }}>
                                 {' '}
                                 Resend OTP ({Math.floor(countdown / 60)
-                                  .toString()
-                                  .padStart(2, '0')}:
+                                    .toString()
+                                    .padStart(2, '0')}:
                                 {Math.floor(countdown % 60).toString().padStart(2, '0')})
-                              </span>
-                            ) : (
-                              <span style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                            </span>
+                        ) : (
+                            <span style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
                                 {' '}
                                 Resend OTP
-                              </span>
-                            )}
-                          </p>
-                        // <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}> {' '} Resend OTP ({countdown.toString().padStart(2, '0')})</a></p>
-                        )
-                        }
+                            </span>
+                        )}
+                    </p>
+
+
 
                 </div>
             </div>

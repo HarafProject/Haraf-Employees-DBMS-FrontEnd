@@ -22,9 +22,8 @@ export default function EmptyEmployeeList() {
                     <img src={emptypage} alt=""  />
                     <p>No Employees Added</p>
                     <span>No employees have been to this system yet, use the new employee button below to add new employees to this system</span>
-                    <button onClick={()=> {navigate("/addemployee");}} className="btn add-employee mt-5">
+                    <button onClick={()=> {navigate("/add-employee");}} className="btn add-employee mt-5">
                         <Icon icon="mdi:add-circle-outline" color="white" /> New Employee
-                        {/* <Icon icon="icon-park-outline:add-one" color="white" /> */}
                     </button>
                 </div>
             </div>

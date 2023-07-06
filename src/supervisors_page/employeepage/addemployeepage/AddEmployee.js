@@ -7,8 +7,10 @@ import ReusableHeader from "../../../component/reusable/reusableheader/ReusableH
 import './addemployee.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddEmployeeScreen() {
+
+export default function AddEmployeeScreen({ prefilledData }) {
     const navigate = useNavigate();
+
 
     const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef(null);
@@ -18,6 +20,13 @@ export default function AddEmployeeScreen() {
     function handleClick() {
         fileInputRef.current.click();
     }
+
+
+    const isEditEmployee = !!prefilledData;
+
+
+
+
     return (
         <div className="add-employee-screen ">
             <div>
@@ -27,7 +36,10 @@ export default function AddEmployeeScreen() {
 
                 <div className="d-flex flex-column align-items-center add-employee-content mt-4">
 
-                    <h5>Add Employee</h5>
+                    {/* <h5>Add Employee</h5> */}
+                    {/* <h5>{prefilledData ? 'Edit Employee' : 'Add Employee'}
+                    </h5>  */}
+                    <h5>{isEditEmployee ? 'Add Employee' : 'Edit Employee'}</h5>
 
 
                     <form action="">
@@ -114,7 +126,7 @@ export default function AddEmployeeScreen() {
                                     </select>
 
                                 </div>
-                                
+
                                 <div className="form-field my-4">
                                     <select name="specialdisability" id="">
                                         <option>Special Disability</option>
@@ -140,9 +152,9 @@ export default function AddEmployeeScreen() {
                                 <div className='d-flex align-items-center picture-upload-section'>
                                     <div className="profile-img mx-3">
                                         {selectedImage ? (
-                                            <img src={selectedImage} alt="Profile" />
+                                            <img src={selectedImage} alt="Default Profile Image" />
                                         ) : (
-                                            <img src={profile} alt="Default Profile Image" />
+                                            <img src={profile} alt='' />
 
                                         )}
                                         <button className="camera" onClick={handleClick}>
@@ -157,19 +169,31 @@ export default function AddEmployeeScreen() {
                                         />
                                     </div>
                                     <p className="headshot-title">
-                                    Employees headshot {<br />} <span>
-                                    Please take a clear well lighted headshot
-                                    </span>
+                                        Employees headshot {<br />} <span>
+                                            Please take a clear well lighted headshot
+                                        </span>
                                     </p>
                                 </div>
 
                             </div>
                         </div>
                     </form>
-                   
 
-                    <button onClick={()=> {navigate("/employeeslist"); }} className="btn save-employee mt-5">
+
+                    {/* <button onClick={() => { navigate("/biometric-capture"); }} className="btn save-employee mt-5">
                         Save Employee
+                    </button> */}
+                    <button
+                        onClick={() => {
+                            if (isEditEmployee) {
+                                navigate("/employee-list");
+                            } else {
+                                navigate("/biometric-capture");
+                            }
+                        }}
+                        className="btn save-employee mt-5"
+                    >
+                        {isEditEmployee ? 'Save Changes' : 'Save Employee'}
                     </button>
                 </div>
             </div>

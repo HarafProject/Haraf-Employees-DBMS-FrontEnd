@@ -36,58 +36,7 @@ export default function CreateNewPassword() {
         setUser({ ...user, [name]: value });
     };
 
-    const validateForm = () => {
-        let errors = {};
-
-        if (!user.email) {
-            errors.email = 'Email Address is required';
-        } else if (!isValidEmail(user.email)) {
-            errors.email = 'Invalid email format';
-        }
-
-        if (!user.password) {
-            errors.password = 'Password is required';
-        }
-
-        return errors;
-    };
-
-    // Helper functions for email and phone number validation
-    const isValidEmail = (email) => {
-        // Regular expression for email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
-
-    async function handleSubmit(e) {
-        e.preventDefault()
-
-        // Validate the form inputs
-        const errors = validateForm();
-
-
-        // If form validation fails
-        if (Object.keys(errors).length > 0) {
-            const firstFieldName = Object.keys(errors)[0];
-            toast.error(errors[firstFieldName]);
-            return;
-        }
-        setIsLoading(true)
-        try {
-            const data = await LoginMember(user);
-            localStorage.setItem("AFCS-token", data.token)
-            toast.success(data.message);
-
-            setIsLoading(false);
-            navigate("/dashboard", { replace: true })
-            openModal()
-            // return data;
-        } catch (error) {
-            setIsLoading(false);
-            toast.error(error.error);
-        }
-
-    }
+ 
     return (
         <div className="forgotpassword-screen ">
             <div className="">

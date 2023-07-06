@@ -52,9 +52,9 @@ const fieldName = `field_${Date.now()}`;
 
 
                 <div className="d-flex flex-column login-screen-button mt-5">
-                    <button onClick={() => { navigate("/employeeemptylist"); }} className="btn login ">Login</button>
+                    <button onClick={() => { navigate("/employee-list-empty"); }} className="btn login ">Login</button>
                 </div>
-                <p className='forgot-password mt-3'>Forgotten Password? <span onClick={() => { navigate("/forgotpassword"); }}> Reset Here</span> </p>
+                <p className='forgot-password mt-3'>Forgotten Password? <span onClick={() => { navigate("/forgot-password"); }}> Reset Here</span> </p>
             </div>
             {/* </div> */}
         </div>

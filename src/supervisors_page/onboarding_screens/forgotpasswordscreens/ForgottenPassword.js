@@ -81,12 +81,12 @@ export default function ForgottenPassword() {
                         <input type="email" name="email" placeholder='email' required value={user.email} onChange={handleChange} className="email-input"/>
 
                         {isLoading && <button className='btn forgotpassword-btn mt-4 mx-auto'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button onClick={() => { navigate("/sendotp"); }} className='btn forgotpassword-btn mt-4 mx-auto' >Send OTP</button>}
+                        {!isLoading && <button onClick={() => { navigate("/send-otp"); }} className='btn forgotpassword-btn mt-4 mx-auto' >Send OTP</button>}
 
 
 
                     </form>
-                    <p>Having Issues or don’t have access to email? <span >Contact Admin</span></p>
+                    <p>Having Issues or don't have access to email? <span >Contact Admin</span></p>
                 </div>
             </div>
         </div>

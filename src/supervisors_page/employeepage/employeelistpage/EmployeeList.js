@@ -8,11 +8,13 @@ import usersData from '../../../component/data/EmployeesData';
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader';
 import EmployeeTableFilterOption from '../../../component/reusable/tablefilteroptions/EmployeesFilterOptions';
 import SendRequestModal from '../../../component/reusable/modalscontent/SendRequestModal';
+import EmptyEmployeeList from './EmptyEmployeeListScreen';
 
 export default function EmployeeListTable() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalType, setModalType] = useState('');
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -22,20 +24,27 @@ export default function EmployeeListTable() {
         setPage(0);
     };
 
-    function openModal() {
+    // function openModal(modalType) {
+    //     setIsOpen(true);
+    //     setModalType(modalType);
+    // }
+
+    const openModal = (getModalType) => { // Modify openModal function
         setIsOpen(true);
-    }
+        setModalType(getModalType()); // Invoke the function to get modalType
+      };
 
     function closeModal() {
         setIsOpen(false);
     }
 
-    const usersPerPage = usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    // const usersPerPage = usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
 
     return (
         <>
             <ReusableHeader />
+            {/* {usersData.length > 0 ? ( */}
             <div className="employees-table-section py-5 my-4">
                 <EmployeeTableFilterOption />
                 <div>
@@ -58,14 +67,14 @@ export default function EmployeeListTable() {
                                         
                                         <TableRow>
                                             <TableCell>{index + 1}</TableCell>
-                                            <TableCell><Link to={`/employeeprofile/${user.id}`} key={user.id} >
+                                            <TableCell><Link to={`/employee-profile/${user.id}`} key={user.id} >
                                                 <Avatar alt={user.full_name} src={user.image} />
                                             </Link></TableCell>
-                                            <TableCell><Link to={`/employeeprofile/${user.id}`} key={user.id} >{user.full_name}</Link></TableCell>
-                                            <TableCell><Link to={`/employeeprofile/${user.id}`} key={user.id} >{user.work_typology}</Link></TableCell>
-                                            <TableCell><Link to={`/employeeprofile/${user.id}`} key={user.id} >{user.ward}</Link></TableCell>
-                                            <TableCell><Link to={`/employeeprofile/${user.id}`} key={user.id} >{user.phone_number}</Link></TableCell>
-                                            <TableCell><Link to={`/employeeprofile/${user.id}`} key={user.id} >{user.age}</Link></TableCell>
+                                            <TableCell><Link to={`/employee-profile/${user.id}`} key={user.id} >{user.full_name}</Link></TableCell>
+                                            <TableCell><Link to={`/employee-profile/${user.id}`} key={user.id} >{user.work_typology}</Link></TableCell>
+                                            <TableCell><Link to={`/employee-profile/${user.id}`} key={user.id} >{user.ward}</Link></TableCell>
+                                            <TableCell><Link to={`/employee-profile/${user.id}`} key={user.id} >{user.phone_number}</Link></TableCell>
+                                            <TableCell><Link to={`/employee-profile/${user.id}`} key={user.id} >{user.age}</Link></TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -82,7 +91,8 @@ export default function EmployeeListTable() {
                         </TableContainer>
                     </div>
                     <div>
-                        <button className="floating-button" onClick={openModal}>
+                        
+                        <button className="floating-button" onClick={() => openModal(() => 'add')}>
                             <Icon icon="icon-park-outline:add-one" />
                             <span>Add Employee</span>
                         </button>
@@ -109,12 +119,15 @@ export default function EmployeeListTable() {
                         shouldCloseOnOverlayClick={true}
                         closeTimeoutMS={2000}
                     >
-                        <SendRequestModal closeModal={closeModal} />
+                        
+                        <SendRequestModal closeModal={closeModal} actionType={modalType} />
                     </Modal>
                 </div>
 
 
             </div>
+             {/* ):
+            (<EmptyEmployeeList />)} */}
         </>
 
 

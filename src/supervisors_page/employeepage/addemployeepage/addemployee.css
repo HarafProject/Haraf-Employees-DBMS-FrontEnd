@@ -28,7 +28,7 @@
     line-height: normal;
     color: #444444;
 
-     
+
 
 }
 
@@ -36,24 +36,27 @@
 .add-employee-content .form-field select option {
     color: #000;
 }
+.add-employee-content .form-field select option:first-child {
+    color: #444444ac !important;
+}
 
 .add-employee-content .form-field select {
     width: 400px;
     padding: 10px 0;
     outline: none;
     border: none;
-    color: #444444;
+    color: #444444ac;
     background-color: transparent;
     font-size: 16px;
     line-height: normal;
-     
+
 }
 
 
 .add-employee-content .form-field input::placeholder {
-    color: #444444;
+    color: #444444ac;
     background-color: transparent !important;
-     
+
 }
 
 .add-employee-content .form-field input:-internal-autofill-selected {
@@ -69,6 +72,16 @@
 .add-employee-content .form-field input:-webkit-autofill:active {
     -webkit-transition-delay: 9999s;
     transition-delay: 9999s;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.add-employee-content .form-field input::-webkit-outer-spin-button,
+.add-employee-content .form-field input::-webkit-inner-spin-button,
+.add-employee-content .form-field input[type=number] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
+    /* -moz-appearance: textfield; */
 }
 
 .add-employee-content .form-field select {
@@ -127,16 +140,13 @@
     width: 100px;
 }
 
-.add-employee-content .btn.save-employee{
+.add-employee-content .btn.save-employee {
     width: 400px;
-padding: 10px;
-border-radius: 50px;
-background: #0173BC;
-color: #FFFFFF;
-font-size: 28px;
-font-weight: 400;
-line-height: normal
-
-
-
+    padding: 10px;
+    border-radius: 50px;
+    background: #0173BC;
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: normal
 }

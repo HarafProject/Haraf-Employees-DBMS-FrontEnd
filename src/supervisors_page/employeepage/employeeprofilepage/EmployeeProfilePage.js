@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReusableInformationList from '../../../component/reusable/employeeinformationcard/ReusableInformationList';
 import './employeeprofile.css';
+import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
 import userData from '../../../component/data/EmployeesData';
 import profileimage from '../../../assets/profile.png'
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader';
-
+import SendRequestModal from '../../../component/reusable/modalscontent/SendRequestModal'
 
 export default function EmployeeProfilePage() {
     // const user = userData.user[0];
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalType, setModalType] = useState('');
 
     const { id } = useParams();
     const user = userData.find((user) => user.id === parseInt(id));
@@ -34,17 +37,26 @@ export default function EmployeeProfilePage() {
         { label: 'Special Disability', value: user.special_disability }
     ];
 
+
+    function openModal(modalType) {
+        setIsOpen(true);
+        setModalType(modalType);
+      }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
     const goBack = () => {
         window.history.go(-1);
-      };
+    };
 
     return (
         <div className="employee-profile-page">
             <ReusableHeader />
-            <div className="profile-content my-5 p-5">
+            <div className="profile-content my-3 p-5">
                 <div className="back-to-previous my-5">
-                <Icon icon="mdi:arrow-back-circle" onClick={goBack} className='arrowback-icon me-3'/>
-                Back to list
+                    <Icon icon="mdi:arrow-back-circle" onClick={goBack} className='arrowback-icon me-3' />
+                    Back to list
                 </div>
                 <div className="d-flex align-item-start  profile-info-summary">
                     <img src={profileimage} alt="" />
@@ -62,12 +74,40 @@ export default function EmployeeProfilePage() {
                     </div>
 
                 </div>
-                <div className='mt-3'>
+                <div className='my-3'>
                     <ReusableInformationList title="Personal Information" information={personalInfo} />
                     <ReusableInformationList title="Bank Information" information={bankInfo} />
                     <ReusableInformationList title="Other Information" information={otherInfo} />
                 </div>
+
+                <div className='d-flex mt-2'>
+                    {/* <button onClick={openModal} className="btn request-edit mt-5 ">Request Edit Access</button>
+                    <button onClick={openModal} className="btn delete-user mt-5 mx-4">Delete Employee</button> */}
+                    <button onClick={() => openModal('edit')} className="btn request-edit mt-5 ">Request Edit Access</button>
+  <button onClick={() => openModal('delete')} className="btn delete-user mt-5 mx-4">Delete Employee</button>
+                </div>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+                className={{
+                    base: 'modal-base',
+                    afterOpen: 'modal-base_after-open',
+                    beforeClose: 'modal-base_before-close'
+                }}
+                overlayClassName={{
+                    base: 'overlay-base',
+                    afterOpen: 'overlay-base_after-open',
+                    beforeClose: 'overlay-base_before-close'
+                }}
+                shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={2000}
+            >
+                
+                <SendRequestModal closeModal={closeModal} actionType={modalType}/>
+            </Modal>
         </div>
     )
 }

@@ -19,6 +19,8 @@ import EmptyEmployeeList from "../supervisors_page/employeepage/employeelistpage
 import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/AddEmployee";
 import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
 import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
+import NotificationScreen from "../supervisors_page/employeepage/notificationpage/NotificationPage";
+import BiometricScreen from "../supervisors_page/employeepage/biometricpage/BiometricPage";
 
 
 
@@ -28,14 +30,16 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route path="/" element={<WelcomeScreen />}  />
       <Route path="/login" element={<LoginScreen />} />
-      <Route path="/forgotpassword" element={<ForgottenPassword />} />
-      <Route path="/sendotp" element={<LoginOtpVerify />} />
-      <Route path="/createpassword" element={<CreateNewPassword />} />
-      <Route path="/createaccount" element={<CreateAccountScreen />} />
-      <Route path="/employeeemptylist" element={<EmptyEmployeeList />} />
-      <Route path="/addemployee" element={<AddEmployeeScreen />} />
-      <Route path="/employeeslist" element={<EmployeeListTable />} />
-      <Route path="/employeeprofile/:id" element={<EmployeeProfilePage />} />
+      <Route path="/forgot-password" element={<ForgottenPassword />} />
+      <Route path="/send-otp" element={<LoginOtpVerify />} />
+      <Route path="/create-new-password" element={<CreateNewPassword />} />
+      <Route path="/create-account" element={<CreateAccountScreen />} />
+      <Route path="/add-employee" element={<AddEmployeeScreen />} />
+      <Route path="/employee-list" element={<EmployeeListTable />} />
+      <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
+      <Route path="/employee-profile/:id" element={<EmployeeProfilePage />} />
+      <Route path="/notification" element={<NotificationScreen />} />
+      <Route path="/biometric-capture" element={<BiometricScreen />} />
    
      
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
