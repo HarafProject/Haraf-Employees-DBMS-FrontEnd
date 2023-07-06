@@ -1,9 +1,13 @@
 .onboarding-screen {
-  background-color: #03293e;
-  display: flex;
-  justify-content: center;
-
-  height: auto;
+    background-color: #03293E;
+    display: flex;
+    justify-content: center;   
+    align-items: center;
+    height: auto;
+    height: fit-content;
+}
+.welcome-screen, .login-screen{
+    height: 100vh;
 }
 .welcome-screen-content {
   text-align: center;
@@ -32,11 +36,10 @@
 
 .signup-content p.title,
 .welcome-screen-content p {
-  font-size: 18px;
-  font-family: "CustomFont", sans-serif;
-  font-weight: 400;
-  /* Bold font weight */
-  line-height: normal;
+    font-size: 18px;
+    font-family: 'CustomFont', sans-serif;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .signup-content p.screen-title {
@@ -153,8 +156,8 @@
   cursor: pointer;
 }
 
-.text-danger {
-  color: red;
+.text-danger, .password-mismatch{
+    color: red;
 }
 
 /* @media only screen and (max-width: 1025px) {

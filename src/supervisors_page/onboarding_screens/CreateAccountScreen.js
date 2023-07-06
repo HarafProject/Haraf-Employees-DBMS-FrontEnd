@@ -11,8 +11,11 @@ import supervisor from "../../class/supervisors.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dataOBJs from "../../class/data.class";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
+import Modal from 'react-modal';
+import './onboarding.css'
+import AccountCreateSuccessModal from "../../component/reusable/modalscontent/AccountCreatedSuccessModal";;
 
 export default function CreateAccountScreen() {
   const navigate = useNavigate();
@@ -38,10 +41,10 @@ export default function CreateAccountScreen() {
     setIcon2(!icon2);
   };
   const dispatch = useDispatch();
-
-  useSelector((state) => {
-    console.log(state.user.user, "state");
-  });
+  
+  // useSelector((state) => {
+  //   console.log(state.user.user, "state");
+  // });
   const validationSchema = Yup.object().shape({
     fname: Yup.string().required("First Name is required"),
     phone: Yup.string().required("Phone Number is required"),
