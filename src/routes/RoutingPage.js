@@ -9,16 +9,22 @@ import {
 
 // TakeAttendancePage
 
-import SelectTypography from '../supervisors_page/takeAttendancePage/SelectTypography'
-import TakeAttendance from '../supervisors_page/takeAttendancePage/TakeAttendance'
-import AttendanceReport from '../supervisors_page/takeAttendancePage/AttendanceReport'
+import SelectTypography from '../supervisors_page/AttendancePages/selectTypologyPage/SelectTypography'
+import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePage/TakeAttendance'
 
+import SupervisorProfile from '../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile'
+import AttendanceReportUpload from '../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
       <Route path='/' element={<SelectTypography />}></Route>
+      <Route path='/' element={<SupervisorProfile />}></Route>
+      <Route path='/profile' element={<SupervisorProfile />}></Route>
       <Route path='/take-attendance' element={<TakeAttendance />}></Route>
-      <Route path='/attendance-report' element={<AttendanceReport />}></Route>
+      <Route
+        path='/attendance-report'
+        element={<AttendanceReportUpload />}
+      ></Route>
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
     </Route>
   )

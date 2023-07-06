@@ -1,7 +1,7 @@
-import ReusableHeader from '../../component/reusable/reusableheader/ReusableHeader'
+import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
 import { useNavigate } from 'react-router-dom'
 import AttendanceTable from './AttendanceTable'
-import { useState } from 'react'
+import './takeAttendance.css'
 
 export default function TakeAttendance() {
   const navigate = useNavigate()

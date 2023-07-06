@@ -1,18 +1,17 @@
 import {
   Table,
-  TableHead,
   TableRow,
   TableCell,
   TableBody,
   TableContainer,
   Paper,
   Avatar,
-  Checkbox,
   Typography,
 } from '@mui/material'
 import tableData from './tableData'
 import { useState } from 'react'
 import { Icon } from '@iconify/react'
+import './takeAttendance.css'
 
 export default function AttendanceTable() {
   const [isPresent, setIsPresent] = useState(tableData)

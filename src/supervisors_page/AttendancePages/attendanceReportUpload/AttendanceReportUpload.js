@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import ReusableHeader from '../../component/reusable/reusableheader/ReusableHeader'
+import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
+import './attendanceReportUpload.css'
 
-export default function AttendanceReport() {
+export default function AttendanceReportUpload() {
   const navigate = useNavigate()
 
   return (
-    <sectin>
+    <section>
       <ReusableHeader />
       <div className='margin '>
         <div className='select-typ-report'>
@@ -76,6 +77,6 @@ export default function AttendanceReport() {
           </div>
         </div>
       </div>
-    </sectin>
+    </section>
   )
 }
