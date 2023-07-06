@@ -19,12 +19,16 @@ export default function AttendanceTable() {
   const [icon, setIcon] = useState('mdi:checkbox-outline')
   const [iconIsAbsent, setIconIsAbsent] = useState('mdi:checkbox-outline')
 
-  const handlePresent = (event, checkboxId) => {
-    const updatedCheckboxes = isPresent.map((checkbox) =>
-      checkbox.id === checkboxId
-        ? { ...checkbox, isPresent: true }
-        : { ...checkbox, isPresent: false }
-    )
+  function handlePresent(event, checkboxId) {
+    const updatedCheckboxes = isPresent.map(function (checkbox) {
+      console.log(checkbox.id === checkboxId)
+
+      if (checkbox.id === checkboxId) {
+        return { ...checkbox, isPresent: false }
+      } else {
+        return ''
+      }
+    })
     setIsPresent(updatedCheckboxes)
     setIcon(!icon)
   }
@@ -55,14 +59,12 @@ export default function AttendanceTable() {
                 <Typography variant='body2'>{row.role}</Typography>
               </TableCell>
               <TableCell>
-                <div
-                  className='d-flex align-items-center'
-                  onClick={(event) => handlePresent(event, row.id)}
-                >
+                <div className='d-flex align-items-center'>
                   <p className={icon ? 'empty-checkbox' : 'checked-box'}>
                     Present
                   </p>
                   <Icon
+                    onClick={(event) => handlePresent(event, row.id)}
                     icon={
                       icon
                         ? 'mdi:checkbox-blank-outline'
