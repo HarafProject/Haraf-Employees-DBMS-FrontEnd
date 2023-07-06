@@ -1,23 +1,23 @@
 .modal-screen {
-    width: 500px;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fefefe;
-    margin: 0 auto;
-    border-radius: 22px;
+  width: 500px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefe;
+  margin: 0 auto;
+  border-radius: 22px;
 }
 .sendrequest-modal {
-    width: auto;
-    height: auto;
+  width: auto;
+  height: auto;
 }
 
 .close-button {
-    outline: none;
-    border: none;
-    font-size: 40px;
-    float: right;
+  outline: none;
+  border: none;
+  font-size: 40px;
+  float: right;
 }
 
 .close-button:focus,
@@ -26,45 +26,43 @@
 }
 
 .modal-screen .modal-title span {
-    font-size: 24px;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0 5px;
-
+  font-size: 24px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 5px;
 }
 .modal-screen p.no-network {
-    font-size: 26px;
-    font-weight: 600;
-    line-height: normal;
-
+  font-size: 26px;
+  font-weight: 600;
+  line-height: normal;
 }
-.success-icon, .network-icon {
-    width: 75px;
-    height: 75px;
-    color: #0280CA;
+.success-icon,
+.network-icon {
+  width: 75px;
+  height: 75px;
+  color: #0280ca;
 }
 .modal-screen .modal-title .error-icon {
-    font-size: 30px;
-    color: #F99C39;
+  font-size: 30px;
+  color: #f99c39;
 }
 
 .modal-screen p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: normal;
-    text-align: center;
-    color: #000000;
-    width: 450px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
+  text-align: center;
+  color: #000000;
+  width: 450px;
 }
 
 .modal-screen .textarea {
-    width: 450px;
-    height: 150px;
-    border-radius: 7px;
-    border: 1px solid #444444;
-    font-size: 16px;
-    font-size: #444444B2;
-
+  width: 450px;
+  height: 150px;
+  border-radius: 7px;
+  border: 1px solid #444444;
+  font-size: 16px;
+  font-size: #444444b2;
 }
 
 .textarea::placeholder {
@@ -75,14 +73,13 @@
 }
 
 .modal-screen .btn.modal-button {
-    width: 250px;
-    border-radius: 45px;
-    background: #0173BC;
-    font-size: 22px;
-    font-weight: 500;
-    text-align: center;
-    color: #ffffff;
-
+  width: 250px;
+  border-radius: 45px;
+  background: #0173bc;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
 }
 
 .modal {
@@ -90,13 +87,13 @@
 }
 
 .modal-base {
-    top: 10%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
+  top: 10%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
 }
 
 .modal-base_after-open {
@@ -110,14 +107,14 @@
 }
 
 .overlay-base {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-background: rgba(0, 0, 0, 0.9);
-    transition: all 0.3s ease-out;
-    z-index: 500;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  transition: all 0.3s ease-out;
+  z-index: 500;
 }
 
 .overlay-base_after-open {

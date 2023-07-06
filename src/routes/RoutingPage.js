@@ -19,9 +19,6 @@ import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/
 import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
 import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
 
-
-
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -35,8 +32,7 @@ const router = createBrowserRouter(
       <Route path="/addemployee" element={<AddEmployeeScreen />} />
       <Route path="/employeeslist" element={<EmployeeListTable />} />
       <Route path="/employeeprofile/:id" element={<EmployeeProfilePage />} />
-   
-     
+
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>
   )
