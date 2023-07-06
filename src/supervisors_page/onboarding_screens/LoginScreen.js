@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
@@ -118,11 +119,19 @@ export default function LoginScreen() {
               className="btn login my-4"
               disabled={!formik.isValid || isLoading}
             >
-              {isLoading ? "Loading" : "Login"}
+              {isLoading ? (
+                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
           <p className="forgot-password">
-            Forgotten Password? <span> <a href="/forgotpassword">Reset Here</a></span>{" "}
+            Forgotten Password?{" "}
+            <span>
+              {" "}
+              <a href="/forgotpassword">Reset Here</a>
+            </span>{" "}
           </p>
         </form>
       </div>

@@ -23,6 +23,7 @@ class supervisorOBJ {
       if (data) {
         const response = await api.post("api/auth/login", data);
         console.log(response);
+        return response;
         //store res data
       } else {
         throw new Error("please fill in the fields");
@@ -39,6 +40,7 @@ class supervisorOBJ {
       if (data) {
         const response = await api.post("api/auth/forgot-pw", data);
         console.log(response);
+        return response;
         //store res data
       } else {
         throw new Error("please fill in the fields");
@@ -64,14 +66,14 @@ class supervisorOBJ {
     }
   };
 
-  //supervisors password reset 
+  //supervisors password reset
   ResetPassword = async (data) => {
     try {
       //check if data is empty
       if (data) {
         const response = await api.put("api/auth/reset-pw", data);
         console.log(response);
-        //store res data
+        return response;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -79,8 +81,6 @@ class supervisorOBJ {
       throw err?.response?.data;
     }
   };
-
-
 }
 
 const supervisor = new supervisorOBJ();
