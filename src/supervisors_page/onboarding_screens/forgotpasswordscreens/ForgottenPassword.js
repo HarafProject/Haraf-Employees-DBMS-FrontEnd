@@ -7,11 +7,13 @@ import * as Yup from "yup";
 import auth from "../../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../../../redux/reducers/userReducer";
 
 export default function ForgottenPassword() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
+  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Email Address is required")
@@ -26,9 +28,10 @@ export default function ForgottenPassword() {
       console.log(values, "values");
       setIsLoading(true);
       auth
-        .register(values)
+        .forgotPassword(values)
         .then((res) => {
           console.log(res);
+          dispatch(loginSuccess(res?.data?.token));
           toast.success(res?.data?.message);
           setIsLoading(false);
         })
