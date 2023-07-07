@@ -1,72 +1,69 @@
-.profile-info-summary {
+.profile-info-summary{
   line-height: normal;
   white-space: nowrap;
 }
 .arrowback-icon {
   width: 60px;
   height: 60px;
-  color: #0280ca;
+  color: #0280CA;
 }
-.profile-info-summary img {
+.profile-info-summary img{
   max-width: 12%;
   width: 150px;
   height: 150px;
   border-radius: 50%;
 }
-.back-to-previous {
+.back-to-previous{
   font-size: 20px;
   font-weight: 500;
 }
-.profile-info-summary h4 {
+.profile-info-summary h4{
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 600;   
   color: #444444;
   line-height: normal;
+
 }
-.profile-info-summary p {
+.profile-info-summary p{
   font-size: 18px;
   font-weight: 300;
-  color: #000000;
-  margin-top: 10px;
+color: #000000;
+margin-top: 10px;
 }
-.profile-info-summary .work-info p {
+.profile-info-summary .work-info p{
   font-size: 13px;
   color: #000000;
-  font-size: 20px;
-  font-weight: 500;
-  margin-top: 10px;
+font-size: 20px;
+font-weight: 500;
+margin-top: 10px;
 }
-.profile-info-summary .work-info p span {
-  font-size: 15px;
+.profile-info-summary .work-info p span{
+  
+font-size: 15px;
   font-weight: 300;
-  color: #444444;
+color: #444444;
 }
 
-.reusable-info-list p.h6 {
+.reusable-info-list p.h6{
   font-size: 22px;
   font-weight: 600;
   color: #444444f0;
+
 }
 
-.reusable-info-list p {
+.reusable-info-list p{
   font-size: 18px;
   font-weight: 400;
 }
 
-<<<<<<< HEAD
-.reusable-info-list p span {
+.reusable-info-list p span{
   font-size: 14px;
   font-weight: 300;
   color: #444444;
-=======
-.reusable-info-list p span{
-    font-size: 14px;
-    font-weight: 300;
-    color: #444444;
 }
 
 .btn.request-edit, .btn.delete-user{
-    width: 250px;
+  width: 250px;
 padding: 10px;
 border-radius: 45px;
 background: #0173BC;
@@ -79,5 +76,4 @@ font-weight: 400;
 .btn.delete-user{
 background: #D40505;
 color: #ffffff;
->>>>>>> origin/admin_sidebar
 }

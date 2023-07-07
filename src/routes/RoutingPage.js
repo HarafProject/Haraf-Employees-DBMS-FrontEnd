@@ -18,8 +18,6 @@ import EmptyEmployeeList from "../supervisors_page/employeepage/employeelistpage
 import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/AddEmployee";
 import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
 import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
-<<<<<<< HEAD
-=======
 import NotificationScreen from "../supervisors_page/employeepage/notificationpage/NotificationPage";
 import BiometricScreen from "../supervisors_page/employeepage/biometricpage/BiometricPage";
 import AdminWelcomeScreen from "../Admin_page/admin_signup_pages/AdminWelcomeScreen";
@@ -30,24 +28,12 @@ import AdminLoginOtpVerify from '../Admin_page/admin_signup_pages/adminforgotpas
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
 
 
->>>>>>> origin/admin_sidebar
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/login" element={<LoginScreen />} />
-<<<<<<< HEAD
-      <Route path="/forgotpassword" element={<ForgottenPassword />} />
-      <Route path="/sendotp" element={<LoginOtpVerify />} />
-      <Route path="/createpassword" element={<CreateNewPassword />} />
-      <Route path="/createaccount" element={<CreateAccountScreen />} />
-      <Route path="/employeeemptylist" element={<EmptyEmployeeList />} />
-      <Route path="/addemployee" element={<AddEmployeeScreen />} />
-      <Route path="/employeeslist" element={<EmployeeListTable />} />
-      <Route path="/employeeprofile/:id" element={<EmployeeProfilePage />} />
-
-=======
       <Route path="/forgot-password" element={<ForgottenPassword />} />
       <Route path="/send-otp" element={<LoginOtpVerify />} />
       <Route path="/create-new-password" element={<CreateNewPassword />} />
@@ -68,7 +54,6 @@ const router = createBrowserRouter(
       <Route path="/admin-home" element={<AdminHomePage />} />
    
      
->>>>>>> origin/admin_sidebar
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>
   )
