@@ -25,18 +25,32 @@
 }
 
 .header-menu li a {
+<<<<<<< HEAD
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
   white-space: nowrap;
   color: #03293e;
   margin: 0 8px;
+=======
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    white-space: nowrap;
+    color: #03293E;
+    margin: 0 8px;
+>>>>>>> origin/admin_sidebar
 }
 
 .header-menu li a:hover,
 .header-menu li a.active {
+<<<<<<< HEAD
   color: #f99c39;
   font-size: 18px;
+=======
+    color: #F99C39;
+    font-size: 17px;
+>>>>>>> origin/admin_sidebar
 }
 
 .hamburger-icon {

@@ -53,8 +53,31 @@
   font-weight: 400;
 }
 
+<<<<<<< HEAD
 .reusable-info-list p span {
   font-size: 14px;
   font-weight: 300;
   color: #444444;
+=======
+.reusable-info-list p span{
+    font-size: 14px;
+    font-weight: 300;
+    color: #444444;
+}
+
+.btn.request-edit, .btn.delete-user{
+    width: 250px;
+padding: 10px;
+border-radius: 45px;
+background: #0173BC;
+color: #ffffff;
+background: #0173BC;
+font-size: 24px;
+font-weight: 400;
+}
+
+.btn.delete-user{
+background: #D40505;
+color: #ffffff;
+>>>>>>> origin/admin_sidebar
 }

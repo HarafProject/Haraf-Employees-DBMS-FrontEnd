@@ -92,6 +92,23 @@
 .filter-option-section .search-button input:-webkit-autofill:hover,
 .filter-option-section .search-button input:-webkit-autofill:focus,
 .filter-option-section .search-button input:-webkit-autofill:active {
+<<<<<<< HEAD
   -webkit-transition-delay: 9999s;
   transition-delay: 9999s;
 }
+=======
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
+}
+
+.filter-option-section .form-field  select option {
+    background-color: #fff;
+    color: #333;
+    padding: 8px;
+  }
+  
+  .filter-option-section .form-field  select option[value="option-value"] {
+    font-weight: bold;
+    color: #ff0000;
+  }
+>>>>>>> origin/admin_sidebar
