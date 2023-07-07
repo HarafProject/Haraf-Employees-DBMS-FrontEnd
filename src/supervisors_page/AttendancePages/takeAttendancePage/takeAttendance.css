@@ -1,0 +1,70 @@
+.margin {
+  margin-top: 8rem;
+}
+
+.attendance {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.attendance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.attendance-header h3 {
+  color: #0280ca;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.attendance-header h4 {
+  font-size: 24px;
+}
+
+.attendance-sub-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.attendance-sub-head h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.attendance-sub-head p {
+  color: red;
+  font-size: 14px;
+}
+
+.center-container {
+  position: fixed;
+  top: 90%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.center-button {
+  border: none;
+  font-size: 12px;
+  padding: 0.5rem 2rem;
+  background-color: #0280ca;
+  color: #fff;
+  border-radius: 25px;
+}
+
+.table-icon {
+  font-size: 35px;
+}
+.checked-box {
+  color: #008000;
+}
+
+.checked-red {
+  color: #ff0000;
+}

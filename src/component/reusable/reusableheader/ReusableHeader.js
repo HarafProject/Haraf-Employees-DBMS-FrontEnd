@@ -1,64 +1,64 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Icon } from "@iconify/react";
-import profile from "../../../assets/logo.png";
-import "./header.css";
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { Icon } from '@iconify/react'
+import profile from '../../../assets/logo.png'
+import './header.css'
 
 const ReusableHeader = () => {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false)
   const handleClick = () => {
-    setClicked(!clicked);
-  };
+    setClicked(!clicked)
+  }
 
-  const closeMobileMenu = () => setClicked(false);
+  const closeMobileMenu = () => setClicked(false)
 
   return (
-    <div className="container-fluid header-section px-4 py-2">
-      <div className="d-flex align-items-center justify-content-between header-content px-4">
-        <NavLink to="/employeeemptylist" onClick={closeMobileMenu}>
-          <img src={profile} alt="logo" />
+    <div className='container-fluid header-section px-4 py-2'>
+      <div className='d-flex align-items-center justify-content-between header-content px-4'>
+        <NavLink to='/employeeemptylist' onClick={closeMobileMenu}>
+          <img src={profile} alt='logo' />
         </NavLink>
 
         <h1>LIPWMS Supervisor Portal</h1>
 
         <ul
-          className={clicked ? "header-menu active" : "header-menu"}
-          id="header-menu"
+          className={clicked ? 'header-menu active' : 'header-menu'}
+          id='header-menu'
         >
           <li>
-            {" "}
-            <NavLink to="/employeeslist" onClick={closeMobileMenu}>
+            {' '}
+            <NavLink to='/employeeslist' onClick={closeMobileMenu}>
               Employee List
-            </NavLink>{" "}
+            </NavLink>{' '}
           </li>
           <li>
-            {" "}
-            <NavLink to="/attendance" onClick={closeMobileMenu}>
+            {' '}
+            <NavLink to='/' onClick={closeMobileMenu}>
               Take Attendance
-            </NavLink>{" "}
+            </NavLink>{' '}
           </li>
           <li>
-            {" "}
-            <NavLink to="/profile" onClick={closeMobileMenu}>
+            {' '}
+            <NavLink to='/profile' onClick={closeMobileMenu}>
               Admin Profile
-            </NavLink>{" "}
+            </NavLink>{' '}
           </li>
           <li>
-            {" "}
-            <NavLink to="/" onClick={closeMobileMenu}>
+            {' '}
+            <NavLink to='/logout' onClick={closeMobileMenu}>
               Logout
-            </NavLink>{" "}
+            </NavLink>{' '}
           </li>
         </ul>
-        <div className="hamburger-icon" onClick={handleClick}>
+        <div className='hamburger-icon' onClick={handleClick}>
           <Icon
-            icon={clicked ? "jam:close" : "ci:menu-alt-02"}
-            className={clicked ? "close" : "bar"}
+            icon={clicked ? 'jam:close' : 'ci:menu-alt-02'}
+            className={clicked ? 'close' : 'bar'}
           />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ReusableHeader;
+export default ReusableHeader

@@ -1,0 +1,88 @@
+.margin {
+  margin-top: 8rem;
+}
+/* Select Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+label {
+  line-height: normal;
+}
+
+.check {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+input[type='checkbox']:checked {
+  background-color: #f99c39;
+}
+
+.select-typ {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
+}
+.header h3 {
+  font-size: 28px;
+  color: #0280ca;
+}
+
+.wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid label {
+  margin: 1rem 0;
+}
+
+.toggle {
+  color: #444444;
+}
+
+.toggle div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.toggle p {
+  color: red;
+  font-size: 12px;
+  padding: 0 2rem;
+}
+
+.select-typ button {
+  display: block;
+  width: 40%;
+  margin: 0 auto;
+  border: none;
+  padding: 0.5rem 2rem;
+  background-color: #0280ca;
+  color: #fff;
+  border-radius: 25px;
+}
+
+.last-check {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 3rem 0;
+  color: #444444;
+}
+/* End of select typography */

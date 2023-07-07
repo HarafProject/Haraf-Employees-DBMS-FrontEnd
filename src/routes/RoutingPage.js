@@ -5,7 +5,7 @@ import {
   // Router,
   createRoutesFromElements,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom'
 
 //Onboarding Routes
 import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
@@ -18,7 +18,13 @@ import EmptyEmployeeList from "../supervisors_page/employeepage/employeelistpage
 import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/AddEmployee";
 import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
 import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
+// TakeAttendancePage
 
+import SelectTypography from '../supervisors_page/AttendancePages/selectTypologyPage/SelectTypography'
+import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePage/TakeAttendance'
+
+import SupervisorProfile from '../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile'
+import AttendanceReportUpload from '../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -34,6 +40,15 @@ const router = createBrowserRouter(
       <Route path="/employeeprofile/:id" element={<EmployeeProfilePage />} />
 
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
+      <Route path='/' element={<SelectTypography />}></Route>
+      <Route path='/' element={<SupervisorProfile />}></Route>
+      <Route path='/profile' element={<SupervisorProfile />}></Route>
+      <Route path='/take-attendance' element={<TakeAttendance />}></Route>
+      <Route
+        path='/attendance-report'
+        element={<AttendanceReportUpload />}
+      ></Route>
+      {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
     </Route>
   )
 );
@@ -45,4 +60,4 @@ function RoutingPage({ user }) {
     </div>
   );
 }
-export default RoutingPage;
+export default RoutingPage
