@@ -81,6 +81,21 @@ class authOBJ {
       throw err?.response?.data;
     }
   };
+  //update supervisors profile
+  updateProfile = async (data) => {
+    try {
+      //check if data is empty
+      if (data) {
+        const response = await api.put("api/auth/profile", data);
+        console.log(response);
+        return response;
+      } else {
+        throw new Error("please fill in the fields");
+      }
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
 }
 
 const auth = new authOBJ();
