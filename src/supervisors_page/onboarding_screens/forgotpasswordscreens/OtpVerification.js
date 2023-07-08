@@ -38,7 +38,7 @@ export default function LoginOtpVerify() {
           setIsLoading(false);
         })
         .catch((err) => {
-          toast.error(err.error || err);
+          toast.error(err.error);
           console.log(err);
           setIsLoading(false);
         });
@@ -71,7 +71,6 @@ export default function LoginOtpVerify() {
     .forgotPassword({email:email})
     .then((res) => {
       console.log(res);
-
       toast.success(res?.data?.message);
       setIsLoading(false);
     })
