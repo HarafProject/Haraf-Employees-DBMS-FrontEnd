@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const baseURL = "https://haraf-edm.onrender.com";
-
+// const baseURL = "http://localhost:5000";
 // Create an Axios instance with the base URL
 const api = axios.create({
   baseURL: `${baseURL}`,
