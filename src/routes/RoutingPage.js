@@ -38,8 +38,6 @@ const router = createBrowserRouter(
       <Route path="/addemployee" element={<AddEmployeeScreen />} />
       <Route path="/employeeslist" element={<EmployeeListTable />} />
       <Route path="/employeeprofile/:id" element={<EmployeeProfilePage />} />
-
-      {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
       <Route path='/' element={<SelectTypography />}></Route>
       <Route path='/' element={<SupervisorProfile />}></Route>
       <Route path='/profile' element={<SupervisorProfile />}></Route>

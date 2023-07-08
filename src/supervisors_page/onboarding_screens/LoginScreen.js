@@ -6,12 +6,11 @@ import "./onboarding.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
-import auth from "../../class/auth.class";
+import supervisor from "../../class/supervisors.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
-import { RotatingLines } from "react-loader-spinner";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
@@ -25,7 +24,11 @@ export default function LoginScreen() {
   };
   const dispatch = useDispatch();
 
-  const validationSchema = Yup.object().shape({
+  useSelector((state) => {
+    console.log(state.user.user, "state");
+  });
+
+const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
       .required("Email Address is required"),
@@ -47,8 +50,7 @@ export default function LoginScreen() {
         password: values.password,
       };
 
-      auth
-        .login(data)
+      supervisor.login(data)
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
@@ -73,7 +75,7 @@ export default function LoginScreen() {
         </div>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">auth LOGIN</p>
+          <p className="screen-title text-center mt-5">auSUPERVISOROGIN</p>
 
           <div>
             <div className="form-field my-4">
@@ -116,20 +118,12 @@ export default function LoginScreen() {
               className="btn login my-4"
               disabled={!formik.isValid || isLoading}
             >
-              {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
-              ) : (
-                "Login"
-              )}
+                {isLoading ?"Loading" : "Login"}
             </button>
           </div>
           <p className="forgot-password">
-            Forgotten Password?{" "}
-            <span>
-              {" "}
-              <a href="/forgotpassword">Reset Here</a>
-            </span>{" "}
-          </p>
+            Forgotten Password? <span> <a href="/forgotpassword">Reset Here</a></span>{" "}
+        </p>
         </form>
       </div>
       {/* </div> */}

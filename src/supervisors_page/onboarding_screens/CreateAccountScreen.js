@@ -97,6 +97,7 @@ export default function CreateAccountScreen() {
           console.log(res);
           toast.success(res?.data?.message);
           dispatch(loginSuccess(res?.data?.token));
+          window.location.href = "/employeeemptylist"
           setIsLoading(false);
         })
         .catch((err) => {
