@@ -81,7 +81,11 @@ export default function ForgottenPassword() {
               className="btn forgotpassword-btn mt-4 mx-auto"
             >
               {" "}
-              {isLoading ? "loading" : "Send OTP"}
+              {isLoading ? (
+                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+              ) : (
+                "Send OTP"
+              )}
             </button>
           </form>
           <p>
