@@ -9,9 +9,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 
-export default function AddEmployeeScreen() {
-  const navigate = useNavigate();
-
+export default function AddEmployeeScreen(){
   const [selectedImage, setSelectedImage] = useState(null);
   const [typology,setTypology] = useState([])
   const [isLoading, setIsLoading] = useState(false);
@@ -393,9 +391,8 @@ export default function AddEmployeeScreen() {
           </button>
           </form>
 
-         
+         </div>
         </div>
-      </div>
-    </div>
-  );
+        </div>
+    )
 }

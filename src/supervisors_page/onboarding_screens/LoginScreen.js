@@ -6,7 +6,7 @@ import "./onboarding.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
-import supervisor from "../../class/supervisors.class";
+import supervisor from "../../class/supervisor.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -122,8 +122,12 @@ const validationSchema = Yup.object().shape({
             </button>
           </div>
           <p className="forgot-password">
-            Forgotten Password? <span> <a href="/forgotpassword">Reset Here</a></span>{" "}
-        </p>
+            Forgotten Password?{" "}
+            <span>
+              {" "}
+              <a href="/forgot-password">Reset Here</a>
+            </span>{" "}
+          </p>
         </form>
       </div>
       {/* </div> */}

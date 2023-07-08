@@ -1,0 +1,54 @@
+.biometric-page{
+    height: 100vh;
+}
+.biometric-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.biometric-content h1{
+    font-size: 40px;
+    font-weight: 600;
+    line-height: normal;
+    color: #444444;
+    
+}
+
+.biometric-content p{
+    font-size: 15px;
+    font-weight: 300;
+    line-height: normal;
+    text-align: center;
+    color: #000000;
+    width: 400px;
+
+}
+
+.biometric-content .finger-print img{
+width: 40%;
+}
+
+.biometric-content .finger-print span{
+    font-size: 40px;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    color: #444444;
+    margin-top: 5px;
+    
+}
+
+.biometric-content .btn.biometric-btn{
+    width: 250px;
+    padding: 10px;
+    border-radius: 50px;
+    background: #0173BC;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+    color: #FFFFFF;
+        
+}

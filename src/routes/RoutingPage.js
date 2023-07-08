@@ -19,6 +19,16 @@ import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/
 import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
 import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
 // TakeAttendancePage
+import NotificationScreen from "../supervisors_page/employeepage/notificationpage/NotificationPage";
+import BiometricScreen from "../supervisors_page/employeepage/biometricpage/BiometricPage";
+import AdminWelcomeScreen from "../Admin_page/admin_signup_pages/AdminWelcomeScreen";
+import AdminLoginScreen from "../Admin_page/admin_signup_pages/AdminLoginScreen";
+import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminForgottenPassword";
+import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
+import AdminLoginOtpVerify from '../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification'
+import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
+
+
 
 import SelectTypography from '../supervisors_page/AttendancePages/selectTypologyPage/SelectTypography'
 import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePage/TakeAttendance'
@@ -47,6 +57,27 @@ const router = createBrowserRouter(
         element={<AttendanceReportUpload />}
       ></Route>
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
+      <Route path="/forgot-password" element={<ForgottenPassword />} />
+      <Route path="/send-otp" element={<LoginOtpVerify />} />
+      <Route path="/create-new-password" element={<CreateNewPassword />} />
+      <Route path="/create-account" element={<CreateAccountScreen />} />
+      <Route path="/add-employee" element={<AddEmployeeScreen />} />
+      <Route path="/employee-list" element={<EmployeeListTable />} />
+      <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
+      <Route path="/employee-profile/:id" element={<EmployeeProfilePage />} />
+      <Route path="/notification" element={<NotificationScreen />} />
+      <Route path="/biometric-capture" element={<BiometricScreen />} />
+
+
+      <Route path="/admin" element={<AdminWelcomeScreen />} />
+      <Route path="/admin-login" element={<AdminLoginScreen />} />
+      <Route path="/admin-forgot-password" element={<AdminForgottenPassword />} />
+      <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
+      <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
+      <Route path="/admin-home" element={<AdminHomePage />} />
+   
+     
+      {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>
   )
 );
