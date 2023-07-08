@@ -38,8 +38,8 @@ export default function ForgottenPassword() {
           setIsLoading(false);
         })
         .catch((err) => {
-          toast.error(err.error || err);
           console.log(err);
+          toast.error(err.error || err);
           setIsLoading(false);
         });
     },

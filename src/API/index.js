@@ -1,29 +1,36 @@
-import axios from "axios";
+import axios from 'axios';
 
-const baseURL = "https://haraf-edm.onrender.com";
-// const baseURL = "http://localhost:5000";
-// Create an Axios instance with the base URL
+
 const api = axios.create({
-  baseURL,
-  withCredentials: true,
+  // baseURL: 'http://127.0.0.1:5000',
+  baseURL: "https://haraf-edm.onrender.com",
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
+const source = axios.CancelToken.source();
+api.interceptors.request.use(
 
-// Get the JWT token from local storage
-const jwt = localStorage.getItem('persist:root')
+  config => {
+  
+    // Get the JWT token from local storage
+const auth_token = localStorage.getItem('persist:root')
   ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).user
   : undefined;
-
-if (jwt) {
-  api.interceptors.request.use(
-    (config) => {
-      config.headers.Authorization = `Bearer ${jwt}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
+    if (auth_token) {
+      config.headers['Authorization'] = `Bearer ${auth_token}`
     }
-  );
-}
+    config.cancelToken = source.token;
+    return config;
+  },
+  error => {
+    Promise.reject(error)
+  }
+);
+
+export const cancelRequest = (message) => {
+  source.cancel(message);
+};
 
 export default api;
