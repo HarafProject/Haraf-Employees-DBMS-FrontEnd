@@ -96,7 +96,7 @@ export default function CreateAccountScreen() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          dispatch(loginSuccess(res?.data?.token));
+          window.location.replace('/login')
           setIsLoading(false);
         })
         .catch((err) => {
