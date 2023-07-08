@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
+import { setToken } from "../../redux/reducers/jwtReducer";
 import { RotatingLines } from "react-loader-spinner";
 
 export default function LoginScreen() {
@@ -55,9 +56,10 @@ export default function LoginScreen() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          dispatch(loginSuccess(res?.data?.token));
+          dispatch(setToken(res?.data?.token));
+          dispatch(loginSuccess(res?.data?.user));
           //redirect to emp
-          window.location.replace("/employee-list-empty")
+          navigate("/employee-list", { replace: true })
           setIsLoading(false);
         })
         .catch((err) => {

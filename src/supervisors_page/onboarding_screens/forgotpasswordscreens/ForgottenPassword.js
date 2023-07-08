@@ -8,7 +8,7 @@ import auth from "../../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess } from "../../../redux/reducers/userReducer";
+import { setToken } from "../../../redux/reducers/jwtReducer";
 
 export default function ForgottenPassword() {
   const navigate = useNavigate();
@@ -31,9 +31,10 @@ export default function ForgottenPassword() {
         .forgotPassword(values)
         .then((res) => {
           console.log(res);
-          dispatch(loginSuccess(res?.data?.token));
+          dispatch(setToken(res?.data?.token));
           const redirectURL = `/send-otp?email=${values.email}`;
-          window.location.replace(redirectURL);
+          navigate(redirectURL, { replace: true })
+
           toast.success(res?.data?.message);
           setIsLoading(false);
         })
