@@ -2,7 +2,8 @@
   font-size: 34px;
   font-weight: 600;
   line-height: normal;
-  color: #0280ca;
+  color: #0280CA;
+
 }
 
 .add-employee-content .form-field {
@@ -14,6 +15,7 @@
   border-radius: 10px;
   border: 1px solid #444444;
   margin: 10px solid;
+
 }
 
 .add-employee-content .form-field input {
@@ -25,10 +27,17 @@
   font-size: 16px;
   line-height: normal;
   color: #444444;
+
+
+
 }
+
 
 .add-employee-content .form-field select option {
   color: #000;
+}
+.add-employee-content .form-field select option:first-child {
+  color: #444444ac !important;
 }
 
 .add-employee-content .form-field select {
@@ -36,15 +45,18 @@
   padding: 10px 0;
   outline: none;
   border: none;
-  color: #444444;
+  color: #444444ac;
   background-color: transparent;
   font-size: 16px;
   line-height: normal;
+
 }
 
+
 .add-employee-content .form-field input::placeholder {
-  color: #444444;
+  color: #444444ac;
   background-color: transparent !important;
+
 }
 
 .add-employee-content .form-field input:-internal-autofill-selected {
@@ -62,9 +74,19 @@
   transition-delay: 9999s;
 }
 
+/* Chrome, Safari, Edge, Opera */
+.add-employee-content .form-field input::-webkit-outer-spin-button,
+.add-employee-content .form-field input::-webkit-inner-spin-button,
+.add-employee-content .form-field input[type=number] {
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+  /* -moz-appearance: textfield; */
+}
+
 .add-employee-content .form-field select {
   appearance: none;
-  background-image: url("../../../assets//arrow.png");
+  background-image: url('../../../assets//arrow.png');
   background-repeat: no-repeat;
   background-position: right 15px;
   background-size: 1em auto;
@@ -75,7 +97,9 @@
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
+
 }
+
 
 .profile-img img {
   width: 100%;
@@ -92,7 +116,7 @@
   height: 30px;
   top: 715px;
   left: 730px;
-  background: #ffffff;
+  background: #FFFFFF;
   border: 1px solid rgba(68, 68, 68, 0.16);
   border-radius: 231.25px;
 }
@@ -100,7 +124,7 @@
 .profile-img .camera .camera-icon {
   height: 20px;
   width: 20px;
-  color: #0173bc;
+  color: #0173BC;
 }
 
 .picture-upload-section p.headshot-title {
@@ -120,9 +144,9 @@
   width: 400px;
   padding: 10px;
   border-radius: 50px;
-  background: #0173bc;
-  color: #ffffff;
+  background: #0173BC;
+  color: #FFFFFF;
   font-size: 28px;
   font-weight: 400;
-  line-height: normal;
+  line-height: normal
 }

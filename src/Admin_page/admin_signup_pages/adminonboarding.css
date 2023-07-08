@@ -1,0 +1,304 @@
+.admin-onboarding {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;   
+    align-items: center;
+    height: auto;
+    height: fit-content;
+}
+.admin-welcome, .admin-login{
+    height: 100vh;
+}
+.admin-welcome-content{
+    text-align: center;
+}
+
+.admin-welcome-content,
+.admin-signup-content {
+   color: #0280CA;
+    line-height: normal;
+    white-space: nowrap;
+    
+}
+
+.admin-welcome-content img {
+    width: 100%
+}
+
+.admin-signup-content img {
+    width: 50%
+}
+
+.admin-welcome-content h1 {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+
+}
+
+.admin-signup-content p.title,
+.admin-welcome-content p { color: #000;
+    font-size: 18px;
+    font-family: 'CustomFont', sans-serif;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.admin-signup-content p.screen-title {
+    font-size: 20px;
+    font-weight: lighter;
+    line-height: normal;
+    font-weight: 600;
+}
+
+
+.admin-welcome-button .btn,
+.admin-signup-content .btn {
+    width: 350px;
+
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-size: 24px;
+    font-weight: 400;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.admin-onboarding .btn.login {
+    background-color: #0280CA;color: #fff;
+}
+
+.admin-onboarding .btn.create-account {
+    border: 1px solid #0280CA;
+    color: #0280CA;
+}
+
+.admin-signup-content .form-field {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    /* justify-content: center; */
+    padding: 5px 20px;
+    border-radius: 50px;
+    border: 1px solid #0280CA;
+    margin: 10px solid;
+
+}
+
+.admin-signup-content .form-field input {
+    /* width: 400px; */
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    line-height: normal;
+    color: #000;
+    font-family: 'Lexend Deca', sans-serif;
+
+}
+
+.admin-signup-content .form-field select option {
+    color: #000;
+}
+
+.admin-signup-content .form-field select {
+    width: 350px;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    color: #000;
+    background-color: transparent;
+    font-size: 16px;
+    line-height: normal;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+
+.admin-signup-content .form-field input::placeholder {
+    color: #000000;
+    background-color: transparent !important;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.admin-signup-content .form-field input:-internal-autofill-selected {
+    appearance: none !important;
+    background-image: none !important;
+    background-color: -internal-light-dark(transparent, transparent) !important;
+    color: transparent !important;
+}
+
+.admin-signup-content .form-field input:-webkit-autofill,
+.admin-signup-content .form-field input:-webkit-autofill:hover,
+.admin-signup-content .form-field input:-webkit-autofill:focus,
+.admin-signup-content .form-field input:-webkit-autofill:active {
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
+}
+.admin-signup-content .form-field select {
+    appearance: none;
+    background-image: url('../../assets/arrow.png');
+    background-repeat: no-repeat;
+    background-position: right 15px;
+    background-size: 1em auto;
+  }
+  .admin-select-selected.select-arrow-active:after {
+    border-color: transparent transparent #0280CA transparent;
+    top: 7px;
+  }
+.admin-eye .iconify {
+    font-size: 20px;
+}
+
+.admin-forgot-password {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+}
+
+.admin-forgot-password span {
+    color: #0280CA;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.text-danger, .password-mismatch{
+    color: red;
+}
+
+
+
+/* @media only screen and (max-width: 1025px) {
+    .admin-onboarding-screen {
+        background-color: #03293E;
+        ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+
+    .welcome-screen-content,
+    .signup-content {
+        color: #FFFFFF;
+        line-height: normal;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    .welcome-screen-content img {
+        width: 100%
+    }
+
+    .signup-content img {
+        width: 60%
+    }
+
+    .welcome-screen-content h1 {
+        font-size: 48px;
+        font-weight: 400;
+        line-height: normal;
+
+    }
+
+    .signup-content p.title {
+        font-size: 28px;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .signup-content p.screen-title {
+        font-size: 36px;
+        font-weight: lighter;
+        line-height: normal
+    }
+
+    .welcome-screen-content p {
+        font-size: 24px;
+        font-weight: 300;
+    }
+
+    .welcome-screen-button .btn,
+    .signup-content .btn {
+        width: 550px;
+        height: 85px;
+        border-radius: 50px;
+        padding: 10px;
+        font-size: 32px;
+        font-weight: 400;
+        color: #FFFFFF;
+
+    }
+
+    .admin-onboarding-screen .btn.login {
+        background-color: #0280CA;
+    }
+
+    .admin-onboarding-screen .btn.create-account {
+        border: 1px solid #0280CA;
+    }
+
+    .signup-content .form-field {
+
+        padding: 10px 25px;
+        border-radius: 50px;
+        border: 2px solid #FFFFFF;
+        margin: 10px solid;
+
+    }
+
+    .signup-content .form-field input {
+        width: 550px;
+        padding: 25px 0;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: normal;
+        color: #FFFFFF;
+        letter-spacing: 2px;
+
+    }
+
+    .signup-content .form-field input::placeholder {
+        color: #FFFFFF;
+        font-size: 25px;
+        font-weight: 400;
+        background-color: transparent !important;
+        letter-spacing: 2px;
+    }
+
+    .signup-content .form-field input:-internal-autofill-selected {
+        appearance: none !important;
+        background-image: none !important;
+        background-color: -internal-light-dark(transparent, transparent) !important;
+        color: transparent !important;
+    }
+
+    .eye .iconify {
+        font-size: 25px;
+    }
+
+    .forgot-password {
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .forgot-password span {
+        color: #0280CA;
+        font-size: 20px;
+        font-weight: 500;
+    }
+} */
+
+@media only screen and (max-width: 992px) {}
+
+@media only screen and (max-width: 800px) {}
+
+@media only screen and (max-width: 768px) {}

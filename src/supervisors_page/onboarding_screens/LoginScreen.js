@@ -130,7 +130,7 @@ export default function LoginScreen() {
             Forgotten Password?{" "}
             <span>
               {" "}
-              <a href="/forgotpassword">Reset Here</a>
+              <a href="/forgot-password">Reset Here</a>
             </span>{" "}
           </p>
         </form>
