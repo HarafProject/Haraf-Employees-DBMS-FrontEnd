@@ -32,8 +32,8 @@ export default function ForgottenPassword() {
         .then((res) => {
           console.log(res);
           dispatch(loginSuccess(res?.data?.token));
-    const redirectURL = `/send-otp?email=${values.email}`;
-    window.location.replace(redirectURL);
+          const redirectURL = `/send-otp?email=${values.email}`;
+          window.location.replace(redirectURL);
           toast.success(res?.data?.message);
           setIsLoading(false);
         })
