@@ -56,6 +56,8 @@ export default function LoginScreen() {
           console.log(res);
           toast.success(res?.data?.message);
           dispatch(loginSuccess(res?.data?.token));
+          //redirect to emp
+          window.location.replace("/employee-list-empty")
           setIsLoading(false);
         })
         .catch((err) => {
