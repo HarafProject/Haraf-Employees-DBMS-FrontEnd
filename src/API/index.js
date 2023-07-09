@@ -18,7 +18,7 @@ api.interceptors.request.use(
     const auth_token = localStorage.getItem('persist:root')
       ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth).token
       : undefined;
-    console.log(auth_token)
+
     if (auth_token) {
       config.headers['Authorization'] = `Bearer ${auth_token}`
     }

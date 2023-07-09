@@ -15,9 +15,9 @@ class supervisorOBJ {
   getBankList = async () => {
     try {
       //check if data is empty
-      const response = await api.get("api/supervisor/bank_list");
-      console.log(response);
-      return response;
+      const { data } = await api.get("api/supervisor/bank_list");
+
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -28,8 +28,8 @@ class supervisorOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/supervisor/bank-details", data);
-        console.log(response);
-        return response;
+
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -41,9 +41,9 @@ class supervisorOBJ {
   getWorkTypology = async () => {
     try {
       //check if data is empty
-      const response = await api.get("api/supervisor/work-typology");
-      console.log(response);
-      return response;
+      const {data} = await api.get("api/supervisor/work-typology");
+ 
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -54,12 +54,13 @@ class supervisorOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/supervisor/add-employee", data);
-        console.log(response);
-        return response;
+    
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
+      console.log(err)
       throw err?.response?.data;
     }
   };
@@ -67,9 +68,8 @@ class supervisorOBJ {
   getAllEmployee = async () => {
     try {
       //check if data is empty
-      const response = await api.get("api/supervisor/employee");
-      console.log(response);
-      return response;
+      const { data } = await api.get("api/supervisor/employee");
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -83,8 +83,8 @@ class supervisorOBJ {
           "api/supervisor/new-employee-request",
           data
         );
-        console.log(response);
-        return response;
+     
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -101,8 +101,8 @@ class supervisorOBJ {
           "api/supervisor/delete-employee-request",
           data
         );
-        console.log(response);
-        return response;
+  
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -119,8 +119,8 @@ class supervisorOBJ {
           "api/supervisor/edit-employee-request",
           data
         );
-        console.log(response);
-        return response;
+       
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }

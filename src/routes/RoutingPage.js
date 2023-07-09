@@ -41,7 +41,7 @@ const router = createBrowserRouter(
       <Route path="/add-employee" element={<AddEmployeeScreen />} />
       <Route path="/employee-list" element={<EmployeeListTable />} />
       <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
-      <Route path="/employee-profile/:id" element={<EmployeeProfilePage />} />
+      <Route path="/employee-profile" element={<EmployeeProfilePage />} />
       <Route path="/notification" element={<NotificationScreen />} />
       <Route path="/biometric-capture" element={<BiometricScreen />} />
 

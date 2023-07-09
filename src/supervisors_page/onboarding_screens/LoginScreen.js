@@ -27,7 +27,7 @@ export default function LoginScreen() {
   const dispatch = useDispatch();
 
   useSelector((state) => {
-    console.log(state.user.user, "state");
+    // console.log(state.user.user, "state");
   });
   const validationSchema = Yup.object().shape({
     email: Yup.string()
