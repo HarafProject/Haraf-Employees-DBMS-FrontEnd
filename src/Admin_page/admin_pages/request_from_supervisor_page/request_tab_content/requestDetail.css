@@ -1,0 +1,10 @@
+.request-bg {
+  background: rgba(245, 245, 245, 0.54);
+  font-size: 18px;
+}
+
+.request-bg button {
+  background-color: transparent;
+  color: #f99c39;
+  border: none;
+}
