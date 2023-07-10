@@ -1,34 +1,37 @@
-import axios from "axios";
-import { useSelector } from "react-redux";
+import axios from 'axios';
 
-const baseURL = "https://haraf-edm.onrender.com";
 
-// Create an Axios instance with the base URL
 const api = axios.create({
-  baseURL: `${baseURL}`,
+  //baseURL: 'http://127.0.0.1:5000',
+  baseURL: "https://haraf-edm.onrender.com",
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-const CustomAxios = () => {
-  // Use useSelector to get the JWT token from the Redux store
-  const jwt = useSelector((state) => state.user.user.token);
+const source = axios.CancelToken.source();
+api.interceptors.request.use(
 
-  // Add an interceptor to include JWT in request headers if available
-  api.interceptors.request.use(
-    (config) => {
-      if (jwt) {
-        config.headers.Authorization = `Bearer ${jwt}`;
-      }
+  config => {
 
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
+    // Get the JWT token from local storage
+    const auth_token = localStorage.getItem('persist:root')
+      ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth).token
+      : undefined;
+    console.log(auth_token)
+    if (auth_token) {
+      config.headers['Authorization'] = `Bearer ${auth_token}`
     }
-  );
+    config.cancelToken = source.token;
+    return config;
+  },
+  error => {
+    Promise.reject(error)
+  }
+);
 
-  // Rest of your code...
-
-  return null; // Since it's not a rendering component, you can return null or any other JSX element
+export const cancelRequest = (message) => {
+  source.cancel(message);
 };
 
 export default api;
