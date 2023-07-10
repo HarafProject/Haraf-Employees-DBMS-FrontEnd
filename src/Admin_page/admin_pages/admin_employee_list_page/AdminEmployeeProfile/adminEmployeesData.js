@@ -4,7 +4,7 @@ const users = [
   {
     image: profile,
     id: 1,
-    full_name: "John Doe",
+    full_name: "Kadwama Lazarus",
     phone_number: "1234567890",
     account_number: "123456789",
     ward: "banjiram",

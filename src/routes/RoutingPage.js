@@ -26,6 +26,7 @@ import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgot
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
 import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
+import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +56,10 @@ const router = createBrowserRouter(
         element={<AdminCreateNewPassword />}
       />
       <Route path="/admin-home" element={<AdminHomePage />} />
+      <Route
+        path="/admin-employee-profile/:id"
+        element={<AdminEmployeeProfile />}
+      />
 
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>

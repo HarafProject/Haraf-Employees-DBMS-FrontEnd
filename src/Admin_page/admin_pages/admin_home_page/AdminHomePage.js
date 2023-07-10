@@ -3,7 +3,8 @@ import { Icon } from "@iconify/react";
 import "./adminhome.css";
 import profile from "../../../assets/logo-light.png";
 import { useNavigate } from "react-router-dom";
-import AdminProfile from "../admin_profile_page/AdminProfile";
+import AdminEmployeeList from "../admin_employee_list_page/AdminEmployeeList";
+import SuperAdminProfile from "../super_admin_profile_page/SuperAdminProfile";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ export default function AdminHomePage() {
           <h4 className="header-title">LIPWDMS Super Admin Portal</h4>
           <div className="user-info-section py-3 my-3">
             <div>
-              {selectedComponent === "employee" && <div>Employees </div>}
+              {selectedComponent === "employee" && <AdminEmployeeList />}
               {selectedComponent === "reports" && <div>Attendance Reports</div>}
               {selectedComponent === "analytics" && (
                 <div>Attendance Analytics </div>
@@ -101,7 +102,7 @@ export default function AdminHomePage() {
                 <div>Requests from Supervisors </div>
               )}
               {selectedComponent === "manage" && <div>Manage Supervisors </div>}
-              {selectedComponent === "profile" && <AdminProfile />}
+              {selectedComponent === "profile" && <SuperAdminProfile />}
               {/* {selectedComponent === 'logout' && <div>Loan </div>} */}
             </div>
           </div>

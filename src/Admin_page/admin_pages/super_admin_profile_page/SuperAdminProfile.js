@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import "./adminprofile.css";
 
-export default function SupervisorProfile() {
+export default function SuperAdminProfile() {
   const [editable, setEditable] = useState(false);
   const [buttonText, setButtonText] = useState("Edit Profile");
   const [inputValue1, setInputValue1] = useState("");

@@ -1,0 +1,89 @@
+.profile-info-summary {
+  line-height: normal;
+  white-space: nowrap;
+}
+.arrowback-icon {
+  width: 60px;
+  height: 60px;
+  color: #0280ca;
+}
+
+.back-to-previous {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile-info-summary h4 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #444444;
+  line-height: normal;
+}
+.profile-info-summary p {
+  font-size: 18px;
+  font-weight: 300;
+  color: #000000;
+  margin-top: 10px;
+}
+.profile-info-summary .work-info p {
+  font-size: 13px;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.profile-info-summary .work-info p span {
+  font-size: 15px;
+  font-weight: 300;
+  color: #444444;
+}
+
+.reusable-info-list p.h6 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #444444f0;
+}
+
+.reusable-info-list p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.reusable-info-list p span {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444444;
+}
+
+.btn.request-edit,
+.btn.delete-user {
+  width: 250px;
+  padding: 10px;
+  border-radius: 45px;
+  background: #0173bc;
+  color: #ffffff;
+  background: #0173bc;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.btn.delete-user {
+  background: #d40505;
+  color: #ffffff;
+}
+
+.dashboard-profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0;
+}
+
+.dashboard-profile-infor-summary {
+  width: 50%;
+}
+
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
