@@ -2,11 +2,11 @@ import api from "../API";
 
 class supervisorOBJ {
   //get profile
-  getProfile = async (data) => {
+  editProfile = async (data) => {
     try {
-      const response = await api.get("api/supervisor/me");
+      const response = await api.put("api/supervisor", data);
       console.log(response);
-      return response;
+      return response.data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -41,8 +41,8 @@ class supervisorOBJ {
   getWorkTypology = async () => {
     try {
       //check if data is empty
-      const {data} = await api.get("api/supervisor/work-typology");
- 
+      const { data } = await api.get("api/supervisor/work-typology");
+
       return data;
     } catch (err) {
       throw err?.response?.data;
@@ -54,7 +54,7 @@ class supervisorOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/supervisor/add-employee", data);
-    
+
         return response.data;
       } else {
         throw new Error("please fill in the fields");
@@ -83,7 +83,7 @@ class supervisorOBJ {
           "api/supervisor/new-employee-request",
           data
         );
-     
+
         return response.data;
       } else {
         throw new Error("please fill in the fields");
@@ -101,7 +101,7 @@ class supervisorOBJ {
           "api/supervisor/delete-employee-request",
           data
         );
-  
+
         return response.data;
       } else {
         throw new Error("please fill in the fields");
@@ -119,7 +119,7 @@ class supervisorOBJ {
           "api/supervisor/edit-employee-request",
           data
         );
-       
+
         return response.data;
       } else {
         throw new Error("please fill in the fields");

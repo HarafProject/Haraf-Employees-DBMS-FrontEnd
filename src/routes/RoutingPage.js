@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-<<<<<<< HEAD
 //Onboarding Routes
 import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
 import LoginScreen from "../supervisors_page/onboarding_screens/LoginScreen";
@@ -29,18 +28,15 @@ import AdminLoginOtpVerify from '../Admin_page/admin_signup_pages/adminforgotpas
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
 
 
-=======
 // TakeAttendancePage
 
 import SelectTypography from '../supervisors_page/AttendancePages/selectTypologyPage/SelectTypography'
 import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePage/TakeAttendance'
->>>>>>> origin/select-topology-for-attendence
 
 import SupervisorProfile from '../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile'
 import AttendanceReportUpload from '../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload'
 const router = createBrowserRouter(
   createRoutesFromElements(
-<<<<<<< HEAD
     <Route path="/">
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/login" element={<LoginScreen />} />
@@ -55,6 +51,13 @@ const router = createBrowserRouter(
       <Route path="/notification" element={<NotificationScreen />} />
       <Route path="/biometric-capture" element={<BiometricScreen />} />
 
+      <Route path='/typology' element={<SelectTypography />} />
+      <Route path='/profile' element={<SupervisorProfile />} />
+      <Route path='/attendance' element={<TakeAttendance />} />
+      <Route
+        path='/attendance-report'
+        element={<AttendanceReportUpload />}
+      />
 
       <Route path="/admin" element={<AdminWelcomeScreen />} />
       <Route path="/admin-login" element={<AdminLoginScreen />} />
@@ -62,21 +65,11 @@ const router = createBrowserRouter(
       <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
       <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
       <Route path="/admin-home" element={<AdminHomePage />} />
-   
-     
+
+
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
-=======
-    <Route path='/'>
-      <Route path='/' element={<SelectTypography />}></Route>
-      <Route path='/' element={<SupervisorProfile />}></Route>
-      <Route path='/profile' element={<SupervisorProfile />}></Route>
-      <Route path='/take-attendance' element={<TakeAttendance />}></Route>
-      <Route
-        path='/attendance-report'
-        element={<AttendanceReportUpload />}
-      ></Route>
+
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
->>>>>>> origin/select-topology-for-attendence
     </Route>
   )
 );

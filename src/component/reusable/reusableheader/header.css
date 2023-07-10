@@ -1,5 +1,4 @@
 .header-section {
-<<<<<<< HEAD
   background-color: #FFFFFF;
   position: fixed;
   z-index: 100;
@@ -11,7 +10,6 @@
   font-weight: 500;
   line-height: normal;
   color: #03293E;
-=======
     background-color: #FFFFFF;
     position: fixed;
     z-index: 100;
@@ -23,12 +21,10 @@
     font-weight: 500;
     line-height: normal;
     color: #03293E;
->>>>>>> origin/select-topology-for-attendence
 
 }
 
 .header-content img {
-<<<<<<< HEAD
   width: 80%;
 }
 
@@ -47,7 +43,6 @@
   white-space: nowrap;
   color: #03293E;
   margin: 0 8px;
-=======
     width: 80%;
 }
 
@@ -66,12 +61,10 @@
     white-space: nowrap;
     color: #03293E;
     margin: 0 8px;
->>>>>>> origin/select-topology-for-attendence
 }
 
 .header-menu li a:hover,
 .header-menu li a.active {
-<<<<<<< HEAD
   color: #F99C39;
   font-size: 17px;
 }
@@ -79,7 +72,6 @@
 .hamburger-icon {
   display: none;
   z-index: 999;
-=======
     color: #F99C39;
     font-size: 18px;
 }
@@ -87,12 +79,10 @@
 .hamburger-icon {
     display: none;
     z-index: 999;
->>>>>>> origin/select-topology-for-attendence
 }
 
 
 @media screen and (max-width: 1026px) {
-<<<<<<< HEAD
   .header-section{
       padding: 1rem 1.5rem !important;
   }
@@ -153,7 +143,6 @@
 
 
   
-=======
     .header-section{
         padding: 1rem 1.5rem !important;
     }
@@ -214,7 +203,6 @@
 
 
     
->>>>>>> origin/select-topology-for-attendence
 
 
 }
