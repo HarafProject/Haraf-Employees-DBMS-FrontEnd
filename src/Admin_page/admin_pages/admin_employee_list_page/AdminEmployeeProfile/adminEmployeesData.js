@@ -1,4 +1,4 @@
-import profile from "../../assets/profile.png";
+import profile from "../../../../assets/profile.png";
 
 const users = [
   {
@@ -12,11 +12,11 @@ const users = [
     home_address: "123 Main Street",
     bank_name: "gtb",
     work_typology: "health",
-    marital_status: "single",
+    marital_status: "Married",
     special_disability: "hearing",
     household_size: 4,
     head_of_house: "women headed",
-    sex: "male",
+    sex: "Female",
   },
   {
     image: profile,

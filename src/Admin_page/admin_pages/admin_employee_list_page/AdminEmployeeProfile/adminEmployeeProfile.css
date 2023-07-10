@@ -8,6 +8,11 @@
   color: #0280ca;
 }
 
+.names h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .back-to-previous {
   font-size: 20px;
   font-weight: 500;
@@ -76,6 +81,10 @@
   justify-content: space-between;
   align-items: center;
   margin: 4rem 0;
+}
+
+.work-info span {
+  font-weight: bold;
 }
 
 .dashboard-profile-infor-summary {

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ReusableInformationList from "../../../../component/reusable/employeeinformationcard/ReusableInformationList";
 import "./adminEmployeeProfile.css";
 import { Icon } from "@iconify/react";
-import userData from "../../../../component/data/EmployeesData";
+import userData from "./adminEmployeesData";
 import profileimage from "../../../../assets/profile.png";
 import AdminEmployeeDataSummary from "./AdminEmployeeAttendanceSummary";
 
@@ -53,19 +53,22 @@ export default function AdminEmployeeProfile() {
               <img className="profile-img" src={profileimage} alt="" />
               <div className="names mx-1">
                 <h4>{user.full_name}</h4>
-                <p>{user.marital_status}</p>
-                <p>{user.sex}</p>
+                <p>
+                  {user.marital_status} | {user.sex}
+                </p>
+                <p>{user.phone_number}</p>
               </div>
               <div className="work-info mx-1">
                 <p>
-                  <span>Work Topology: </span>
-                  {user.work_typology}
+                  Work Topology:
+                  <span> {user.work_typology} </span>
                 </p>
                 <p>
-                  <span>Ward:</span> {user.ward}
+                  Ward: <span>{user.ward}</span>
                 </p>
                 <p>
-                  <span>Age:</span> {user.age} Years
+                  Age:
+                  <span>{user.age} Years</span>
                 </p>
               </div>
             </div>
