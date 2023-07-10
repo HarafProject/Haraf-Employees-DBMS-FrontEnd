@@ -1,0 +1,17 @@
+.card {
+  padding: 1rem 2rem;
+  background-color: rgba(227, 227, 227, 0.4);
+  border: none;
+}
+
+.number {
+  text-align: center;
+  color: #f99c39;
+  font-weight: bolder;
+}
+
+.card p {
+  font-size: 18px;
+  text-align: center;
+  color: #444444;
+}

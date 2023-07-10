@@ -24,10 +24,9 @@ import AdminWelcomeScreen from "../Admin_page/admin_signup_pages/AdminWelcomeScr
 import AdminLoginScreen from "../Admin_page/admin_signup_pages/AdminLoginScreen";
 import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminForgottenPassword";
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
-import AdminLoginOtpVerify from '../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification'
+import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
-
-
+import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,15 +44,23 @@ const router = createBrowserRouter(
       <Route path="/notification" element={<NotificationScreen />} />
       <Route path="/biometric-capture" element={<BiometricScreen />} />
 
-
       <Route path="/admin" element={<AdminWelcomeScreen />} />
       <Route path="/admin-login" element={<AdminLoginScreen />} />
-      <Route path="/admin-forgot-password" element={<AdminForgottenPassword />} />
+      <Route
+        path="/admin-forgot-password"
+        element={<AdminForgottenPassword />}
+      />
       <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
-      <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
+      <Route
+        path="/admin-create-password"
+        element={<AdminCreateNewPassword />}
+      />
       <Route path="/admin-home" element={<AdminHomePage />} />
-   
-     
+      <Route
+        path="/admin-employee-profile/:id"
+        element={<AdminEmployeeProfile />}
+      />
+
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
     </Route>
   )
