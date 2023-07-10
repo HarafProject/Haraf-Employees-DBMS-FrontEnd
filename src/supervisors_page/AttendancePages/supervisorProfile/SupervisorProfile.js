@@ -1,15 +1,28 @@
-import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
 import { Icon } from '@iconify/react'
 import { useState } from 'react'
 import './supervisorProfile.css'
 
 export default function SupervisorProfile() {
-  const [inputValue, setInputValue] = useState('')
   const [editable, setEditable] = useState(false)
   const [buttonText, setButtonText] = useState('Edit Profile')
+  const [inputValue1, setInputValue1] = useState('')
+  const [inputValue2, setInputValue2] = useState('')
+  const [inputValue3, setInputValue3] = useState('')
+  const [inputValue4, setInputValue4] = useState('')
 
-  const handleChange = (event) => {
-    setInputValue(event.target.value)
+  const handleInputChange1 = (event) => {
+    setInputValue1(event.target.value)
+  }
+
+  const handleInputChange2 = (event) => {
+    setInputValue2(event.target.value)
+  }
+
+  const handleInputChange3 = (event) => {
+    setInputValue3(event.target.value)
+  }
+  const handleInputChange4 = (event) => {
+    setInputValue4(event.target.value)
   }
 
   const handleButtonClick = () => {
@@ -25,15 +38,15 @@ export default function SupervisorProfile() {
   }
   return (
     <section>
-      <ReusableHeader />
+      <h2>Supervisor Account</h2>
       <section className='login-container'>
-        <h3 className='login-heading'>Supervisor Login</h3>
         <section>
           <div className='input-form'>
             <label htmlFor=''>Name</label>
             <input
-              value={inputValue}
-              onChange={handleChange}
+              className={editable ? 'border-orange' : 'border-black'}
+              value={inputValue1}
+              onChange={handleInputChange1}
               disabled={!editable}
               type='text'
               placeholder='Lazarus Kadwama'
@@ -43,8 +56,9 @@ export default function SupervisorProfile() {
             <label htmlFor=''>Phone Number</label>
             <input
               type='text'
-              value={inputValue}
-              onChange={handleChange}
+              className={editable ? 'border-orange' : 'border-black'}
+              value={inputValue2}
+              onChange={handleInputChange2}
               disabled={!editable}
               placeholder='+234902494030'
             />
@@ -52,9 +66,10 @@ export default function SupervisorProfile() {
           <div className='input-form'>
             <label htmlFor=''>Email Address</label>
             <input
+              className={editable ? 'border-orange' : 'border-black'}
               type='text'
-              value={inputValue}
-              onChange={handleChange}
+              value={inputValue3}
+              onChange={handleInputChange3}
               disabled={!editable}
               placeholder='superadmin@yahoo.com'
             />
@@ -62,9 +77,10 @@ export default function SupervisorProfile() {
           <div className='input-form'>
             <label htmlFor=''>Role</label>
             <input
+              className={editable ? 'border-orange' : 'border-black'}
               type='text'
-              value={inputValue}
-              onChange={handleChange}
+              value={inputValue4}
+              onChange={handleInputChange4}
               disabled={!editable}
               placeholder='Super Admin 1'
             />

@@ -1,8 +1,15 @@
+h2 {
+  text-align: center;
+  margin: 1.5rem;
+  font-weight: bold;
+  font-size: 24px;
+}
+
 .login-container {
-  width: 50%;
-  margin: 8rem auto;
+  width: 60%;
+  margin: 1rem auto;
   border: 1px solid black;
-  padding: 4rem;
+  padding: 1rem 6rem;
   border-radius: 15px;
   border: 1px solid #acacac;
   box-shadow: 0px 4px 75px 0px rgba(0, 0, 0, 0.1);
@@ -12,7 +19,7 @@
 
 .login-heading {
   color: #444444;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -21,7 +28,7 @@
 }
 
 .input-form {
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .input-form label {
@@ -37,8 +44,15 @@
   display: block;
   width: 100%;
   border-radius: 3px;
-  border: 0.6px solid #7b7b7b;
   padding: 1rem;
+}
+
+.border-orange {
+  border: 1px solid #f99c39;
+}
+
+.border-black {
+  border: 1px solid #7b7b7b;
 }
 
 .icon-bg {
@@ -54,13 +68,51 @@
 .edit-button {
   display: flex;
   justify-content: center;
-  gap: 1rem;
   align-items: center;
   width: 40%;
-  margin: 0 auto;
+  margin: 1.5rem auto;
   padding: 0.5rem;
   background-color: #0280ca;
   border-radius: 30px;
   color: #fff;
   border: none;
+}
+
+input:focus {
+  outline: none;
+  /* Change the color as desired */
+}
+
+.icon-bg {
+  margin-right: 5px;
+}
+
+.profile {
+  position: relative;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.camera-bg {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f99c39;
+  top: 75%;
+  left: 70%;
+
+  padding: 4px 0;
+  width: 20%;
+  border-radius: 50%;
 }
