@@ -36,7 +36,7 @@ class adminOBJ {
   };
 
   //get Get Supervisors
-  getAGetSupervisors = async () => {
+  getGetSupervisors = async () => {
     try {
       //check if data is empty
       const { data } = await api.get("api/admin/supervisors");
