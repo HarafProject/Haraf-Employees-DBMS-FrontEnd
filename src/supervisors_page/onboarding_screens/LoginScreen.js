@@ -27,7 +27,7 @@ export default function LoginScreen() {
   const dispatch = useDispatch();
 
   useSelector((state) => {
-    console.log(state.user.user, "state");
+    // console.log(state.user.user, "state");
   });
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -80,7 +80,7 @@ export default function LoginScreen() {
         </div>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">auth LOGIN</p>
+          <p className="screen-title text-center mt-5">LOGIN</p>
 
           <div>
             <div className="form-field my-4">

@@ -3,8 +3,7 @@ import profile from '../../../assets/profile.png';
 import { Icon } from '@iconify/react';
 import ReusableHeader from "../../../component/reusable/reusableheader/ReusableHeader";
 import './addemployee.css';
-import { useNavigate } from 'react-router-dom';
-import supervisor from "../../../class/supervisor.class";
+import { useNavigate, useLocation } from 'react-router-dom';
 import dataOBJs from '../../../class/data.class';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -13,9 +12,25 @@ import { useSelector } from "react-redux";
 import Webcam from 'react-webcam';
 import Modal from 'react-modal';
 import { RotatingLines } from "react-loader-spinner";
+import { useQuery } from 'react-query'
+import supervisor from '../../../class/supervisor.class';
 
-export default function AddEmployeeScreen({ prefilledData }) {
+
+const fetchEmployee = async (key, id) => {
+    if (!id) return
+    try {
+
+        const res = await supervisor.getEmployee(id)
+        return res
+
+    } catch (error) {
+        toast.error(error?.error);
+    }
+};
+
+export default function EditEmployeeScreen() {
     const navigate = useNavigate();
+    const location = useLocation()
     const webcamRef = useRef(null);
     const [imageData, setImageData] = useState(null);
     const { user } = useSelector((state) => state?.user)
@@ -29,7 +44,9 @@ export default function AddEmployeeScreen({ prefilledData }) {
     const inputRef = useRef(null);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
-
+    const [edited, setEdited] = useState(false)
+    let { employee, notificationId } = location.state
+    const { data, status } = useQuery(['fetchEmployee', employee], fetchEmployee)
 
     function openModal() {
         setIsOpen(true);
@@ -43,7 +60,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
         setImageData(imageSrc);
         closeModal()
     };
-    const isEditEmployee = !!prefilledData;
+
 
     async function fetchBankList() {
         try {
@@ -72,12 +89,42 @@ export default function AddEmployeeScreen({ prefilledData }) {
         // setWardList(ward_list)
     }
     useEffect(() => {
-        if (!bankDetail.accountNumber) toast.info("Please enter bank details before proceeding.")
+
+        if (!employee) return navigate(-1)
 
         fetchBankList();
         fetchWards()
         fetchTypology()
     }, [])
+
+    useEffect(() => {
+        if (!data) return
+
+        setBankDetails({
+            fullName: data.employee.fullName,
+            accountNumber: data.employee.accountNumber,
+            bankCode: data.employee.bankCode,
+            bankName: data.employee.bankName
+
+        })
+        setImageData(data.employee.photo)
+        const updatedValues = {
+            ward: data.employee.ward._id,
+            age: data.employee.age,
+            maritalStatus: data.employee.maritalStatus,
+            householdSize: data.employee.householdSize,
+            sex: data.employee.sex,
+            phone: data.employee.phone,
+            address: data.employee.address,
+            workTypology: data.employee.workTypology._id,
+            specialDisability: data.employee.specialDisability,
+            householdHead: data.employee.householdHead,
+        };
+        formik.setValues(updatedValues);
+    }, [data])
+
+
+
 
     async function verifyBankDetails() {
 
@@ -85,12 +132,14 @@ export default function AddEmployeeScreen({ prefilledData }) {
         if (bankDetail.bankName === "Select Bank") return toast.error("Please select bank.")
         toast.info("Please wait while we verify your bank details.")
         try {
+            setIsVerified(false)
             const { bankDetails, message } = await supervisor.verifyEmpoyeeBankAccount(bankDetail)
 
             setBankDetails({
                 ...bankDetail,
                 fullName: bankDetails.accountName
             })
+
             toast.success(message)
             setIsVerified(true)
             inputRef.current.focus();
@@ -99,7 +148,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
             console.log(error)
             setBankDetails({
                 ...bankDetail,
-                accountName: ""
+                fullName: ""
             })
             setIsVerified(false)
             toast.error(error)
@@ -137,15 +186,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             if (!imageData) return toast.error("Headshot is required.")
-            try {           
+            try {
                 // Handle form submission here
                 // Create a FormData object to send the image file
                 setIsLoading(true)
                 const formData = new FormData();
-                formData.append('image', dataURLtoFile(imageData, 'image.png'));
+
+                if (imageData.slice(-4) !== "webp") {
+                    formData.append('image', dataURLtoFile(imageData, 'image.png'));
+                }
+
                 // Append form fields to formData
                 Object.keys(values).forEach((field) => {
-                    
+
                     formData.append(field, values[field]);
                 });
                 // Append form fields to formData
@@ -153,11 +206,11 @@ export default function AddEmployeeScreen({ prefilledData }) {
                     // console.log()
                     formData.append(field, bankDetail[field]);
                 });
-                const {message} = await supervisor.addEmployee(formData)
-                console.log(message)
+                const { message, updatedEmployee } = await supervisor.updateEmployeeProfile(formData, employee, notificationId)
+
                 toast.success(message)
                 setIsLoading(false)
-                navigate("/employee-list",{replace:true})
+                navigate("/employee-profile", { state: updatedEmployee, replace: true })
 
             } catch (error) {
                 setIsLoading(false)
@@ -193,7 +246,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                     {/* <h5>Add Employee</h5> */}
                     {/* <h5>{prefilledData ? 'Edit Employee' : 'Add Employee'}
                     </h5>  */}
-                    <h5>Add Employee</h5>
+                    <h5>Edit Employee</h5>
 
 
                     <form >
@@ -216,13 +269,20 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                             ...bankDetail,
                                             accountNumber: e.target.value
                                         })}
+                                        value={bankDetail.accountNumber}
                                         onBlur={verifyBankDetails}
                                         placeholder='Bank Account Number '
                                         autoFocus
                                     />
                                 </div>
                                 <div className="form-field my-4" >
-                                    <select name="ward" id="" disabled={!isVerified} {...formik.getFieldProps('ward')}>
+                                    <select name="ward" disabled={!isVerified}
+                                        type="text"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.ward}
+                                        placeholder="Select ward"
+                                    >
                                         <option value="">Ward</option>
                                         {
                                             wardList.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
@@ -235,13 +295,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                 </div>
                                 <div className="form-field my-4">
                                     <input autocomplete="age" type="number" name="age" placeholder='Age ' disabled={!isVerified}
-                                        {...formik.getFieldProps('age')} />
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.age}
+                                    />
                                     {formik.touched.age && formik.errors.age ? (
                                         <div className="error">{formik.errors.age}</div>
                                     ) : null}
                                 </div>
                                 <div className="form-field my-4">
-                                    <select name="maritalStatus" id="" disabled={!isVerified}  {...formik.getFieldProps('maritalStatus')}>
+                                    <select name="maritalStatus" disabled={!isVerified}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.maritalStatus} >
                                         <option value="">Marital Status</option>
                                         <option value="single">Single</option>
                                         <option value="married">Married</option>
@@ -256,13 +322,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                     <input autocomplete="new-housesize" type="number"
                                         name="householdSize" placeholder='Household Size'
                                         disabled={!isVerified}
-                                        {...formik.getFieldProps('householdSize')} />
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.householdSize}
+                                    />
                                     {formik.touched.householdSize && formik.errors.householdSize ? (
                                         <div className="error">{formik.errors.householdSize}</div>
                                     ) : null}
                                 </div>
-                                <div className="form-field my-4"  {...formik.getFieldProps('sex')}>
-                                    <select name="sex" id="" disabled={!isVerified}>
+                                <div className="form-field my-4"  >
+                                    <select name="sex" id="" disabled={!isVerified}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.sex}>
                                         <option value="">Sex</option>
                                         <option value="female">Female</option>
                                         <option value="male">Male</option>
@@ -281,7 +353,10 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         type="tel" name="phone" ref={inputRef}
                                         placeholder='Phone Number '
                                         disabled={!isVerified}
-                                        {...formik.getFieldProps('phone')} />
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.phone}
+                                    />
 
                                     {formik.touched.phone && formik.errors.phone ? (
                                         <div className="error">{formik.errors.phone}</div>
@@ -311,13 +386,20 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                     <input autocomplete="new-address"
                                         type="text" name="address" placeholder='Home Address'
                                         disabled={!isVerified}
-                                        {...formik.getFieldProps('address')} />
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.address}
+                                    />
                                     {formik.touched.address && formik.errors.address ? (
                                         <div className="error">{formik.errors.address}</div>
                                     ) : null}
                                 </div>
                                 <div className="form-field my-4">
-                                    <select name="workTypology" disabled={!isVerified} {...formik.getFieldProps('workTypology')}>
+                                    <select name="workTypology" disabled={!isVerified}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.workTypology}
+                                    >
                                         <option>Work Typology</option>
                                         {typologyList?.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
 
@@ -328,7 +410,10 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                 </div>
 
                                 <div className="form-field my-4">
-                                    <select name="specialDisability" disabled={!isVerified} {...formik.getFieldProps('specialDisability')}>
+                                    <select name="specialDisability" disabled={!isVerified}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.specialDisability} >
                                         <option>Special Disability</option>
                                         <option value="nil">N/A</option>
                                         <option value="visibility">Visibility impairment</option>
@@ -343,7 +428,10 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                     ) : null}
                                 </div>
                                 <div className="form-field my-4">
-                                    <select name="householdHead" disabled={!isVerified}  {...formik.getFieldProps('householdHead')}>
+                                    <select name="householdHead" disabled={!isVerified}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.householdHead} >
                                         <option>Head of House</option>
                                         <option value="womanhead">Women headed household</option>
                                         <option value="youthhead">Youth headed household</option>
@@ -381,9 +469,17 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         {isLoading && <center className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 
                         {
-                            !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || isLoading} className="btn save-employee mt-5">
-                                {isEditEmployee ? 'Save Changes' : 'Save Employee'}
-                            </button>
+                            !isLoading &&
+                            <div className="d-flex">
+                                <button type="button" onClick={() => navigate(-1)} className="btn save-employee mt-5">
+                                    Go back
+                                </button>
+                                <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || !isVerified || isLoading} className="btn save-employee mt-5">
+                                    Save Changes
+                                </button>
+                            </div>
+
+
                         }
                     </form>
                     <Modal

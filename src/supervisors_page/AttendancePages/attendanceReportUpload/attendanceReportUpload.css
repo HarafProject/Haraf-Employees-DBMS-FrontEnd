@@ -1,0 +1,172 @@
+.margin {
+  margin-top: 8rem;
+}
+
+/* Attendance list */
+
+/* End of Attendance List */
+
+/* Attendance Report */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.summary h1 {
+  color: #f99c39;
+  font-size: 40px;
+}
+.select-typ-report {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.select-typ-report h4 {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444444;
+}
+
+.header-report {
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.header-report h3 {
+  font-size: 28px;
+  color: #0280ca;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  margin: 2rem 0;
+}
+
+.report p {
+  text-align: center;
+  color: #444444;
+}
+
+.report h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.msg-area {
+  width: 60%;
+  margin: 6rem auto;
+}
+
+.msg-area p {
+  text-align: center;
+  color: #444444;
+}
+
+.message {
+  width: 100%;
+  padding: 0.5rem;
+  resize: none;
+}
+
+.btns {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+.select-typ-report button {
+  width: 30%;
+  display: block;
+  padding: 0.7rem 0;
+  border-radius: 25px;
+}
+.btn-submit {
+  background-color: #0280ca;
+  color: #fff;
+  border: 1px;
+}
+
+.btn-back {
+  color: #0280ca;
+  background-color: #fff;
+  border: 2px solid #0280ca;
+}
+
+/* Modal */
+
+.login-container {
+  width: 50%;
+  margin: 8rem auto;
+  border: 1px solid black;
+  padding: 4rem;
+  border-radius: 15px;
+  border: 1px solid #acacac;
+  box-shadow: 0px 4px 75px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* LOGIN */
+
+.login-heading {
+  color: #444444;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.text-margin {
+  margin: 2rem 0;
+}
+
+.input-form {
+  margin: 2rem 0;
+}
+
+.input-form label {
+  position: relative;
+  z-index: 2;
+  margin-bottom: -1.5rem;
+  margin-left: 0.4rem;
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.input-form input {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: 0.6px solid #7b7b7b;
+  padding: 1rem;
+}
+
+.icon-bg {
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.edit-icon {
+  font-size: 27px;
+}
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  width: 40%;
+  margin: 0 auto;
+  padding: 0.5rem;
+  background-color: #0280ca;
+  border-radius: 30px;
+  color: #fff;
+  border: none;
+}

@@ -2,11 +2,11 @@ import api from "../API";
 
 class supervisorOBJ {
   //get profile
-  getProfile = async (data) => {
+  editProfile = async (data) => {
     try {
-      const response = await api.get("api/supervisor/me");
+      const response = await api.put("api/supervisor", data);
       console.log(response);
-      return response;
+      return response.data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -15,21 +15,54 @@ class supervisorOBJ {
   getBankList = async () => {
     try {
       //check if data is empty
-      const response = await api.get("api/supervisor/bank_list");
-      console.log(response);
-      return response;
+      const { data } = await api.get("api/supervisor/bank_list");
+
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }
   };
+
+  //get employee details
+  getEmployee = async (id) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/supervisor/employee/${id}`);
+
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  updateEmployeeProfile = async (data,employee,notificationId) => {
+    try {
+      const response = await api.put(`api/supervisor/employee/${employee}?notification=${notificationId}`, data);
+   
+      return response.data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+    //get notifications
+    getNotifications = async () => {
+      try {
+        //check if data is empty
+        const { data } = await api.get("api/supervisor/notifications");
+  
+        return data;
+      } catch (err) {
+        throw err?.response?.data;
+      }
+    };
   //verify employee bank account
   verifyEmpoyeeBankAccount = async (data) => {
     try {
       //check if data is empty
       if (data) {
         const response = await api.post("api/supervisor/bank-details", data);
-        console.log(response);
-        return response;
+
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -41,9 +74,9 @@ class supervisorOBJ {
   getWorkTypology = async () => {
     try {
       //check if data is empty
-      const response = await api.get("api/supervisor/work-typology");
-      console.log(response);
-      return response;
+      const { data } = await api.get("api/supervisor/work-typology");
+
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -54,12 +87,13 @@ class supervisorOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/supervisor/add-employee", data);
-        console.log(response);
-        return response;
+
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
+      console.log(err)
       throw err?.response?.data;
     }
   };
@@ -67,9 +101,8 @@ class supervisorOBJ {
   getAllEmployee = async () => {
     try {
       //check if data is empty
-      const response = await api.get("api/supervisor/employee");
-      console.log(response);
-      return response;
+      const { data } = await api.get("api/supervisor/employee");
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }
@@ -83,8 +116,8 @@ class supervisorOBJ {
           "api/supervisor/new-employee-request",
           data
         );
-        console.log(response);
-        return response;
+
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -101,8 +134,8 @@ class supervisorOBJ {
           "api/supervisor/delete-employee-request",
           data
         );
-        console.log(response);
-        return response;
+
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
@@ -119,8 +152,8 @@ class supervisorOBJ {
           "api/supervisor/edit-employee-request",
           data
         );
-        console.log(response);
-        return response;
+
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
