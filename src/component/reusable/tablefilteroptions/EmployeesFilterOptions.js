@@ -1,8 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./tablefilteroptions.css";
+import dataOBJs from '../../../class/data.class';
+import { useDispatch, useSelector } from "react-redux";
+import supervisor from "../../../class/supervisor.class";
 
-const EmployeeTableFilterOption = () => {
+const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
+  const [wardList, setWardList] = useState([])
+  const [typologyList, setTypologyList] = useState([])
+  const [tempData, setTempData] = useState([])
+  const { user } = useSelector((state) => state?.user)
+  async function fetchWards() {
+    try {
+      const ward_list = await dataOBJs.getWardsByLga(user.lga);
+      setWardList(ward_list)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  async function fetchTypology() {
+    const typology_list = await supervisor.getWorkTypology();
+
+    setTypologyList(typology_list.workTypology)
+    // setWardList(ward_list)
+  }
+  useEffect(() => {
+    fetchWards()
+    fetchTypology()
+  }, [])
+
+  function handleFilter(e) {
+    if (e.target.name === "workTypology") {
+      const data = e.target.value === "" ? allData : allData?.filter(item => item.workTypology._id === e.target.value)
+      setTempData(data)
+      setUsersData(data)
+    } else if (e.target.name === "ward") {
+      const data = e.target.value === "" ? tempData : tempData?.filter(item => item.ward._id === e.target.value)
+      setUsersData(data)
+    } else {
+      let lowercaseQuery = e.target.value.toLowerCase();
+
+      // Filter the array based on the name key
+      let filteredData = allData.filter(function (item) {
+        let lowercaseName = item.fullName.toLowerCase();
+        return lowercaseName.includes(lowercaseQuery);
+      });
+      setUsersData(filteredData);
+
+    }
+
+  }
+
   return (
     <div className="filter-option-section px-5 mt-3">
       <div className=" d-flex align-items-center justify-content-between ">
@@ -10,33 +60,18 @@ const EmployeeTableFilterOption = () => {
         <div className="d-flex align-items-center">
           <div className="search-button px-2 mx-2">
             <Icon icon="eva:search-outline" className="me-2 search-icon" />
-            <input type="search" name="" placeholder="Search Member" />
+            <input type="search" name="search" placeholder="Search Member" onChange={(e) => handleFilter(e)} />
           </div>
           <div className="form-field my-4 mx-2">
-            <select name="worktypology" id="">
-              <option>Work Typology</option>
-              <option value="health">Health</option>
-              <option value="education">Education</option>
-              <option value="wash">wash</option>
-              <option value="agricuture">
-                Agriculture, livelihood {<br />} & Value chain
-              </option>
-              <option value="transport">Transport</option>
+            <select name="workTypology" onChange={(e) => handleFilter(e)}>
+              <option value={""}>Work Typology</option>
+              {typologyList?.map(item => <option key={item._id} value={item._id}>{item?.name}</option>)}
             </select>
           </div>
           <div className="form-field my-4 mx-2">
-            <select name="ward" id="">
+            <select name="ward" id="" onChange={(e) => handleFilter(e)}>
               <option value="">Ward</option>
-              <option value="banjiram">Banjiram</option>
-              <option value="bobini">Bobini</option>
-              <option value="bodeno">Bodeno</option>
-              <option value="chikila">Chikila</option>
-              <option value="dukul">Dukul</option>
-              <option value="dumna">Dumna</option>
-              <option value="guyuk">Guyuk</option>
-              <option value="kola">Kola</option>
-              <option value="lokoro">Lokoro</option>
-              <option value="purokayo">Purokayo</option>
+              {wardList?.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
             </select>
           </div>
         </div>

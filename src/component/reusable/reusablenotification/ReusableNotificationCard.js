@@ -1,4 +1,5 @@
 import React from 'react';
+const moment = require('moment');
 // import './reusableinfo.css';
 
 const ReusableNotificationCard = ({ notificationContent, onButtonClick }) => {
@@ -10,9 +11,9 @@ const ReusableNotificationCard = ({ notificationContent, onButtonClick }) => {
                     <p className=''>{item.message}</p>
                     <div className="d-flex notification-action align-items-center justify-content-around">
                         <button className="btn notification-btn" onClick={() => onButtonClick(item.buttonType, index)}>
-                            {item.buttonType} Now
+                            {item.buttonType} {item.buttonType !== "Completed" && "Now"}
                         </button>
-                        <span>{item.date_time}</span>
+                        <span>{moment(item.date_time).fromNow()}</span>
                     </div>
 
                 </div>

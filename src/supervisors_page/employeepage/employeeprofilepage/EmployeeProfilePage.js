@@ -1,47 +1,45 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import ReusableInformationList from '../../../component/reusable/employeeinformationcard/ReusableInformationList';
 import './employeeprofile.css';
 import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
-import userData from '../../../component/data/EmployeesData';
-import profileimage from '../../../assets/profile.png'
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader';
 import SendRequestModal from '../../../component/reusable/modalscontent/SendRequestModal'
+import supervisor from '../../../class/supervisor.class';
+import { toast } from "react-toastify";
 
 export default function EmployeeProfilePage() {
     // const user = userData.user[0];
+    const [isLoading, setIsLoading] = useState(false);
+    const location = useLocation()
     const [modalIsOpen, setIsOpen] = useState(false);
     const [modalType, setModalType] = useState('');
+    const userData = location.state
 
-    const { id } = useParams();
-    const user = userData.find((user) => user.id === parseInt(id));
-    if (!user) {
-        return <p>Employee not found</p>;
-    }
     const personalInfo = [
-        { label: 'Full Name', value: user.full_name },
-        { label: 'Address', value: user.home_address },
-        { label: 'Phone Number', value: user.phone_number }
+        { label: 'Full Name', value: userData?.fullName },
+        { label: 'Address', value: userData?.address },
+        { label: 'Phone Number', value: userData?.phone }
     ];
 
     const bankInfo = [
-        { label: 'Account Name', value: user.full_name },
-        { label: 'Bank Name', value: user.bank_name },
-        { label: 'Account Number', value: user.account_number },
+        { label: 'Account Name', value: userData?.fullName },
+        { label: 'Bank Name', value: userData?.bankName },
+        { label: 'Account Number', value: userData?.accountNumber },
     ];
 
     const otherInfo = [
-        { label: 'Head of Household', value: user.head_of_house },
-        { label: 'Household Size', value: user.household_size },
-        { label: 'Special Disability', value: user.special_disability }
+        { label: 'Head of Household', value: userData?.householdHead },
+        { label: 'Household Size', value: userData.householdSize },
+        { label: 'Special Disability', value: userData.specialDisability }
     ];
 
 
     function openModal(modalType) {
         setIsOpen(true);
         setModalType(modalType);
-      }
+    }
 
     function closeModal() {
         setIsOpen(false);
@@ -49,6 +47,28 @@ export default function EmployeeProfilePage() {
     const goBack = () => {
         window.history.go(-1);
     };
+
+    async function supervisorRequest(reason) {
+        if (!reason) return toast.error("Please enter a reason for the request.")
+        try {
+            setIsLoading(true)
+            if (modalType === "edit") {
+                const { message } = await supervisor.editEmployeeRequest({ reason, employeeId:userData._id })
+                toast.success(message)
+
+            } else {
+                const { message } = await supervisor.deleteEmployeeRequest({ reason })
+                toast.success(message)
+            }
+
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+            closeModal()
+
+        }
+    }
 
     return (
         <div className="employee-profile-page">
@@ -59,17 +79,17 @@ export default function EmployeeProfilePage() {
                     Back to list
                 </div>
                 <div className="d-flex align-item-start  profile-info-summary">
-                    <img src={profileimage} alt="" />
+                    <img src={userData?.photo} alt="" />
                     <div className="d-flex my-3">
                         <div className="names mx-5">
-                            <h4>{user.full_name}</h4>
-                            <p>{user.marital_status}</p>
-                            <p>{user.sex}</p>
+                            <h4>{userData?.fullName}</h4>
+                            <p>{userData?.maritalStatus}</p>
+                            <p>{userData?.sex}</p>
                         </div>
                         <div className='work-info mx-5'>
-                            <p> <span>Work Topology: </span>{user.work_typology}</p>
-                            <p><span>Ward:</span> {user.ward}</p>
-                            <p><span>Age:</span> {user.age} Years</p>
+                            <p> <span>Work Topology: </span>{userData?.workTypology?.name}</p>
+                            <p><span>Ward:</span> {userData?.ward?.name}</p>
+                            <p><span>Age:</span> {userData?.age} Years</p>
                         </div>
                     </div>
 
@@ -81,10 +101,15 @@ export default function EmployeeProfilePage() {
                 </div>
 
                 <div className='d-flex mt-2'>
+
                     {/* <button onClick={openModal} className="btn request-edit mt-5 ">Request Edit Access</button>
                     <button onClick={openModal} className="btn delete-user mt-5 mx-4">Delete Employee</button> */}
+
+
                     <button onClick={() => openModal('edit')} className="btn request-edit mt-5 ">Request Edit Access</button>
-  <button onClick={() => openModal('delete')} className="btn delete-user mt-5 mx-4">Delete Employee</button>
+                    <button onClick={() => openModal('delete')} className="btn delete-user mt-5 mx-4">Delete Employee</button>
+
+
                 </div>
             </div>
             <Modal
@@ -105,8 +130,12 @@ export default function EmployeeProfilePage() {
                 shouldCloseOnOverlayClick={true}
                 closeTimeoutMS={2000}
             >
-                
-                <SendRequestModal closeModal={closeModal} actionType={modalType}/>
+
+                <SendRequestModal
+                    closeModal={closeModal}
+                    action={supervisorRequest}
+                    actionType={modalType}
+                    isLoading={isLoading} />
             </Modal>
         </div>
     )

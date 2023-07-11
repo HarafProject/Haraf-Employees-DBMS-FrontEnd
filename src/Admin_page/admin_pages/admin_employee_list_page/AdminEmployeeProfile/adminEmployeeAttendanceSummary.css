@@ -1,0 +1,50 @@
+.attendance-grid {
+  margin-top: 2rem;
+  border: 1px solid #f99c39;
+  border-radius: 10px;
+  box-shadow: 0px 17px 50px 0px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.border-center {
+  width: 100%;
+  border: #f99c39 0.5px solid;
+}
+
+.green {
+  color: #008000;
+}
+
+.red {
+  color: #b40b0b;
+}
+
+.border-cross {
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: #f99c39 0.5px solid;
+}
+
+.attendance-flex {
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+  gap: 3rem;
+}
+
+.attendance-flex h1 {
+  text-align: center;
+}
+
+.profile-info-summary {
+  flex: 4;
+}
+
+h2 {
+  margin: 0;
+  text-align: left;
+  color: #0280ca;
+}

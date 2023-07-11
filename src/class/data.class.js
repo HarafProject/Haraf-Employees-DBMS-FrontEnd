@@ -23,6 +23,18 @@ class dataOBJ {
       throw err;
     }
   };
+
+  //get wards by lga
+  getWardsByLga = async (lgaId) => {
+    try {
+      const res = await api.get(`api/location/ward/${lgaId}`);
+      if (res?.data?.status === "success") {
+        return res?.data?.wards;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 
 const dataOBJs = new dataOBJ();

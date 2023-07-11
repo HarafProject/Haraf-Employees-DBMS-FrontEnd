@@ -26,16 +26,16 @@ const ReusableHeader = () => {
         <ul className={clicked ? "header-menu active" : "header-menu"} id="header-menu" >
           <li> <NavLink to='/employee-list' onClick={closeMobileMenu}>Employee List</NavLink> </li>
           <li> <NavLink to='/attendance' onClick={closeMobileMenu}>Take Attendance</NavLink> </li>
-          <li> <NavLink to='/supervisor-profile' onClick={closeMobileMenu}>Supervisor's Profile</NavLink> </li>
+          <li> <NavLink to='/profile' onClick={closeMobileMenu}>Supervisor's Profile</NavLink> </li>
           <li> <NavLink to='/notification' onClick={closeMobileMenu}>Notifications</NavLink> </li>
           <li> <NavLink to='/' onClick={closeMobileMenu}>Logout</NavLink> </li>
         </ul>
- <div className="hamburger-icon" onClick={handleClick}>
-        <Icon icon={clicked ? "jam:close" : "ci:menu-alt-02"} className={clicked ? "close" : "bar"} />
-      </div>
+        <div className="hamburger-icon" onClick={handleClick}>
+          <Icon icon={clicked ? "jam:close" : "ci:menu-alt-02"} className={clicked ? "close" : "bar"} />
+        </div>
       </div>
 
-     
+
     </div>
   );
 };

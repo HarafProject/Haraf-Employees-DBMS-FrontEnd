@@ -7,11 +7,13 @@ import * as Yup from "yup";
 import auth from "../../../class/auth.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../../redux/reducers/jwtReducer";
 
 export default function ForgottenPassword() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
+  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Email Address is required")
@@ -26,15 +28,19 @@ export default function ForgottenPassword() {
       console.log(values, "values");
       setIsLoading(true);
       auth
-        .register(values)
+        .forgotPassword(values)
         .then((res) => {
           console.log(res);
+          dispatch(setToken(res?.data?.token));
+          const redirectURL = `/send-otp?email=${values.email}`;
+          navigate(redirectURL, { replace: true })
+
           toast.success(res?.data?.message);
           setIsLoading(false);
         })
         .catch((err) => {
-          toast.error(err.error || err);
           console.log(err);
+          toast.error(err.error || err);
           setIsLoading(false);
         });
     },
@@ -75,7 +81,11 @@ export default function ForgottenPassword() {
               className="btn forgotpassword-btn mt-4 mx-auto"
             >
               {" "}
-              {isLoading ? "loading" : "Send OTP"}
+              {isLoading ? (
+                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+              ) : (
+                "Send OTP"
+              )}
             </button>
           </form>
           <p>

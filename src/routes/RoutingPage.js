@@ -5,7 +5,7 @@ import {
   // Router,
   createRoutesFromElements,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom'
 
 //Onboarding Routes
 import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
@@ -24,12 +24,23 @@ import AdminWelcomeScreen from "../Admin_page/admin_signup_pages/AdminWelcomeScr
 import AdminLoginScreen from "../Admin_page/admin_signup_pages/AdminLoginScreen";
 import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminForgottenPassword";
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
-import AdminLoginOtpVerify from '../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification'
+import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
+<<<<<<< HEAD
 import AttendanceDetailedPage from "../Admin_page/admin_pages/attendance_page/AttendanceDetailedPage";
+=======
+import CreateAdminAccountScreen from '../Admin_page/admin_signup_pages/AdminCreateAccount';
+>>>>>>> main
 
+// TakeAttendancePage
+import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
 
+import SelectTypography from '../supervisors_page/AttendancePages/selectTypologyPage/SelectTypography'
+import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePage/TakeAttendance'
 
+import SupervisorProfile from '../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile'
+import AttendanceReportUpload from '../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload'
+import EditEmployeeScreen from '../supervisors_page/employeepage/addemployeepage/EditEmployee';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -40,23 +51,49 @@ const router = createBrowserRouter(
       <Route path="/create-new-password" element={<CreateNewPassword />} />
       <Route path="/create-account" element={<CreateAccountScreen />} />
       <Route path="/add-employee" element={<AddEmployeeScreen />} />
+      <Route path="/edit-employee" element={<EditEmployeeScreen />} />
       <Route path="/employee-list" element={<EmployeeListTable />} />
       <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
-      <Route path="/employee-profile/:id" element={<EmployeeProfilePage />} />
+      <Route path="/employee-profile" element={<EmployeeProfilePage />} />
       <Route path="/notification" element={<NotificationScreen />} />
       <Route path="/biometric-capture" element={<BiometricScreen />} />
 
+      <Route path='/typology' element={<SelectTypography />} />
+      <Route path='/profile' element={<SupervisorProfile />} />
+      <Route path='/attendance' element={<TakeAttendance />} />
+      <Route
+        path='/attendance-report'
+        element={<AttendanceReportUpload />}
+      />
 
       <Route path="/admin" element={<AdminWelcomeScreen />} />
       <Route path="/admin-login" element={<AdminLoginScreen />} />
-      <Route path="/admin-forgot-password" element={<AdminForgottenPassword />} />
+      <Route path="/admin-create-account" element={<CreateAdminAccountScreen/>} />
+      <Route
+        path="/admin-forgot-password"
+        element={<AdminForgottenPassword />}
+      />
       <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
-      <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
+      <Route
+        path="/admin-create-password"
+        element={<AdminCreateNewPassword />}
+      />
       <Route path="/admin-home" element={<AdminHomePage />} />
+<<<<<<< HEAD
       <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage />} />
    
      
+=======
+
+      <Route
+        path="/admin-employee-profile/:id"
+        element={<AdminEmployeeProfile />}
+      />
+
+>>>>>>> main
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
+
+      {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
     </Route>
   )
 );
@@ -68,4 +105,4 @@ function RoutingPage({ user }) {
     </div>
   );
 }
-export default RoutingPage;
+export default RoutingPage

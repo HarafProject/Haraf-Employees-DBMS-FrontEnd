@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
+import { setToken } from "../../redux/reducers/jwtReducer";
 import { RotatingLines } from "react-loader-spinner";
 
 export default function LoginScreen() {
@@ -26,7 +27,7 @@ export default function LoginScreen() {
   const dispatch = useDispatch();
 
   useSelector((state) => {
-    console.log(state.user.user, "state");
+    // console.log(state.user.user, "state");
   });
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -55,7 +56,10 @@ export default function LoginScreen() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          dispatch(loginSuccess(res?.data?.token));
+          dispatch(setToken(res?.data?.token));
+          dispatch(loginSuccess(res?.data?.user));
+          //redirect to emp
+          navigate("/employee-list", { replace: true })
           setIsLoading(false);
         })
         .catch((err) => {
@@ -76,7 +80,7 @@ export default function LoginScreen() {
         </div>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">auth LOGIN</p>
+          <p className="screen-title text-center mt-5">LOGIN</p>
 
           <div>
             <div className="form-field my-4">
