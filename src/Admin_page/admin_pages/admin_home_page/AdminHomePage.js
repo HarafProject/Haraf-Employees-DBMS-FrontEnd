@@ -3,20 +3,28 @@ import { Icon } from '@iconify/react';
 import './adminhome.css';
 import profile from '../../../assets/logo-light.png'
 import { useNavigate } from 'react-router-dom';
+import AttendanceReportTable from '../attendance_page/AttendanceReportTable';
+import ManageSupervisor from '../manage_supervisor_page/ManageSupervisor';
+import AttendanceAnalytics from '../attendance_analytic_page/AttendanceAnalytics';
 
 
 
 export default function AdminHomePage() {
     const navigate = useNavigate();
-    const [selectedComponent, setSelectedComponent] = useState('employee');
+    const [selectedComponent, setSelectedComponent] = useState('analytics');
 
     const handleComponentClick = (component) => {
         setSelectedComponent(component);
     };
+    
 
     const goBack = () => {
         window.history.go(-1);
     };
+
+    const handleRowClick = (id) => {
+        navigate(`/detailed-attendance/${id}`);
+      };
 
     return (
         <div className="admin-dashboard">
@@ -77,15 +85,15 @@ export default function AdminHomePage() {
             </div>
             <div className="content px-3">
                 <div className='mx-3'>
-                    <h4 className='header-title'>LIPWDMS Super Admin Portal</h4>
+                   
                     <div className='user-info-section py-3 my-3'>
 
                         <div>
                             {selectedComponent === 'employee' && <div>Employees </div>}
-                            {selectedComponent === 'reports' && <div>Attendance Reports</div>}
-                            {selectedComponent === 'analytics' && <div>Attendance Analytics </div>}
+                            {selectedComponent === 'reports' && <AttendanceReportTable onRowClick={handleRowClick}  />}
+                            {selectedComponent === 'analytics' && <AttendanceAnalytics />}
                             {selectedComponent === 'requests' && <div>Requests from Supervisors </div>}
-                            {selectedComponent === 'manage' && <div>Manage Supervisors </div>}
+                            {selectedComponent === 'manage' && <ManageSupervisor />}
                             {selectedComponent === 'profile' && <div>Super Admin Profile </div>}
                             {/* {selectedComponent === 'logout' && <div>Loan </div>} */}
                            

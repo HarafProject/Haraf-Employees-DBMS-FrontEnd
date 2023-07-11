@@ -26,6 +26,7 @@ import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgot
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
 import AdminLoginOtpVerify from '../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification'
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
+import AttendanceDetailedPage from "../Admin_page/admin_pages/attendance_page/AttendanceDetailedPage";
 
 
 
@@ -52,6 +53,7 @@ const router = createBrowserRouter(
       <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
       <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
       <Route path="/admin-home" element={<AdminHomePage />} />
+      <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage />} />
    
      
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}

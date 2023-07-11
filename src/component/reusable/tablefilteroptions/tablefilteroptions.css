@@ -51,6 +51,10 @@
       background-position: center right ;
       background-size: 0.8em auto;
   }
+  .filter-option-section .form-field.date-select select{
+    background-image: none;
+    width: auto;
+  }
   
   .search-button{
       display: flex;
