@@ -80,9 +80,25 @@
   font-weight: 500;
   text-align: center;
   color: #ffffff;
+  outline: none !important;
 }
+<<<<<<< HEAD
 .modal-screen .btn.modal-button.delete-btn {
   background-color: #c20a0a;
+=======
+.modal-screen .btn.modal-button.delete-btn{
+    background-color: #C20A0A;
+  
+
+}
+.modal-screen .btn.modal-button.delete-btn:focus, .modal-screen .btn.modal-button.verify-btn:focus{
+   
+}
+.modal-screen .btn.modal-button.verify-btn{
+  background-color: #0280CA;
+
+
+>>>>>>> a940818abe950c3030bfadd49aef724a6702ad1f
 }
 .delete-close-btn {
   color: #444444;
