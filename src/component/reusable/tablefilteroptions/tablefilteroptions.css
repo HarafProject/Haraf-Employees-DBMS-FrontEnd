@@ -27,7 +27,6 @@
   border-radius: 33px;
   border: 0.6px solid #444444;
   padding: 0 15px;
-<<<<<<< HEAD
 }
 .filter-option-section .form-field select {
   width: 130px;
@@ -50,6 +49,10 @@
   background-position: center right;
   background-size: 0.8em auto;
 }
+.filter-option-section .form-field.date-select select {
+  background-image: none;
+  width: auto;
+}
 
 .search-button {
   display: flex;
@@ -57,42 +60,6 @@
   align-items: center;
   justify-content: center;
   width: 200px;
-=======
-  }
-  .filter-option-section .form-field select {
-      width: 130px;
-      padding: 10px 0;
-      outline: none;
-      border: none;
-      color: #7A7575;
-      background-color: transparent;
-      font-size: 14px;
-      line-height: normal;
-       
-  }
-  .filter-option-section .form-field select option:first-child{
-      color:  #a6a6a68c;
-  }
-  
-  .filter-option-section .form-field select {
-      appearance: none;
-      background-image: url('../../../assets/arrow.png');
-      background-repeat: no-repeat;
-      background-position: center right ;
-      background-size: 0.8em auto;
-  }
-  .filter-option-section .form-field.date-select select{
-    background-image: none;
-    width: auto;
-  }
-  
-  .search-button{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 200px;
->>>>>>> a940818abe950c3030bfadd49aef724a6702ad1f
   border-radius: 45px;
   border: 0.6px solid #444444;
   color: #444444;

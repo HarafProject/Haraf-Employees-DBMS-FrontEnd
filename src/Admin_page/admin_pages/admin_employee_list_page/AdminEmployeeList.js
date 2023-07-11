@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import dataOBJs from "../../../class/data.class";
 
@@ -34,7 +34,7 @@ export default function AdminEmployeeList() {
     },
   ]);
 
-  useEffect(()=>{
+  useEffect(() => {
     dataOBJs.getZone().then((zone) => {
       console.log(zone, "zones");
       setZones(zone);
@@ -44,8 +44,8 @@ export default function AdminEmployeeList() {
         setLgas(res);
       });
     }
-  },[dataOBJs])
-console.log(selectedZones,'zone')
+  }, [dataOBJs]);
+  console.log(selectedZones, "zone");
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -65,12 +65,15 @@ console.log(selectedZones,'zone')
     <>
       <div className="employees-table-section">
         <AdminEmployeeDataSummary />
-        <AdminEmployeeFilterComponent lgas={lgas} ward={ward} workTopology={workTopology}
-        setZones={setSelectedZones}
-        zones={zones}
-        setWard={setWard}
-        setWorkTopology={setWorkTopology}
-        setLgas={setLgas}
+        <AdminEmployeeFilterComponent
+          lgas={lgas}
+          ward={ward}
+          workTopology={workTopology}
+          setZones={setSelectedZones}
+          zones={zones}
+          setWard={setWard}
+          setWorkTopology={setWorkTopology}
+          setLgas={setLgas}
         />
         <div>
           <div className="employee-list-table p-3 my-3">

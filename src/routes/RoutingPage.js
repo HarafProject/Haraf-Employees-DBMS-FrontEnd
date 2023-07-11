@@ -26,15 +26,8 @@ import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgot
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
 import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
-<<<<<<< HEAD
-import CreateAdminAccountScreen from "../Admin_page/admin_signup_pages/AdminCreateAccount";
-=======
-<<<<<<< HEAD
 import AttendanceDetailedPage from "../Admin_page/admin_pages/attendance_page/AttendanceDetailedPage";
-=======
-import CreateAdminAccountScreen from '../Admin_page/admin_signup_pages/AdminCreateAccount';
->>>>>>> main
->>>>>>> a940818abe950c3030bfadd49aef724a6702ad1f
+import CreateAdminAccountScreen from "../Admin_page/admin_signup_pages/AdminCreateAccount";
 
 // TakeAttendancePage
 import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
@@ -83,18 +76,12 @@ const router = createBrowserRouter(
         element={<AdminCreateNewPassword />}
       />
       <Route path="/admin-home" element={<AdminHomePage />} />
-<<<<<<< HEAD
-      <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage />} />
-   
-     
-=======
 
       <Route
         path="/admin-employee-profile/:id"
         element={<AdminEmployeeProfile />}
       />
 
->>>>>>> main
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
 
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}
