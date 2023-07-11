@@ -1,10 +1,10 @@
-import profile from "../../assets/profile.png";
+import profile from "../../../../assets/profile.png";
 
 const users = [
   {
     image: profile,
     id: 1,
-    full_name: "John Doe",
+    full_name: "Kadwama Lazarus",
     phone_number: "1234567890",
     account_number: "123456789",
     ward: "banjiram",
@@ -12,11 +12,11 @@ const users = [
     home_address: "123 Main Street",
     bank_name: "gtb",
     work_typology: "health",
-    marital_status: "single",
+    marital_status: "Married",
     special_disability: "hearing",
     household_size: 4,
     head_of_house: "women headed",
-    sex: "male",
+    sex: "Female",
   },
   {
     image: profile,
