@@ -17,7 +17,7 @@ import usersData from "./AdminEmployeeData";
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 
-import "./adminEmployeeList.css";
+import "../admin_employee_list_page/adminemployeelist.css";
 
 export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);

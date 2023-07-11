@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import profile from '../../assets/logo.png';
 import './adminonboarding.css';
-import auth from "../../class/auth.class";
+import admin from "../../class/admin.class";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -41,7 +41,7 @@ const fieldName = `field_${Date.now()}`;
         password: values.password,
       };
 
-      auth
+      admin
         .login(data)
         .then((res) => {
           console.log(res);
