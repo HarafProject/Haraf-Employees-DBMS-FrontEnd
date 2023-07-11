@@ -1,0 +1,116 @@
+.manage-supervisor-header {
+    position: fixed;
+    background-color: #ffffff;
+    top: 0;
+    /* width: 79%; */
+}
+
+.manage-supervisor-page h1 {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: normal
+}
+
+.manage-supervisor-page .filter-option-section .form-field select {
+    width: 100px;
+}
+
+.manage-supervisor-page .export-file-btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100px;
+    padding: 10px;
+    border-radius: 3px;
+    color: #ffffff;
+    background: #0280CA;
+
+}
+
+.export-file-btn .export-icon {
+    font-size: 20px;
+}
+
+.manage-supervisor-table {
+    margin-top: 150px;
+}
+
+.manage-supervisor-table .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+    border-radius: 10px 10px 0 0;
+    border: 0.7px solid #c2c2c2cb;
+    background-color: #eeeded;
+}
+
+
+
+.manage-supervisor-table .css-1ygcj2i-MuiTableCell-root {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    color: #444444;
+    white-space: nowrap;
+    border-bottom: 1px solid #C2C2C2;
+
+}
+
+
+.manage-supervisor-table .css-1ex1afd-MuiTableCell-root {
+
+    border-bottom: 1px solid #C2C2C2;
+    /* max-width: 100px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.admin-name span {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: normal;
+    color: #444444;
+
+}
+
+
+
+.btn.manage-supervisor-btn {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn.manage-supervisor-btn .iconify {
+    font-size: 18px;
+
+}
+
+.iconify.delete-icon {
+    color: #FF0000;
+
+}
+
+.iconify.verify-icon {
+    color: #008000;
+}
+
+.snackbar {
+    position: fixed;
+    top: 500px;
+    background-color: #0280CA;
+    color: #ffffff;
+    width: fit-content;
+    padding: 5px 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.snackbar-btn,
+.snackbar:focus {
+    color: #ffffff;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-weight: 700;
+}
