@@ -35,6 +35,7 @@ import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePa
 
 import SupervisorProfile from '../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile'
 import AttendanceReportUpload from '../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload'
+import EditEmployeeScreen from '../supervisors_page/employeepage/addemployeepage/EditEmployee';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
       <Route path="/create-new-password" element={<CreateNewPassword />} />
       <Route path="/create-account" element={<CreateAccountScreen />} />
       <Route path="/add-employee" element={<AddEmployeeScreen />} />
+      <Route path="/edit-employee" element={<EditEmployeeScreen />} />
       <Route path="/employee-list" element={<EmployeeListTable />} />
       <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
       <Route path="/employee-profile" element={<EmployeeProfilePage />} />

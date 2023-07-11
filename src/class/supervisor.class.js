@@ -22,6 +22,39 @@ class supervisorOBJ {
       throw err?.response?.data;
     }
   };
+
+  //get employee details
+  getEmployee = async (id) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/supervisor/employee/${id}`);
+
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  updateEmployeeProfile = async (data,employee,notificationId) => {
+    try {
+      const response = await api.put(`api/supervisor/employee/${employee}?notification=${notificationId}`, data);
+   
+      return response.data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+    //get notifications
+    getNotifications = async () => {
+      try {
+        //check if data is empty
+        const { data } = await api.get("api/supervisor/notifications");
+  
+        return data;
+      } catch (err) {
+        throw err?.response?.data;
+      }
+    };
   //verify employee bank account
   verifyEmpoyeeBankAccount = async (data) => {
     try {

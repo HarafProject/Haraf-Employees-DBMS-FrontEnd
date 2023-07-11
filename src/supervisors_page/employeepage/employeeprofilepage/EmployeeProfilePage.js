@@ -4,8 +4,6 @@ import ReusableInformationList from '../../../component/reusable/employeeinforma
 import './employeeprofile.css';
 import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
-import userData from '../../../component/data/EmployeesData';
-import profileimage from '../../../assets/profile.png'
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader';
 import SendRequestModal from '../../../component/reusable/modalscontent/SendRequestModal'
 import supervisor from '../../../class/supervisor.class';
@@ -55,7 +53,7 @@ export default function EmployeeProfilePage() {
         try {
             setIsLoading(true)
             if (modalType === "edit") {
-                const { message } = await supervisor.editEmployeeRequest({ reason })
+                const { message } = await supervisor.editEmployeeRequest({ reason, employeeId:userData._id })
                 toast.success(message)
 
             } else {
