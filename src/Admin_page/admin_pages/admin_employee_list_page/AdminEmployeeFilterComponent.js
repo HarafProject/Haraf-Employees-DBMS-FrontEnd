@@ -1,7 +1,12 @@
 import { Icon } from "@iconify/react";
 import "./adminEmployeeFilter.css";
 
-function AdminEmployeeFilterComponent() {
+function AdminEmployeeFilterComponent({lgas,ward, workTopology,
+  setZones,
+  zones,
+  setWard,
+  setWorkTopology,
+  setLgas}) {
   return (
     <div className="filter-option-section  mt-3">
       <div className="d-flex align-items-center justify-content-between ">
@@ -13,38 +18,34 @@ function AdminEmployeeFilterComponent() {
         <div className="form-field my-2">
           <select name="zones" id="">
             <option value="">Zones</option>
-            <option value="banjiram">Banjiram</option>
-            <option value="bobini">Bobini</option>
+            {zones.map((a, i) => (
+              <option key={i} value={a._id} onChange={(e)=>{
+                console.log(e.target.values,'values fromm id')
+                setZones(e.target.values)
+              }}>
+                {a.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-field my-2">
           <select name="LGA's" id="">
             <option value="">LGA's</option>
-            <option value="banjiram">Banjiram</option>
-            <option value="bobini">Bobini</option>
-            <option value="bodeno">Bodeno</option>
-            <option value="chikila">Chikila</option>
-            <option value="dukul">Dukul</option>
-            <option value="dumna">Dumna</option>
-            <option value="guyuk">Guyuk</option>
-            <option value="kola">Kola</option>
-            <option value="lokoro">Lokoro</option>
-            <option value="purokayo">Purokayo</option>
+            {lgas.map((a, i) => (
+              <option key={i} value={a._id}>
+                {a.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-field my-2">
           <select name="ward" id="">
             <option value="">Ward</option>
-            <option value="banjiram">Banjiram</option>
-            <option value="bobini">Bobini</option>
-            <option value="bodeno">Bodeno</option>
-            <option value="chikila">Chikila</option>
-            <option value="dukul">Dukul</option>
-            <option value="dumna">Dumna</option>
-            <option value="guyuk">Guyuk</option>
-            <option value="kola">Kola</option>
-            <option value="lokoro">Lokoro</option>
-            <option value="purokayo">Purokayo</option>
+            {ward.map((a, i) => (
+              <option key={i} value={a._id}>
+                {a.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-field my-2">

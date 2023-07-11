@@ -1,7 +1,7 @@
-import api from '../API'
+import api from "../API";
 
 class adminOBJ {
-    //work-typology
+  //work-typology
   addWorkTypology = async (data) => {
     try {
       //check if data is empty
@@ -13,13 +13,13 @@ class adminOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       throw err?.response?.data;
     }
   };
 
-   //update supervisor
-  updateSupervisor = async (data,id) => {
+  //update supervisor
+  updateSupervisor = async (data, id) => {
     try {
       //check if data is empty
       if (data) {
@@ -30,7 +30,7 @@ class adminOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       throw err?.response?.data;
     }
   };
@@ -45,7 +45,7 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-// create account 
+  // create account
   register = async (data) => {
     try {
       //check if data is empty
@@ -59,7 +59,7 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-//login
+  //login
   login = async (data) => {
     try {
       //check if data is empty
@@ -75,8 +75,8 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-//admin action on supervisor
-adminAction = async (data,id) => {
+  //admin action on supervisor
+  adminAction = async (data, id) => {
     try {
       //check if data is empty
       if (data) {
@@ -87,11 +87,10 @@ adminAction = async (data,id) => {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       throw err?.response?.data;
     }
   };
-
 }
-const admin = new adminOBJ()
-export default admin
+const admin = new adminOBJ();
+export default admin;

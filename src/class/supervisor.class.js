@@ -35,26 +35,29 @@ class supervisorOBJ {
     }
   };
 
-  updateEmployeeProfile = async (data,employee,notificationId) => {
+  updateEmployeeProfile = async (data, employee, notificationId) => {
     try {
-      const response = await api.put(`api/supervisor/employee/${employee}?notification=${notificationId}`, data);
-   
+      const response = await api.put(
+        `api/supervisor/employee/${employee}?notification=${notificationId}`,
+        data
+      );
+
       return response.data;
     } catch (err) {
       throw err?.response?.data;
     }
   };
-    //get notifications
-    getNotifications = async () => {
-      try {
-        //check if data is empty
-        const { data } = await api.get("api/supervisor/notifications");
-  
-        return data;
-      } catch (err) {
-        throw err?.response?.data;
-      }
-    };
+  //get notifications
+  getNotifications = async () => {
+    try {
+      //check if data is empty
+      const { data } = await api.get("api/supervisor/notifications");
+
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
   //verify employee bank account
   verifyEmpoyeeBankAccount = async (data) => {
     try {
@@ -93,7 +96,7 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       throw err?.response?.data;
     }
   };

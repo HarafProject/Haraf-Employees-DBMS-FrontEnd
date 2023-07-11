@@ -59,7 +59,7 @@ export default function LoginScreen() {
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
           //redirect to emp
-          navigate("/employee-list", { replace: true })
+          navigate("/employee-list", { replace: true });
           setIsLoading(false);
         })
         .catch((err) => {

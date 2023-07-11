@@ -13,7 +13,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   auth: jwtReducer,
-  employee:employeeReducer
+  employee: employeeReducer,
 });
 
 // export default rootReducer;

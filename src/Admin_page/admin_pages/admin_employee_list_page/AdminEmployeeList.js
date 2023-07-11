@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import dataOBJs from "../../../class/data.class";
 
 import {
   Table,
@@ -22,7 +23,29 @@ import "../admin_employee_list_page/adminemployeelist.css";
 export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [zones, setZones] = useState([]);
+  const [selectedZones, setSelectedZones] = useState();
+  const [ward, setWard] = useState([]);
+  const [workTopology, setWorkTopology] = useState([]);
+  const [lgas, setLgas] = useState([
+    {
+      name: "select zone",
+      _id: "",
+    },
+  ]);
 
+  useEffect(()=>{
+    dataOBJs.getZone().then((zone) => {
+      console.log(zone, "zones");
+      setZones(zone);
+    });
+    if (zones) {
+      dataOBJs.getLgaByZone(selectedZones).then((res) => {
+        setLgas(res);
+      });
+    }
+  },[dataOBJs])
+console.log(selectedZones,'zone')
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -42,7 +65,13 @@ export default function AdminEmployeeList() {
     <>
       <div className="employees-table-section">
         <AdminEmployeeDataSummary />
-        <AdminEmployeeFilterComponent />
+        <AdminEmployeeFilterComponent lgas={lgas} ward={ward} workTopology={workTopology}
+        setZones={setSelectedZones}
+        zones={zones}
+        setWard={setWard}
+        setWorkTopology={setWorkTopology}
+        setLgas={setLgas}
+        />
         <div>
           <div className="employee-list-table p-3 my-3">
             <TableContainer component={Paper}>

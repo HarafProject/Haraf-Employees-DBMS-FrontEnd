@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./adminhome.css";
 import profile from "../../../assets/logo-light.png";
@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import AdminEmployeeList from "../admin_employee_list_page/AdminEmployeeList";
 import SuperAdminProfile from "../super_admin_profile_page/SuperAdminProfile";
 
+
 export default function AdminHomePage() {
   const navigate = useNavigate();
   const [selectedComponent, setSelectedComponent] = useState("employee");
-
+  
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
   };

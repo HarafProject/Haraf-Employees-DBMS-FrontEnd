@@ -1,21 +1,21 @@
-import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
-import { useNavigate } from 'react-router-dom'
-import AttendanceTable from './AttendanceTable'
-import './takeAttendance.css'
+import ReusableHeader from "../../../component/reusable/reusableheader/ReusableHeader";
+import { useNavigate } from "react-router-dom";
+import AttendanceTable from "./AttendanceTable";
+import "./takeAttendance.css";
 
 export default function TakeAttendance() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <section>
       <ReusableHeader />
-      <div className='margin'>
-        <div className='attendance'>
-          <div className='attendance-header'>
+      <div className="margin">
+        <div className="attendance">
+          <div className="attendance-header">
             <h3>Tick Attendance</h3>
             <h4>17th July 2023</h4>
           </div>
-          <div className='attendance-sub-head'>
+          <div className="attendance-sub-head">
             <h4>Health Typology</h4>
             <p>
               Note: Attendance report must be <br /> sent between
@@ -24,11 +24,11 @@ export default function TakeAttendance() {
           </div>
         </div>
         <AttendanceTable />
-        <div className='center-container'>
+        <div className="center-container">
           <button
-            className='center-button'
+            className="center-button"
             onClick={() => {
-              navigate('/')
+              navigate("/");
             }}
           >
             Next Typology
@@ -36,5 +36,5 @@ export default function TakeAttendance() {
         </div>
       </div>
     </section>
-  )
+  );
 }

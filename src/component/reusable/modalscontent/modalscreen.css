@@ -81,12 +81,11 @@
   text-align: center;
   color: #ffffff;
 }
-.modal-screen .btn.modal-button.delete-btn{
-    background-color: #C20A0A;
-
+.modal-screen .btn.modal-button.delete-btn {
+  background-color: #c20a0a;
 }
-.delete-close-btn{
-    color: #444444;
+.delete-close-btn {
+  color: #444444;
 }
 
 .modal {
