@@ -70,7 +70,7 @@ export default function AttendanceTable({ attendance }) {
   return (
     <TableContainer
       component={Paper}
-      style={{ width: '90%', margin: '0 auto' }}
+      style={{ width: "90%", margin: "0 auto" }}
     >
       <Table>
         <TableBody>

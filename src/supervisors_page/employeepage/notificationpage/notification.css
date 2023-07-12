@@ -1,46 +1,40 @@
-.notification h1{
-font-size: 32px;
-font-weight: 600;
-line-height: normal;
-color: #009af3ca;
-
+.notification h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: normal;
+  color: #009af3ca;
 }
 
-.notification-list { 
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.notification-list {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.notification-card p{    
-    font-size: 18px;
-    font-weight: 300;
-    line-height: normal;
-
-    
+.notification-card p {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: normal;
 }
-.notification-action{
-width: 30%;
+.notification-action {
+  width: 30%;
 }
-.notification-action .btn.notification-btn{
-    width: 150px;
-    padding: 10px;
-    border-radius: 45px;
-    border: 2px solid #F99C39;    
-font-size: 16px;
-font-weight: 500;
-line-height: normal;
-text-align: center;
-color: #444444;
-    
+.notification-action .btn.notification-btn {
+  width: 150px;
+  padding: 10px;
+  border-radius: 45px;
+  border: 2px solid #f99c39;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  color: #444444;
 }
-.notification-action span{
-    
-    font-size: 14px;
-    font-weight: 400;
-    line-height: normal;
-    color: #444444;
-    margin: 0 5px;
-    
+.notification-action span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  color: #444444;
+  margin: 0 5px;
 }
 
-hr{
-    width: auto;
+hr {
+  width: auto;
 }

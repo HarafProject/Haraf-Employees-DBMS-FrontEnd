@@ -89,9 +89,9 @@ export default function AttendanceReportUpload() {
   return (
     <section>
       <ReusableHeader />
-      <div className='margin '>
-        <div className='select-typ-report'>
-          <div className='header-report'>
+      <div className="margin ">
+        <div className="select-typ-report">
+          <div className="header-report">
             <h3>Attendance Report Upload</h3>
             <p>
               Please choose the employee typology for whom you will be taking
@@ -113,12 +113,12 @@ export default function AttendanceReportUpload() {
               <p>Submission Time</p>
             </div>
           </div>
-          <div className='report-grid'>
-            <div className='report'>
+          <div className="report-grid">
+            <div className="report">
               <p>Report For:</p>
               <h4>{attendance.date}</h4>
             </div>
-            <div className='report'>
+            <div className="report">
               <p>Report From:</p>
               <h4>{attendance.data[0]?.lga?.name} lga</h4>
             </div>
@@ -131,14 +131,14 @@ export default function AttendanceReportUpload() {
               <h4>{user.firstname} {user.surname}</h4>
             </div>
           </div>
-          <div className='msg-area'>
+          <div className="msg-area">
             <textarea
-              placeholder='Supervisors comment'
-              name=''
-              id=''
-              cols='50'
-              className='message'
-              rows='4'
+              placeholder="Supervisors comment"
+              name=""
+              id=""
+              cols="50"
+              className="message"
+              rows="4"
               textarea
               onChange={(e) => setAttendanceComment(e.target.value)}
             />
@@ -147,9 +147,9 @@ export default function AttendanceReportUpload() {
               taking attendance today
             </p>
           </div>
-          <div className='btns'>
+          <div className="btns">
             <button
-              className='btn-back'
+              className="btn-back"
               onClick={() => {
                 navigate('/supervisor/attendance')
               }}
@@ -188,5 +188,5 @@ export default function AttendanceReportUpload() {
 
       </Modal>
     </section>
-  )
+  );
 }

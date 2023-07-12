@@ -21,7 +21,7 @@ export default function LoginOtpVerify() {
       .max(6, "Please enter a 6-digit OTP"),
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [email,setEmail] = useState('')
+  const [email, setEmail] = useState("");
   const formik = useFormik({
     initialValues: {
       otp: ["", "", "", "", "", ""],
@@ -34,7 +34,7 @@ export default function LoginOtpVerify() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace('/create-new-password')
+          window.location.replace("/create-new-password");
           setIsLoading(false);
         })
         .catch((err) => {
@@ -46,10 +46,10 @@ export default function LoginOtpVerify() {
   });
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const email = urlParams.get('email');
+    const email = urlParams.get("email");
     console.log(email);
     // Use the email value as needed
-    setEmail(email)
+    setEmail(email);
   }, []);
   useEffect(() => {
     let timer;
@@ -68,18 +68,17 @@ export default function LoginOtpVerify() {
     setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
     //send otp
     auth
-    .forgotPassword({email:email})
-    .then((res) => {
-      console.log(res);
-      toast.success(res?.data?.message);
-      setIsLoading(false);
-    })
-    .catch((err) => {
-      toast.error(err.error || err);
-      console.log(err);
-      setIsLoading(false);
-    });
-
+      .forgotPassword({ email: email })
+      .then((res) => {
+        console.log(res);
+        toast.success(res?.data?.message);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        toast.error(err.error || err);
+        console.log(err);
+        setIsLoading(false);
+      });
   };
 
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);

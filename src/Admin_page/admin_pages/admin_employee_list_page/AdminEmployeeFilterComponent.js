@@ -1,7 +1,41 @@
 import { Icon } from "@iconify/react";
 import "./adminEmployeeFilter.css";
+import {useState,useEffect} from 'react'
+import dataOBJs from "../../../class/data.class";
+import supervisor from "../../../class/supervisor.class";
 
-function AdminEmployeeFilterComponent() {
+function AdminEmployeeFilterComponent(){
+  
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [zones, setZones] = useState([]);
+  const [selectedZones, setSelectedZones] = useState();
+  const [ward, setWard] = useState([]);
+  const [workTopology, setWorkTopology] = useState([]);
+  const [lgas, setLgas] = useState([
+    {
+      name: "select zone",
+      _id: "",
+    },
+  ]);
+
+  useEffect(() => {
+    dataOBJs.getZone().then((zone) => {
+      setZones(zone);
+    });
+    if (selectedZones) {
+      dataOBJs.getLgaByZone(selectedZones).then((res) => {
+        setLgas(res);
+        console.log(res,'select zone')
+      });
+    }
+  }, [selectedZones]);
+  useEffect(()=>{
+    supervisor.getWorkTypology().then((res)=>{
+      setWorkTopology(res)
+    })
+  })
+  console.log(selectedZones,'select zone')
   return (
     <div className="filter-option-section  mt-3">
       <div className="d-flex align-items-center justify-content-between ">
@@ -11,40 +45,40 @@ function AdminEmployeeFilterComponent() {
         </div>
 
         <div className="form-field my-2">
-          <select name="zones" id="">
+          <select onChange={(e) => {
+            console.log(e?.target?.value, "values fromm id");
+            setSelectedZones(e.target.value);
+          }} name="zones" id="">
             <option value="">Zones</option>
-            <option value="banjiram">Banjiram</option>
-            <option value="bobini">Bobini</option>
+            {zones.map((a, i) => (
+              <option
+                key={i}
+                value={a._id}
+                
+              >
+                {a.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-field my-2">
           <select name="LGA's" id="">
             <option value="">LGA's</option>
-            <option value="banjiram">Banjiram</option>
-            <option value="bobini">Bobini</option>
-            <option value="bodeno">Bodeno</option>
-            <option value="chikila">Chikila</option>
-            <option value="dukul">Dukul</option>
-            <option value="dumna">Dumna</option>
-            <option value="guyuk">Guyuk</option>
-            <option value="kola">Kola</option>
-            <option value="lokoro">Lokoro</option>
-            <option value="purokayo">Purokayo</option>
+            {lgas.map((a, i) => (
+              <option key={i} value={a._id}>
+                {a.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-field my-2">
           <select name="ward" id="">
             <option value="">Ward</option>
-            <option value="banjiram">Banjiram</option>
-            <option value="bobini">Bobini</option>
-            <option value="bodeno">Bodeno</option>
-            <option value="chikila">Chikila</option>
-            <option value="dukul">Dukul</option>
-            <option value="dumna">Dumna</option>
-            <option value="guyuk">Guyuk</option>
-            <option value="kola">Kola</option>
-            <option value="lokoro">Lokoro</option>
-            <option value="purokayo">Purokayo</option>
+            {ward.map((a, i) => (
+              <option key={i} value={a._id}>
+                {a.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-field my-2">

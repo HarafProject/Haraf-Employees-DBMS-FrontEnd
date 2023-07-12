@@ -29,7 +29,7 @@ const ReusableHeader = () => {
   }
 
   return (
-    <div className="container-fluid header-section px-4 py-2" >
+    <div className="container-fluid header-section px-4 py-2">
       <div className="d-flex align-items-center justify-content-between header-content px-4">
 
         <NavLink to="/supervisor/employee-list" onClick={closeMobileMenu}>
@@ -49,11 +49,12 @@ const ReusableHeader = () => {
           </li>
         </ul>
         <div className="hamburger-icon" onClick={handleClick}>
-          <Icon icon={clicked ? "jam:close" : "ci:menu-alt-02"} className={clicked ? "close" : "bar"} />
+          <Icon
+            icon={clicked ? "jam:close" : "ci:menu-alt-02"}
+            className={clicked ? "close" : "bar"}
+          />
         </div>
       </div>
-
-
     </div>
   );
 };

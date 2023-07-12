@@ -48,9 +48,9 @@ export default function TakeAttendance() {
   return (
     <section>
       <ReusableHeader />
-      <div className='margin'>
-        <div className='attendance'>
-          <div className='attendance-header'>
+      <div className="margin">
+        <div className="attendance">
+          <div className="attendance-header">
             <h3>Tick Attendance</h3>
             <h4>{attendanceData.date}</h4>
           </div>
@@ -90,5 +90,5 @@ export default function TakeAttendance() {
         </div>
       </div>
     </section>
-  )
+  );
 }

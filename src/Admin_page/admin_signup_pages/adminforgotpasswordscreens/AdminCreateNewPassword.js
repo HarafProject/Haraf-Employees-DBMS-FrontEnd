@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import './adminforgotpassword.css';
+import "./adminforgotpassword.css";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import Modal from "react-modal";
@@ -45,7 +45,7 @@ export default function AdminCreateNewPassword() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace('/admin-login')
+          window.location.replace("/admin-login");
           setIsLoading(false);
         })
         .catch((err) => {

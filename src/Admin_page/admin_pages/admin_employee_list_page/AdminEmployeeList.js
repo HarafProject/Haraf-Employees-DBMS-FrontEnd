@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import admin from "../../../class/admin.class";
 
 import {
   Table,
@@ -17,12 +18,19 @@ import usersData from "./AdminEmployeeData";
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 
-import "./adminEmployeeList.css";
+import "../admin_employee_list_page/adminEmployeeList.css";
 
 export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
+  const [supervisors,setSupervisors] = useState([])
+  
+  useEffect(()=>{
+    admin.getAllGetSupervisors().then((res)=>{
+      setSupervisors(res)
+    })
+  },[])
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -42,7 +50,9 @@ export default function AdminEmployeeList() {
     <>
       <div className="employees-table-section">
         <AdminEmployeeDataSummary />
-        <AdminEmployeeFilterComponent />
+        <AdminEmployeeFilterComponent
+          
+        />
         <div>
           <div className="employee-list-table p-3 my-3">
             <TableContainer component={Paper}>

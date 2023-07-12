@@ -1,184 +1,182 @@
-import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
-import { Icon } from '@iconify/react'
-import { useState } from 'react'
-import './supervisorProfile.css'
+import ReusableHeader from "../../../component/reusable/reusableheader/ReusableHeader";
+import { Icon } from "@iconify/react";
+import { useState } from "react";
+import "./supervisorProfile.css";
 import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
-import supervisor from '../../../class/supervisor.class';
-import { toast } from 'react-toastify';
-import { loginSuccess } from '../../../redux/reducers/userReducer';
+import supervisor from "../../../class/supervisor.class";
+import { toast } from "react-toastify";
+import { loginSuccess } from "../../../redux/reducers/userReducer";
 
 export default function SupervisorProfile() {
-  const { user } = useSelector((state) => state?.user)
+  const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false)
-  const [editable, setEditable] = useState(false)
-  const [buttonText, setButtonText] = useState('Edit Profile')
-  const [edited, setEdited] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [editable, setEditable] = useState(false);
+  const [buttonText, setButtonText] = useState("Edit Profile");
+  const [edited, setEdited] = useState(false);
 
   const [userData, setUserData] = useState({
     firstname: user.firstname,
     surname: user.surname,
-    phone: user.phone
-  })
+    phone: user.phone,
+  });
 
   const handleChange = (e) => {
-    setEdited(true)
-    const { name, value } = e.target
+    setEdited(true);
+    const { name, value } = e.target;
 
     setUserData({
       ...userData,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const handleButtonClick = async (e) => {
-
     if (editable) {
       try {
         if (edited) {
-          setIsLoading(true)
-          const data = await supervisor.editProfile(userData)
-          toast.success(data.message)
+          setIsLoading(true);
+          const data = await supervisor.editProfile(userData);
+          toast.success(data.message);
           dispatch(loginSuccess(data?.user));
-          setEditable(false)
-          setButtonText('Edit Profile')
+          setEditable(false);
+          setButtonText("Edit Profile");
         } else {
-          setEditable(false)
-          setButtonText('Edit Profile')
+          setEditable(false);
+          setButtonText("Edit Profile");
         }
       } catch (error) {
-        toast.error(error)
-        toast.error(error.error)
-      } finally{
-        setIsLoading(false)
+        toast.error(error);
+        toast.error(error.error);
+      } finally {
+        setIsLoading(false);
       }
-
     } else {
       // Handle save functionality here
       // e.g., Make API calls, update database, etc.
-      setEditable(true)
-      setButtonText('Save')
+      setEditable(true);
+      setButtonText("Save");
     }
-  }
+  };
 
   function cancelEdit() {
     setUserData({
       firstname: user.firstname,
       surname: user.surname,
-      phone: user.phone
-    })
-    setEditable(false)
-    setButtonText('Edit Profile')
+      phone: user.phone,
+    });
+    setEditable(false);
+    setButtonText("Edit Profile");
   }
 
   return (
     <section>
       <ReusableHeader />
-      <section className='login-container'>
-        <h3 className='login-heading'>Supervisor Login</h3>
+      <section className="login-container">
+        <h3 className="login-heading">Supervisor Login</h3>
         <section>
-          {
-            !editable &&
-            <div className='input-form'>
-              <label htmlFor=''>Name</label>
+          {!editable && (
+            <div className="input-form">
+              <label htmlFor="">Name</label>
               <input
                 value={`${userData.firstname} ${userData.surname}`}
                 onChange={handleChange}
                 disabled={!editable}
-                type='text'
-                placeholder='Lazarus Kadwama'
+                type="text"
+                placeholder="Lazarus Kadwama"
               />
             </div>
-
-          }
-          {
-            editable &&
-            <div className='input-form'>
-              <label htmlFor=''>First Name</label>
+          )}
+          {editable && (
+            <div className="input-form">
+              <label htmlFor="">First Name</label>
               <input
                 value={userData.firstname}
-                name='firstname'
+                name="firstname"
                 onChange={handleChange}
                 disabled={!editable}
-                type='text'
-                placeholder='Lazarus Kadwama'
+                type="text"
+                placeholder="Lazarus Kadwama"
               />
             </div>
+          )}
 
-          }
-
-          {
-            editable &&
-            <div className='input-form'>
-              <label htmlFor=''>Surname</label>
+          {editable && (
+            <div className="input-form">
+              <label htmlFor="">Surname</label>
               <input
-                type='text'
-                name='surname'
+                type="text"
+                name="surname"
                 value={userData.surname}
                 onChange={handleChange}
                 disabled={!editable}
-                placeholder='+234902494030'
+                placeholder="+234902494030"
               />
             </div>
-          }
-          <div className='input-form'>
-            <label htmlFor=''>Phone Number</label>
+          )}
+          <div className="input-form">
+            <label htmlFor="">Phone Number</label>
             <input
-              type='text'
+              type="text"
               value={userData.phone}
               onChange={handleChange}
               disabled={!editable}
-              placeholder='+234902494030'
+              placeholder="+234902494030"
             />
           </div>
-          <div className='input-form'>
-            <label htmlFor=''>Email Address</label>
+          <div className="input-form">
+            <label htmlFor="">Email Address</label>
             <input
-              type='text'
+              type="text"
               onChange={handleChange}
               disabled={true}
               placeholder={user.email}
             />
           </div>
-          <div className='input-form'>
-            <label htmlFor=''>Role</label>
+          <div className="input-form">
+            <label htmlFor="">Role</label>
             <input
-              type='text'
+              type="text"
               value={user.role}
               onChange={handleChange}
               disabled={true}
-              placeholder='Super Admin 1'
+              placeholder="Super Admin 1"
             />
           </div>
 
-          {isLoading && <center className="btn edit-button"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
+          {isLoading && (
+            <center className="btn edit-button">
+              <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+            </center>
+          )}
 
-          {
-            !isLoading && <div className="d-flex justify-content-between mb-3">
-              {
-                editable && <button className='edit-button' onClick={cancelEdit}>Cancel</button>
-              }
+          {!isLoading && (
+            <div className="d-flex justify-content-between mb-3">
+              {editable && (
+                <button className="edit-button" onClick={cancelEdit}>
+                  Cancel
+                </button>
+              )}
 
-              <button onClick={handleButtonClick} className='edit-button'>
+              <button onClick={handleButtonClick} className="edit-button">
                 {!editable ? (
-                  <div className='icon-bg'>
+                  <div className="icon-bg">
                     <Icon
-                      icon='fluent:edit-20-filled'
-                      color='#f99c39'
-                      className='edit-icon'
+                      icon="fluent:edit-20-filled"
+                      color="#f99c39"
+                      className="edit-icon"
                     />
                   </div>
                 ) : (
-                  ''
+                  ""
                 )}
                 {buttonText}
               </button>
             </div>
-          }
-
+          )}
         </section>
       </section>
     </section>
-  )
+  );
 }

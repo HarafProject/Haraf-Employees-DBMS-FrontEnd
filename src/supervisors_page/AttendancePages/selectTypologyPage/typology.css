@@ -16,7 +16,7 @@ label {
   height: 1.5rem;
 }
 
-input[type='checkbox']:checked {
+input[type="checkbox"]:checked {
   background-color: #f99c39;
 }
 
