@@ -12,10 +12,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dataOBJs from "../../class/data.class";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../redux/reducers/userReducer";
-import Modal from "react-modal";
 import "./onboarding.css";
-import AccountCreateSuccessModal from "../../component/reusable/modalscontent/AccountCreatedSuccessModal";
 import { RotatingLines } from "react-loader-spinner";
 
 export default function CreateAccountScreen() {
@@ -43,9 +40,6 @@ export default function CreateAccountScreen() {
   };
   const dispatch = useDispatch();
 
-  // useSelector((state) => {
-  //   console.log(state.user.user, "state");
-  // });
   const validationSchema = Yup.object().shape({
     fname: Yup.string().required("First Name is required"),
     phone: Yup.string().required("Phone Number is required"),
@@ -132,155 +126,179 @@ export default function CreateAccountScreen() {
           <p className="screen-title text-center mt-5">auth SIGNUP</p>
           <div className="d-flex align-items-start">
             <div className="mx-3">
-              <div className="form-field my-4">
-                <input
-                  autoComplete="new-firstname"
-                  type="text"
-                  id="fname"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.fname}
-                  name="fname"
-                  placeholder="FirstName *"
-                />
+              <div>
+                <div className="form-field mt-5">
+                  <input
+                    autoComplete="new-firstname"
+                    type="text"
+                    id="fname"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.fname}
+                    name="fname"
+                    placeholder="FirstName *"
+                  />
+
+                </div>
                 {formik.touched.fname && formik.errors.fname && (
                   <div className="error">{formik.errors.fname}</div>
                 )}
               </div>
-              <div className="form-field my-4">
-                <input
-                  autoComplete="new-phone"
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.phone}
-                  placeholder="Phone Number *"
-                />
+
+              <div>
+                <div className="form-field mt-5">
+                  <input
+                    autoComplete="new-phone"
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.phone}
+                    placeholder="Phone Number *"
+                  />
+
+                </div>
                 {formik.touched.phone && formik.errors.phone && (
                   <div className="error">{formik.errors.phone}</div>
                 )}
               </div>
-              <div className="form-field my-4">
-                <select
-                  name="zonalRegion"
-                  id="zonalRegion"
-                  value={formik.values.zonalRegion}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                >
-                  <option value="" disabled>
-                    Select a Zonal Region
-                  </option>
-                  {zones.map((a, i) => (
-                    <option key={i} value={a._id}>
-                      {a.name}
+
+              <div>
+                <div className="form-field mt-5">
+                  <select
+                    name="zonalRegion"
+                    id="zonalRegion"
+                    value={formik.values.zonalRegion}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  >
+                    <option value="" disabled>
+                      Select a Zonal Region
                     </option>
-                  ))}
-                </select>
+                    {zones.map((a, i) => (
+                      <option key={i} value={a._id}>
+                        {a.name}
+                      </option>
+                    ))}
+                  </select>
+
+                </div>
                 {formik.touched.zonalRegion && formik.errors.zonalRegion && (
                   <div className="error">{formik.errors.zonalRegion}</div>
                 )}
               </div>
-              <div className="form-field d-flex align-items-center justify-content-between my-4">
-                <input
-                  autoComplete="new-password"
-                  className=""
-                  id="password"
-                  placeholder="Password *"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.password}
-                  type={passwordType ? "password" : "text"}
-                  name="password"
-                />
-                <div onClick={togglePasswordVisiblity} className="eye">
-                  <Icon icon={icon1 ? "mdi:eye" : "mdi:eye-off"} />
+
+              <div>
+                <div className="form-field d-flex align-items-center justify-content-between mt-5">
+                  <input
+                    autoComplete="new-password"
+                    className=""
+                    id="password"
+                    placeholder="Password *"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
+                    type={passwordType ? "password" : "text"}
+                    name="password"
+                  />
+                  <div onClick={togglePasswordVisiblity} className="eye">
+                    <Icon icon={icon1 ? "mdi:eye" : "mdi:eye-off"} />
+                  </div>
+
                 </div>
+                {formik.touched.password && formik.errors.password && (
+                  <div className="error">{formik.errors.password}</div>
+                )}
               </div>
-              {formik.touched.password && formik.errors.password && (
-                <div className="error">{formik.errors.password}</div>
-              )}
-              <span className="">
-                Must be at least 8 characters {<br />}
-                Must have at least one special character {<br />}
-                Must have at least one number and alphabet
-              </span>
+             
             </div>
             <div className="mx-3">
-              <div className="form-field my-4">
-                <input
-                  autoComplete="new-surname"
-                  id="surname"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.surname}
-                  type="text"
-                  name="surname"
-                  placeholder="Surname *"
-                />
-                {formik.touched.surname && formik.errors.surname && (
+              <div>
+                <div className="form-field mt-5">
+                  <input
+                    autoComplete="new-surname"
+                    id="surname"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.surname}
+                    type="text"
+                    name="surname"
+                    placeholder="Surname *"
+                  />
+
+                </div> {formik.touched.surname && formik.errors.surname && (
                   <div className="error">{formik.errors.surname}</div>
                 )}
               </div>
-              <div className="form-field my-4">
-                <input
-                  autoComplete="new-email"
-                  type="email"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                  id="email"
-                  name="email"
-                  placeholder="Email Address *"
-                />
+
+              <div>
+                <div className="form-field mt-5">
+                  <input
+                    autoComplete="new-email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                    id="email"
+                    name="email"
+                    placeholder="Email Address *"
+                  />
+
+                </div>
                 {formik.touched.email && formik.errors.email && (
                   <div className="error">{formik.errors.email}</div>
                 )}
               </div>
-              <div className="form-field my-4">
-                <select
-                  name="lga"
-                  id="lga"
-                  value={formik.values.lga}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                >
-                  <option value="" disabled>
-                    Select an LGA
-                  </option>
-                  {lgas.map((a, i) => (
-                    <option key={i} value={a._id}>
-                      {a.name}
+
+              <div>
+                <div className="form-field mt-5">
+                  <select
+                    name="lga"
+                    id="lga"
+                    value={formik.values.lga}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  >
+                    <option value="" disabled>
+                      Select an LGA
                     </option>
-                  ))}
-                </select>
-                {formik.touched.lga && formik.errors.lga && (
+                    {lgas.map((a, i) => (
+                      <option key={i} value={a._id}>
+                        {a.name}
+                      </option>
+                    ))}
+                  </select>
+
+                </div>{formik.touched.lga && formik.errors.lga && (
                   <div className="error">{formik.errors.lga}</div>
                 )}
               </div>
-              <div className="form-field d-flex align-items-center justify-content-between my-4">
-                <input
-                  autoComplete="new-password"
-                  className=""
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.confirm_password}
-                  id="confirm_password"
-                  name="confirm_password"
-                  placeholder="Confirm Password *"
-                  type={confirmPasswordType ? "password" : "text"}
-                />
-                <div onClick={toggleConfirmPasswordVisiblity} className="eye">
-                  <Icon icon={icon2 ? "mdi:eye" : "mdi:eye-off"} />
+
+              <div>
+                <div className="form-field d-flex align-items-center justify-content-between mt-5">
+                  <input
+                    autoComplete="new-password"
+                    className=""
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.confirm_password}
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm Password *"
+                    type={confirmPasswordType ? "password" : "text"}
+                  />
+                  <div onClick={toggleConfirmPasswordVisiblity} className="eye">
+                    <Icon icon={icon2 ? "mdi:eye" : "mdi:eye-off"} />
+                  </div>
                 </div>
-              </div>
-              {formik.touched.confirm_password &&
-                formik.errors.confirm_password && (
-                  <div className="error">{formik.errors.confirm_password}</div>
-                )}
-              <span className="float-end">Both passwords must match</span>
+
+                {formik.touched.confirm_password &&
+                  formik.errors.confirm_password && (
+                    <div className="error">{formik.errors.confirm_password}</div>
+                  )}</div>
+
+              
             </div>
           </div>
           <div className="d-flex flex-column login-screen-button mt-3">

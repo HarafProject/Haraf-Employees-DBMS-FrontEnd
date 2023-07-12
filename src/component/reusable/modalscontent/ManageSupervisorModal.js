@@ -14,7 +14,7 @@ export default function ManageSupervisorModal({ closeModal, buttonClick, supervi
     const [buttonText, setButtonText] = useState('')
     
 
-    useEffect(() => {
+    useEffect (() => {
        if (buttonClick === 'verify') {
             setActionTitle('Verify Supervisor');
             setActionText(`Are you sure you want to verify ${supervisorName} as a ${getRole}? This will allow ${supervisorName} to have full access to the LIPWDMS portal`);

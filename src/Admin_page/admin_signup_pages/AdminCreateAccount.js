@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import profile from "../../assets/logo-light.png";
-import "./onboarding.css";
+import './adminonboarding.css'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import admin from "../../class/admin.class";
@@ -12,10 +12,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dataOBJs from "../../class/data.class";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../redux/reducers/userReducer";
-import Modal from "react-modal";
-import "./onboarding.css";
-import AccountCreateSuccessModal from "../../component/reusable/modalscontent/AccountCreatedSuccessModal";
 import { RotatingLines } from "react-loader-spinner";
 
 export default function CreateAdminAccountScreen() {

@@ -1,38 +1,38 @@
 @import url("https://fonts.cdnfonts.com/css/lexend-deca");
 
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontLighter";
   font-weight: 200;
   src: url("./font/LexendDeca-Thin.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontLight";
   font-weight: 300;
   src: url("./font/LexendDeca-Light.ttf") format("truetype");
 }
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontReqular";
   font-weight: 400;
   src: url("./font/LexendDeca-Regular.ttf") format("truetype");
 }
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontMedium";
   font-weight: 500;
   src: url("./font/LexendDeca-Medium.ttf") format("truetype");
 }
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontSemiBold";
   font-weight: 600;
   src: url("./font/LexendDeca-SemiBold.ttf") format("truetype");
 }
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontBold";
   font-weight: 700;
   src: url("./font/LexendDeca-Bold.ttf") format("truetype");
 }
 @font-face {
-  font-family: "LexendFont";
+  font-family: "LexendFontExtraBold";
   font-weight: 800;
   src: url("./font/LexendDeca-ExtraBold.ttf") format("truetype");
 }
@@ -56,8 +56,8 @@ input,
 input::placeholder,
 select,
 select option {
-  font-family: "CustomFont", sans-serif;
-  font-weight: 200 !important;
+  font-family: "LexendFontLight", sans-serif;
+  
 }
 h1,
 h2,
