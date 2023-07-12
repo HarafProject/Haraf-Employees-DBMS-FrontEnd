@@ -90,7 +90,7 @@ export default function CreateAccountScreen() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace('/login')
+          window.location.replace("/login");
           setIsLoading(false);
         })
         .catch((err) => {

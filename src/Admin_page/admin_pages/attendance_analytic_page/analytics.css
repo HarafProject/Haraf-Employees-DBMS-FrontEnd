@@ -1,61 +1,50 @@
-
-
-
-
-
-
-
-.attendance-analytic-page h1{
-    font-size: 24px;
-    font-weight: 600;
-    line-height: normal;
-    color: #0280CA;
+.attendance-analytic-page h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: #0280ca;
 }
 
 .attendance-analytic-page h5 {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: normal;
-    color: #0280CA;
-    white-space: nowrap;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  color: #0280ca;
+  white-space: nowrap;
 }
 .beneficiary-statistics .box {
-    width: 230px;
-    padding: 10px;
-    border-radius: 8px;
-    background: #E3E3E366;
-    color: #444444;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
+  width: 230px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #e3e3e366;
+  color: #444444;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
 }
 
 .beneficiary-statistics .box h2 {
-    font-size: 34px;
-    font-weight: 800;
-    line-height: normal;
-    color: #0280CA;
-
+  font-size: 34px;
+  font-weight: 800;
+  line-height: normal;
+  color: #0280ca;
 }
-
-
 
 .attendance-analytic-page .filter-option-section .form-field select {
-
-    background-image: url('../../../assets/arrow-blue.png');
-
+  background-image: url("../../../assets/arrow-blue.png");
 }
 
-
-.apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right, .apexcharts-legend.apx-legend-position-top.apexcharts-align-right {
-    justify-content: flex-end;
-    right: 0px;
-    position: relative !important;
-    left: 0px;
-    padding: 46px !important;
+.apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right,
+.apexcharts-legend.apx-legend-position-top.apexcharts-align-right {
+  justify-content: flex-end;
+  right: 0px;
+  position: relative !important;
+  left: 0px;
+  padding: 46px !important;
 }
 
-.apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right, .apexcharts-legend.apx-legend-position-top.apexcharts-align-right:nth-child(2) {
-    margin: 0 2px;
+.apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right,
+.apexcharts-legend.apx-legend-position-top.apexcharts-align-right:nth-child(2) {
+  margin: 0 2px;
 }

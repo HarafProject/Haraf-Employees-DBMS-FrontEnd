@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import userReducer from "./reducers/userReducer";
 import jwtReducer from "./reducers/jwtReducer";
 import employeeReducer from "./reducers/employeeReducer";
+import attendanceReducer from "./reducers/attendanceReducer";
 
 const persistConfig = {
   key: "root",
@@ -13,7 +14,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   auth: jwtReducer,
-  employee:employeeReducer
+  employee: employeeReducer,
+  attendance: attendanceReducer
 });
 
 // export default rootReducer;

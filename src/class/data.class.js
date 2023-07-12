@@ -24,6 +24,18 @@ class dataOBJ {
     }
   };
 
+  //get lga
+  getLga = async (zoneId) => {
+    try {
+      const res = await api.get(`api/location/lga`);
+      if (res?.data?.status === "success") {
+        return res?.data?.lgas;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
   //get wards by lga
   getWardsByLga = async (lgaId) => {
     try {

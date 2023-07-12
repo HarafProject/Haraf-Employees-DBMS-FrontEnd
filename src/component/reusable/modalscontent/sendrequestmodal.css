@@ -1,129 +1,119 @@
 .sendrequest-modal {
-    width: auto;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fefefe;
-    margin: 0 auto;
-    border-radius: 22px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefe;
+  margin: 0 auto;
+  border-radius: 22px;
 }
 
 .close-button {
-    outline: none;
-    border: none;
-    font-size: 45px;
-    float: right;
+  outline: none;
+  border: none;
+  font-size: 45px;
+  float: right;
 }
 
 .close-button:focus,
 .close-button:checked {
-    outline: none;
+  outline: none;
 }
 
 .sendrequest-modal .modal-title span {
-    font-size: 24px;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0 5px;
-
+  font-size: 24px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 5px;
 }
 
 .sendrequest-modal .modal-title .error-icon {
-    font-size: 30px;
-    color: #F99C39;
+  font-size: 30px;
+  color: #f99c39;
 }
 
 .sendrequest-modal p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: normal;
-    text-align: center;
-    color: #000000;
-    width: 450px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
+  text-align: center;
+  color: #000000;
+  width: 450px;
 }
 
 .sendrequest-modal .textarea {
-    width: 450px;
-    height: 150px;
-    border-radius: 7px;
-    border: 1px solid #444444;
-    font-size: 16px;
-    font-size: #444444B2;
-
+  width: 450px;
+  height: 150px;
+  border-radius: 7px;
+  border: 1px solid #444444;
+  font-size: 16px;
+  font-size: #444444b2;
 }
 
 .textarea::placeholder {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: normal;
-    color: #444444B2;
-
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  color: #444444b2;
 }
 
 .sendrequest-modal .btn.send-button {
-    width: 250px;
-    border-radius: 45px;
-    background: #0173BC;
-    font-size: 22px;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    color: #ffffff;
-
+  width: 250px;
+  border-radius: 45px;
+  background: #0173bc;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  color: #ffffff;
 }
 
-
-
-
-
 .modal {
-    z-index: 999;
+  z-index: 999;
 }
 
 .modal-base {
-    top: 15%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* margin: auto;
+  top: 15%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin: auto;
     width: 800px;
     height: 350px;
     border-radius: 22px; */
-    opacity: 0;
-    /* -webkit-transition: all 0.2s ease-in-out;
+  opacity: 0;
+  /* -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     transform: scale(0.8); */
 }
 
-
-
 .modal-base_after-open {
-    opacity: 1;
-    transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 
 .modal-base_before-close {
-    transform: scale(.2);
-    opacity: 0;
+  transform: scale(0.2);
+  opacity: 0;
 }
 
 .overlay-base {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(19, 18, 18, 0.75);
-    opacity: 0;
-    transition: all 0.3s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(19, 18, 18, 0.75);
+  opacity: 0;
+  transition: all 0.3s ease-out;
 }
 
 .overlay-base_after-open {
-    opacity: 1;
+  opacity: 1;
 }
 
 .overlay-base_before-close {
-    opacity: 0;
+  opacity: 0;
 }

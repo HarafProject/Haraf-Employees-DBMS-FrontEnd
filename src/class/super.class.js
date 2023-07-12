@@ -1,56 +1,12 @@
 import api from "../API";
 
-class adminOBJ {
-  //work-typology
-  addWorkTypology = async (data) => {
-    try {
-      //check if data is empty
-      if (data) {
-        const response = await api.post("api/admin/work-typology", data);
-
-        return response.data;
-      } else {
-        throw new Error("please fill in the fields");
-      }
-    } catch (err) {
-      console.log(err);
-      throw err?.response?.data;
-    }
-  };
-
-  //update supervisor
-  updateSupervisor = async (data, id) => {
-    try {
-      //check if data is empty
-      if (data) {
-        const response = await api.put(`api/admin/supervisor/${id}`, data);
-
-        return response.data;
-      } else {
-        throw new Error("please fill in the fields");
-      }
-    } catch (err) {
-      console.log(err);
-      throw err?.response?.data;
-    }
-  };
-
-  //get Get Supervisors
-  getGetSupervisors = async () => {
-    try {
-      //check if data is empty
-      const { data } = await api.get("api/admin/supervisors");
-      return data;
-    } catch (err) {
-      throw err?.response?.data;
-    }
-  };
+class superOBJ {
   // create account
   register = async (data) => {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/admin/create-admin", data);
+        const response = await api.post("api/superadmin/create-account", data);
         return response;
       } else {
         throw new Error("please fill in the fields");
@@ -64,7 +20,7 @@ class adminOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/admin/login", data);
+        const response = await api.post("api/superadmin/login", data);
         console.log(response);
         return response;
         //store res data
@@ -75,12 +31,12 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-  //admin action on supervisor
-  adminAction = async (data, id) => {
+  //Update Admin
+  updateSupervisor = async (data, id) => {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.put(`/api/admin/handle-request/${id}`, data);
+        const response = await api.put(`api/superadmin/${id}`, data);
 
         return response.data;
       } else {
@@ -91,21 +47,21 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-  //get all Get Supervisors
-  getAllGetSupervisors = async () => {
+  //get Get All Supervisors
+  getAllSupervisors = async () => {
     try {
       //check if data is empty
-      const { data } = await api.get("api/admin/all-supervisors");
+      const { data } = await api.get("api/superadmin/all-supervisor");
       return data;
     } catch (err) {
       throw err?.response?.data;
     }
   };
-  //get all Get beneficiaries
-  getAllGetbeneficiaries = async () => {
+  //get all beneficiaries
+  getAllbeneficiaries = async () => {
     try {
       //check if data is empty
-      const { data } = await api.get("api/admin/all-beneficiaries");
+      const { data } = await api.get("api/superadmin/all-beneficiaries");
       return data;
     } catch (err) {
       throw err?.response?.data;
@@ -116,7 +72,7 @@ class adminOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/admin/filter-by-lga", data);
+        const response = await api.post("api/superadmin/filter-by-lga", data);
         console.log(response);
         return response;
         //store res data
@@ -133,7 +89,7 @@ class adminOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/admin/filter-by-zones", data);
+        const response = await api.post("api/superadmin/filter-by-zones", data);
         console.log(response);
         return response;
         //store res data
@@ -149,7 +105,7 @@ class adminOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/admin/filter-by-ward", data);
+        const response = await api.post("api/superadmin/filter-by-wards", data);
         console.log(response);
         return response;
         //store res data
@@ -161,12 +117,12 @@ class adminOBJ {
     }
   };
   //filter by work topology
-  filterByWorkTOpology = async (data) => {
+  filterByWorkTopology = async (data) => {
     try {
       //check if data is empty
       if (data) {
         const response = await api.post(
-          "api/admin/filter-by-work-topology",
+          "api/superadmin/filter-by-work-topology",
           data
         );
         console.log(response);
@@ -179,12 +135,12 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-  //search
+  //search beneficiaries
   search = async (data) => {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post("api/admin/search", data);
+        const response = await api.post("api/superadmin/search", data);
         console.log(response);
         return response;
         //store res data
@@ -195,7 +151,18 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
+   //get ward
+  getWard = async () => {
+    try {
+      //check if data is empty
+      const { data } = await api.get("api/superadmin/all-ward");
+
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
 }
 
-const admin = new adminOBJ();
-export default admin;
+const superAdmin = new superOBJ();
+export default superAdmin;

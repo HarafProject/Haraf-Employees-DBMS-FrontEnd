@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import profile from "../../assets/logo-light.png";
@@ -13,13 +12,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
 import { setToken } from "../../redux/reducers/jwtReducer";
 import { RotatingLines } from "react-loader-spinner";
+import { updateWards } from "../../redux/reducers/employeeReducer";
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import NoNetworkModal from "../../component/reusable/modalscontent/NoNetworkModal";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
 
   const [passwordType, setPasswordType] = useState("false");
   const [icon, setIcon] = useState("mdi:eye");
   const [isLoading, setIsLoading] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  
   const togglePasswordVisiblity = () => {
     setPasswordType(passwordType ? false : true);
     setIcon(!icon);
@@ -29,6 +50,14 @@ export default function LoginScreen() {
   useSelector((state) => {
     // console.log(state.user.user, "state");
   });
+
+  const openModal = () => { // Modify openModal function
+    setIsOpen(true);
+  };
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
@@ -44,7 +73,6 @@ export default function LoginScreen() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // Handle form submission
-      console.log(values);
       setIsLoading(true);
       const data = {
         email: values.email,
@@ -54,22 +82,29 @@ export default function LoginScreen() {
       auth
         .login(data)
         .then((res) => {
-          console.log(res);
           toast.success(res?.data?.message);
+          localStorage.setItem("HARAF-AUTH", res?.data?.token)
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
+          dispatch(updateWards(res?.data.wards))
           //redirect to emp
-          navigate("/employee-list", { replace: true })
+          navigate("/supervisor", { replace: true })
           setIsLoading(false);
         })
         .catch((err) => {
-          toast.error(err.error || err);
-          console.log(err, "errr");
+          console.log(err);
+          toast.error(err?.error || err);
           setIsLoading(false);
+          if (!err) {
+            let auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
+            if (auth && !isOnline) {
+              openModal()
+            }
+          }
         });
     },
   });
-  const fieldName = `field_${Date.now()}`;
+
   return (
     <div className="onboarding-screen login-screen">
       <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-5">
@@ -138,6 +173,33 @@ export default function LoginScreen() {
           </p>
         </form>
       </div>
+<<<<<<< HEAD
+=======
+      {/* </div> */}
+      <Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        className={{
+          base: 'modal-base',
+          afterOpen: 'modal-base_after-open',
+          beforeClose: 'modal-base_before-close'
+        }}
+        overlayClassName={{
+          base: 'overlay-base',
+          afterOpen: 'overlay-base_after-open',
+          beforeClose: 'overlay-base_before-close'
+        }}
+        shouldCloseOnOverlayClick={true}
+        closeTimeoutMS={2000}
+      >
+
+        <NoNetworkModal
+          closeModal={closeModal}
+        />
+      </Modal>
+>>>>>>> main
     </div>
   );
 }

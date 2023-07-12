@@ -82,21 +82,17 @@
   color: #ffffff;
   outline: none !important;
 }
-.modal-screen .btn.modal-button.delete-btn{
-    background-color: #C20A0A;
-  
-
+.modal-screen .btn.modal-button.delete-btn {
+  background-color: #c20a0a;
 }
-.modal-screen .btn.modal-button.delete-btn:focus, .modal-screen .btn.modal-button.verify-btn:focus{
-   
+.modal-screen .btn.modal-button.delete-btn:focus,
+.modal-screen .btn.modal-button.verify-btn:focus {
 }
-.modal-screen .btn.modal-button.verify-btn{
-  background-color: #0280CA;
-
-
+.modal-screen .btn.modal-button.verify-btn {
+  background-color: #0280ca;
 }
-.delete-close-btn{
-    color: #444444;
+.delete-close-btn {
+  color: #444444;
 }
 
 .modal {

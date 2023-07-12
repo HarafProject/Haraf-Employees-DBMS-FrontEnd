@@ -9,12 +9,15 @@ import dataOBJs from '../../../class/data.class';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { useSelector } from "react-redux";
 import Webcam from 'react-webcam';
 import Modal from 'react-modal';
 import { RotatingLines } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWards } from '../../../redux/reducers/employeeReducer';
+import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkModal';
 
 export default function AddEmployeeScreen({ prefilledData }) {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const webcamRef = useRef(null);
     const [imageData, setImageData] = useState(null);
@@ -29,7 +32,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
     const inputRef = useRef(null);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
-
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
 
     function openModal() {
         setIsOpen(true);
@@ -50,19 +53,27 @@ export default function AddEmployeeScreen({ prefilledData }) {
             const bank_list = await supervisor.getBankList();
             setbankList(bank_list.banks)
         } catch (error) {
-            toast.error(error)
-            toast.error(error.error)
+            if (error === "You are currently offline.") {
+                setIsOnline(false)
+                openModal()
+            } else {
+                toast.error(error)
+                toast.error(error.error)
+            }
+
         }
 
     }
     async function fetchWards() {
         try {
-
+            const ward_list = await dataOBJs.getWardsByLga(user.lga);
+            setWardList(ward_list)
+            dispatch(updateWards(ward_list))
         } catch (error) {
-
+            toast.error(error)
+            toast.error(error?.error)
         }
-        const ward_list = await dataOBJs.getWardsByLga(user.lga);
-        setWardList(ward_list)
+
     }
 
     async function fetchTypology() {
@@ -96,14 +107,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
             inputRef.current.focus();
 
         } catch (error) {
-            console.log(error)
-            setBankDetails({
-                ...bankDetail,
-                accountName: ""
-            })
-            setIsVerified(false)
-            toast.error(error)
-            toast.error(error?.error)
+            if (error === "You are currently offline.") {
+                setIsOnline(false)
+                openModal()
+            } else {
+                setBankDetails({
+                    ...bankDetail,
+                    accountName: ""
+                })
+                setIsVerified(false)
+                toast.error(error)
+                toast.error(error?.error)
+            }
+
         }
 
     }
@@ -137,7 +153,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             if (!imageData) return toast.error("Headshot is required.")
-            try {           
+            try {
                 // Handle form submission here
                 // Create a FormData object to send the image file
                 setIsLoading(true)
@@ -145,7 +161,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                 formData.append('image', dataURLtoFile(imageData, 'image.png'));
                 // Append form fields to formData
                 Object.keys(values).forEach((field) => {
-                    
+
                     formData.append(field, values[field]);
                 });
                 // Append form fields to formData
@@ -153,17 +169,26 @@ export default function AddEmployeeScreen({ prefilledData }) {
                     // console.log()
                     formData.append(field, bankDetail[field]);
                 });
-                const {message} = await supervisor.addEmployee(formData)
+                const { message } = await supervisor.addEmployee(formData)
                 console.log(message)
                 toast.success(message)
                 setIsLoading(false)
-                navigate("/employee-list",{replace:true})
+                navigate("/supervisor/employee-list", { replace: true, state: { display: true } })
 
             } catch (error) {
-                setIsLoading(false)
-                toast.error(error)
-                toast.error(error?.error)
-                console.error('Form submission error:', error);
+
+                if (error === "You are currently offline.") {
+                    setIsOnline(false)
+                    openModal()
+                } else {
+                    setBankDetails({
+                        ...bankDetail,
+                        accountName: ""
+                    })
+                    setIsVerified(false)
+                    toast.error(error)
+                    toast.error(error?.error)
+                }
             }
         },
     });
@@ -234,7 +259,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                     ) : null}
                                 </div>
                                 <div className="form-field my-4">
-                                    <input autocomplete="age" type="number" name="age" placeholder='Age ' disabled={!isVerified}
+                                    <input autocomplete="age" type="number" min={1} name="age" placeholder='Age ' disabled={!isVerified}
                                         {...formik.getFieldProps('age')} />
                                     {formik.touched.age && formik.errors.age ? (
                                         <div className="error">{formik.errors.age}</div>
@@ -381,7 +406,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         {isLoading && <center className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 
                         {
-                            !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || isLoading} className="btn save-employee mt-5">
+                            !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || !isVerified || isLoading} className="btn save-employee mt-5">
                                 {isEditEmployee ? 'Save Changes' : 'Save Employee'}
                             </button>
                         }
@@ -404,11 +429,20 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         shouldCloseOnOverlayClick={true}
                         closeTimeoutMS={2000}
                     >
+                        {
+                            !isOnline && <NoNetworkModal
+                                closeModal={closeModal}
+                            />
+                        }
+                        {
+                            isOnline &&
+                            <>
+                                <Webcam audio={false} ref={webcamRef} mirrored={true} />
+                                <button className="profile-img camera" onClick={handleCapture}>
+                                    <Icon icon="heroicons-solid:camera" className='camera-icon' />
+                                </button></>
+                        }
 
-                        <Webcam audio={false} ref={webcamRef} mirrored={true} />
-                        <button className="profile-img camera" onClick={handleCapture}>
-                            <Icon icon="heroicons-solid:camera" className='camera-icon' />
-                        </button>
                     </Modal>
 
 

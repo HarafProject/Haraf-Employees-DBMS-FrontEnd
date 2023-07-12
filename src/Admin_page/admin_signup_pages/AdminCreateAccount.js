@@ -92,7 +92,7 @@ export default function CreateAdminAccountScreen() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace('/admin-login')
+          window.location.replace("/admin-login");
           setIsLoading(false);
         })
         .catch((err) => {
