@@ -19,7 +19,11 @@ class supervisorOBJ {
 
       return data;
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
 
@@ -37,10 +41,7 @@ class supervisorOBJ {
 
   updateEmployeeProfile = async (data, employee, notificationId) => {
     try {
-      const response = await api.put(
-        `api/supervisor/employee/${employee}?notification=${notificationId}`,
-        data
-      );
+      const response = await api.put(`api/supervisor/employee/${employee}?notification=${notificationId}`, data);
 
       return response.data;
     } catch (err) {
@@ -70,7 +71,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //get work typology
@@ -96,8 +101,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      console.log(err);
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //get all employee
@@ -107,7 +115,11 @@ class supervisorOBJ {
       const { data } = await api.get("api/supervisor/employee");
       return data;
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //new employee request
@@ -125,7 +137,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //delete employee request
@@ -143,7 +159,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //edit employee request
@@ -161,7 +181,32 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
+    }
+  };
+
+  //delete employee
+  deleteEmployee = async (data, notificationId) => {
+    try {
+      //check if data is empty
+      if (data) {
+        const response = await api.delete(
+          `api/supervisor/employee/${data}?notification=${notificationId}`);
+
+        return response.data;
+      } else {
+        throw new Error("please fill in the fields");
+      }
+    } catch (err) {
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //submit attendance
@@ -169,14 +214,20 @@ class supervisorOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.put("api/supervisor/attendance", data);
+        const response = await api.post("api/supervisor/attendance", data);
         console.log(response);
-        return response;
+        return response.data;
       } else {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
+
     }
   };
  

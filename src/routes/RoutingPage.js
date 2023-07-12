@@ -5,7 +5,7 @@ import {
   // Router,
   createRoutesFromElements,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom'
 
 //Onboarding Routes
 import WelcomeScreen from "../supervisors_page/onboarding_screens/WelcomeScreen";
@@ -14,58 +14,32 @@ import ForgottenPassword from "../supervisors_page/onboarding_screens/forgotpass
 import LoginOtpVerify from "../supervisors_page/onboarding_screens/forgotpasswordscreens/OtpVerification";
 import CreateNewPassword from "../supervisors_page/onboarding_screens/forgotpasswordscreens/CreateNewPassword";
 import CreateAccountScreen from "../supervisors_page/onboarding_screens/CreateAccountScreen";
-import EmptyEmployeeList from "../supervisors_page/employeepage/employeelistpage/EmptyEmployeeListScreen";
-import AddEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/AddEmployee";
-import EmployeeListTable from "../supervisors_page/employeepage/employeelistpage/EmployeeList";
-import EmployeeProfilePage from "../supervisors_page/employeepage/employeeprofilepage/EmployeeProfilePage";
-import NotificationScreen from "../supervisors_page/employeepage/notificationpage/NotificationPage";
-import BiometricScreen from "../supervisors_page/employeepage/biometricpage/BiometricPage";
 import AdminWelcomeScreen from "../Admin_page/admin_signup_pages/AdminWelcomeScreen";
 import AdminLoginScreen from "../Admin_page/admin_signup_pages/AdminLoginScreen";
 import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminForgottenPassword";
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
 import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
-import AttendanceDetailedPage from "../Admin_page/admin_pages/attendance_page/AttendanceDetailedPage";
-import CreateAdminAccountScreen from "../Admin_page/admin_signup_pages/AdminCreateAccount";
+
 
 // TakeAttendancePage
 import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
-
-import SelectTypography from "../supervisors_page/AttendancePages/selectTypologyPage/SelectTypography";
-import TakeAttendance from "../supervisors_page/AttendancePages/takeAttendancePage/TakeAttendance";
-
-import SupervisorProfile from "../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile";
-import AttendanceReportUpload from "../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload";
-import EditEmployeeScreen from "../supervisors_page/employeepage/addemployeepage/EditEmployee";
+import SupervisorHome from '../supervisors_page/SupervisorHome';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
+
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/forgot-password" element={<ForgottenPassword />} />
       <Route path="/send-otp" element={<LoginOtpVerify />} />
       <Route path="/create-new-password" element={<CreateNewPassword />} />
       <Route path="/create-account" element={<CreateAccountScreen />} />
-      <Route path="/add-employee" element={<AddEmployeeScreen />} />
-      <Route path="/edit-employee" element={<EditEmployeeScreen />} />
-      <Route path="/employee-list" element={<EmployeeListTable />} />
-      <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
-      <Route path="/employee-profile" element={<EmployeeProfilePage />} />
-      <Route path="/notification" element={<NotificationScreen />} />
-      <Route path="/biometric-capture" element={<BiometricScreen />} />
 
-      <Route path="/typology" element={<SelectTypography />} />
-      <Route path="/profile" element={<SupervisorProfile />} />
-      <Route path="/attendance" element={<TakeAttendance />} />
-      <Route path="/attendance-report" element={<AttendanceReportUpload />} />
+      <Route path="supervisor/*" element={<SupervisorHome />} />
 
       <Route path="/admin" element={<AdminWelcomeScreen />} />
       <Route path="/admin-login" element={<AdminLoginScreen />} />
-      <Route
-        path="/admin-create-account"
-        element={<CreateAdminAccountScreen />}
-      />
       <Route
         path="/admin-forgot-password"
         element={<AdminForgottenPassword />}
@@ -96,4 +70,4 @@ function RoutingPage({ user }) {
     </div>
   );
 }
-export default RoutingPage;
+export default RoutingPage

@@ -8,14 +8,16 @@ import ReusableHeader from "../../../component/reusable/reusableheader/ReusableH
 import SendRequestModal from "../../../component/reusable/modalscontent/SendRequestModal";
 import supervisor from "../../../class/supervisor.class";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function EmployeeProfilePage() {
   // const user = userData.user[0];
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
+  const location = useLocation()
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalType, setModalType] = useState("");
-  const userData = location.state;
+  const [modalType, setModalType] = useState('');
+  const userData = location.state
+  const { offline } = useSelector((state) => state?.user)
 
   const personalInfo = [
     { label: "Full Name", value: userData?.fullName },
@@ -118,50 +120,7 @@ export default function EmployeeProfilePage() {
             information={otherInfo}
           />
         </div>
-
-        <div className="d-flex mt-2">
-          {/* <button onClick={openModal} className="btn request-edit mt-5 ">Request Edit Access</button>
-                    <button onClick={openModal} className="btn delete-user mt-5 mx-4">Delete Employee</button> */}
-
-          <button
-            onClick={() => openModal("edit")}
-            className="btn request-edit mt-5 "
-          >
-            Request Edit Access
-          </button>
-          <button
-            onClick={() => openModal("delete")}
-            className="btn delete-user mt-5 mx-4"
-          >
-            Delete Employee
-          </button>
-        </div>
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        className={{
-          base: "modal-base",
-          afterOpen: "modal-base_after-open",
-          beforeClose: "modal-base_before-close",
-        }}
-        overlayClassName={{
-          base: "overlay-base",
-          afterOpen: "overlay-base_after-open",
-          beforeClose: "overlay-base_before-close",
-        }}
-        shouldCloseOnOverlayClick={true}
-        closeTimeoutMS={2000}
-      >
-        <SendRequestModal
-          closeModal={closeModal}
-          action={supervisorRequest}
-          actionType={modalType}
-          isLoading={isLoading}
-        />
-      </Modal>
     </div>
   );
 }
