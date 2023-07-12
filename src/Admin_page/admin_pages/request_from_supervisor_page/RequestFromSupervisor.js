@@ -6,7 +6,7 @@ import DeleteRequestTab from "./request_tab_content/DeleteRequestTab";
 import AddRequestTab from "./request_tab_content/AddRequestTab";
 
 export default function RequestFromSupervisor() {
-  const [activeTab, setActiveTab] = useState("tab1");
+  const [activeTab, setActiveTab] = useState("delete_request");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -16,27 +16,29 @@ export default function RequestFromSupervisor() {
     <div className="supervisor-request">
       <div className="tab-buttons">
         <button
-          className={activeTab === "tab1" ? "current" : ""}
-          onClick={() => handleTabClick("tab1")}
+          className={activeTab === "delete_request" ? "current" : ""}
+          onClick={() => handleTabClick("delete_request")}
         >
           Delete Employee Request
         </button>
         <button
-          className={activeTab === "tab2" ? "current" : ""}
-          onClick={() => handleTabClick("tab2")}
+          className={activeTab === "edit_request" ? "current" : ""}
+          onClick={() => handleTabClick("edit_request")}
         >
           Profile Edit Request
         </button>
         <button
-          className={activeTab === "tab3" ? "current" : ""}
-          onClick={() => handleTabClick("tab3")}
+          className={activeTab === "add_request" ? "current" : ""}
+          onClick={() => handleTabClick("add_request")}
         >
           Add Employee Request
         </button>
       </div>
-      {activeTab === "tab1" && <DeleteRequestTab />}
-      {activeTab === "tab2" && <EditRequestTab />}
-      {activeTab === "tab3" && <AddRequestTab />}
+      {activeTab === "delete_request" && (
+        <DeleteRequestTab />
+      )}
+      {activeTab === "edit_request" && <EditRequestTab />}
+      {activeTab === "add_request" && <AddRequestTab />}
     </div>
   );
 }

@@ -46,6 +46,7 @@ const router = createBrowserRouter(
 
       <Route path="/admin" element={<AdminWelcomeScreen />} />
       <Route path="/admin-login" element={<AdminLoginScreen />} />
+
       <Route
         path="/admin-forgot-password"
         element={<AdminForgottenPassword />}

@@ -9,7 +9,7 @@ import RequestFromSupervisor from "../request_from_supervisor_page/RequestFromSu
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
-  const [selectedComponent, setSelectedComponent] = useState("employee");
+  const [selectedComponent, setSelectedComponent] = useState("requests");
 
   const handleComponentClick = (component) => {
     setSelectedComponent(component);

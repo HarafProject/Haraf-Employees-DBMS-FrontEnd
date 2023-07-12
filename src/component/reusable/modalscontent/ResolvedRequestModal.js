@@ -2,31 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./modalscreen.css";
 
-export default function ViewRequestModal({
-  closeModal,
-  activeTabButton,
-  openSnackBar,
-}) {
+export default function ResolvedRequestModal({ closeModal, activeTabButton }) {
   const [modalText, setModalText] = useState("");
   const [modalMessage, setModalMessage] = useState("");
 
-  const declineRequest = () => {
-    closeModal();
-    openSnackBar();
-  };
 
-  console.log(activeTabButton);
 
   useEffect(() => {
     if (activeTabButton === "add") {
-      setModalText("Add Employee Request");
+      setModalText("Add Profile Request");
+       setModalMessage(
+         "Request to Add Kadwama Lazarus as an LIPWDMS Employee"
+       );
     } else if (activeTabButton === "delete") {
-      setModalText("Delete Employee Request");
+      setModalText("Delete Profile Request");
       setModalMessage(
         "Request to delete Kadwama Lazarus as an LIPWDMS Employee"
       );
-      console.log(activeTabButton === "delete");
     } else if (activeTabButton === "edit") {
+      setModalMessage(
+        "Request to Edit Kadwama Lazarus as an LIPWDMS Employee"
+      );
       setModalText("Edit Profile Request");
     }
   }, [activeTabButton]);
@@ -56,19 +52,9 @@ export default function ViewRequestModal({
               Date: <span>17th July 2023</span>
             </p>
           </div>
-          <div className="d-flex">
-            <button
-              className="btn modal-button delete-request"
-              onClick={declineRequest}
-            >
-              Decline Request
-            </button>
-            <button
-              className="btn modal-button delete-request"
-              onClick={closeModal}
-            >
-              Approve Request
-            </button>
+          <div className="approved mt-4">
+           <h3 className="my-2"> Request Declined & Resolved</h3>
+           <p>By Jeremiah Adu (Super Admin 2)</p>
           </div>
         </div>
       </div>
