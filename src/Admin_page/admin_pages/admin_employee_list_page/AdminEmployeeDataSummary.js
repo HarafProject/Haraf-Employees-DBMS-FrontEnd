@@ -1,10 +1,10 @@
 import "./adminEmployeeDataSummary.css";
 
-export default function AdminEmployeeList() {
+export default function AdminEmployeeList({ supervisors }) {
   return (
     <section className="d-flex align-items-center justify-content-between">
       <div className="card">
-        <h1 className="number">6300</h1>
+        <h1 className="number">{supervisors.length}</h1>
         <p>Total Employees</p>
       </div>
       <div className="card">

@@ -122,7 +122,7 @@ class superOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post(
-          "api/superadmin/filter-by-work-topologyy",
+          "api/superadmin/filter-by-work-topology",
           data
         );
         console.log(response);
@@ -140,16 +140,24 @@ class superOBJ {
     try {
       //check if data is empty
       if (data) {
-        const response = await api.post(
-          "api/superadmin/search",
-          data
-        );
+        const response = await api.post("api/superadmin/search", data);
         console.log(response);
         return response;
         //store res data
       } else {
         throw new Error("please fill in the fields");
       }
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+   //get ward
+  getWard = async () => {
+    try {
+      //check if data is empty
+      const { data } = await api.get("api/superadmin/all-ward");
+
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }

@@ -179,6 +179,7 @@ class supervisorOBJ {
       throw err?.response?.data;
     }
   };
+ 
 }
 
 const supervisor = new supervisorOBJ();
