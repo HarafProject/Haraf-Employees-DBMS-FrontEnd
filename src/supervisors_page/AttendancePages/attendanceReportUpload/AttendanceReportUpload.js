@@ -8,6 +8,8 @@ import moment from 'moment';
 import { RotatingLines } from "react-loader-spinner";
 import supervisor from '../../../class/supervisor.class';
 import { updateAttendance, attendanceWards } from '../../../redux/reducers/attendanceReducer';
+import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkModal';
+import Modal from 'react-modal';
 
 export default function AttendanceReportUpload() {
   const navigate = useNavigate()
@@ -17,7 +19,16 @@ export default function AttendanceReportUpload() {
   const [attendanceComment, setAttendanceComment] = useState(null)
   const [lateSubmissionReason, setlateSubmissionReason] = useState("")
   const [isLoading, setIsLoading] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const openModal = () => { // Modify openModal function
+    setIsOpen(true);
+  };
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   useEffect(() => {
 
@@ -61,11 +72,16 @@ export default function AttendanceReportUpload() {
       toast.success(message)
       dispatch(updateAttendance({}))
       dispatch(attendanceWards([]))
-      navigate("/supervisor/attendance",{replace:true})
+      navigate("/supervisor/attendance", { replace: true })
     } catch (error) {
       console.log(error)
-      toast.error(error)
-      toast.error(error?.error)
+      if (error === "You are currently offline.") {
+        openModal()
+      } else {
+        toast.error(error)
+        toast.error(error?.error)
+      }
+
     } finally {
       setIsLoading(false)
     }
@@ -147,6 +163,30 @@ export default function AttendanceReportUpload() {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        className={{
+          base: 'modal-base',
+          afterOpen: 'modal-base_after-open',
+          beforeClose: 'modal-base_before-close'
+        }}
+        overlayClassName={{
+          base: 'overlay-base',
+          afterOpen: 'overlay-base_after-open',
+          beforeClose: 'overlay-base_before-close'
+        }}
+        shouldCloseOnOverlayClick={true}
+        closeTimeoutMS={2000}
+      >
+
+        <NoNetworkModal
+          closeModal={closeModal}
+        />
+
+      </Modal>
     </section>
   )
 }

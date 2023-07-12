@@ -19,7 +19,11 @@ class supervisorOBJ {
 
       return data;
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
 
@@ -67,7 +71,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //get work typology
@@ -93,8 +101,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      console.log(err)
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //get all employee
@@ -104,7 +115,11 @@ class supervisorOBJ {
       const { data } = await api.get("api/supervisor/employee");
       return data;
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //new employee request
@@ -122,7 +137,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //delete employee request
@@ -140,7 +159,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //edit employee request
@@ -158,12 +181,16 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
 
   //delete employee
-  deleteEmployee = async (data,notificationId) => {
+  deleteEmployee = async (data, notificationId) => {
     try {
       //check if data is empty
       if (data) {
@@ -175,7 +202,11 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
     }
   };
   //submit attendance
@@ -190,7 +221,13 @@ class supervisorOBJ {
         throw new Error("please fill in the fields");
       }
     } catch (err) {
-      throw err?.response?.data;
+
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
+
     }
   };
 }

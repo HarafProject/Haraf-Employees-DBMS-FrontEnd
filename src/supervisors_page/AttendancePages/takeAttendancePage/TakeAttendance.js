@@ -14,9 +14,10 @@ export default function TakeAttendance() {
   const { attendance } = useSelector((state) => state?.attendance)
   const isSaved = location?.state
   const dispatch = useDispatch();
+  const { offline } = useSelector((state) => state?.user)
 
   useEffect(() => {
-    
+
     if (!attendance.date) navigate('/supervisor/wards')
     setAttendanceData(attendance)
 
@@ -24,10 +25,21 @@ export default function TakeAttendance() {
 
 
   function handleSubmit() {
-    navigate('/supervisor/attendance-report')
+   
+    if (offline) {
+
+      if (attendance.saved) return alert("Attendance Saved")
+      if (!window.confirm("Are you sure you want to save report. Once saved attendance cannot be editied.")) return
+      dispatch(updateAttendance({ ...attendance, saved: true }));
+      alert("Attendance Saved Successfully.")
+
+    } else {
+      navigate('/supervisor/attendance-report')
+    }
+
   }
   function handleDiscard() {
-    if(!window.confirm("Are you sure you want to discard this report?")) return
+    if (!window.confirm("Are you sure you want to discard this report?")) return
     dispatch(updateAttendance({}))
     dispatch(attendanceWards([]))
     navigate("/supervisor/wards", { replace: true })
@@ -56,18 +68,25 @@ export default function TakeAttendance() {
         />
         <div className='d-flex center-container'>
           {
-            isSaved && <button className='center-button mr-3' onClick={handleDiscard}>
+            (isSaved || attendance.saved) && <button className='center-button mr-3' onClick={handleDiscard}>
               Discard Report
             </button>
           }
 
+          {
+            !offline ? <button
+              className='center-button'
+              onClick={handleSubmit}
+            >
+              Send Report
+            </button> : <button
+              className='center-button'
+              onClick={handleSubmit}
+            >
+              Save Report
+            </button>
+          }
 
-          <button
-            className='center-button'
-            onClick={handleSubmit}
-          >
-            Send Report
-          </button>
         </div>
       </div>
     </section>

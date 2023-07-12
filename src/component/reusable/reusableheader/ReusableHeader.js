@@ -15,17 +15,18 @@ const ReusableHeader = () => {
   const handleClick = () => {
     setClicked(!clicked);
   };
+  const { offline } = useSelector((state) => state?.user)
 
   const closeMobileMenu = () => setClicked(false);
-function logout(params) {
-  dispatch(logoutSuccess())
-  dispatch(clearToken())
-  dispatch(updateAttendance({}))
-  dispatch(updateEmployees([]))
-  dispatch(updateWards([]))
-  dispatch(attendanceWards([]))
+  function logout(params) {
+    dispatch(logoutSuccess())
+    dispatch(clearToken())
+    dispatch(updateAttendance({}))
+    dispatch(updateEmployees([]))
+    dispatch(updateWards([]))
+    dispatch(attendanceWards([]))
 
-}
+  }
 
   return (
     <div className="container-fluid header-section px-4 py-2" >
@@ -42,7 +43,10 @@ function logout(params) {
           <li> <NavLink to='/supervisor/wards' onClick={closeMobileMenu}>Take Attendance</NavLink> </li>
           <li> <NavLink to='/supervisor/profile' onClick={closeMobileMenu}>Supervisor's Profile</NavLink> </li>
           <li> <NavLink to='/supervisor/notification' onClick={closeMobileMenu}>Notifications</NavLink> </li>
-          <li> <NavLink to='/' onClick={logout}>Logout</NavLink> </li>
+          <li>
+            {offline ? <p>Offline</p> : <NavLink to='/' onClick={logout}>Logout</NavLink>
+            }
+          </li>
         </ul>
         <div className="hamburger-icon" onClick={handleClick}>
           <Icon icon={clicked ? "jam:close" : "ci:menu-alt-02"} className={clicked ? "close" : "bar"} />

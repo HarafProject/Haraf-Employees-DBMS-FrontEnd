@@ -14,6 +14,7 @@ import Modal from 'react-modal';
 import { RotatingLines } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWards } from '../../../redux/reducers/employeeReducer';
+import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkModal';
 
 export default function AddEmployeeScreen({ prefilledData }) {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
     const inputRef = useRef(null);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
-
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
 
     function openModal() {
         setIsOpen(true);
@@ -52,8 +53,14 @@ export default function AddEmployeeScreen({ prefilledData }) {
             const bank_list = await supervisor.getBankList();
             setbankList(bank_list.banks)
         } catch (error) {
-            toast.error(error)
-            toast.error(error.error)
+            if (error === "You are currently offline.") {
+                setIsOnline(false)
+                openModal()
+            } else {
+                toast.error(error)
+                toast.error(error.error)
+            }
+
         }
 
     }
@@ -63,7 +70,6 @@ export default function AddEmployeeScreen({ prefilledData }) {
             setWardList(ward_list)
             dispatch(updateWards(ward_list))
         } catch (error) {
-           
             toast.error(error)
             toast.error(error?.error)
         }
@@ -101,14 +107,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
             inputRef.current.focus();
 
         } catch (error) {
-            console.log(error)
-            setBankDetails({
-                ...bankDetail,
-                accountName: ""
-            })
-            setIsVerified(false)
-            toast.error(error)
-            toast.error(error?.error)
+            if (error === "You are currently offline.") {
+                setIsOnline(false)
+                openModal()
+            } else {
+                setBankDetails({
+                    ...bankDetail,
+                    accountName: ""
+                })
+                setIsVerified(false)
+                toast.error(error)
+                toast.error(error?.error)
+            }
+
         }
 
     }
@@ -165,10 +176,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
                 navigate("/supervisor/employee-list", { replace: true, state: { display: true } })
 
             } catch (error) {
-                setIsLoading(false)
-                toast.error(error)
-                toast.error(error?.error)
-                console.error('Form submission error:', error);
+
+                if (error === "You are currently offline.") {
+                    setIsOnline(false)
+                    openModal()
+                } else {
+                    setBankDetails({
+                        ...bankDetail,
+                        accountName: ""
+                    })
+                    setIsVerified(false)
+                    toast.error(error)
+                    toast.error(error?.error)
+                }
             }
         },
     });
@@ -409,11 +429,20 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         shouldCloseOnOverlayClick={true}
                         closeTimeoutMS={2000}
                     >
+                        {
+                            !isOnline && <NoNetworkModal
+                                closeModal={closeModal}
+                            />
+                        }
+                        {
+                            isOnline &&
+                            <>
+                                <Webcam audio={false} ref={webcamRef} mirrored={true} />
+                                <button className="profile-img camera" onClick={handleCapture}>
+                                    <Icon icon="heroicons-solid:camera" className='camera-icon' />
+                                </button></>
+                        }
 
-                        <Webcam audio={false} ref={webcamRef} mirrored={true} />
-                        <button className="profile-img camera" onClick={handleCapture}>
-                            <Icon icon="heroicons-solid:camera" className='camera-icon' />
-                        </button>
                     </Modal>
 
 

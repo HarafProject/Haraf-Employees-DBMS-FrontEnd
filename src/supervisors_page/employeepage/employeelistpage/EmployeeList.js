@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query'
 import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Paper, Avatar, TablePagination } from '@mui/material';
 import { Icon } from '@iconify/react';
@@ -15,13 +15,21 @@ import supervisor from "../../../class/supervisor.class";
 import { toast } from "react-toastify";
 
 
-const fetchEmployees = async (key) => {
+const fetchEmployees = async (key, offline) => {
+   
     try {
+        if (offline) {
+            return "offline"
+        } else {
+            const res = await supervisor.getAllEmployee()
+            return res
+        }
 
-        const res = await supervisor.getAllEmployee()
-        return res
 
     } catch (error) {
+        if(error==="You are currently offline."){
+            return "offline"
+        }
         toast.error(error?.error);
     }
 };
@@ -36,21 +44,27 @@ export default function EmployeeListTable() {
     const [modalType, setModalType] = useState('');
     const [usersData, setUsersData] = useState([])
     const [isLoading, setIsLoading] = useState(false);
-    const { user } = useSelector((state) => state?.user)
+    const { user, offline } = useSelector((state) => state?.user)
+    const { employees } = useSelector((state) => state?.employee)
 
     const display = location.state
 
 
     // React query fecth data
-    const { data, status } = useQuery(['fetchEmployees'], fetchEmployees)
+    const { data, status } = useQuery(['fetchEmployees', offline], fetchEmployees)
 
     useEffect(() => {
         if (!data) return
-        
-        if (data.employees.length === 0 && !display) return navigate("/supervisor/employee-list-empty", { replace: true })
-        setUsersData(data.employees)
-        localStorage.removeItem("HARAF-AUTH");
-        dispatch(updateEmployees(data.employees))
+        if (data === "offline") {
+            setUsersData(employees)
+        } else {
+            if (data.employees.length === 0 && !display) return navigate("/supervisor/employee-list-empty", { replace: true })
+            setUsersData(data.employees)
+            localStorage.removeItem("HARAF-AUTH");
+            dispatch(updateEmployees(data.employees))
+        }
+
+
     }, [data])
 
     const handleChangePage = (event, newPage) => {
@@ -121,7 +135,7 @@ export default function EmployeeListTable() {
                                 <TableBody>
                                     {usersData?.map((user, index) => (
 
-                                        <TableRow onClick={() => navigate(`/employee-profile`, { state: user })} style={{ cursor: "pointer" }}>
+                                        <TableRow onClick={() => navigate(`/supervisor/employee-profile`, { state: user })} style={{ cursor: "pointer" }}>
                                             <TableCell>{index + 1}</TableCell>
                                             <TableCell>
                                                 <Avatar alt={user.fullName} src={user?.photo} />
@@ -147,11 +161,15 @@ export default function EmployeeListTable() {
                         </TableContainer>
                     </div>
                     <div>
+                        {
+                            !offline &&
+                            <button className="floating-button" onClick={() => user.operation === "super" ? navigate("/supervisor/add-employee") : openModal(() => 'add')}>
+                                <Icon icon="icon-park-outline:add-one" />
+                                <span>Add Employee</span>
+                            </button>
+                        }
 
-                        <button className="floating-button" onClick={() => user.operation === "super" ? navigate("/supervisor/add-employee") : openModal(() => 'add')}>
-                            <Icon icon="icon-park-outline:add-one" />
-                            <span>Add Employee</span>
-                        </button>
+
 
 
 

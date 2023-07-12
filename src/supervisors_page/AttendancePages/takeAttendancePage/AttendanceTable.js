@@ -15,7 +15,7 @@ import './takeAttendance.css'
 import { useDispatch, useSelector } from "react-redux";
 import { updateAttendance, attendanceRecord } from '../../../redux/reducers/attendanceReducer'
 
-export default function AttendanceTable({ attendance, setAttendanceData }) {
+export default function AttendanceTable({ attendance }) {
 
   const [record, setRecord] = useState([])
   const [markAttendance, setMarkAttendance] = useState({})
@@ -48,7 +48,7 @@ export default function AttendanceTable({ attendance, setAttendanceData }) {
     setRecord(updatedRecord);
     setFireDispatch(true);
   }
-  
+
 
 
 
@@ -84,7 +84,7 @@ export default function AttendanceTable({ attendance, setAttendanceData }) {
                 <Typography variant='body2'>{row.workTypology?.name} Typography - {row.ward?.name} Ward</Typography>
               </TableCell>
               <TableCell>
-                <div className='d-flex align-items-center' onClick={() => handleTick("Present", index)}>
+                <div className='d-flex align-items-center' onClick={() => attendance.saved ? null : handleTick("Present", index)}>
                   <p className={row.status === "Present" ? 'checked-box' : 'empty-checkbox'}>
                     Present
                   </p>
@@ -95,7 +95,7 @@ export default function AttendanceTable({ attendance, setAttendanceData }) {
                 </div>
               </TableCell>
               <TableCell>
-                <div className='d-flex align-items-center' onClick={() => handleTick("Absent", index)}>
+                <div className='d-flex align-items-center' onClick={() => attendance.saved ? null : handleTick("Absent", index)}>
                   <p className={row.status === "Absent" ? 'checked-box' : 'empty-checkbox'}>
                     Absent
                   </p>
@@ -109,6 +109,6 @@ export default function AttendanceTable({ attendance, setAttendanceData }) {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer >
   )
 }
