@@ -15,8 +15,8 @@ api.interceptors.request.use(
   config => {
 
     // Get the JWT token from local storage
-    const auth_token = localStorage.getItem('persist:root')
-      ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth).token
+    const auth_token = localStorage.getItem("HARAF-AUTH") ? localStorage.getItem("HARAF-AUTH") : localStorage.getItem('persist:root')
+      ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
       : undefined;
 
     if (auth_token) {

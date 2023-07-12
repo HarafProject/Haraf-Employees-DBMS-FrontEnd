@@ -9,37 +9,62 @@ import {
   Typography,
 } from '@mui/material'
 import tableData from './tableData'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 import './takeAttendance.css'
+import { useDispatch, useSelector } from "react-redux";
+import { updateAttendance, attendanceRecord } from '../../../redux/reducers/attendanceReducer'
 
-export default function AttendanceTable() {
-  const [isPresent, setIsPresent] = useState(tableData)
-  const [isAbsent, setIsAbsent] = useState(tableData)
-  const [icon, setIcon] = useState('mdi:checkbox-outline')
-  const [iconIsAbsent, setIconIsAbsent] = useState('mdi:checkbox-outline')
+export default function AttendanceTable({ attendance, setAttendanceData }) {
 
-  function handlePresent(event, checkboxId) {
-    const updatedCheckboxes = isPresent.map(function (checkbox) {
-      console.log(checkbox.id === checkboxId)
+  const [record, setRecord] = useState([])
+  const [markAttendance, setMarkAttendance] = useState({})
+  const [fireDispatch, setFireDispatch] = useState(false)
+  const { user } = useSelector((state) => state?.user)
+  const dispatch = useDispatch();
 
-      if (checkbox.id === checkboxId) {
-        return { ...checkbox, isPresent: false }
-      } else {
-        return ''
+  useEffect(() => {
+    setRecord(attendance.data)
+  }, [attendance])
+
+  function handleTick(value, index) {
+    let updatedRecord = record.map((item, i) => {
+      if (i === index) {
+        const updatedAttempt = item.attempt ? [...item.attempt] : [];
+        return {
+          ...item,
+          status: value,
+          attempt: [
+            ...updatedAttempt,
+            {
+              status: value,
+              date: new Date()
+            }
+          ]
+        };
       }
-    })
-    setIsPresent(updatedCheckboxes)
-    setIcon(!icon)
+      return item;
+    });
+    setRecord(updatedRecord);
+    setFireDispatch(true);
   }
-  const handleAbsent = (event, checkboxId) => {
-    const updatedCheckboxes = isAbsent.map((checkbox) =>
-      checkbox.id === checkboxId
-        ? { ...checkbox, checked: event.target.checked }
-        : checkbox
-    )
-    setIsAbsent(updatedCheckboxes)
-    setIconIsAbsent(!iconIsAbsent)
+  
+
+
+
+
+
+  useEffect(() => {
+    if (fireDispatch) {
+
+      // dispatch(attendanceRecord(markAttendance));
+      dispatch(updateAttendance({ date: attendance.date, data: record }));
+      setFireDispatch(false);
+    }
+  }, [fireDispatch, dispatch, markAttendance]);
+
+  function handleSubmit(params) {
+    // Handle form submission if needed
   }
 
   return (
@@ -49,56 +74,34 @@ export default function AttendanceTable() {
     >
       <Table>
         <TableBody>
-          {isPresent.map((row, index) => (
+          {record?.map((row, index) => (
             <TableRow key={index}>
               <TableCell>
-                <Avatar alt='Avatar' src={row.image} />
+                <Avatar alt='Avatar' src={row.photo} />
               </TableCell>
               <TableCell>
-                <Typography variant='subtitle2'>{row.name}</Typography>
-                <Typography variant='body2'>{row.role}</Typography>
+                <Typography variant='subtitle2'>{row.fullName}</Typography>
+                <Typography variant='body2'>{row.workTypology?.name} Typography - {row.ward?.name} Ward</Typography>
               </TableCell>
               <TableCell>
-                <div className='d-flex align-items-center'>
-                  <p className={icon ? 'empty-checkbox' : 'checked-box'}>
+                <div className='d-flex align-items-center' onClick={() => handleTick("Present", index)}>
+                  <p className={row.status === "Present" ? 'checked-box' : 'empty-checkbox'}>
                     Present
                   </p>
                   <Icon
-                    onClick={(event) => handlePresent(event, row.id)}
-                    icon={
-                      icon
-                        ? 'mdi:checkbox-blank-outline'
-                        : 'mdi:checkbox-marked'
-                    }
-                    className={
-                      icon
-                        ? 'empty-checkbox table-icon'
-                        : 'checked-box table-icon'
-                    }
+                    icon={row.status === "Present" ? 'mdi:checkbox-marked' : 'mdi:checkbox-blank-outline'}
+                    className={row.status === "Present" ? 'checked-box table-icon' : 'empty-checkbox table-icon'}
                   />
                 </div>
               </TableCell>
               <TableCell>
-                <div
-                  className='d-flex align-items-center'
-                  onClick={(event) => handleAbsent(event, row.id)}
-                >
-                  <p
-                    className={iconIsAbsent ? 'empty-checkbox' : 'checked-box'}
-                  >
+                <div className='d-flex align-items-center' onClick={() => handleTick("Absent", index)}>
+                  <p className={row.status === "Absent" ? 'checked-box' : 'empty-checkbox'}>
                     Absent
                   </p>
                   <Icon
-                    icon={
-                      iconIsAbsent
-                        ? 'mdi:checkbox-blank-outline'
-                        : 'mdi:cancel-box-outline'
-                    }
-                    className={
-                      iconIsAbsent
-                        ? 'empty-checkbox table-icon'
-                        : 'checked-red table-icon'
-                    }
+                    icon={row.status === "Absent" ? 'mdi:cancel-box-outline' : 'mdi:checkbox-blank-outline'}
+                    className={row.status === "Absent" ? 'checked-red table-icon' : 'empty-checkbox table-icon'}
                   />
                 </div>
               </TableCell>

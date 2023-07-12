@@ -13,7 +13,6 @@ const userSlice = createSlice({
       };
     },
     logoutSuccess: (state) => {
-      localStorage.clear();
       return {
         ...state,
         user: null,

@@ -29,7 +29,8 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   useEffect(() => {
     fetchWards()
     fetchTypology()
-  }, [])
+    setTempData(allData)
+  }, [allData])
 
   function handleFilter(e) {
     if (e.target.name === "workTypology") {

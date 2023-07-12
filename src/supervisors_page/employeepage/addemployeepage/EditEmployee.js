@@ -210,7 +210,7 @@ export default function EditEmployeeScreen() {
 
                 toast.success(message)
                 setIsLoading(false)
-                navigate("/employee-profile", { state: updatedEmployee, replace: true })
+                navigate("/supervisor/employee-profile", { state: updatedEmployee, replace: true })
 
             } catch (error) {
                 setIsLoading(false)

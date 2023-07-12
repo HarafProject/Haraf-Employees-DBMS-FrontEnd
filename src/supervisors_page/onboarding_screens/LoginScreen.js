@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/reducers/userReducer";
 import { setToken } from "../../redux/reducers/jwtReducer";
 import { RotatingLines } from "react-loader-spinner";
+import { updateWards } from "../../redux/reducers/employeeReducer";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
@@ -54,12 +55,13 @@ export default function LoginScreen() {
       auth
         .login(data)
         .then((res) => {
-          console.log(res);
           toast.success(res?.data?.message);
+          localStorage.setItem("HARAF-AUTH", res?.data?.token)
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
+          dispatch(updateWards(res?.data.wards))
           //redirect to emp
-          navigate("/employee-list", { replace: true })
+          navigate("/supervisor", { replace: true })
           setIsLoading(false);
         })
         .catch((err) => {

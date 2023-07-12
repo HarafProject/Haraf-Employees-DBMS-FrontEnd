@@ -3,24 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 const employeeSlice = createSlice({
     name: "employee",
     initialState: {
-        data: [],
+        employees: [],
+        wards:[]
     },
     reducers: {
         updateEmployees: (state, action) => {
             return {
                 ...state,
-                data: action.payload,
+                employees: action.payload,
             };
         },
-        // logoutSuccess: (state) => {
-        //     localStorage.clear();
-        //     return {
-        //         ...state,
-        //         user: null,
-        //     };
-        // },
+        updateWards: (state, action) => {
+            return {
+                ...state,
+                wards: action.payload,
+            };
+        },
+
     },
 });
 
-export const { updateEmployees } = employeeSlice.actions;
+export const { updateEmployees,updateWards } = employeeSlice.actions;
 export default employeeSlice.reducer;

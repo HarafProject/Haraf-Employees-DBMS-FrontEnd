@@ -53,11 +53,11 @@ export default function EmployeeProfilePage() {
         try {
             setIsLoading(true)
             if (modalType === "edit") {
-                const { message } = await supervisor.editEmployeeRequest({ reason, employeeId:userData._id })
+                const { message } = await supervisor.editEmployeeRequest({ reason, employeeId: userData._id })
                 toast.success(message)
 
             } else {
-                const { message } = await supervisor.deleteEmployeeRequest({ reason })
+                const { message } = await supervisor.deleteEmployeeRequest({ reason, employeeId: userData._id })
                 toast.success(message)
             }
 
@@ -79,7 +79,10 @@ export default function EmployeeProfilePage() {
                     Back to list
                 </div>
                 <div className="d-flex align-item-start  profile-info-summary">
-                    <img src={userData?.photo} alt="" />
+                    <div>
+                        <img src={userData?.photo} alt="" />
+                    </div>
+
                     <div className="d-flex my-3">
                         <div className="names mx-5">
                             <h4>{userData?.fullName}</h4>

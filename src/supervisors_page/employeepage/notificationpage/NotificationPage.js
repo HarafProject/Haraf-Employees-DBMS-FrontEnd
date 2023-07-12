@@ -27,13 +27,14 @@ export default function NotificationScreen() {
     const { data, status } = useQuery(['fetchNotifications'], fetchNotifications)
     const [notificationList, setNotificationList] = useState([])
     const [reason, setReason] = useState(null)
+    const [employeeToDelete, setEmployeeToDelete] = useState({})
 
     useEffect(() => {
         if (!data) return
 
         let notice = []
         for (let i = 0; i < data.notifications.length; i++) {
-
+            console.log(data.notifications[i])
             if (data.notifications[i].request?.type === "add-employee") {
 
                 notice.push({
@@ -49,16 +50,17 @@ export default function NotificationScreen() {
                     buttonType: data.notifications[i].request?.status === "declined" ? "View Reason" : data.notifications[i]?.actionTaken ? "Completed" : "Edit",
                     date_time: data.notifications[i]?.createdAt,
                     reason: data.notifications[i]?.reason,
-                    employee: data.notifications[i]?.request?.employee,
+                    employee: data.notifications[i]?.request?.employee?._id,
                     notificationId: data.notifications[i]?._id
                 })
             } else {
                 notice.push({
                     message: `Request to delete beneficiary has been ${data.notifications[i]?.request?.status}.`,
-                    buttonType: data.notifications[i].request?.status === "declined" ? "View Reason" : "Delete",
+                    buttonType: data.notifications[i].request?.status === "declined" ? "View Reason" : data.notifications[i]?.actionTaken ? "Completed" : "Delete",
                     date_time: data.notifications[i]?.createdAt,
                     reason: data.notifications[i]?.reason,
-                    employee: data.notifications[i]?.request?.employee,
+                    employee: data.notifications[i]?.request?.employee?._id,
+                    employeeName: data.notifications[i]?.request?.employee?.fullName,
                     notificationId: data.notifications[i]?._id
                 })
             }
@@ -82,10 +84,15 @@ export default function NotificationScreen() {
         if (buttonType === 'Add') {
             setSelectedNotification(null);
             setIsOpen(false);
-            navigate('/add-employee');
+            navigate('/supervisor/add-employee');
 
         } else if (buttonType === 'Delete') {
             setSelectedNotification(notification);
+            setEmployeeToDelete({
+                notification: notificationList[notification].notificationId,
+                name: notificationList[notification].employeeName,
+                id: notificationList[notification].employee
+            })
             setIsOpen(true);
 
 
@@ -93,7 +100,7 @@ export default function NotificationScreen() {
             setSelectedNotification(notification);
             setIsOpen(false);
 
-            navigate('/edit-employee',
+            navigate('/supervisor/edit-employee',
                 {
                     state: {
                         employee: notificationList[notification].employee,
@@ -170,7 +177,10 @@ export default function NotificationScreen() {
                                 closeModal={closeModal}
                                 modalTitle={"Admin Decline Reason"} />
                             :
-                            < DeleteEmployeeSuccessModal closeModal={() => setIsOpen(false)} />
+                            < DeleteEmployeeSuccessModal
+                                closeModal={() => setIsOpen(false)}
+                                employee={employeeToDelete}
+                            />
                     }
 
                 </Modal>

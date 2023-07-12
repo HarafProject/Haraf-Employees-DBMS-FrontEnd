@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query'
 import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Paper, Avatar, TablePagination } from '@mui/material';
 import { Icon } from '@iconify/react';
 import Modal from 'react-modal';
-// import usersData from '../../../component/data/EmployeesData';
+import { updateEmployees } from '../../../redux/reducers/employeeReducer';
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader';
 import EmployeeTableFilterOption from '../../../component/reusable/tablefilteroptions/EmployeesFilterOptions';
 import SendRequestModal from '../../../component/reusable/modalscontent/SendRequestModal';
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import supervisor from "../../../class/supervisor.class";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+
 
 const fetchEmployees = async (key) => {
     try {
@@ -26,6 +26,8 @@ const fetchEmployees = async (key) => {
     }
 };
 export default function EmployeeListTable() {
+    const location = useLocation()
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [page, setPage] = useState(0);
@@ -35,17 +37,20 @@ export default function EmployeeListTable() {
     const [usersData, setUsersData] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useSelector((state) => state?.user)
-   
+
+    const display = location.state
+
+
     // React query fecth data
     const { data, status } = useQuery(['fetchEmployees'], fetchEmployees)
 
     useEffect(() => {
         if (!data) return
-        if (data.employees.length === 0) {
-            navigate("/employee-list-empty", { replace: true })
-        }
-
+        
+        if (data.employees.length === 0 && !display) return navigate("/supervisor/employee-list-empty", { replace: true })
         setUsersData(data.employees)
+        localStorage.removeItem("HARAF-AUTH");
+        dispatch(updateEmployees(data.employees))
     }, [data])
 
     const handleChangePage = (event, newPage) => {
@@ -67,7 +72,7 @@ export default function EmployeeListTable() {
     }
 
     async function supervisorRequest(reason) {
-        if(!reason) return toast.error("Please enter a reason for your request.")
+        if (!reason) return toast.error("Please enter a reason for your request.")
 
         try {
             setIsLoading(true)
@@ -143,7 +148,7 @@ export default function EmployeeListTable() {
                     </div>
                     <div>
 
-                        <button className="floating-button" onClick={() => user.operation==="super"? navigate("/add-employee"):openModal(() => 'add')}>
+                        <button className="floating-button" onClick={() => user.operation === "super" ? navigate("/supervisor/add-employee") : openModal(() => 'add')}>
                             <Icon icon="icon-park-outline:add-one" />
                             <span>Add Employee</span>
                         </button>
