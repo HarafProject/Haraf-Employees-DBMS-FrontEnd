@@ -5,14 +5,20 @@ import "./modalscreen.css";
 export default function ViewRequestModal({
   closeModal,
   activeTabButton,
-  openSnackBar,
+  openDeclineSnackBar,
+  openApproveSnackBar,
 }) {
   const [modalText, setModalText] = useState("");
   const [modalMessage, setModalMessage] = useState("");
 
   const declineRequest = () => {
     closeModal();
-    openSnackBar();
+    openDeclineSnackBar();
+  };
+
+  const approveRequest = () => {
+    closeModal();
+    openApproveSnackBar();
   };
 
   console.log(activeTabButton);
@@ -20,14 +26,15 @@ export default function ViewRequestModal({
   useEffect(() => {
     if (activeTabButton === "add") {
       setModalText("Add Employee Request");
+      setModalMessage("Request add new employee to LIPWDMS ");
     } else if (activeTabButton === "delete") {
       setModalText("Delete Employee Request");
       setModalMessage(
-        "Request to delete Kadwama Lazarus as an LIPWDMS Employee"
+        "Request to delete Kadwama Lazarus as an LIPWDMS employeee"
       );
-      console.log(activeTabButton === "delete");
     } else if (activeTabButton === "edit") {
       setModalText("Edit Profile Request");
+      setModalMessage("Request to edit Kadwama Lazarus's profile");
     }
   }, [activeTabButton]);
 
@@ -35,7 +42,7 @@ export default function ViewRequestModal({
     <div className="modal-screen sendrequest-modal p-4 my-3">
       <div className="">
         <button className="btn close-button" onClick={closeModal}>
-          <Icon icon="icons8:cancel" className="close-icon" />
+          <Icon icon="ic:round-cancel" color="#F99C39" className="close-icon" />
         </button>
 
         <div className="d-flex flex-column align-items-center modal-content">
@@ -65,7 +72,7 @@ export default function ViewRequestModal({
             </button>
             <button
               className="btn modal-button delete-request"
-              onClick={closeModal}
+              onClick={approveRequest}
             >
               Approve Request
             </button>

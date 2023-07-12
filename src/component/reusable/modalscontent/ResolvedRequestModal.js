@@ -31,7 +31,7 @@ export default function ResolvedRequestModal({ closeModal, activeTabButton }) {
     <div className="modal-screen sendrequest-modal p-4 my-3">
       <div className="">
         <button className="btn close-button" onClick={closeModal}>
-          <Icon icon="icons8:cancel" className="close-icon" />
+          <Icon icon="ic:round-cancel" color="#f99c39" className="close-icon" />
         </button>
 
         <div className="d-flex flex-column align-items-center modal-content">
@@ -53,8 +53,8 @@ export default function ResolvedRequestModal({ closeModal, activeTabButton }) {
             </p>
           </div>
           <div className="approved mt-4">
-           <h3 className="my-2"> Request Declined & Resolved</h3>
-           <p>By Jeremiah Adu (Super Admin 2)</p>
+            <h3 className="my-2"> Request Declined & Resolved</h3>
+            <p>By Jeremiah Adu (Super Admin 2)</p>
           </div>
         </div>
       </div>

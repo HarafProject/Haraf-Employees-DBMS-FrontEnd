@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
+import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
 import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
@@ -13,25 +14,43 @@ export default function EditRequestTab() {
     { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
     { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
   ];
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
+  const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
-  const [snackBar, setSnackBar] = useState(false);
+  const [declineSnackBar, setDeclineSnackBar] = useState(false);
+  const [approveSnackBar, setApproveSnackBar] = useState(false);
 
-  const openSnackBar = () => {
-    setSnackBar(true);
+  const openDeclineSnackBar = () => {
+    setDeclineSnackBar(true);
   };
 
-  const closeSnackBar = () => {
-    setSnackBar(false);
+  const closeDeclineSnackBar = () => {
+    setDeclineSnackBar(false);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const openApproveSnackBar = () => {
+    setApproveSnackBar(true);
+  };
+
+  const closeApproveSnackBar = () => {
+    setApproveSnackBar(false);
+  };
+
+  const closeRequestModal = () => {
+    setIsRequestModalOpen(false);
   };
   const [activeTabButton, setActiveTabButton] = useState("");
 
-  function openModal(activeTabButton) {
-    setIsOpen(true);
+  function openRequestModal(activeTabButton) {
+    setIsRequestModalOpen(true);
+    setActiveTabButton(activeTabButton);
+  }
+  const closeResolvedModal = () => {
+    setResolvedIsModalOpen(false);
+  };
+
+  function openResolvedModal(activeTabButton) {
+    setResolvedIsModalOpen(true);
     setActiveTabButton(activeTabButton);
   }
 
@@ -49,14 +68,21 @@ export default function EditRequestTab() {
                 {item.name}
               </p>
 
-              <button
-                className={
-                  item.status === "Resolved" ? "btn-black" : "btn-orange"
-                }
-                onClick={() => openModal("edit")}
-              >
-                {item.status}
-              </button>
+              {item.status === "Resolved" ? (
+                <button
+                  className={"btn-black"}
+                  onClick={() => openResolvedModal("edit")}
+                >
+                  Resolved
+                </button>
+              ) : (
+                <button
+                  className={"btn-orange"}
+                  onClick={() => openRequestModal("edit")}
+                >
+                  View Request
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -64,9 +90,9 @@ export default function EditRequestTab() {
 
       {/* {modalIsOpen && ( */}
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={requestModalIsOpen}
         // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
+        onRequestClose={closeRequestModal}
         contentLabel="Example Modal"
         className={{
           base: "modal-base",
@@ -82,21 +108,58 @@ export default function EditRequestTab() {
         closeTimeoutMS={2000}
       >
         <ViewRequestModal
-          closeModal={closeModal}
-          openSnackBar={openSnackBar}
+          closeModal={closeRequestModal}
+          openDeclineSnackBar={openDeclineSnackBar}
+          openApproveSnackBar={openApproveSnackBar}
           activeTabButton={activeTabButton}
         />
       </Modal>
 
-      {snackBar && (
+      <Modal
+        isOpen={resolvedModalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeResolvedModal}
+        contentLabel="Example Modal"
+        className={{
+          base: "modal-base",
+          afterOpen: "modal-base_after-open",
+          beforeClose: "modal-base_before-close",
+        }}
+        overlayClassName={{
+          base: "overlay-base",
+          afterOpen: "overlay-base_after-open",
+          beforeClose: "overlay-base_before-close",
+        }}
+        shouldCloseOnOverlayClick={true}
+        closeTimeoutMS={2000}
+      >
+        <ResolvedRequestModal
+          closeModal={closeResolvedModal}
+          activeTabButton={activeTabButton}
+        />
+      </Modal>
+
+      {declineSnackBar && (
         <div className="d-flex justify-content-between align-items-center px-4 py-2 snackbar ">
           <Icon
-            onClick={closeSnackBar}
+            onClick={closeDeclineSnackBar}
             icon="system-uicons:cross"
             className="snackbar-close"
           />
           <p>Edit Request Decline</p>
-          <button onClick={closeSnackBar}>Undo</button>
+          <button onClick={closeDeclineSnackBar}>Undo</button>
+        </div>
+      )}
+      {approveSnackBar && (
+        <div className="d-flex justify-content-between align-items-center px-4 py-2 snackbar ">
+          <Icon
+            icon="teenyicons:tick-circle-outline"
+            color="white"
+            onClick={closeApproveSnackBar}
+            className="snackbar-close"
+          />
+          <p>Signed in request approved</p>
+          <button onClick={closeApproveSnackBar}>Undo</button>
         </div>
       )}
       {/* )} */}
