@@ -20,7 +20,7 @@ import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgot
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
 import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
-
+import CreateAdminAccountScreen from '../Admin_page/admin_signup_pages/AdminCreateAccount';
 
 // TakeAttendancePage
 import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
@@ -45,6 +45,7 @@ const router = createBrowserRouter(
         element={<AdminForgottenPassword />}
       />
       <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
+      <Route path="/admin-create-account" element={<CreateAdminAccountScreen />} />
       <Route
         path="/admin-create-password"
         element={<AdminCreateNewPassword />}
