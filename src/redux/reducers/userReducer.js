@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
     user: null,
+    offline: false,
   },
   reducers: {
     loginSuccess: (state, action) => {
@@ -13,14 +15,19 @@ const userSlice = createSlice({
       };
     },
     logoutSuccess: (state) => {
-      localStorage.clear();
       return {
         ...state,
         user: null,
       };
     },
+    offlineMode: (state, action) => {
+      return {
+        ...state,
+        offline: action.payload,
+      };
+    }
   },
 });
 
-export const { loginSuccess, logoutSuccess } = userSlice.actions;
+export const { loginSuccess, logoutSuccess,offlineMode } = userSlice.actions;
 export default userSlice.reducer;
