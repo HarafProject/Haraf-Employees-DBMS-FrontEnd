@@ -5,7 +5,9 @@ import profile from "../../../assets/logo-light.png";
 import { useNavigate } from "react-router-dom";
 import AdminEmployeeList from "../admin_employee_list_page/AdminEmployeeList";
 import SuperAdminProfile from "../super_admin_profile_page/SuperAdminProfile";
-import RequestFromSupervisor from "../request_from_supervisor_page/RequestFromSupervisor";
+import AttendanceAnalytics from "../attendance_analytic_page/AttendanceAnalytics";
+import ManageSupervisor from "../manage_supervisor_page/ManageSupervisor";
+import AttendanceReportTable from "../attendance_page/AttendanceReportTable";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
@@ -95,12 +97,14 @@ export default function AdminHomePage() {
           <div className="user-info-section py-3 my-3">
             <div>
               {selectedComponent === "employee" && <AdminEmployeeList />}
-              {selectedComponent === "reports" && <div>Attendance Reports</div>}
+              {selectedComponent === "reports" && <AttendanceReportTable />}
               {selectedComponent === "analytics" && (
-                <div>Attendance Analytics </div>
+                <AttendanceAnalytics />
               )}
-              {selectedComponent === "requests" && <RequestFromSupervisor />}
-              {selectedComponent === "manage" && <div>Manage Supervisors </div>}
+              {selectedComponent === "requests" && (
+                <div>Requests from Supervisors </div>
+              )}
+              {selectedComponent === "manage" && <ManageSupervisor />}
               {selectedComponent === "profile" && <SuperAdminProfile />}
               {/* {selectedComponent === 'logout' && <div>Loan </div>} */}
             </div>

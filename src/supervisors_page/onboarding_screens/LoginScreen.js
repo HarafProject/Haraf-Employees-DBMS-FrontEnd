@@ -36,7 +36,7 @@ export default function LoginScreen() {
   }, []);
 
   const [passwordType, setPasswordType] = useState("false");
-  const [icon, setIcon] = useState("ph:eye-light");
+  const [icon, setIcon] = useState("mdi:eye");
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -106,13 +106,12 @@ export default function LoginScreen() {
   });
 
   return (
-    <div className="onboarding-screen">
-      {/* <div className="login-screen"> */}
-      <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
-        <div className="signup-logo text-center">
+    <div className="onboarding-screen login-screen">
+      <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-5">
+       
           <img src={profile} alt="" />
-          <p className="my-1 title">LIPW Management System{<br />}(LIPWMS)</p>
-        </div>
+          <p className="my-1 text-center title">LIPW Management System{<br />}(LIPWMS)</p>
+    
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
           <p className="screen-title text-center mt-5">LOGIN</p>
@@ -144,7 +143,7 @@ export default function LoginScreen() {
                 value={formik.values.password}
               />
               <div onClick={togglePasswordVisiblity} className="eye">
-                <Icon icon={icon} />
+                <Icon icon={icon ? "mdi:eye" : "mdi:eye-off"} />
               </div>
             </div>
             {formik.touched.password && formik.errors.password && (
