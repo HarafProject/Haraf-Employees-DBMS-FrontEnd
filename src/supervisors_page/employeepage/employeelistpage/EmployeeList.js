@@ -76,10 +76,10 @@ export default function EmployeeListTable() {
     };
 
 
-    const openModal = (getModalType) => { // Modify openModal function
+    const openModal = (getModalType) => { 
         setIsOpen(true);
-        setModalType(getModalType()); // Invoke the function to get modalType
-    };
+        setModalType(getModalType()); 
+      };
 
     function closeModal() {
         setIsOpen(false);

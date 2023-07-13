@@ -5,10 +5,11 @@ import profile from "../../../assets/logo-light.png";
 import { useNavigate } from "react-router-dom";
 import AdminEmployeeList from "../admin_employee_list_page/AdminEmployeeList";
 import SuperAdminProfile from "../super_admin_profile_page/SuperAdminProfile";
+import RequestFromSupervisor from "../request_from_supervisor_page/RequestFromSupervisor";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
-  const [selectedComponent, setSelectedComponent] = useState("employee");
+  const [selectedComponent, setSelectedComponent] = useState("requests");
 
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
@@ -98,9 +99,7 @@ export default function AdminHomePage() {
               {selectedComponent === "analytics" && (
                 <div>Attendance Analytics </div>
               )}
-              {selectedComponent === "requests" && (
-                <div>Requests from Supervisors </div>
-              )}
+              {selectedComponent === "requests" && <RequestFromSupervisor />}
               {selectedComponent === "manage" && <div>Manage Supervisors </div>}
               {selectedComponent === "profile" && <SuperAdminProfile />}
               {/* {selectedComponent === 'logout' && <div>Loan </div>} */}

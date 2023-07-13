@@ -1,0 +1,21 @@
+.tab-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.tab-buttons button {
+  display: block;
+  background-color: transparent;
+  outline: none;
+  font-size: 20px;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  color: #444;
+}
+
+.tab-buttons button.current {
+  border-bottom: 5px solid #0280ca;
+  color: #0280ca;
+}
