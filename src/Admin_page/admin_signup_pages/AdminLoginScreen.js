@@ -36,8 +36,8 @@ export default function AdminLoginScreen() {
       console.log(values);
       setIsLoading(true);
       const data = {
-        email: values.email,
-        password: values.password,
+        email:values.email,
+        password:values.password,
       };
 
       admin
