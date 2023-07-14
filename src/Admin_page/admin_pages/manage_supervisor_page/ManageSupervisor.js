@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Modal from "react-modal";
 import {
   Table,
@@ -15,6 +15,7 @@ import { Icon } from "@iconify/react";
 import adminSupervisorList from "../../../component/data/ListOfAdminSupervisors";
 import "./managesupervisor.css";
 import ManageSupervisorModal from "../../../component/reusable/modalscontent/ManageSupervisorModal";
+import manageSupervisior from "../../../class/ManageSupervisior.class";
 
 export default function ManageSupervisor() {
   const [page, setPage] = useState(0);
@@ -25,6 +26,7 @@ export default function ManageSupervisor() {
   const [getRole, setGetRole] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [modalClosed, setModalClosed] = useState(false);
+  const [supervisor,setSupervisor] = useState([])
 
   function openModal(buttonClick, supervisorName, getRole) {
     setIsOpen(true);
@@ -42,7 +44,18 @@ export default function ManageSupervisor() {
     setSnackbarOpen(false);
     setModalClosed(false);
   }
+//get supervisior details 
 
+const getDetails = ()=>{
+  manageSupervisior.getAll().then((res)=>{
+    setSupervisor(res?.data)
+    console.log(res.data, 'response from sup')
+  })
+}
+
+useEffect(()=>{
+  getDetails()
+},[])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -110,19 +123,19 @@ export default function ManageSupervisor() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {adminSupervisorList.map((supervisor, index) => (
+                {supervisor.map((supervisor, index) => (
                   <TableRow key={supervisor.id}>
                     <TableCell>{index + 1}</TableCell>
 
                     <TableCell>
                       <p className="d-flex flex-column admin-name">
-                        {supervisor.name}
+                        {supervisor.firstname }
                         <span>{supervisor.email}</span>
                       </p>
                     </TableCell>
                     <TableCell>{supervisor.role}</TableCell>
                     <TableCell>{supervisor.zone}</TableCell>
-                    <TableCell>{supervisor.phoneNumber}</TableCell>
+                    <TableCell>{supervisor.phone}</TableCell>
                     <TableCell>
                       <div className="d-flex">
                         <button
@@ -138,7 +151,9 @@ export default function ManageSupervisor() {
                           <Icon icon="carbon:delete" className="delete-icon" />{" "}
                           Delete
                         </button>
-                        <button
+                        
+                        {
+                          supervisor?.isVerified === true ? <button
                           className="btn manage-supervisor-btn"
                           onClick={() =>
                             openModal(
@@ -148,12 +163,32 @@ export default function ManageSupervisor() {
                             )
                           }
                         >
+                       
                           <Icon
                             icon="carbon:checkmark"
                             className="verify-icon"
                           />{" "}
                           Verify
-                        </button>
+                        </button> : <button
+                        className="btn manage-supervisor-btn"
+                        onClick={() =>
+                          openModal(
+                            "unverify",
+                            supervisor.name,
+                            supervisor.role
+                          )
+                        }
+                      >
+                     
+                      <Icon
+                      icon="carbon:x"
+                      className="verify-icon"
+                      style={{ color: "red" }}
+                    />
+                        Unverify
+                      </button>
+
+                        }
                       </div>
                     </TableCell>
                   </TableRow>

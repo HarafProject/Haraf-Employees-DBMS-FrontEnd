@@ -28,6 +28,12 @@ export default function ManageSupervisorModal({
         `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the LIPWDMS portal`
       );
       setButtonText("Delete");
+    }else if(buttonClick === "unverify"){
+      setActionTitle("Verify Supervisor");
+      setActionText(
+        `Are you sure you want to unverify ${supervisorName} as a ${getRole}? This will restrict ${supervisorName} from having full access to the LIPWDMS portal`
+      );
+      setButtonText("Unverify");
     }
   }, [buttonClick, supervisorName]);
 
