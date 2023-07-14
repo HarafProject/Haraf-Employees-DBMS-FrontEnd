@@ -30,13 +30,13 @@ export default function AttendanceDetailedPage() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-
+  console.log(id,'id')
   const report = attendanceReportData.find((item) => item.id === parseInt(id));
 
-  if (!report) {
-    navigate("/admin-home");
-    return null;
-  }
+  // if (!report) {
+  //   navigate("/admin-home");
+  //   return null;
+  // }
 
   const goBack = () => {
     window.history.go(-1);

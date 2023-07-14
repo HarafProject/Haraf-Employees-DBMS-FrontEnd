@@ -5,8 +5,8 @@ class AdminAttendanceOBJ {
   getAllZone = async () => {
     try {
       const res = await api.get("api/superadmin/all-zones-attendance");
-      if (res?.data?.status === "success") {
-        return res?.data?.zones;
+      if (res?.data?.success) {
+        return res?.data?.data;
       }
     } catch (err) {
       throw err;

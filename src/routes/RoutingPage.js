@@ -58,7 +58,7 @@ const router = createBrowserRouter(
         path="/admin-employee-profile/:id"
         element={<AdminEmployeeProfile />}
       />
-
+<Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage/>} />
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
 
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}

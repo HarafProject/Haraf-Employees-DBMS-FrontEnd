@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Table,
   TableContainer,
@@ -13,11 +13,14 @@ import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import attendanceReportData from "../../../component/data/AttendanceReportData";
 import "./attendance.css";
+import AdminAttendance from "../../../class/adminAttendanceReport.class";
+import dataOBJs from "../../../class/data.class";
 
 export default function AttendanceReportTable({ onRowClick }) {
   const [activeTab, setActiveTab] = useState("allZones");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [tableData,setTableData] = useState([])
 
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
@@ -63,44 +66,41 @@ export default function AttendanceReportTable({ onRowClick }) {
 
     return adjustedHour >= 16; // 16 represents 4:00 PM
   };
+// Sample array of objects
 
+
+
+
+const tabData = [
+  { tab: 'allZones', label: 'All Zones', count: totalCount },
+  { tab: 'AdamawaSouth', label: 'Adamawa South', count: countAdamawaSouth },
+  { tab: 'AdamawaNorth', label: 'Adamawa North', count: countAdamawaNorth },
+  { tab: 'AdamawaCentral', label: 'Adamawa Central', count: countAdamawaCentral },
+];
+//get all zone
+useEffect(()=>{
+  AdminAttendance.getAllZone().then((res)=>{
+    console.log(res,'from the table data')
+     setTableData(res)
+  })
+},[setTableData])
+console.log(activeTab,'active tab')
   return (
     <>
       <div className="dashboard-attendance-table-section my-3">
         <div className="attendance-header  pt-5 pe-5">
           <h4 className="header-title">LIPWDMS Super Admin Portal</h4>
-          <div className="d-flex  tab-header my-4">
+          <div className="d-flex tab-header my-4">
+          {tabData.map((item) => (
             <div
-              className={`tab-item ${activeTab === "allZones" ? "active" : ""}`}
-              onClick={() => handleTabChange("allZones")}
+              key={item.tab}
+              className={`tab-item ${activeTab === item.tab ? 'active' : ''}`}
+              onClick={() => handleTabChange(item.tab)}
             >
-              All Zones ({totalCount})
+              {item.label} ({item.count})
             </div>
-            <div
-              className={`tab-item ${
-                activeTab === "AdamawaSouth" ? "active" : ""
-              }`}
-              onClick={() => handleTabChange("AdamawaSouth")}
-            >
-              Adamawa South ({countAdamawaSouth})
-            </div>
-            <div
-              className={`tab-item ${
-                activeTab === "AdamawaNorth" ? "active" : ""
-              }`}
-              onClick={() => handleTabChange("AdamawaNorth")}
-            >
-              Adamawa North ({countAdamawaNorth})
-            </div>
-            <div
-              className={`tab-item ${
-                activeTab === "AdamawaCentral" ? "active" : ""
-              }`}
-              onClick={() => handleTabChange("AdamawaCentral")}
-            >
-              Adamawa Central ({countAdamawaCentral})
-            </div>
-          </div>
+          ))}
+        </div>
           <div className="d-flex filter-option-section align-items-center py-4 my-2">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
@@ -144,76 +144,91 @@ export default function AttendanceReportTable({ onRowClick }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredData
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((report, index) => (
-                    <TableRow
-                      key={report.id}
-                      onClick={() => onRowClick(report.id)}
-                    >
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.supervisor_name}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.date}
-                        </Link>
-                      </TableCell>
-                      <TableCell
-                        className={
-                          isTimePastFour(report.time_sent) ? "red-color" : ""
-                        }
-                      >
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.time_sent}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.present}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.absent}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.location}
-                        </Link>
-                      </TableCell>
-                      <TableCell className="commentColumn">
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.comment}
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                {tableData && tableData
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((report, index) => {
+                      return(
+                        report?.attendanceRecord
+                        .map((a,i)=>{
+                          console.log({
+                            a,
+                            ...report
+                          },'attendance')
+                          return(
+                            <TableRow
+                            key={index}
+                            as="a"
+                            href={`/detailed-attendance/${report?._id}`}
+                            
+                          >
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                               {report?.submittedBy?.firstname}
+                              </Link>
+                            </TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                              
+                            {new Date(report?.date).toISOString().split('T')[0]}
+                             
+                              </Link>
+                            </TableCell>
+                            <TableCell
+                              className={
+                                isTimePastFour(new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })) ? "red-color" : ""
+                              }
+                            >
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                              {new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                              </Link>
+                            </TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                             {a.status === "Present" && "Present"}
+                              </Link>
+                            </TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                              {a.status !== "Present" && "Absent"}
+                              </Link>
+                            </TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                              {report?.lga?.name}
+                              </Link>
+                            </TableCell>
+                            <TableCell className="commentColumn">
+                              <Link
+                                to={`/detailed-attendance/${report?._id}`}
+                                key={index}
+                              >
+                              {report?.comment}
+                              </Link>
+                            </TableCell>
+                          </TableRow>
+                          )
+                      })
+                      )
+                  })}
               </TableBody>
             </Table>
             <TablePagination
