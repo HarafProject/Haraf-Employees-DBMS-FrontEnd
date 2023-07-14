@@ -197,7 +197,7 @@ console.log(activeTab,'active tab')
                                 to={`/detailed-attendance/${report?._id}`}
                                 key={index}
                               >
-                             {a.status === "Present" && "Present"}
+                           {a?.attempt.filter(obj => obj.status === 'Present').length}
                               </Link>
                             </TableCell>
                             <TableCell>
@@ -205,7 +205,7 @@ console.log(activeTab,'active tab')
                                 to={`/detailed-attendance/${report?._id}`}
                                 key={index}
                               >
-                              {a.status !== "Present" && "Absent"}
+                              {a?.attempt.filter(obj => obj.status !== 'Present').length}
                               </Link>
                             </TableCell>
                             <TableCell>
