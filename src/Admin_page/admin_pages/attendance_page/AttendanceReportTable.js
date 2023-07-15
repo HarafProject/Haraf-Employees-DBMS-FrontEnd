@@ -77,8 +77,6 @@ useEffect(() => {
       const filterTable = activeTab === 'allZones'
         ? tableDataResponse
         : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
-
-      setTableData(filterTable);
       setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount,id:'' }, ...zoneData]);
       if (searchData && searchData.length > 1) {
         const filterSearch = filterTable.filter((item) => {
@@ -92,8 +90,10 @@ useEffect(() => {
       if (selectedlgaValue) {
         const lgaFilter = filterTable.filter((item) => item.lga._id === selectedlgaValue);
         setTableData(lgaFilter);
+      }else{
+        setTableData(filterTable)
       }
-      
+      setTableData(filterTable);
     } catch (error) {
       console.log(error);
     }
@@ -150,7 +150,7 @@ useEffect(()=>{
             </div>
             <div className="form-field mx-2">
               <select name="lga" id="" onChange={(e)=> setSelectedLgaValue(e.target.value)}>
-                <option>LGAs</option>
+                <option value="">LGAs</option>
                {
                 lgaValue.map((a,i)=>{
                   return( <option value={a?.value} key={i}>{a?.name}</option>

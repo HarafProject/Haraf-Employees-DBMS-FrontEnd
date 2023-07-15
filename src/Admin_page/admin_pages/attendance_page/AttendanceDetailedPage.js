@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Table,
   TableContainer,
@@ -19,8 +19,8 @@ import employee from "../../../class/employee.class";
 export default function AttendanceDetailedPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [beneficiariesID,setBeneficiariesID] = useState("")
-
+  const [searchData,setSearchData] = useState('')
+  const [tableData,setTableData]=useState([])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -40,18 +40,29 @@ export default function AttendanceDetailedPage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const dataParam = queryParams.get('data');
-  const receivedArray = JSON.parse(decodeURIComponent(dataParam));
+  let receivedArray = JSON.parse(decodeURIComponent(dataParam));
   console.log(receivedArray?.attendanceRecord,'array from new page')
-  // if (!report) {
-  //   navigate("/admin-home");
-  //   return null;
-  // }
+
+  useEffect(()=>{
+    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord    )
+  },[dataParam])
+  console.log(tableData,'table da')
 
   const goBack = () => {
     window.history.go(-1);
   };
-  const filteredData = [];
-
+ 
+useEffect(()=>{
+  if (searchData && searchData.length > 1) {
+    const filterSearch = receivedArray?.attendanceRecord.filter((item) => {
+      const firstName = item?.employee
+      return firstName.toLowerCase().startsWith(searchData.toLowerCase());
+    });
+    setTableData(filterSearch)
+  } else {
+    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord    )
+  }
+},[dataParam, receivedArray?.attendanceRecord, searchData])
   return (
     <div className="my-4 px-auto attendance-detailed-page">
       <div className=" container-fluid attendance-detailed-header px-4">
@@ -92,7 +103,7 @@ export default function AttendanceDetailedPage() {
           <div className="d-flex filter-option-section align-items-center">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
-              <input type="search" name="" placeholder="Search Reports" />
+              <input type="search" value={searchData} onChange={(e)=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
             </div>
             <div className="form-field mx-2">
               <select name="worktypology" id="">
@@ -136,7 +147,7 @@ export default function AttendanceDetailedPage() {
                 <TableCell>SP. Action</TableCell>
               </TableRow>
             </TableHead>
-            {receivedArray?.attendanceRecord.map((beneficiary, index) => (
+            {tableData.length >=1 && tableData.map((beneficiary, index) => (
               <TableRow key={beneficiary._id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>
