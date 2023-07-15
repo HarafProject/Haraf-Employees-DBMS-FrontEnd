@@ -22,6 +22,7 @@ export default function AttendanceReportTable({ onRowClick }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tableData,setTableData] = useState([])
   const [zone,setZone] = useState([])
+  const [lgaValue,setLgaValue] = useState([])
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
     setPage(0);
@@ -68,7 +69,7 @@ useEffect(() => {
           return acc + (item.zone.name === zone.name ? 1 : 0);
         }, 0);
 
-        return { tab: zone.name.split(' ').join('_'), label: zone.name, count };
+        return { tab: zone.name.split(' ').join('_'), label: zone.name,id:zone._id, count };
       });
 
       const filterTable = activeTab === 'allZones'
@@ -76,7 +77,7 @@ useEffect(() => {
         : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
 
       setTableData(filterTable);
-      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount }, ...zoneData]);
+      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount,id:'' }, ...zoneData]);
       if (searchData && searchData.length > 1) {
         const filterSearch = filterTable.filter((item) => {
           const firstName = item?.submittedBy?.firstname || '';
@@ -99,10 +100,24 @@ useEffect(() => {
 
 
 
-//get all zone
+//get all lga
 useEffect(()=>{
-  
-},[setTableData])
+  let zoneID = zone.filter((e)=> e.tab === activeTab)
+  if(zone && zoneID[0]?.id){
+    let lga = []
+    dataOBJs.getLgaByZone(zoneID[0]?.id).then((res)=>{
+      res.map((a)=>{
+        lga.push({
+          name:a.name,
+          value:a._id
+        })
+      })
+      setLgaValue(lga)
+    })
+  }else{
+    setLgaValue([])
+  }
+},[activeTab])
 
 
   
@@ -130,11 +145,13 @@ useEffect(()=>{
             <div className="form-field mx-2">
               <select name="lga" id="">
                 <option>LGAs</option>
-                <option value="guyuk">Guyuk</option>
-                <option value="numan">Numan</option>
-                <option value="Ganye">Ganye</option>
-                <option value="girei">Girei</option>
-                <option value="michika">Michika</option>
+               {
+                lgaValue.map((a,i)=>{
+                  return( <option value={a?.value} key={i}>{a?.name}</option>
+
+                  )
+                })
+               }
               </select>
             </div>
             <div className="form-field mx-2 date-select">
