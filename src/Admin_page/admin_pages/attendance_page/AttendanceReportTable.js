@@ -21,7 +21,8 @@ export default function AttendanceReportTable({ onRowClick }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tableData,setTableData] = useState([])
-
+  const [zone,setZone] = useState([])
+  const [length,setLength] = useState()
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
     setPage(0);
@@ -77,21 +78,56 @@ const tabData = [
   { tab: 'AdamawaNorth', label: 'Adamawa North', count: countAdamawaNorth },
   { tab: 'AdamawaCentral', label: 'Adamawa Central', count: countAdamawaCentral },
 ];
+//get list of zone
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const [zoneResponse, tableDataResponse] = await Promise.all([
+        dataOBJs.getZone(),
+        AdminAttendance.getAllZone()
+      ]);
+
+      const allZonesCount = tableDataResponse.length;
+
+      const zoneData = zoneResponse.map((zone) => {
+        const count = tableDataResponse.reduce((acc, item) => {
+          return acc + (item.zone.name === zone.name ? 1 : 0);
+        }, 0);
+
+        return { tab: zone.name.split(' ').join('_'), label: zone.name, count };
+      });
+
+      const filterTable = activeTab === 'allZones'
+        ? tableDataResponse
+        : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
+
+      setTableData(filterTable);
+      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount }, ...zoneData]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchData();
+}, [activeTab]);
+
+
+
+console.log(zone,'zone tab')
 //get all zone
 useEffect(()=>{
-  AdminAttendance.getAllZone().then((res)=>{
-    console.log(res,'from the table data')
-     setTableData(res)
-  })
+  
 },[setTableData])
 console.log(activeTab,'active tab')
+
+  
   return (
     <>
       <div className="dashboard-attendance-table-section my-3">
         <div className="attendance-header  pt-5 pe-5">
           <h4 className="header-title">LIPWDMS Super Admin Portal</h4>
           <div className="d-flex tab-header my-4">
-          {tabData.map((item) => (
+          {zone && zone.map((item) => (
             <div
               key={item.tab}
               className={`tab-item ${activeTab === item.tab ? 'active' : ''}`}
@@ -147,86 +183,85 @@ console.log(activeTab,'active tab')
                 {tableData && tableData
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((report, index) => {
+                    const queryParam = encodeURIComponent(JSON.stringify(report))
                       return(
-                        report?.attendanceRecord
-                        .map((a,i)=>{
-                          console.log({
-                            a,
-                            ...report
-                          },'attendance')
-                          return(
-                            <TableRow
+                        <TableRow
+                        key={index}
+                        as="a"
+                        href={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                        
+                      >
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
                             key={index}
-                            as="a"
-                            href={`/detailed-attendance/${report?._id}`}
-                            
                           >
-                            <TableCell>{index + 1}</TableCell>
-                            <TableCell>
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                               {report?.submittedBy?.firstname}
-                              </Link>
-                            </TableCell>
-                            <TableCell>
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                              
-                            {new Date(report?.date).toISOString().split('T')[0]}
-                             
-                              </Link>
-                            </TableCell>
-                            <TableCell
-                              className={
-                                isTimePastFour(new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })) ? "red-color" : ""
-                              }
-                            >
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                              {new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
-                              </Link>
-                            </TableCell>
-                            <TableCell>
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                           {a?.attempt.filter(obj => obj.status === 'Present').length}
-                              </Link>
-                            </TableCell>
-                            <TableCell>
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                              {a?.attempt.filter(obj => obj.status !== 'Present').length}
-                              </Link>
-                            </TableCell>
-                            <TableCell>
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                              {report?.lga?.name}
-                              </Link>
-                            </TableCell>
-                            <TableCell className="commentColumn">
-                              <Link
-                                to={`/detailed-attendance/${report?._id}`}
-                                key={index}
-                              >
-                              {report?.comment}
-                              </Link>
-                            </TableCell>
-                          </TableRow>
-                          )
-                      })
+                           {report?.submittedBy?.firstname}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          
+                        {new Date(report?.date).toISOString().split('T')[0]}
+                         
+                          </Link>
+                        </TableCell>
+                        <TableCell
+                          className={
+                            isTimePastFour(new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })) ? "red-color" : ""
+                          }
+                        >
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                     
+                          {report?.attendanceRecord
+                            .flatMap(obj => obj.attempt)
+                            .filter(attempt => attempt.status === 'Present')
+                            .length}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {report?.attendanceRecord
+                            .flatMap(obj => obj.attempt)
+                            .filter(attempt => attempt.status === 'Absent')
+                            .length}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {report?.lga?.name}
+                          </Link>
+                        </TableCell>
+                        <TableCell className="commentColumn">
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {report?.comment}
+                          </Link>
+                        </TableCell>
+                      </TableRow>
                       )
                   })}
               </TableBody>

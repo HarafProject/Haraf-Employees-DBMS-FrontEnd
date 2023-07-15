@@ -162,7 +162,9 @@ class superOBJ {
       throw err?.response?.data;
     }
   };
+  
 }
+
 
 const superAdmin = new superOBJ();
 export default superAdmin;

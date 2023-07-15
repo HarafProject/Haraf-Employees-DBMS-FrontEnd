@@ -11,18 +11,23 @@ import {
   Avatar,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams,useLocation } from "react-router-dom";
 import attendanceReportData from "../../../component/data/AttendanceReportData";
 import "./attendance.css";
+import employee from "../../../class/employee.class";
 
 export default function AttendanceDetailedPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [beneficiariesID,setBeneficiariesID] = useState("")
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+  employee.filterById().then((res)=>{
+    console.log(res,'form calling emp')
+  })
+  
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -32,7 +37,11 @@ export default function AttendanceDetailedPage() {
   const navigate = useNavigate();
   console.log(id,'id')
   const report = attendanceReportData.find((item) => item.id === parseInt(id));
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const dataParam = queryParams.get('data');
+  const receivedArray = JSON.parse(decodeURIComponent(dataParam));
+  console.log(receivedArray?.attendanceRecord,'array from new page')
   // if (!report) {
   //   navigate("/admin-home");
   //   return null;
@@ -41,7 +50,7 @@ export default function AttendanceDetailedPage() {
   const goBack = () => {
     window.history.go(-1);
   };
-  const filteredData = report.beneficiary;
+  const filteredData = [];
 
   return (
     <div className="my-4 px-auto attendance-detailed-page">
@@ -58,23 +67,25 @@ export default function AttendanceDetailedPage() {
         <div className="d-flex justify-content-between attendance-info">
           <p>
             Supervisor : {<br />}
-            <span>{report.supervisor_name}</span>
+            <span>{receivedArray?.submittedBy?.firstname }</span>
           </p>
           <p>
             Date Submitted: {<br />}
-            <span>{report.date}</span>
+            <span>
+            {new Date(receivedArray?.updatedAt).toLocaleDateString()}
+            </span>
           </p>
           <p>
             Time Submitted: {<br />}
-            <span>{report.time_sent}</span>
+            <span>{new Date(receivedArray?.updatedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</span>
           </p>
           <p>
             Report from: {<br />}
-            <span>{report.location}</span>
+            <span>{receivedArray?.lga?.name}</span>
           </p>
           <p>
             Supervisor's Comment: {<br />}
-            <span>{report.comment}</span>
+            <span>{receivedArray?.comment}</span>
           </p>
         </div>
         <div className="d-flex align-items-center justify-content-between py-3 mt-3">
@@ -110,7 +121,6 @@ export default function AttendanceDetailedPage() {
           </div>
         </div>
       </div>
-
       <div className="detailed-attendance-table mx-4">
         <TableContainer component={Paper}>
           <Table>
@@ -126,52 +136,50 @@ export default function AttendanceDetailedPage() {
                 <TableCell>SP. Action</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {filteredData.map((beneficiary, index) => (
-                <TableRow key={beneficiary.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>
-                    <Avatar
-                      alt={beneficiary.full_name}
-                      src={beneficiary.image}
-                    />
-                  </TableCell>
-                  <TableCell>{beneficiary.full_name}</TableCell>
-                  <TableCell>
-                    <div></div>
-                    {beneficiary.attendance_status === "Present" ? (
-                      <p className="present">
-                        Present <Icon icon="charm:tick" className="present" />{" "}
-                      </p>
-                    ) : (
-                      <p className="absent">
-                        Absent <Icon icon="charm:cross" className="absent" />{" "}
-                      </p>
-                    )}
-                  </TableCell>
-                  <TableCell>{beneficiary.work_typology}</TableCell>
-                  <TableCell>{beneficiary.ward}</TableCell>
-                  <TableCell>{report.supervisor_name}</TableCell>
-                  <TableCell className="d-flex sp-action-column">
-                    {beneficiary.sp_action.map((action) => (
-                      <p className="sp-action me-2" key={action.id}>
-                        {action.status === "present" ? (
-                          <Icon icon="charm:tick" className="present" />
-                        ) : (
-                          <Icon icon="charm:cross" className="absent" />
-                        )}
-                        <span>{action.time_tick}</span>
-                      </p>
-                    ))}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            {receivedArray?.attendanceRecord.map((beneficiary, index) => (
+              <TableRow key={beneficiary._id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  <Avatar
+                    alt={beneficiary?.employee}
+                    // src={beneficiary?.image}
+                  />
+                </TableCell>
+                <TableCell>{beneficiary?.employee}</TableCell>
+                <TableCell>
+                  <div></div>
+                  {beneficiary?.status === "Present" ? (
+                    <p className="present">
+                      Present <Icon icon="charm:tick" className="present" />{" "}
+                    </p>
+                  ) : (
+                    <p className="absent">
+                      Absent <Icon icon="charm:cross" className="absent" />{" "}
+                    </p>
+                  )}
+                </TableCell>
+                <TableCell>{beneficiary?.workTypology}</TableCell>
+                <TableCell>{beneficiary?.ward}</TableCell>
+                <TableCell>{receivedArray?.submittedBy?.firstname}</TableCell>
+                <TableCell className="d-flex sp-action-column">
+                  {beneficiary?.attempt.map((action) => (
+                    <p className="sp-action me-2" key={action?.id}>
+                      {action?.status === "present" ? (
+                        <Icon icon="charm:tick" className="present" />
+                      ) : (
+                        <Icon icon="charm:cross" className="absent" />
+                      )}
+                      <span>{action?.time_tick}</span>
+                    </p>
+                  ))}
+                </TableCell>
+              </TableRow>
+            ))}
           </Table>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={filteredData.length}
+            count={receivedArray.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
