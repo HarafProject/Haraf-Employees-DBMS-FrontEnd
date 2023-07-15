@@ -14,19 +14,20 @@ import { Icon } from "@iconify/react";
 import { Link, useNavigate, useParams,useLocation } from "react-router-dom";
 import attendanceReportData from "../../../component/data/AttendanceReportData";
 import "./attendance.css";
-import employee from "../../../class/employee.class";
+import supervisor from "../../../class/supervisor.class";
+import dataOBJs from "../../../class/data.class";
 
 export default function AttendanceDetailedPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchData,setSearchData] = useState('')
   const [tableData,setTableData]=useState([])
+  const [zone,setZone] =useState([])
+  const [selectedZone,setSelectedZone] = useState([])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  employee.filterById().then((res)=>{
-    console.log(res,'form calling emp')
-  })
+  
   
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -34,35 +35,61 @@ export default function AttendanceDetailedPage() {
   };
 
   const { id } = useParams();
-  const navigate = useNavigate();
-  console.log(id,'id')
-  const report = attendanceReportData.find((item) => item.id === parseInt(id));
+  
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const dataParam = queryParams.get('data');
   let receivedArray = JSON.parse(decodeURIComponent(dataParam));
-  console.log(receivedArray?.attendanceRecord,'array from new page')
+
 
   useEffect(()=>{
-    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord    )
+    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord)
   },[dataParam])
-  console.log(tableData,'table da')
+
+  useEffect(()=>{
+    supervisor.getWorkTypology((res)=>{
+      console.log(res,'toplogy')
+    })
+
+    dataOBJs.getZone().then((res)=>{
+      let arr = []
+      res.map((a)=>{
+        arr.push({
+          name:a.name,
+          value:a._id
+        })
+      })
+      setZone(arr)
+      console.log(arr,'res from zone')
+    })
+    
+  },[])
 
   const goBack = () => {
     window.history.go(-1);
   };
  
 useEffect(()=>{
-  if (searchData && searchData.length > 1) {
+  if (searchData && searchData.length >= 1) {
     const filterSearch = receivedArray?.attendanceRecord.filter((item) => {
       const firstName = item?.employee
       return firstName.toLowerCase().startsWith(searchData.toLowerCase());
     });
     setTableData(filterSearch)
   } else {
-    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord    )
+    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord)
   }
-},[dataParam, receivedArray?.attendanceRecord, searchData])
+
+  if(selectedZone){
+     const filterZone =  receivedArray?.attendanceRecord?.filter((i)=>i.zone === selectedZone )
+      setTableData(filterZone)
+    console.log(filterZone)
+     
+  }else{
+    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord)
+  }
+},[dataParam, receivedArray?.attendanceRecord, searchData, selectedZone, tableData, zone])
+console.log(tableData,'table data')
   return (
     <div className="my-4 px-auto attendance-detailed-page">
       <div className=" container-fluid attendance-detailed-header px-4">
@@ -118,12 +145,15 @@ useEffect(()=>{
               </select>
             </div>
             <div className="form-field mx-2">
-              <select name="ward" id="">
+              <select name="ward" id="" onChange={(e)=> setSelectedZone(e.target.value)}>
                 <option value="">Zones</option>
-                <option value="all">All</option>
-                <option value="adsouth">Admawa South</option>
-                <option value="adnorth">Adamawa North</option>
-                <option value="adcentral">Adamawa Central</option>
+                {
+                  zone && zone.map((res,i)=>{
+                    return(
+                      <option value={res.value} key={i}>{res.name}</option>
+                    )
+                  })
+                }
               </select>
             </div>
           </div>
