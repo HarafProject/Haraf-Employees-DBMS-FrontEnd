@@ -1,0 +1,68 @@
+.request-bg {
+  background: rgba(245, 245, 245, 0.54);
+  font-size: 18px;
+}
+
+.btn-orange {
+  background-color: transparent;
+  color: #f99c39;
+  border: none;
+  font-weight: 600;
+}
+.btn-black {
+  color: #000;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+}
+
+.pop-up {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pop-up span {
+  font-size: 20px;
+}
+
+.pop-up-wrapper {
+  padding: 0.5rem 1.5rem;
+  background-color: #0280ca;
+  width: 50%;
+  margin: 0 auto;
+  border: 10px;
+}
+
+.snackbar {
+  width: 50%;
+  color: #fff;
+  background-color: #0280ca;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.snackbar button {
+  border: none;
+  color: #fff;
+  background-color: transparent;
+}
+
+.snackbar-close {
+  font-size: 20px;
+}
+
+.approved h3 {
+color: #0280ca;
+text-align: center;
+font-size: 22px;
+font-weight: 600;
+}
+
+.approved p {
+  color: #000;
+  text-align: center;
+  font-size: 18px;
+}
+

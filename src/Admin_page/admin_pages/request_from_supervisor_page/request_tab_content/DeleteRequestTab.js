@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
 import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
 import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
+import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
 
 export default function DeleteRequestTab() {
   const data = [
-    { id: 1, name: "Kishimu Shanwas", status: "Veiw Request" },
+    { id: 1, name: "Kishinmjjju Shanwas", status: "Veiw Request" },
     { id: 2, name: "JKishimu Shanwas", status: "Veiw Request" },
     { id: 3, name: "BKishimu Shanwas", status: "Veiw Request" },
     { id: 4, name: "AKishimu Shanwas", status: "Veiw Request" },
@@ -19,6 +20,8 @@ export default function DeleteRequestTab() {
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
+
+  const [deleteData, setDeleteData] = useState({});
 
   const openDeclineSnackBar = () => {
     setDeclineSnackBar(true);
@@ -54,6 +57,23 @@ export default function DeleteRequestTab() {
     setActiveTabButton(activeTabButton);
   }
 
+
+    const handleFetchDeleteRequestData = async () => {
+      try {
+        const {data }= await EmployeeRequest.getAllDeleteEmployeeRequest();
+         setDeleteData(data);
+        // console.log('d',data)
+        // console.log('DEGLETdE DAggTA',deleteData)
+      } catch (error) {
+        console.error(error);
+      }
+      
+    };
+
+    useEffect(() => {
+      handleFetchDeleteRequestData();
+    }, []);
+
   return (
     <div>
       <div>
@@ -65,7 +85,7 @@ export default function DeleteRequestTab() {
             >
               <p>
                 Edit Kadwama Lazarus’s profile request from
-                {item.name}
+                {item?.user?.firstname}
               </p>
 
               {item.status === "Resolved" ? (

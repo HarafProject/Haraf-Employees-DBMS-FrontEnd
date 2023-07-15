@@ -1,24 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
 import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
 import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
+import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
 
 export default function EditRequestTab() {
-  const data = [
-    { id: 1, name: "Kishimu Shanwas", status: "Veiw Request" },
-    { id: 2, name: "JKishimu Shanwas", status: "Veiw Request" },
-    { id: 3, name: "BKishimu Shanwas", status: "Veiw Request" },
-    { id: 4, name: "AKishimu Shanwas", status: "Veiw Request" },
-    { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
-    { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
-  ];
+  
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
+
+    const [editRequest, setEditRequest] = useState([]);
 
   const openDeclineSnackBar = () => {
     setDeclineSnackBar(true);
@@ -54,18 +50,36 @@ export default function EditRequestTab() {
     setActiveTabButton(activeTabButton);
   }
 
+  
+    const handleFetchEditRequestData = async () => {
+      try {
+        const  {data}  = await EmployeeRequest.getAllEditEmployeeRequest();
+        setEditRequest(data);
+        
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    useEffect(() => {
+      handleFetchEditRequestData();
+    }, []);
+
+    const data = [
+      { id: 1,  beneficiary: "beneficiary",  supervisor: "supervisor", status: "status" },
+      
+    ];
   return (
     <div>
       <div>
         <div>
-          {data.map((item) => (
+          {editRequest.map((item) => (
             <div
               className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
-              key={item.id}
+              key={item._id}
             >
               <p>
-                Edit Kadwama Lazarus’s profile request from
-                {item.name}
+                Edit {item?.employee} profile request from {item?.user?.firstname}
               </p>
 
               {item.status === "Resolved" ? (

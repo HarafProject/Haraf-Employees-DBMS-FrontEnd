@@ -1,16 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
 import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
 import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
-import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
 
 export default function AddRequestTab() {
-
- 
-
-
   const data = [
     { id: 1, name: "Kishimu Shanwas", status: "Veiw Request" },
     { id: 2, name: "JKishimu Shanwas", status: "Veiw Request" },
@@ -59,22 +54,6 @@ export default function AddRequestTab() {
     setActiveTabButton(activeTabButton);
   }
 
-   const handleFetchAddRequestData = async () => {
-     try {
-       const data = await EmployeeRequest.getAllAddEmployeeRequest();
-       console.log("ajdd request", data);
-      
-     } catch (error) {
-       console.error(error);
-       
-     }
-   };
-
-   useEffect(() => {
-     handleFetchAddRequestData();
-   }, []);
-
-   
   return (
     <div>
       <div>
