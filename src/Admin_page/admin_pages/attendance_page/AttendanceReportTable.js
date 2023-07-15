@@ -23,8 +23,10 @@ export default function AttendanceReportTable({ onRowClick }) {
   const [tableData,setTableData] = useState([])
   const [zone,setZone] = useState([])
   const [lgaValue,setLgaValue] = useState([])
+  const [selectedlgaValue,setSelectedLgaValue] = useState([])
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
+    setSelectedLgaValue('')
     setPage(0);
   };
 const [searchData,setSearchData] = useState('')
@@ -87,14 +89,18 @@ useEffect(() => {
       } else {
         setTableData(filterTable);
       }
+      if (selectedlgaValue) {
+        const lgaFilter = filterTable.filter((item) => item.lga._id === selectedlgaValue);
+        setTableData(lgaFilter);
+      }
       
     } catch (error) {
       console.log(error);
     }
   };
-
+ 
   fetchData();
-}, [activeTab, searchData, tableData]);
+}, [activeTab, searchData, selectedlgaValue, tableData]);
 
 
 
@@ -143,7 +149,7 @@ useEffect(()=>{
               <input type="search" value={searchData} onChange={e=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
             </div>
             <div className="form-field mx-2">
-              <select name="lga" id="">
+              <select name="lga" id="" onChange={(e)=> setSelectedLgaValue(e.target.value)}>
                 <option>LGAs</option>
                {
                 lgaValue.map((a,i)=>{
