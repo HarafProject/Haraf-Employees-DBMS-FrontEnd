@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import admin from "../../../class/admin.class";
 import superAdmin from "../../../class/super.class";
 import dataOBJs from "../../../class/data.class";
@@ -15,6 +15,8 @@ import {
   Avatar,
   TablePagination,
 } from "@mui/material";
+import { useQuery } from 'react-query'
+import { toast } from "react-toastify"
 
 import usersData from "./AdminEmployeeData";
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
@@ -22,16 +24,31 @@ import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 
 import "./adminEmployeeList.css";
 
+const fetchEmployeesList = async (key) => {
+
+  try {
+    const res = await admin.getAllGetbeneficiaries()
+    return res
+  } catch (error) {
+    toast.error(error?.error);
+  }
+};
+
 export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [supervisors, setSupervisors] = useState([]);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [beneficiaries, setBeneficiaries] = useState([]);
+  const navigate = useNavigate()
+
+  // React query fecth data
+  const { data, status } = useQuery(['fetchEmployeesList',], fetchEmployeesList)
 
   useEffect(() => {
-    superAdmin.getAllbeneficiaries().then((res) => {
-      setSupervisors(res?.data);
-    });
-  }, []);
+    if (!data) return
+    console.log(data.data)
+    setBeneficiaries(data.data)
+
+  }, [data])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -40,157 +57,54 @@ export default function AdminEmployeeList() {
     setPage(0);
   };
 
-  const [zone,setZone] = useState({
-    menue:[],
-    value:""
-  })
-  const [lga,setLga] = useState({
-    menue:[{
-      _id:'',
-      name:"select zone"
-    }],
-    value:""
-  })
-  const [ward,setWard] = useState({
-    menue:[],
-    value:""
-  })
-  const [topology,setTopology] = useState({
-    menue:[],
-    value:""
-  })
-const [search,setSearch] = useState('')
-console.log(search,'search value ')
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [zoneData, lgaData, topologyData] = await Promise.all([
-          dataOBJs.getZone(),
-          dataOBJs.getLga(),
-          supervisor.getWorkTypology()
-        ]);
-  
-        setZone((prevZone) => ({
-          ...prevZone,
-          menue: zoneData
-        }));
-  
-        setLga((prevLga) => ({
-          ...prevLga,
-          menue: lgaData
-        }));
-  
-        setTopology((prevTopology) => ({
-          ...prevTopology,
-          menue: topologyData?.workTypology
-        }));
-  
-        if (zone.value) {
-          filter('zones', zone.value);
-        }
-        if (lga.value) {
-          filter('lgas', lga.value);
-        }
-        if (topology.value) {
-          filter('workTopology', topology.value);
-        }
-      } catch (error) {
-        // Handle error, if needed
-        console.error(error);
-      }
-    };
-  
-    fetchData();
-  }, [lga.value, topology.value, zone.value]);
-  
-  const filter = async (filterParam, filterValue) => {
-    try {
-      switch (filterParam) {
-        case "zones":
-          const zoneResponse = await superAdmin.filterByZone({ zone: filterValue });
-          setSupervisors(zoneResponse?.data?.data);
-          break;
-  
-        case "ward":
-          // Code for case 2
-          const wardResponse = await superAdmin.filterByWards(filterValue);
-          setSupervisors(wardResponse?.data);
-          break;
-  
-        case "workTopology":
-          // Code for case 3
-          const topologyResponse = await superAdmin.filterByWorkTopology({ topology: filterValue });
-          console.log(topologyResponse?.data?.data, "data from filter");
-          setSupervisors(topologyResponse?.data?.data);
-          break;
-  
-        case "lgas":
-          // Code for case 4
-          const lgaResponse = await superAdmin.filterByLga({ lga: filterValue });
-          setSupervisors(lgaResponse?.data?.data);
-          break;
-  
-        default:
-          // Default code if none of the cases match
-          const defaultResponse = await superAdmin.getAllbeneficiaries();
-          setSupervisors(defaultResponse?.data);
-          break;
-      }
-    } catch (error) {
-      // Handle error, if needed
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    const performSearch = async () => {
-      try {
-        const response = await superAdmin.search({ searchParams: search });
+  const [search, setSearch] = useState('')
 
-        // Process the response data here
-        console.log(response.data?.beneficiaries);
-        setSupervisors(response.data?.beneficiaries);
-      } catch (error) {
-        // Handle error here
-        console.error(error);
-      }
-    };
 
-    const debounce = (func, delay) => {
-      let timer;
-      return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-          func(...args);
-        }, delay);
-      };
-    };
 
-    const delayedSearch = debounce(performSearch, 10); // Set the desired debounce delay time in milliseconds (e.g., 500ms)
 
-    if (search) {
-      delayedSearch();
-    }
-  }, [search]);
+  // useEffect(() => {
+  //   const performSearch = async () => {
+  //     try {
+  //       const response = await superAdmin.search({ searchParams: search });
+
+  //       // Process the response data here
+  //       console.log(response.data?.beneficiaries);
+  //       setSupervisors(response.data?.beneficiaries);
+  //     } catch (error) {
+  //       // Handle error here
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   const debounce = (func, delay) => {
+  //     let timer;
+  //     return (...args) => {
+  //       clearTimeout(timer);
+  //       timer = setTimeout(() => {
+  //         func(...args);
+  //       }, delay);
+  //     };
+  //   };
+
+  //   const delayedSearch = debounce(performSearch, 10); // Set the desired debounce delay time in milliseconds (e.g., 500ms)
+
+  //   if (search) {
+  //     delayedSearch();
+  //   }
+  // }, [search]);
 
 
 
   return (
     <>
       <div className="employees-table-section">
-        <AdminEmployeeDataSummary supervisors={supervisors} />
+        <AdminEmployeeDataSummary beneficiaries={beneficiaries} />
         <AdminEmployeeFilterComponent
-         zone={zone}
-          setZone={setZone}
-          lga={lga}
-          setLga={setLga}
-          ward={ward}
-          setWard={setWard}
-          topology={topology}
-          setTopology={setTopology}
-          search={search}
-          setSearch={setSearch}
-           />
+          allData={data?.data}
+          beneficiaries={beneficiaries}
+          setBeneficiaries={setBeneficiaries}
+        />
         <div>
           <div className="employee-list-table p-3 my-3">
             <TableContainer component={Paper}>
@@ -208,73 +122,44 @@ console.log(search,'search value ')
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {supervisors.map((user, index) => (
-                    <TableRow>
+                  {beneficiaries.map((user, index) => (
+                    <TableRow onClick={() => navigate("/admin-employee-profile", { state: user })}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          <Avatar alt={user.name} src={user.photo} />
-                        </Link>
+                        <Avatar alt={user.name} src={user.photo} />
                       </TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          {user.fullName}
-                        </Link>
+
+                        {user.fullName}
+
                       </TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          {user.workTypology}
-                        </Link>
+
+                        {user.workTypology?.name}
+
                       </TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          {user.phone}
-                        </Link>
+
+                        {user.phone}
+
                       </TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          {user.ward}
-                        </Link>
+                        {user.ward?.name}
                       </TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          {user.age}
-                        </Link>
+                        {user.age}
                       </TableCell>
                       <TableCell>
-                        <Link
-                          to={`/admin-employee-profile/${user._id}`}
-                          key={user._id}
-                        >
-                          {user.address}
-                        </Link>
+                        {user.address}
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
+                rowsPerPageOptions={[5, 10, 25, 50, 100]}
                 component="div"
-                count={usersData.length}
+                count={beneficiaries.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

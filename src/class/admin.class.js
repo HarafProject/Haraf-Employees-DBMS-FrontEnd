@@ -91,6 +91,17 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
+
+  //get all DataCount
+  getDataCount = async () => {
+    try {
+      //check if data is empty
+      const { data } = await api.get("api/admin/data-summary");
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
   //get all Get Supervisors
   getAllGetSupervisors = async () => {
     try {
@@ -195,6 +206,19 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
+  
+  getEmployeeSummary = async (employeeId) => {
+    try {
+
+      const response = await api.get(`api/admin/beneficiary-attendance-summary/${employeeId}`);
+
+      return response.data;
+      //store res data
+
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  }
 }
 
 const admin = new adminOBJ();
