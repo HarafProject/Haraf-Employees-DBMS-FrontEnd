@@ -1,35 +1,34 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import ReusableInformationList from "../../../../component/reusable/employeeinformationcard/ReusableInformationList";
 import "./adminEmployeeProfile.css";
 import { Icon } from "@iconify/react";
-import userData from "./adminEmployeesData";
-import profileimage from "../../../../assets/profile.png";
+
 import AdminEmployeeDataSummary from "./AdminEmployeeAttendanceSummary";
 
 export default function AdminEmployeeProfile() {
   // const user = userData.user[0];
+  const location = useLocation()
   const { id } = useParams();
-  const user = userData.find((user) => user.id === parseInt(id));
-  if (!user) {
-    return <p>Employee not found</p>;
-  }
+  const user = location.state
+
+
   const personalInfo = [
-    { label: "Full Name", value: user.full_name },
-    { label: "Address", value: user.home_address },
-    { label: "Phone Number", value: user.phone_number },
+    { label: "Full Name", value: user.fullName },
+    { label: "Address", value: user.address },
+    { label: "Phone Number", value: user.phone },
   ];
 
   const bankInfo = [
-    { label: "Account Name", value: user.full_name },
-    { label: "Bank Name", value: user.bank_name },
-    { label: "Account Number", value: user.account_number },
+    { label: "Account Name", value: user.fullName },
+    { label: "Bank Name", value: user.bankName },
+    { label: "Account Number", value: user.accountNumber },
   ];
 
   const otherInfo = [
-    { label: "Head of Household", value: user.head_of_house },
-    { label: "Household Size", value: user.household_size },
-    { label: "Special Disability", value: user.special_disability },
+    { label: "Head of Household", value: user.householdHead },
+    { label: "Household Size", value: user.householdSize },
+    { label: "Special Disability", value: user.specialDisability },
   ];
 
   const goBack = () => {
@@ -50,21 +49,24 @@ export default function AdminEmployeeProfile() {
         <div className="dashboard-profile-info">
           <div className="dashboard-profile-infor-summary">
             <div className="profile-summary">
-              <img className="profile-img" src={profileimage} alt="" />
+              <div className="profile-img">
+              <img  src={user.photo} alt="" />
+              </div>
+              
               <div className="names mx-1">
-                <h4>{user.full_name}</h4>
+                <h4>{user.fullName}</h4>
                 <p>
-                  {user.marital_status} | {user.sex}
+                  {user.maritalStatus} | {user.sex}
                 </p>
-                <p>{user.phone_number}</p>
+                <p>{user.phone}</p>
               </div>
               <div className="work-info mx-1">
                 <p>
                   Work Topology:
-                  <span> {user.work_typology} </span>
+                  <span> {user?.workTypology.name} </span>
                 </p>
                 <p>
-                  Ward: <span>{user.ward}</span>
+                  Ward: <span>{user?.ward.name}</span>
                 </p>
                 <p>
                   Age:
@@ -87,7 +89,9 @@ export default function AdminEmployeeProfile() {
               />
             </div>
           </div>
-          <AdminEmployeeDataSummary />
+          <AdminEmployeeDataSummary
+            beneficiary={user._id}
+          />
         </div>
       </div>
     </div>
