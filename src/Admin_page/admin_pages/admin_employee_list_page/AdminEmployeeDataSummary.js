@@ -17,14 +17,14 @@ const fetchDataSummary = async (key) => {
   }
 };
 
-export default function AdminEmployeeList({ beneficiaries }) {
+export default function AdminEmployeeDataSummary() {
   // React query fecth data
   const { data, status } = useQuery(['fetchDataSummary'], fetchDataSummary)
 
   return (
     <section className="d-flex align-items-center justify-content-between">
       <div className="card">
-        <h1 className="number">{beneficiaries.length}</h1>
+        <h1 className="number">{data?.data?.beneficiaryCount}</h1>
         <p>Total Beneficiaries</p>
       </div>
       <div className="card">

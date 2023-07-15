@@ -65,7 +65,6 @@ class adminOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/admin/login", data);
-        console.log(response);
         return response;
         //store res data
       } else {

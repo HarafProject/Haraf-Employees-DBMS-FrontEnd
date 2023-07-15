@@ -63,12 +63,17 @@ function AdminEmployeeFilterComponent({ allData, beneficiaries, setBeneficiaries
   function handleFilter(e) {
 
     if (e.target.name === "zone") {
-      const data =
+
+      const datas =
         e.target.value === ""
           ? allData
           : allData?.filter((item) => item.zone._id === e.target.value);
-      setTempData(data);
-      setBeneficiaries(data);
+      let lga = e.target.value === ""
+        ? data?.lgaData :
+        data?.lgaData.filter(item => item.zone._id === e.target.value)
+      setLgaList(lga)
+      setTempData(datas);
+      setBeneficiaries(datas);
     } else if (e.target.name === "lga") {
       setWardList(data.wardData.filter(item => item.lga._id === e.target.value))
       const datas =

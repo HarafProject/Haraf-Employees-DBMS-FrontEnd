@@ -17,7 +17,7 @@ const fetchBeneficiaryAttenedanceSummary = async (key, beneficiary) => {
   };
 }
 
-export default function AdminEmployeeDataSummary({ beneficiary }) {
+export default function AdminEmployeeAttendanceSummary({ beneficiary }) {
   // React query fecth data
   const { data, status } = useQuery(['fetchBeneficiaryAttenedanceSummary', beneficiary], fetchBeneficiaryAttenedanceSummary)
 

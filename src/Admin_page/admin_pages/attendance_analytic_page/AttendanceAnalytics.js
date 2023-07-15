@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import Chart from "react-apexcharts";
 import "./analytics.css";
 import attendanceReportData from "../../../component/data/AttendanceReportData";
+import AdminEmployeeDataSummary from "../admin_employee_list_page/AdminEmployeeDataSummary";
 
 export default function AttendanceAnalytics() {
   const options = {
@@ -116,8 +117,7 @@ export default function AttendanceAnalytics() {
   return (
     <div className="attendance-analytic-page">
       <div>
-        <h1 className="header-title">LIPWDMS Super Admin Portal</h1>
-        <div className="d-flex justify-content-between beneficiary-statistics mt-4">
+        {/* <div className="d-flex justify-content-between beneficiary-statistics mt-4">
           <div className="box">
             <h2>{totalCount}</h2>
             Total Beneficiaries
@@ -134,7 +134,8 @@ export default function AttendanceAnalytics() {
             <h2>{countAdamawaCentral}</h2>
             AD Central Zone
           </div>
-        </div>
+        </div> */}
+       <AdminEmployeeDataSummary/>
         <div className="d-flex align-items-center justify-content-between mt-5 ">
           <h5>Attendance Overview</h5>
           <div className="d-flex filter-option-section align-items-center">
