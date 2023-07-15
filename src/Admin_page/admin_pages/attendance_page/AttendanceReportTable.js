@@ -22,12 +22,11 @@ export default function AttendanceReportTable({ onRowClick }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tableData,setTableData] = useState([])
   const [zone,setZone] = useState([])
-  const [length,setLength] = useState()
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
     setPage(0);
   };
-
+const [searchData,setSearchData] = useState('')
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -37,22 +36,6 @@ export default function AttendanceReportTable({ onRowClick }) {
     setPage(0);
   };
 
-  const filteredData =
-    activeTab === "allZones"
-      ? attendanceReportData
-      : attendanceReportData.filter(
-          (report) => report.zone.replace(/\s/g, "") === activeTab
-        );
-  const totalCount = attendanceReportData.length;
-  const countAdamawaSouth = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa South"
-  ).length;
-  const countAdamawaNorth = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa North"
-  ).length;
-  const countAdamawaCentral = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa Central"
-  ).length;
 
   const isTimePastFour = (time) => {
     const [hour, minutes] = time.split(":");
@@ -69,16 +52,7 @@ export default function AttendanceReportTable({ onRowClick }) {
   };
 // Sample array of objects
 
-
-
-
-const tabData = [
-  { tab: 'allZones', label: 'All Zones', count: totalCount },
-  { tab: 'AdamawaSouth', label: 'Adamawa South', count: countAdamawaSouth },
-  { tab: 'AdamawaNorth', label: 'Adamawa North', count: countAdamawaNorth },
-  { tab: 'AdamawaCentral', label: 'Adamawa Central', count: countAdamawaCentral },
-];
-//get list of zone
+//get list of zone and filter
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -103,22 +77,33 @@ useEffect(() => {
 
       setTableData(filterTable);
       setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount }, ...zoneData]);
+      if (searchData && searchData.length > 1) {
+        const filterSearch = filterTable.filter((item) => {
+          const firstName = item?.submittedBy?.firstname || '';
+          return firstName.toLowerCase().startsWith(searchData.toLowerCase());
+        });
+        setTableData(filterSearch);
+      } else {
+        setTableData(filterTable);
+      }
+      
     } catch (error) {
       console.log(error);
     }
   };
 
   fetchData();
-}, [activeTab]);
+}, [activeTab, searchData, tableData]);
 
 
 
-console.log(zone,'zone tab')
+
+
 //get all zone
 useEffect(()=>{
   
 },[setTableData])
-console.log(activeTab,'active tab')
+
 
   
   return (
@@ -140,7 +125,7 @@ console.log(activeTab,'active tab')
           <div className="d-flex filter-option-section align-items-center py-4 my-2">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
-              <input type="search" name="" placeholder="Search Reports" />
+              <input type="search" value={searchData} onChange={e=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
             </div>
             <div className="form-field mx-2">
               <select name="lga" id="">
@@ -269,7 +254,7 @@ console.log(activeTab,'active tab')
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={filteredData.length}
+              count={tableData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
