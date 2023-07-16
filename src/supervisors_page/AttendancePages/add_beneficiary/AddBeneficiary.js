@@ -2,22 +2,16 @@ import React, { useState } from 'react'
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
 import './addbeneficiary.css'
 import profile from '../../../assets/profile.png'
-import {
-  bankName,
-  householdTypes,
-  sex,
-  maritalStatus,
-  specialDisability,
-  wards,
-  workTopology,
-} from '../../../component/data/AddBeneficiaryData'
+import { bankName } from '../../../component/data/AddBeneficiaryData'
 
 export default function AddBeneficiary() {
   // Create state variables to hold the values of the input fields
   const [inputValues, setInputValues] = useState({
     accountNumber: '',
     bankName: '',
-    fullName: '',
+    firstName: '',
+    lastName: '',
+
     phoneNumber: '',
     age: '',
     homeAddress: '',
@@ -58,77 +52,23 @@ export default function AddBeneficiary() {
             <div>
               <input
                 type='text'
-                value={inputValues.fullName}
-                name='fullName'
-                placeholder='Full Name'
+                value={inputValues.firstName}
+                name='firstName'
+                placeholder='First Name'
                 onChange={handleInputChange}
               />
-            </div>
-            <div>
-              <select
-                id='dropdown'
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value=''>Ward</option>
-                {wards.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <input
-                type='text'
-                value={inputValues.age}
-                name='age'
-                onChange={handleInputChange}
-                placeholder='Age'
-              />
-            </div>
-            <div>
-              <select
-                id='dropdown'
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value=''>Marital Status</option>
-                {maritalStatus.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <input
-                type='text'
-                value={inputValues.houseHoldSize}
-                name='houseHoldSize'
-                onChange={handleInputChange}
-                placeholder='Household size'
-              />
-            </div>
-
-            <div>
-              <select
-                id='dropdown'
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value=''>Sex</option>
-                {sex.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
             </div>
           </div>
           <div>
+            <div>
+              <input
+                type='text'
+                value={inputValues.lastName}
+                name='lastName'
+                placeholder='Last Name'
+                onChange={handleInputChange}
+              />
+            </div>
             <div>
               <select
                 id='dropdown'
@@ -143,80 +83,9 @@ export default function AddBeneficiary() {
                 ))}
               </select>
             </div>
-
-            <div>
-              <input
-                type='text'
-                value={inputValues.phoneNumber}
-                name='phoneNumber'
-                onChange={handleInputChange}
-                placeholder='Phone Number'
-              />
-            </div>
-
-            <div>
-              <input
-                type='text'
-                value={inputValues.homeAddress}
-                name='homeAddress'
-                onChange={handleInputChange}
-                placeholder='Home Address'
-              />
-            </div>
-            <div>
-              <select
-                id='dropdown'
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value=''>Work Typology</option>
-                {workTopology.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <select
-                id='dropdown'
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value=''>Special Disability</option>
-                {specialDisability.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <select
-                id='dropdown'
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value=''>Head of Household</option>
-                {householdTypes.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className='user'>
-              <div>
-                <img src={profile} alt='' />
-              </div>
-              <div>
-                <p>Beneficiary headshot</p>
-                <p>Please take a clear well lighted headshot</p>
-              </div>
-            </div>
           </div>
         </div>
-        <button onClick={''}>Save Beneficiary</button>
+        <button onClick={''}>Verify</button>
       </div>
     </div>
   )
