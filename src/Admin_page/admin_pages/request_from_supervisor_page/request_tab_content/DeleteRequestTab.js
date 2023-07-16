@@ -5,6 +5,7 @@ import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
+import axios from "axios";
 
 export default function DeleteRequestTab() {
   const data = [
@@ -16,23 +17,39 @@ export default function DeleteRequestTab() {
     { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
   ];
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
+  const [itemIdToModal, setItemIdToModal] = useState(0)
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
 
-  const [deleteData, setDeleteData] = useState({});
+  const [deleteData, setDeleteData] = useState([]);
+  const [modalData, setModalData] = useState()
 
-  const openDeclineSnackBar = () => {
-    setDeclineSnackBar(true);
+
+  const openDeclineSnackBar = async() => {
+    const res = await EmployeeRequest.declineEmployeeRequest({
+      itemIdToModal
+    });
+
+    // const res = await axios.delete(`https://example.com/id/${itemIdToModal}`);
+
+     setDeclineSnackBar(true);
+
+    console.log("response", modalData);
   };
 
   const closeDeclineSnackBar = () => {
     setDeclineSnackBar(false);
   };
 
-  const openApproveSnackBar = () => {
+  const openApproveSnackBar = async () => {
     setApproveSnackBar(true);
+     setApproveSnackBar(true);
+        const res = await EmployeeRequest.declineEmployeeRequest({
+       itemIdToModal
+     });
+     console.log(res)
   };
 
   const closeApproveSnackBar = () => {
@@ -44,9 +61,10 @@ export default function DeleteRequestTab() {
   };
   const [activeTabButton, setActiveTabButton] = useState("");
 
-  function openRequestModal(activeTabButton) {
+  function openRequestModal(activeTabButton, item, modalData) {
     setIsRequestModalOpen(true);
     setActiveTabButton(activeTabButton);
+    setItemIdToModal(item);
   }
   const closeResolvedModal = () => {
     setResolvedIsModalOpen(false);
@@ -62,12 +80,12 @@ export default function DeleteRequestTab() {
       try {
         const {data }= await EmployeeRequest.getAllDeleteEmployeeRequest();
          setDeleteData(data);
-        // console.log('d',data)
+        console.log('this is delete ',data)
         // console.log('DEGLETdE DAggTA',deleteData)
       } catch (error) {
         console.error(error);
       }
-      
+
     };
 
     useEffect(() => {
@@ -78,33 +96,38 @@ export default function DeleteRequestTab() {
     <div>
       <div>
         <div>
-          {data.map((item) => (
-            <div
-              className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
-              key={item.id}
-            >
-              <p>
-                Edit Kadwama Lazarus’s profile request from
-                {item?.user?.firstname}
-              </p>
+          {deleteData.length &&
+            deleteData.map((item) => (
+              <div
+                className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
+                key={item._id}
+              >
+                <p>
+                  Edit Kadwama Lazarus’s profile request from
+                  {item?.user?.firstname}
+                </p>
 
-              {item.status === "Resolved" ? (
-                <button
-                  className={"btn-black"}
-                  onClick={() => openResolvedModal("delete")}
-                >
-                  Resolved
-                </button>
-              ) : (
-                <button
-                  className={"btn-orange"}
-                  onClick={() => openRequestModal("delete")}
-                >
-                  View Request
-                </button>
-              )}
-            </div>
-          ))}
+                {item.status === "Resolved" ? (
+                  <button
+                    className={"btn-black"}
+                    onClick={() => openResolvedModal("delete")}
+                  >
+                    Resolved
+                  </button>
+                ) : (
+                  <button
+                    className={"btn-orange"}
+                    onClick={() => {
+                      console.log('item from reqeust buttin',item);
+                      openRequestModal("delete", item._id);
+                      setModalData(item);
+                    }}
+                  >
+                    View Request
+                  </button>
+                )}
+              </div>
+            ))}
         </div>
       </div>
 
@@ -132,6 +155,8 @@ export default function DeleteRequestTab() {
           openDeclineSnackBar={openDeclineSnackBar}
           openApproveSnackBar={openApproveSnackBar}
           activeTabButton={activeTabButton}
+          modalReason={modalData}
+
         />
       </Modal>
 

@@ -25,16 +25,27 @@ export default function AddRequestTab() {
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
 
-  const openDeclineSnackBar = () => {
+  const [itemIdToModal, setItemIdToModal] = useState(0);
+   const [addData, setAddData] = useState([]);
+
+  const openDeclineSnackBar = async() => {
     setDeclineSnackBar(true);
+      const res = await EmployeeRequest.declineEmployeeRequest({
+      itemIdToModal
+    });
+
   };
 
   const closeDeclineSnackBar = () => {
     setDeclineSnackBar(false);
   };
 
-  const openApproveSnackBar = () => {
+  const openApproveSnackBar = async() => {
     setApproveSnackBar(true);
+        const res = await EmployeeRequest.declineEmployeeRequest({
+       itemIdToModal
+     });
+// console.log(res);
   };
 
   const closeApproveSnackBar = () => {
@@ -46,9 +57,10 @@ export default function AddRequestTab() {
   };
   const [activeTabButton, setActiveTabButton] = useState("");
 
-  function openRequestModal(activeTabButton) {
+  function openRequestModal(activeTabButton,itemId) {
     setIsRequestModalOpen(true);
     setActiveTabButton(activeTabButton);
+    setItemIdToModal(itemId);
   }
   const closeResolvedModal = () => {
     setResolvedIsModalOpen(false);
@@ -61,8 +73,9 @@ export default function AddRequestTab() {
 
    const handleFetchAddRequestData = async () => {
      try {
-       const data = await EmployeeRequest.getAllAddEmployeeRequest();
-       console.log("ajdd request", data);
+       const {data} = await EmployeeRequest.getAllAddEmployeeRequest();
+       setAddData(data)
+       console.log("this is add request", data);
       
      } catch (error) {
        console.error(error);
@@ -79,33 +92,34 @@ export default function AddRequestTab() {
     <div>
       <div>
         <div>
-          {data.map((item) => (
-            <div
-              className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
-              key={item.id}
-            >
-              <p>
-                Edit Kadwama Lazarus’s profile request from
-                {item.name}
-              </p>
+          {addData.length &&
+            addData.map((item) => (
+              <div
+                className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
+                key={item._id}
+              >
+                <p>
+                  Edit Kadwama Lazarus’s profile request from
+                  {item.name}
+                </p>
 
-              {item.status === "Resolved" ? (
-                <button
-                  className={"btn-black"}
-                  onClick={() => openResolvedModal("add")}
-                >
-                  Resolved
-                </button>
-              ) : (
-                <button
-                  className={"btn-orange"}
-                  onClick={() => openRequestModal("add")}
-                >
-                  View Request
-                </button>
-              )}
-            </div>
-          ))}
+                {item.status === "Resolved" ? (
+                  <button
+                    className={"btn-black"}
+                    onClick={() => openResolvedModal("add")}
+                  >
+                    Resolved
+                  </button>
+                ) : (
+                  <button
+                    className={"btn-orange"}
+                    onClick={() => openRequestModal("add", item._id)}
+                  >
+                    View Request
+                  </button>
+                )}
+              </div>
+            ))}
         </div>
       </div>
 

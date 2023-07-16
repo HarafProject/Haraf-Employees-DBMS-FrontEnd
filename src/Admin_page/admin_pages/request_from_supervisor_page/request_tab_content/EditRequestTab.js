@@ -15,9 +15,14 @@ export default function EditRequestTab() {
   const [approveSnackBar, setApproveSnackBar] = useState(false);
 
     const [editRequest, setEditRequest] = useState([]);
+const [itemIdToModal, setItemIdToModal] = useState(0);
 
-  const openDeclineSnackBar = () => {
+ 
+  const openDeclineSnackBar = async () => {
     setDeclineSnackBar(true);
+    const res = await EmployeeRequest.declineEmployeeRequest({
+      itemIdToModal,
+    });
   };
 
   const closeDeclineSnackBar = () => {
@@ -28,8 +33,12 @@ export default function EditRequestTab() {
     setApproveSnackBar(true);
   };
 
-  const closeApproveSnackBar = () => {
+  const closeApproveSnackBar = async() => {
     setApproveSnackBar(false);
+     setApproveSnackBar(true);
+        const res = await EmployeeRequest.declineEmployeeRequest({
+       itemIdToModal
+     });
   };
 
   const closeRequestModal = () => {
@@ -37,9 +46,10 @@ export default function EditRequestTab() {
   };
   const [activeTabButton, setActiveTabButton] = useState("");
 
-  function openRequestModal(activeTabButton) {
+  function openRequestModal(activeTabButton, itemId) {
     setIsRequestModalOpen(true);
     setActiveTabButton(activeTabButton);
+    setItemIdToModal(itemId); 
   }
   const closeResolvedModal = () => {
     setResolvedIsModalOpen(false);
@@ -50,10 +60,11 @@ export default function EditRequestTab() {
     setActiveTabButton(activeTabButton);
   }
 
-  
+ 
     const handleFetchEditRequestData = async () => {
       try {
         const  {data}  = await EmployeeRequest.getAllEditEmployeeRequest();
+        console.log('this is edit request',data)
         setEditRequest(data);
         
       } catch (error) {
@@ -73,32 +84,34 @@ export default function EditRequestTab() {
     <div>
       <div>
         <div>
-          {editRequest.map((item) => (
-            <div
-              className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
-              key={item._id}
-            >
-              <p>
-                Edit {item?.employee} profile request from {item?.user?.firstname}
-              </p>
+          {editRequest.length &&
+            editRequest.map((item) => (
+              <div
+                className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
+                key={item._id}
+              >
+                <p>
+                  Edit {item?.employee} profile request from{" "}
+                  {item?.user?.firstname}
+                </p>
 
-              {item.status === "Resolved" ? (
-                <button
-                  className={"btn-black"}
-                  onClick={() => openResolvedModal("edit")}
-                >
-                  Resolved
-                </button>
-              ) : (
-                <button
-                  className={"btn-orange"}
-                  onClick={() => openRequestModal("edit")}
-                >
-                  View Request
-                </button>
-              )}
-            </div>
-          ))}
+                {item.status === "Resolved" ? (
+                  <button
+                    className={"btn-black"}
+                    onClick={() => openResolvedModal("edit")}
+                  >
+                    Resolved
+                  </button>
+                ) : (
+                  <button
+                    className={"btn-orange"}
+                    onClick={() => openRequestModal("edit", item._id)}
+                  >
+                    View Request
+                  </button>
+                )}
+              </div>
+            ))}
         </div>
       </div>
 
