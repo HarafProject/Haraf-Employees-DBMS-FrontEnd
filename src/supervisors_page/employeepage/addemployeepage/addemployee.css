@@ -30,6 +30,7 @@
 .add-employee-content .form-field select option {
   color: #000;
 }
+
 .add-employee-content .form-field select option:first-child {
   color: #444444ac !important;
 }
@@ -138,4 +139,9 @@
   font-size: 28px;
   font-weight: 400;
   line-height: normal;
+}
+
+.add-employee-screen .form-field input,
+.add-employee-screen .form-field select {
+  width: 100%;
 }

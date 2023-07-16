@@ -3,7 +3,7 @@ import profile from '../../../assets/profile.png';
 import { Icon } from '@iconify/react';
 import ReusableHeader from "../../../component/reusable/reusableheader/ReusableHeader";
 import './addemployee.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import supervisor from "../../../class/supervisor.class";
 import dataOBJs from '../../../class/data.class';
 import { useFormik } from 'formik';
@@ -18,11 +18,13 @@ import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkM
 
 export default function AddEmployeeScreen({ prefilledData }) {
     const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
     const webcamRef = useRef(null);
     const [imageData, setImageData] = useState(null);
     const { user } = useSelector((state) => state?.user)
     const [isVerified, setIsVerified] = useState(false)//Check if user account number is valid
+    const [callVerify, setCallVerify] = useState(false)
     const [bankDetail, setBankDetails] = useState({
         bankName: "Select Bank",
     })
@@ -33,6 +35,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const [isOnline, setIsOnline] = useState(navigator.onLine);
+    const verificationInfo = location?.state
 
     function openModal() {
         setIsOpen(true);
@@ -82,19 +85,37 @@ export default function AddEmployeeScreen({ prefilledData }) {
         setTypologyList(typology_list.workTypology)
         // setWardList(ward_list)
     }
+
+
     useEffect(() => {
-        if (!bankDetail.accountNumber) toast.info("Please enter bank details before proceeding.")
 
         fetchBankList();
         fetchWards()
         fetchTypology()
     }, [])
 
+    useEffect(() => {
+        if (!verificationInfo) return navigate(-1, { replace: true })
+
+        setBankDetails({
+            ...bankDetail,
+            // accountNumber: verificationInfo.accountNumber,
+            // bankCode: verificationInfo.bankCode,
+            accountNumber: "0121027651",
+            bankCode: "058",
+            bankName: verificationInfo.bankName
+        })
+        setCallVerify(true)
+    }, [location])
+
+    useEffect(() => {
+        if (!bankDetail?.bankName || !bankDetail?.accountNumber) return
+        verifyBankDetails()
+    }, [callVerify])
+
+
     async function verifyBankDetails() {
 
-        if (!bankDetail.accountNumber) return toast.error("Please enter account number.")
-        if (bankDetail.bankName === "Select Bank") return toast.error("Please select bank.")
-        toast.info("Please wait while we verify your bank details.")
         try {
             const { bankDetails, message } = await supervisor.verifyEmpoyeeBankAccount(bankDetail)
 
@@ -113,7 +134,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
             } else {
                 setBankDetails({
                     ...bankDetail,
-                    accountName: ""
+                    fullName: ""
                 })
                 setIsVerified(false)
                 toast.error(error)
@@ -229,7 +250,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         type="text"
                                         name="fullName"
                                         placeholder="Full Name"
-                                        value={bankDetail.fullName}
+                                        value={bankDetail?.fullName}
                                         disabled
                                     />
 
@@ -243,7 +264,8 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         })}
                                         onBlur={verifyBankDetails}
                                         placeholder='Bank Account Number '
-                                        autoFocus
+                                        value={bankDetail?.accountNumber}
+                                        disabled
                                     />
                                 </div>
                                 <div className="form-field my-4" >
@@ -306,7 +328,8 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         type="tel" name="phone" ref={inputRef}
                                         placeholder='Phone Number '
                                         disabled={!isVerified}
-                                        {...formik.getFieldProps('phone')} />
+                                        {...formik.getFieldProps('phone')}
+                                        autoFocus />
 
                                     {formik.touched.phone && formik.errors.phone ? (
                                         <div className="error">{formik.errors.phone}</div>
@@ -323,6 +346,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         })
 
                                     }} placeholder='Select Bank'
+                                        disabled
                                         onBlur={verifyBankDetails}
                                     >
                                         <option>{bankDetail?.bankName}</option>
@@ -406,7 +430,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         {isLoading && <center className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 
                         {
-                            !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid ||!isVerified || isLoading} className="btn save-employee mt-5">
+                            !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || !isVerified || isLoading} className="btn save-employee mt-5">
                                 {isEditEmployee ? 'Save Changes' : 'Save Employee'}
                             </button>
                         }
@@ -437,7 +461,14 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         {
                             isOnline &&
                             <>
-                                <Webcam audio={false} ref={webcamRef} mirrored={true} />
+                                <Webcam
+                                    audio={false}
+                                    ref={webcamRef}
+                                    mirrored={true}
+                                    videoConstraints={{
+                                        facingMode: ["environment"]
+                                    }}
+                                />
                                 <button className="profile-img camera" onClick={handleCapture}>
                                     <Icon icon="heroicons-solid:camera" className='camera-icon' />
                                 </button></>

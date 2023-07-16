@@ -98,69 +98,7 @@ export default function EditEmployeeScreen() {
       bankName: data.employee.bankName,
     });
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //         ward: '',
-    //         age: '',
-    //         maritalStatus: '',
-    //         householdSize: '',
-    //         sex: '',
-    //         phone: '',
-    //         address: '',
-    //         workTypology: '',
-    //         specialDisability: '',
-    //         householdHead: '',
-    //     },
-    //     validationSchema: validationSchema,
-    //     onSubmit: async (values) => {
-    //         if (!imageData) return toast.error("Headshot is required.")
-    //         try {
-    //             // Handle form submission here
-    //             // Create a FormData object to send the image file
-    //             setIsLoading(true)
-    //             const formData = new FormData();
-
-    //             if (imageData.slice(-4) !== "webp") {
-    //                 formData.append('image', dataURLtoFile(imageData, 'image.png'));
-    //             }
-
-    //             // Append form fields to formData
-    //             Object.keys(values).forEach((field) => {
-
-    //                 formData.append(field, values[field]);
-    //             });
-    //             // Append form fields to formData
-    //             Object.keys(bankDetail).forEach((field) => {
-    //                 // console.log()
-    //                 formData.append(field, bankDetail[field]);
-    //             });
-    //             const { message, updatedEmployee } = await supervisor.updateEmployeeProfile(formData, employee, notificationId)
-
-    //             toast.success(message)
-    //             setIsLoading(false)
-    //             navigate("/supervisor/employee-profile", { state: updatedEmployee, replace: true })
-
-    //         } catch (error) {
-    //             setIsLoading(false)
-    //             toast.error(error)
-    //             toast.error(error?.error)
-    //             console.error('Form submission error:', error);
-    //         }
-    //     },
-    // });
-
-    // const dataURLtoFile = (dataURL, filename) => {
-    //     const arr = dataURL.split(',');
-    //     const mime = arr[0].match(/:(.*?);/)[1];
-    //     const bstr = atob(arr[1]);
-    //     let n = bstr.length;
-    //     const u8arr = new Uint8Array(n);
-    //     while (n--) {
-    //         u8arr[n] = bstr.charCodeAt(n);
-    //     }
-    //     return new File([u8arr], filename, { type: mime });
-    // };
-    // formik.setValues(updatedValues);
+;
   }, [data]);
 
   async function verifyBankDetails() {

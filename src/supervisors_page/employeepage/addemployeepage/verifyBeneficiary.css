@@ -1,0 +1,58 @@
+.verify-beneficiary {
+    margin: 6rem auto;
+    width: 80%;
+  }
+  
+  .verify-beneficiary h2 {
+    color: #0280ca;
+    text-align: center;
+  }
+  .verify-beneficiary .form-flex {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .verify-beneficiary input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin: 1.5rem 0;
+    border: 1px solid black;
+  }
+  
+  .verify-beneficiary  select {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 1.5rem 0;
+    border-radius: 5px;
+  }
+  
+  .verify-beneficiary button {
+    display: block;
+    width: 40%;
+    margin: 1rem auto;
+    border: none;
+    color: white;
+    background-color: #0280ca;
+    padding: 0.6rem 0;
+    border-radius: 25px;
+  }
+  
+  .verify-beneficiary .user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .verify-beneficiary .user p:nth-child(1) {
+    font-size: 14px;
+  }
+  
+  .verify-beneficiary .user img {
+    width: 50px;
+    border-radius: 60%;
+  }
+  
+  .verify-beneficiary .user p {
+    font-size: 12px;
+  }

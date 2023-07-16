@@ -20,6 +20,7 @@ import { replace } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import OnlineMode from "../component/reusable/modalscontent/OnlineMode";
 import Modal from 'react-modal';
+import VerifyBeneficiary from "./employeepage/addemployeepage/VerifyBeneficiary";
 const SupervisorHome = () => {
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -59,7 +60,7 @@ const SupervisorHome = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-   
+
     if (!user) {
       navigate("/", { replace: true })
     } else {
@@ -70,6 +71,7 @@ const SupervisorHome = () => {
   return (
     <>
       <Routes>
+        <Route path="/verify-beneficiary" element={<VerifyBeneficiary />} />
         <Route path="/add-employee" element={<AddEmployeeScreen />} />
         <Route path="/edit-employee" element={<EditEmployeeScreen />} />
         <Route path="/employee-list" element={<EmployeeListTable />} />

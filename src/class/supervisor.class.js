@@ -27,6 +27,21 @@ class supervisorOBJ {
     }
   };
 
+  //get bank list
+  verifyBeneficiary = async (info) => {
+    try {
+      //check if data is empty
+      const { data } = await api.post("api/supervisor/verify-beneficiary", info);
+
+      return data;
+    } catch (err) {
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
+    }
+  };
   //get employee details
   getEmployee = async (id) => {
     try {
@@ -230,7 +245,7 @@ class supervisorOBJ {
 
     }
   };
- 
+
 }
 
 const supervisor = new supervisorOBJ();
