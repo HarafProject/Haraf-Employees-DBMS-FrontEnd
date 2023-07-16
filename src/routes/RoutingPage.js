@@ -14,11 +14,19 @@ import TakeAttendance from '../supervisors_page/AttendancePages/takeAttendancePa
 
 import SupervisorProfile from '../supervisors_page/AttendancePages/supervisorProfile/SupervisorProfile'
 import AttendanceReportUpload from '../supervisors_page/AttendancePages/attendanceReportUpload/AttendanceReportUpload'
+import AddBeneficiary from '../supervisors_page/AttendancePages/add_beneficiary/AddBeneficiary'
+
+
+
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
       <Route path='/' element={<SelectTypography />}></Route>
       <Route path='/' element={<SupervisorProfile />}></Route>
+      <Route path='/add-beneficiary' element={<AddBeneficiary />}></Route>
+
       <Route path='/profile' element={<SupervisorProfile />}></Route>
       <Route path='/take-attendance' element={<TakeAttendance />}></Route>
       <Route
