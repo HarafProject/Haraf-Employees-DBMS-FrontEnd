@@ -101,6 +101,38 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
+
+  //get all attendance date
+  getAttendanceDates = async (type, value) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/admin/attendance-dates`);
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  //get all attendance date
+  getAttendanceWeeks = async (type, value) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/admin/attendance-weeks`);
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+  //get all DataCount
+  getAnalyticsData = async (type, value) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/admin/beneficiary-attendance-analytics?type=${type}&value=${value}`);
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
   //get all Get Supervisors
   getAllGetSupervisors = async () => {
     try {
@@ -205,7 +237,7 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
-  
+
   getEmployeeSummary = async (employeeId) => {
     try {
 
