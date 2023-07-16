@@ -92,13 +92,16 @@ export default function LoginScreen() {
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+         
           toast.error(err?.error || err);
           setIsLoading(false);
           if (!err) {
             let auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
+           
             if (auth && !isOnline) {
               openModal()
+            }else{
+              toast.error("You appear to be offline.")
             }
           }
         });

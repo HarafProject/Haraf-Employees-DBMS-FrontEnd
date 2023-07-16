@@ -58,7 +58,7 @@ export default function EmployeeListTable() {
         if (data === "offline") {
             setUsersData(employees)
         } else {
-            if (data.employees.length === 0 && !display) return navigate("/supervisor/employee-list-empty", { replace: true })
+            // if (data.employees.length === 0 && !display) return navigate("/supervisor/employee-list-empty", { replace: true })
             setUsersData(data.employees)
             localStorage.removeItem("HARAF-AUTH");
             dispatch(updateEmployees(data.employees))
