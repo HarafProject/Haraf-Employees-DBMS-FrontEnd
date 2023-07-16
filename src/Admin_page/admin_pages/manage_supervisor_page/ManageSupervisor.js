@@ -27,12 +27,14 @@ export default function ManageSupervisor() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [modalClosed, setModalClosed] = useState(false);
   const [supervisor,setSupervisor] = useState([])
+  const [userId,setUserId] = useState([])
 
-  function openModal(buttonClick, supervisorName, getRole) {
+  function openModal(buttonClick, supervisorName, getRole,id) {
     setIsOpen(true);
     setButtonClick(buttonClick);
     setSupervisorName(supervisorName);
     setGetRole(getRole);
+    setUserId(id)
   }
 
   function closeModal() {
@@ -143,8 +145,9 @@ useEffect(()=>{
                           onClick={() =>
                             openModal(
                               "delete",
-                              supervisor.name,
-                              supervisor.role
+                              supervisor.firstname,
+                              supervisor.role,
+                              supervisor._id
                             )
                           }
                         >
@@ -158,8 +161,9 @@ useEffect(()=>{
                           onClick={() =>
                             openModal(
                               "verify",
-                              supervisor.name,
-                              supervisor.role
+                              supervisor.firstname,
+                              supervisor.role,
+                              supervisor._id
                             )
                           }
                         >
@@ -174,8 +178,9 @@ useEffect(()=>{
                         onClick={() =>
                           openModal(
                             "unverify",
-                            supervisor.name,
-                            supervisor.role
+                            supervisor.firstname,
+                            supervisor.role,
+                            supervisor._id
                           )
                         }
                       >
@@ -230,19 +235,11 @@ useEffect(()=>{
           buttonClick={buttonClick}
           supervisorName={supervisorName}
           getRole={getRole}
+          id={userId}
         />
       </Modal>
 
-      {modalClosed && (
-        <div className="d-flex justify-content-center">
-          <div className=" d-flex align-items-center snackbar">
-            You have successfully {buttonClick} {supervisorName} as a {getRole}
-            <button className=" btn snackbar-btn" onClick={closeSnackbar}>
-              Undo
-            </button>
-          </div>
-        </div>
-      )}
+      
     </>
   );
 }
