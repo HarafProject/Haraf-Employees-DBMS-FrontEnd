@@ -71,39 +71,40 @@ useEffect(() => {
           return acc + (item.zone.name === zone.name ? 1 : 0);
         }, 0);
 
-        return { tab: zone.name.split(' ').join('_'), label: zone.name,id:zone._id, count };
+        return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
       });
 
       const filterTable = activeTab === 'allZones'
         ? tableDataResponse
         : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
-      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount,id:'' }, ...zoneData]);
-      if (searchData && searchData.length > 1) {
+
+      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
+
+      let filteredTableData = filterTable;
+
+      if (searchData && searchData.trim().length >= 1) {
         const filterSearch = filterTable.filter((item) => {
           const firstName = item?.submittedBy?.firstname || '';
           return firstName.toLowerCase().startsWith(searchData.toLowerCase());
         });
-        setTableData(filterSearch);
-      } else {
-        setTableData(filterTable);
+        filteredTableData = filterSearch;
       }
+
       if (selectedlgaValue) {
-        const lgaFilter = filterTable.filter((item) => item.lga._id === selectedlgaValue);
-        setTableData(lgaFilter);
-      }else{
-        setTableData(filterTable)
+        const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
+        filteredTableData = lgaFilter;
       }
-      setTableData(filterTable);
+
+      setTableData(filteredTableData);
     } catch (error) {
       console.log(error);
     }
   };
- 
+
   fetchData();
 }, [activeTab, searchData, selectedlgaValue, tableData]);
 
-
-
+console.log(searchData,'search')
 
 
 //get all lga
