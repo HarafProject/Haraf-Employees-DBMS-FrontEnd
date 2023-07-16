@@ -8,10 +8,12 @@ import SuperAdminProfile from "../super_admin_profile_page/SuperAdminProfile";
 import AttendanceAnalytics from "../attendance_analytic_page/AttendanceAnalytics";
 import ManageSupervisor from "../manage_supervisor_page/ManageSupervisor";
 import AttendanceReportTable from "../attendance_page/AttendanceReportTable";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
   const [selectedComponent, setSelectedComponent] = useState("requests");
+  const { user } = useSelector((state) => state?.user)
 
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
@@ -29,7 +31,7 @@ export default function AdminHomePage() {
 
           <div>
             <span className="name">
-              Williams Donald {<br />} Super Admin ID: 3290339300
+              {user?.firstname} {user?.surname} {<br />}  {user?.role} ID: {user?.reference}
             </span>
           </div>
         </div>
@@ -93,7 +95,7 @@ export default function AdminHomePage() {
       </div>
       <div className="content px-3">
         <div className="mx-3">
-          <h4 className="header-title">LIPWDMS Super Admin Portal</h4>
+          <h4 className="header-title">LIPWDMS {user?.role === "super-admin" ? "Super" : ""} Admin Portal</h4>
           <div className="user-info-section py-3 my-3">
             <div>
               {selectedComponent === "employee" && <AdminEmployeeList />}
