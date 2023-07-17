@@ -26,7 +26,7 @@ class manageSupervisiorOBJ {
     }
   };
   //search by zone
-  searchByZone = async () => {
+  searchByZone = async (data) => {
     try {
       //check if data is empty
       const { data } = await api.get(`api/superadmin/filter-supervisors-by-zones/${data}`);
@@ -36,30 +36,30 @@ class manageSupervisiorOBJ {
     }
   };
   //search By LGA
-  searchByLGA = async () => {
+  searchByLGA = async (id) => {
     try {
       //check if data is empty
-      const { data } = await api.get(`api/superadmin/filter-supervisors-by-lga/${data}`);
+      const { data } = await api.get(`api/superadmin/filter-supervisors-by-lga/${id}`);
       return data;
     } catch (err) {
       throw err?.response?.data;
     }
   };
    //verify supervisor
-   verify = async () => {
+   verify = async (id) => {
     try {
       //check if data is empty
-      const { data } = await api.get(`api/superadmin/superadmin/verify-supervisor/${data}`);
+      const { data } = await api.get(`api/superadmin/verify-supervisor/${id}`);
       return data;
     } catch (err) {
       throw err?.response?.data;
     }
   };
    //get by id
-   searchById = async () => {
+   searchById = async (id) => {
     try {
       //check if data is empty
-      const { data } = await api.get(`api/superadmin/view-a-supervisor/${data}`);
+      const { data } = await api.get(`api/superadmin/view-a-supervisor/${id}`);
       return data;
     } catch (err) {
       throw err?.response?.data;
@@ -67,10 +67,10 @@ class manageSupervisiorOBJ {
   };
   //undo verified 
   //get by id
-  undoVerifiedd = async () => {
+  undoVerified = async (id) => {
     try {
       //check if data is empty
-      const { data } = await api.get(`api/superadmin/undo-supervisor-verification/${data}`);
+      const { data } = await api.get(`api/superadmin/undo-supervisor-verification/${id}`);
       return data;
     } catch (err) {
       throw err?.response?.data;
