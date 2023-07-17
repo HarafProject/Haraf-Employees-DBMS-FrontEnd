@@ -57,14 +57,16 @@ export default function AddRequestTab() {
   };
   const [activeTabButton, setActiveTabButton] = useState("");
 
-  function openRequestModal(activeTabButton,itemId) {
+  function openRequestModal(activeTabButton,itemId,) {
     setIsRequestModalOpen(true);
+    console.log('itme  id',itemId)
     setActiveTabButton(activeTabButton);
-    setItemIdToModal(itemId);
+    setItemIdToModal(itemId.id);
   }
   const closeResolvedModal = () => {
     setResolvedIsModalOpen(false);
   };
+
 
   function openResolvedModal(activeTabButton) {
     setResolvedIsModalOpen(true);
@@ -113,7 +115,7 @@ export default function AddRequestTab() {
                 ) : (
                   <button
                     className={"btn-orange"}
-                    onClick={() => openRequestModal("add", item._id)}
+                    onClick={() => openRequestModal("add", item)}
                   >
                     View Request
                   </button>

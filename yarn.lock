@@ -8200,7 +8200,7 @@
     "@scarf/scarf" "^1.0.6"
     "ts-toolbelt" "^6.9.4"
 
-"react-redux@^8.0.4":
+"react-redux@^8.1.1":
   "integrity" "sha512-5W0QaKtEhj+3bC0Nj0NkqkhIv8gLADH/2kYFMTHxCVqQILiWzLv6MaLuV5wJU3BQEdHKzTfcvPN0WMS6SC1oyA=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-8.1.1.tgz"
   "version" "8.1.1"

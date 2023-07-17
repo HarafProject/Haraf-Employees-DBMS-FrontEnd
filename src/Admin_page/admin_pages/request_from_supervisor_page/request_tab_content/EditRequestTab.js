@@ -47,6 +47,7 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
   const [activeTabButton, setActiveTabButton] = useState("");
 
   function openRequestModal(activeTabButton, itemId) {
+    console.log('dfdfdf',itemId)
     setIsRequestModalOpen(true);
     setActiveTabButton(activeTabButton);
     setItemIdToModal(itemId); 
@@ -91,7 +92,7 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
                 key={item._id}
               >
                 <p>
-                  Edit {item?.employee} profile request from{" "}
+                  Edit {item?.employee} pepe request from{" "}
                   {item?.user?.firstname}
                 </p>
 
@@ -105,7 +106,7 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
                 ) : (
                   <button
                     className={"btn-orange"}
-                    onClick={() => openRequestModal("edit", item._id)}
+                    onClick={() => openRequestModal("edit", item)}
                   >
                     View Request
                   </button>
