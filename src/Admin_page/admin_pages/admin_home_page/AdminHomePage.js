@@ -8,6 +8,7 @@ import SuperAdminProfile from "../super_admin_profile_page/SuperAdminProfile";
 import AttendanceAnalytics from "../attendance_analytic_page/AttendanceAnalytics";
 import ManageSupervisor from "../manage_supervisor_page/ManageSupervisor";
 import AttendanceReportTable from "../attendance_page/AttendanceReportTable";
+import RequestFromSupervisor from "../request_from_supervisor_page/RequestFromSupervisor";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminHomePage() {
@@ -19,9 +20,11 @@ export default function AdminHomePage() {
     setSelectedComponent(component);
   };
 
+  
   const goBack = () => {
     window.history.go(-1);
   };
+
 
   return (
     <div className="admin-dashboard">
@@ -104,7 +107,7 @@ export default function AdminHomePage() {
                 <AttendanceAnalytics />
               )}
               {selectedComponent === "requests" && (
-                <div>Requests from Supervisors </div>
+                <div><RequestFromSupervisor /> </div>
               )}
               {selectedComponent === "manage" && <ManageSupervisor />}
               {selectedComponent === "profile" && <SuperAdminProfile />}
