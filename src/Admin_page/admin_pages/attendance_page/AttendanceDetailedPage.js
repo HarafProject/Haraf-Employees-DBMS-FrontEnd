@@ -20,76 +20,71 @@ import dataOBJs from "../../../class/data.class";
 export default function AttendanceDetailedPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [searchData,setSearchData] = useState('')
-  const [tableData,setTableData]=useState([])
-  const [zone,setZone] =useState([])
-  const [selectedZone,setSelectedZone] = useState([])
+  const [searchData, setSearchData] = useState("");
+  const [tableData, setTableData] = useState([]);
+  const [zone, setZone] = useState([]);
+  const [selectedZone, setSelectedZone] = useState("");
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  
-  
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   const { id } = useParams();
-  
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const dataParam = queryParams.get('data');
-  let receivedArray = JSON.parse(decodeURIComponent(dataParam));
+  const dataParam = queryParams.get("data");
+  let receivedArray = dataParam ? JSON.parse(decodeURIComponent(dataParam)) : [];
 
+  useEffect(() => {
+    if (dataParam) {
+      const attendanceRecord = receivedArray?.attendanceRecord || [];
+      setTableData(attendanceRecord);
+      console.log(attendanceRecord, "testing");
+    }
+  }, [dataParam]);
 
-  useEffect(()=>{
-    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord)
-  },[dataParam])
+  useEffect(() => {
+    supervisor.getWorkTypology((res) => {
+      console.log(res, "toplogy");
+    });
 
-  useEffect(()=>{
-    supervisor.getWorkTypology((res)=>{
-      console.log(res,'toplogy')
-    })
+    dataOBJs.getZone().then((res) => {
+      const arr = res.map((a) => ({
+        name: a.name,
+        value: a._id,
+      }));
+      setZone(arr);
+      console.log(arr, "res from zone");
+    });
+  }, []);
 
-    dataOBJs.getZone().then((res)=>{
-      let arr = []
-      res.map((a)=>{
-        arr.push({
-          name:a.name,
-          value:a._id
-        })
-      })
-      setZone(arr)
-      console.log(arr,'res from zone')
-    })
-    
-  },[])
+  useEffect(() => {
+    if (searchData && searchData.length >= 1) {
+      const filterSearch = receivedArray?.attendanceRecord.filter((item) =>
+        item?.employee.toLowerCase().startsWith(searchData.toLowerCase())
+      );
+      setTableData(filterSearch);
+    } else if (selectedZone) {
+      const filterZone = receivedArray?.attendanceRecord?.filter(
+        (i) => i.zone === selectedZone
+      );
+      setTableData(filterZone);
+      console.log(filterZone);
+    } else if (dataParam) {
+      const attendanceRecord = receivedArray?.attendanceRecord || [];
+      setTableData(attendanceRecord);
+    }
+  }, [dataParam, receivedArray?.attendanceRecord, searchData, selectedZone]);
 
   const goBack = () => {
     window.history.go(-1);
   };
- 
-useEffect(()=>{
-  if (searchData && searchData.length >= 1) {
-    const filterSearch = receivedArray?.attendanceRecord.filter((item) => {
-      const firstName = item?.employee
-      return firstName.toLowerCase().startsWith(searchData.toLowerCase());
-    });
-    setTableData(filterSearch)
-  } else {
-    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord)
-  }
-
-  if(selectedZone){
-     const filterZone =  receivedArray?.attendanceRecord?.filter((i)=>i.zone === selectedZone )
-      setTableData(filterZone)
-    console.log(filterZone)
-     
-  }else{
-    setTableData( JSON.parse(decodeURIComponent(dataParam))?.attendanceRecord)
-  }
-},[dataParam, receivedArray?.attendanceRecord, searchData, selectedZone, tableData, zone])
-console.log(tableData,'table data')
   return (
     <div className="my-4 px-auto attendance-detailed-page">
       <div className=" container-fluid attendance-detailed-header px-4">

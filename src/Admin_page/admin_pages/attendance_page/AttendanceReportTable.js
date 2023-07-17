@@ -24,6 +24,7 @@ export default function AttendanceReportTable({ onRowClick }) {
   const [zone,setZone] = useState([])
   const [lgaValue,setLgaValue] = useState([])
   const [selectedlgaValue,setSelectedLgaValue] = useState([])
+  
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
     setSelectedLgaValue('')

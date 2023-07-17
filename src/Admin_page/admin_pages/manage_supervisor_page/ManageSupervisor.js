@@ -16,6 +16,7 @@ import adminSupervisorList from "../../../component/data/ListOfAdminSupervisors"
 import "./managesupervisor.css";
 import ManageSupervisorModal from "../../../component/reusable/modalscontent/ManageSupervisorModal";
 import manageSupervisior from "../../../class/ManageSupervisior.class";
+import dataOBJs from "../../../class/data.class";
 
 export default function ManageSupervisor() {
   const [page, setPage] = useState(0);
@@ -28,6 +29,10 @@ export default function ManageSupervisor() {
   const [modalClosed, setModalClosed] = useState(false);
   const [supervisor,setSupervisor] = useState([])
   const [userId,setUserId] = useState([])
+  const [zone,setZone] = useState([])
+  const [lgaValue,setLgaValue] = useState([])
+  const [selectedlgaValue,setSelectedLgaValue] = useState([])
+  
 
   function openModal(buttonClick, supervisorName, getRole,id) {
     setIsOpen(true);
@@ -48,6 +53,7 @@ export default function ManageSupervisor() {
   }
 //get supervisior details 
 
+
 const getDetails = ()=>{
   manageSupervisior.getAll().then((res)=>{
     setSupervisor(res?.data)
@@ -66,7 +72,19 @@ useEffect(()=>{
     setPage(0);
   };
   const totalCount = adminSupervisorList.length;
+useEffect(()=>{
+ const getZone = async()=>{
+  try{
+    const [zoneResponse] = await Promise.all([
+      dataOBJs.getZone(zoneResponse,'zones'),
+    console.log()
+    ]);
 
+  }catch(err){
+
+  }
+ }
+})
   return (
     <>
       <div className="manage-supervisor-page py-3">
@@ -125,7 +143,9 @@ useEffect(()=>{
                 </TableRow>
               </TableHead>
               <TableBody>
-                {supervisor.map((supervisor, index) => (
+                {supervisor && supervisor
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((supervisor, index) => (
                   <TableRow key={supervisor.id}>
                     <TableCell>{index + 1}</TableCell>
 
@@ -203,7 +223,7 @@ useEffect(()=>{
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={adminSupervisorList.length}
+              count={supervisor.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
