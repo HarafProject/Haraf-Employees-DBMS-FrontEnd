@@ -65,7 +65,7 @@ useEffect(() => {
       ]);
 
       const allZonesCount = tableDataResponse.length;
-
+      
       const zoneData = zoneResponse.map((zone) => {
         const count = tableDataResponse.reduce((acc, item) => {
           return acc + (item.zone.name === zone.name ? 1 : 0);
@@ -94,8 +94,12 @@ useEffect(() => {
         const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
         filteredTableData = lgaFilter;
       }
-
-      setTableData(filteredTableData);
+      if(filteredTableData.length >=1){
+        setTableData(filteredTableData);
+      }else{
+        setTableData(tableDataResponse)
+      }
+      
     } catch (error) {
       console.log(error);
     }
