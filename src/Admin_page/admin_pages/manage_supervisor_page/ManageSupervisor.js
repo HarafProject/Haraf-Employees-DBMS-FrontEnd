@@ -76,14 +76,15 @@ useEffect(()=>{
  const getZone = async()=>{
   try{
     const [zoneResponse] = await Promise.all([
-      dataOBJs.getZone(zoneResponse,'zones'),
-    console.log()
+      dataOBJs.getZone(),
     ]);
+    console.log(zoneResponse,'zones')
 
   }catch(err){
 
   }
  }
+ getZone()
 })
   return (
     <>
