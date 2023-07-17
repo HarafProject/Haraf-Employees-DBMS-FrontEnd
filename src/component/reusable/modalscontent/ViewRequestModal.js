@@ -7,9 +7,11 @@ export default function ViewRequestModal({
   activeTabButton,
   openDeclineSnackBar,
   openApproveSnackBar,
+  modalData,
 }) {
   const [modalText, setModalText] = useState("");
   const [modalMessage, setModalMessage] = useState("");
+  const [modalReason, setModalReason] = useState({});
 
   const declineRequest = () => {
     closeModal();
@@ -22,11 +24,13 @@ export default function ViewRequestModal({
   };
 
   console.log(activeTabButton);
+  console.log("this is reason", 'modalData');
 
   useEffect(() => {
     if (activeTabButton === "add") {
       setModalText("Add Employee Request");
       setModalMessage("Request add new employee to LIPWDMS ");
+      setModalReason(modalData);
     } else if (activeTabButton === "delete") {
       setModalText("Delete Employee Request");
       setModalMessage(
@@ -50,10 +54,7 @@ export default function ViewRequestModal({
           <p className="request-by mt-2">{modalMessage}</p>
           <div className="reason-section mt-3">
             <span>Reasons</span>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua
-            </p>
+            {modalData ? <p>{modalData}</p> : <p> </p>}
           </div>
           <div className="d-flex justify-content-between request-info my-3">
             <p>

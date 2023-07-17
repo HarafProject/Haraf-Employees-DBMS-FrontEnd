@@ -22,7 +22,7 @@ import usersData from "./AdminEmployeeData";
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 
-import "./adminEmployeeList.css";
+import "./adminemployeelist.css";
 
 const fetchEmployeesList = async (key) => {
 

@@ -22,12 +22,15 @@ export default function AttendanceReportTable({ onRowClick }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tableData,setTableData] = useState([])
   const [zone,setZone] = useState([])
-  const [length,setLength] = useState()
+  const [lgaValue,setLgaValue] = useState([])
+  const [selectedlgaValue,setSelectedLgaValue] = useState([])
+  
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
+    setSelectedLgaValue('')
     setPage(0);
   };
-
+const [searchData,setSearchData] = useState('')
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -37,22 +40,6 @@ export default function AttendanceReportTable({ onRowClick }) {
     setPage(0);
   };
 
-  const filteredData =
-    activeTab === "allZones"
-      ? attendanceReportData
-      : attendanceReportData.filter(
-          (report) => report.zone.replace(/\s/g, "") === activeTab
-        );
-  const totalCount = attendanceReportData.length;
-  const countAdamawaSouth = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa South"
-  ).length;
-  const countAdamawaNorth = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa North"
-  ).length;
-  const countAdamawaCentral = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa Central"
-  ).length;
 
   const isTimePastFour = (time) => {
     const [hour, minutes] = time.split(":");
@@ -69,16 +56,7 @@ export default function AttendanceReportTable({ onRowClick }) {
   };
 // Sample array of objects
 
-
-
-
-const tabData = [
-  { tab: 'allZones', label: 'All Zones', count: totalCount },
-  { tab: 'AdamawaSouth', label: 'Adamawa South', count: countAdamawaSouth },
-  { tab: 'AdamawaNorth', label: 'Adamawa North', count: countAdamawaNorth },
-  { tab: 'AdamawaCentral', label: 'Adamawa Central', count: countAdamawaCentral },
-];
-//get list of zone
+//get list of zone and filter
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -88,37 +66,71 @@ useEffect(() => {
       ]);
 
       const allZonesCount = tableDataResponse.length;
-
+      
       const zoneData = zoneResponse.map((zone) => {
         const count = tableDataResponse.reduce((acc, item) => {
           return acc + (item.zone.name === zone.name ? 1 : 0);
         }, 0);
 
-        return { tab: zone.name.split(' ').join('_'), label: zone.name, count };
+        return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
       });
 
       const filterTable = activeTab === 'allZones'
         ? tableDataResponse
         : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
 
-      setTableData(filterTable);
-      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount }, ...zoneData]);
+      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
+
+      let filteredTableData = filterTable;
+
+      if (searchData && searchData.trim().length >= 1) {
+        const filterSearch = filterTable.filter((item) => {
+          const firstName = item?.submittedBy?.firstname || '';
+          return firstName.toLowerCase().startsWith(searchData.toLowerCase());
+        });
+        filteredTableData = filterSearch;
+      }
+
+      if (selectedlgaValue) {
+        const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
+        filteredTableData = lgaFilter;
+      }
+      if(filteredTableData.length >=1){
+        setTableData(filteredTableData);
+      }else{
+        setTableData(tableDataResponse)
+      }
+      
     } catch (error) {
       console.log(error);
     }
   };
 
   fetchData();
-}, [activeTab]);
+}, [activeTab, searchData, selectedlgaValue, tableData]);
+
+console.log(searchData,'search')
 
 
-
-console.log(zone,'zone tab')
-//get all zone
+//get all lga
 useEffect(()=>{
-  
-},[setTableData])
-console.log(activeTab,'active tab')
+  let zoneID = zone.filter((e)=> e.tab === activeTab)
+  if(zone && zoneID[0]?.id){
+    let lga = []
+    dataOBJs.getLgaByZone(zoneID[0]?.id).then((res)=>{
+      res.map((a)=>{
+        lga.push({
+          name:a.name,
+          value:a._id
+        })
+      })
+      setLgaValue(lga)
+    })
+  }else{
+    setLgaValue([])
+  }
+},[activeTab])
+
 
   
   return (
@@ -140,16 +152,18 @@ console.log(activeTab,'active tab')
           <div className="d-flex filter-option-section align-items-center py-4 my-2">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
-              <input type="search" name="" placeholder="Search Reports" />
+              <input type="search" value={searchData} onChange={e=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
             </div>
             <div className="form-field mx-2">
-              <select name="lga" id="">
-                <option>LGAs</option>
-                <option value="guyuk">Guyuk</option>
-                <option value="numan">Numan</option>
-                <option value="Ganye">Ganye</option>
-                <option value="girei">Girei</option>
-                <option value="michika">Michika</option>
+              <select name="lga" id="" onChange={(e)=> setSelectedLgaValue(e.target.value)}>
+                <option value="">LGAs</option>
+               {
+                lgaValue.map((a,i)=>{
+                  return( <option value={a?.value} key={i}>{a?.name}</option>
+
+                  )
+                })
+               }
               </select>
             </div>
             <div className="form-field mx-2 date-select">
@@ -269,7 +283,7 @@ console.log(activeTab,'active tab')
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={filteredData.length}
+              count={tableData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
