@@ -31,7 +31,7 @@ export default function ManageSupervisor() {
   const [userId,setUserId] = useState([])
   const [zone,setZone] = useState([])
   const [lgaValue,setLgaValue] = useState([])
-  const [selectedlgaValue,setSelectedLgaValue] = useState([])
+ const [search,setSearch] = useState('')
   
 
   function openModal(buttonClick, supervisorName, getRole,id) {
@@ -51,19 +51,48 @@ export default function ManageSupervisor() {
     setSnackbarOpen(false);
     setModalClosed(false);
   }
+
+
+  const handleZoneSelected = (e)=>{
+    console.log(e,'inpiu')
+    dataOBJs.getLgaByZone(e).then((res)=>{
+      let arr =[]
+    res.map((a)=>{
+      console.log(a,'reseee')
+      arr.push({
+        name:a.name,
+        value:a._id
+      })
+    })
+    console.log(arr,'new arr')
+      setLgaValue(arr)
+    })
+  }
 //get supervisior details 
 
 
-const getDetails = ()=>{
-  manageSupervisior.getAll().then((res)=>{
-    setSupervisor(res?.data)
-    console.log(res.data, 'response from sup')
-  })
-}
 
-useEffect(()=>{
-  getDetails()
-},[])
+
+useEffect(() => {
+  manageSupervisior.getAll().then((res) => {
+    const supervisorData = res?.data;
+
+    if (search && search.trim().length >= 1) {
+      const searchFilter = supervisorData.filter((a) => {
+        const firstName = a?.firstname || '';
+        return firstName.toLowerCase().startsWith(search.toLowerCase());
+      });
+      setSupervisor(searchFilter);
+    } else {
+      setSupervisor(supervisorData);
+    }
+  });
+}, [search]);
+
+
+
+
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -79,13 +108,20 @@ useEffect(()=>{
       dataOBJs.getZone(),
     ]);
     console.log(zoneResponse,'zones')
-
+    let arr =[]
+    zoneResponse.map((a)=>{
+      arr.push({
+        name:a.name,
+        value:a._id
+      })
+    })
+    setZone(arr)
   }catch(err){
 
   }
  }
  getZone()
-})
+},[])
   return (
     <>
       <div className="manage-supervisor-page py-3">
@@ -96,25 +132,31 @@ useEffect(()=>{
             <div className="d-flex filter-option-section align-items-center mx-4">
               <div className="search-button px-2 mx-1">
                 <Icon icon="eva:search-outline" className="me-2 search-icon" />
-                <input type="search" name="" placeholder="Search Reports" />
+                <input value={search} onChange={(e)=> setSearch(e.target.value)} type="search" name="" placeholder="Search Reports" />
               </div>
               <div className="form-field mx-1">
                 <select name="lga" id="">
                   <option>LGAs</option>
-                  <option value="guyuk">Guyuk</option>
-                  <option value="numan">Numan</option>
-                  <option value="Ganye">Ganye</option>
-                  <option value="girei"></option>
-                  <option value="michika">Michika</option>
+                 {
+                  lgaValue && lgaValue.map((a,i)=>{
+                    return(
+                      <option value={a.value}>{a.name}</option>
+                    )
+                  })
+                 }
                 </select>
               </div>
               <div className="form-field mx-1">
-                <select name="zones" id="">
+                <select onChange={(e) => handleZoneSelected(e.target.value)} name="zones" id="">
                   <option>Zones</option>
                   <option value="all">All</option>
-                  <option value="adsouth">Adamawa South</option>
-                  <option value="adnorth">Adamawa North</option>
-                  <option value="adcentral">Adamawa Central</option>
+                 {
+                  zone && zone.map((a,i)=>{
+                    return(
+                      <option value={a?.value}>{a?.name}</option>
+                    )
+                  })
+                 }
                 </select>
               </div>
             </div>
