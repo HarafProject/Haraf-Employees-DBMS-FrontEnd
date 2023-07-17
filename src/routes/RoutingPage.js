@@ -55,7 +55,7 @@ const router = createBrowserRouter(
       <Route path="/admin-home" element={<AdminHomePage />} />
 
       <Route
-        path="/admin-employee-profile/:id"
+        path="/admin-employee-profile"
         element={<AdminEmployeeProfile />}
       />
 <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage/>} />

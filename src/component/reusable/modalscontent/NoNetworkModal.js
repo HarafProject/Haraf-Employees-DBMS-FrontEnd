@@ -31,7 +31,7 @@ export default function NoNetworkModal({ closeModal }) {
 
         <div className="d-flex flex-column align-items-center modal-content">
           <Icon icon="carbon:network-public" className="network-icon" />
-          <p className="mt-2 text-center no-network">No Nerwork</p>
+          <p className="mt-2 text-center no-network">No Network</p>
           <span className="mt-2 mb-5 text-center">
             There seems to be no network connection, use offline mode by tapping
             the button below to take attendance and store data locally{" "}

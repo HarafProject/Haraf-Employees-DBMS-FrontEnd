@@ -65,7 +65,6 @@ class adminOBJ {
       //check if data is empty
       if (data) {
         const response = await api.post("api/admin/login", data);
-        console.log(response);
         return response;
         //store res data
       } else {
@@ -88,6 +87,49 @@ class adminOBJ {
       }
     } catch (err) {
       console.log(err);
+      throw err?.response?.data;
+    }
+  };
+
+  //get all DataCount
+  getDataCount = async () => {
+    try {
+      //check if data is empty
+      const { data } = await api.get("api/admin/data-summary");
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  //get all attendance date
+  getAttendanceDates = async (type, value) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/admin/attendance-dates`);
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  //get all attendance date
+  getAttendanceWeeks = async (type, value) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/admin/attendance-weeks`);
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+  //get all DataCount
+  getAnalyticsData = async (type, value) => {
+    try {
+      //check if data is empty
+      const { data } = await api.get(`api/admin/beneficiary-attendance-analytics?type=${type}&value=${value}`);
+      return data;
+    } catch (err) {
       throw err?.response?.data;
     }
   };
@@ -195,6 +237,19 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
+
+  getEmployeeSummary = async (employeeId) => {
+    try {
+
+      const response = await api.get(`api/admin/beneficiary-attendance-summary/${employeeId}`);
+
+      return response.data;
+      //store res data
+
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  }
 }
 
 const admin = new adminOBJ();

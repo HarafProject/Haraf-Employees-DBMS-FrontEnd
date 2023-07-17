@@ -33,7 +33,6 @@ export default function AdminLoginScreen() {
     validationSchema,
     onSubmit: (values) => {
       // Handle form submission
-      console.log(values);
       setIsLoading(true);
       const data = {
         email:values.email,
@@ -43,7 +42,6 @@ export default function AdminLoginScreen() {
       admin
         .login(data)
         .then((res) => {
-          console.log(res);
           toast.success(res?.data?.message);
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));

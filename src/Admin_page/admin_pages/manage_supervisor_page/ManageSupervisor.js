@@ -16,6 +16,7 @@ import adminSupervisorList from "../../../component/data/ListOfAdminSupervisors"
 import "./managesupervisor.css";
 import ManageSupervisorModal from "../../../component/reusable/modalscontent/ManageSupervisorModal";
 import manageSupervisior from "../../../class/ManageSupervisior.class";
+import dataOBJs from "../../../class/data.class";
 
 export default function ManageSupervisor() {
   const [page, setPage] = useState(0);
@@ -27,12 +28,18 @@ export default function ManageSupervisor() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [modalClosed, setModalClosed] = useState(false);
   const [supervisor,setSupervisor] = useState([])
+  const [userId,setUserId] = useState([])
+  const [zone,setZone] = useState([])
+  const [lgaValue,setLgaValue] = useState([])
+ const [search,setSearch] = useState('')
+  
 
-  function openModal(buttonClick, supervisorName, getRole) {
+  function openModal(buttonClick, supervisorName, getRole,id) {
     setIsOpen(true);
     setButtonClick(buttonClick);
     setSupervisorName(supervisorName);
     setGetRole(getRole);
+    setUserId(id)
   }
 
   function closeModal() {
@@ -44,18 +51,48 @@ export default function ManageSupervisor() {
     setSnackbarOpen(false);
     setModalClosed(false);
   }
+
+
+  const handleZoneSelected = (e)=>{
+    console.log(e,'inpiu')
+    dataOBJs.getLgaByZone(e).then((res)=>{
+      let arr =[]
+    res.map((a)=>{
+      console.log(a,'reseee')
+      arr.push({
+        name:a.name,
+        value:a._id
+      })
+    })
+    console.log(arr,'new arr')
+      setLgaValue(arr)
+    })
+  }
 //get supervisior details 
 
-const getDetails = ()=>{
-  manageSupervisior.getAll().then((res)=>{
-    setSupervisor(res?.data)
-    console.log(res.data, 'response from sup')
-  })
-}
 
-useEffect(()=>{
-  getDetails()
-},[])
+
+
+useEffect(() => {
+  manageSupervisior.getAll().then((res) => {
+    const supervisorData = res?.data;
+
+    if (search && search.trim().length >= 1) {
+      const searchFilter = supervisorData.filter((a) => {
+        const firstName = a?.firstname || '';
+        return firstName.toLowerCase().startsWith(search.toLowerCase());
+      });
+      setSupervisor(searchFilter);
+    } else {
+      setSupervisor(supervisorData);
+    }
+  });
+}, [search]);
+
+
+
+
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -64,7 +101,27 @@ useEffect(()=>{
     setPage(0);
   };
   const totalCount = adminSupervisorList.length;
+useEffect(()=>{
+ const getZone = async()=>{
+  try{
+    const [zoneResponse] = await Promise.all([
+      dataOBJs.getZone(),
+    ]);
+    console.log(zoneResponse,'zones')
+    let arr =[]
+    zoneResponse.map((a)=>{
+      arr.push({
+        name:a.name,
+        value:a._id
+      })
+    })
+    setZone(arr)
+  }catch(err){
 
+  }
+ }
+ getZone()
+},[])
   return (
     <>
       <div className="manage-supervisor-page py-3">
@@ -75,25 +132,31 @@ useEffect(()=>{
             <div className="d-flex filter-option-section align-items-center mx-4">
               <div className="search-button px-2 mx-1">
                 <Icon icon="eva:search-outline" className="me-2 search-icon" />
-                <input type="search" name="" placeholder="Search Reports" />
+                <input value={search} onChange={(e)=> setSearch(e.target.value)} type="search" name="" placeholder="Search Reports" />
               </div>
               <div className="form-field mx-1">
                 <select name="lga" id="">
                   <option>LGAs</option>
-                  <option value="guyuk">Guyuk</option>
-                  <option value="numan">Numan</option>
-                  <option value="Ganye">Ganye</option>
-                  <option value="girei"></option>
-                  <option value="michika">Michika</option>
+                 {
+                  lgaValue && lgaValue.map((a,i)=>{
+                    return(
+                      <option value={a.value}>{a.name}</option>
+                    )
+                  })
+                 }
                 </select>
               </div>
               <div className="form-field mx-1">
-                <select name="zones" id="">
+                <select onChange={(e) => handleZoneSelected(e.target.value)} name="zones" id="">
                   <option>Zones</option>
                   <option value="all">All</option>
-                  <option value="adsouth">Adamawa South</option>
-                  <option value="adnorth">Adamawa North</option>
-                  <option value="adcentral">Adamawa Central</option>
+                 {
+                  zone && zone.map((a,i)=>{
+                    return(
+                      <option value={a?.value}>{a?.name}</option>
+                    )
+                  })
+                 }
                 </select>
               </div>
             </div>
@@ -123,7 +186,9 @@ useEffect(()=>{
                 </TableRow>
               </TableHead>
               <TableBody>
-                {supervisor.map((supervisor, index) => (
+                {supervisor && supervisor
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((supervisor, index) => (
                   <TableRow key={supervisor.id}>
                     <TableCell>{index + 1}</TableCell>
 
@@ -143,8 +208,9 @@ useEffect(()=>{
                           onClick={() =>
                             openModal(
                               "delete",
-                              supervisor.name,
-                              supervisor.role
+                              supervisor.firstname,
+                              supervisor.role,
+                              supervisor._id
                             )
                           }
                         >
@@ -158,8 +224,9 @@ useEffect(()=>{
                           onClick={() =>
                             openModal(
                               "verify",
-                              supervisor.name,
-                              supervisor.role
+                              supervisor.firstname,
+                              supervisor.role,
+                              supervisor._id
                             )
                           }
                         >
@@ -174,8 +241,9 @@ useEffect(()=>{
                         onClick={() =>
                           openModal(
                             "unverify",
-                            supervisor.name,
-                            supervisor.role
+                            supervisor.firstname,
+                            supervisor.role,
+                            supervisor._id
                           )
                         }
                       >
@@ -198,7 +266,7 @@ useEffect(()=>{
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={adminSupervisorList.length}
+              count={supervisor.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -230,19 +298,11 @@ useEffect(()=>{
           buttonClick={buttonClick}
           supervisorName={supervisorName}
           getRole={getRole}
+          id={userId}
         />
       </Modal>
 
-      {modalClosed && (
-        <div className="d-flex justify-content-center">
-          <div className=" d-flex align-items-center snackbar">
-            You have successfully {buttonClick} {supervisorName} as a {getRole}
-            <button className=" btn snackbar-btn" onClick={closeSnackbar}>
-              Undo
-            </button>
-          </div>
-        </div>
-      )}
+      
     </>
   );
 }
