@@ -1,8 +1,8 @@
 .manage-supervisor-header {
-  position: fixed;
+  /* position: fixed;
   background-color: #ffffff;
-  top: 0;
-  max-width: 100vw;
+  top: 5rem;
+  max-width: 100vw; */
   /* width: 79%; */
 }
 
@@ -32,7 +32,7 @@
 }
 
 .manage-supervisor-table {
-  margin-top: 150px;
+  margin-top: 2rem;
 }
 
 .manage-supervisor-table .css-11xur9t-MuiPaper-root-MuiTableContainer-root {

@@ -80,8 +80,8 @@ export default function SuperAdminProfile() {
             <label htmlFor="">Name</label>
             <input
               className={editable ? "border-orange" : "border-black"}
-              value={inputValue1}
-              onChange={handleInputChange1}
+              // value={inputValue1}
+              // onChange={handleInputChange1}
               disabled={!editable}
               type="text"
               placeholder="Lazarus Kadwama"

@@ -1,40 +1,12 @@
-<<<<<<< HEAD
-.profile-info-summary{
-=======
 .employee-profile-page{
   /* height: 100vh; */
 }
 .profile-info-summary {
->>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
   line-height: normal;
   white-space: nowrap;
 }
 
 .arrowback-icon {
-<<<<<<< HEAD
-  width: 60px;
-  height: 60px;
-  color: #0280CA;
-}
-.profile-info-summary div.image{
-  max-width: 12%;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
-.profile-info-summary div img{
-  width: 100%;
-  height: 100%;
-
-}
-.back-to-previous{
-  font-size: 20px;
-  font-weight: 500;
-}
-.profile-info-summary h4{
-  font-size: 28px;
-  font-weight: 600;   
-=======
   width: 30px;
   height: 30px;
   color: #0280ca;
@@ -57,36 +29,10 @@
 
 .profile-info-summary h4 {
   font-size: 22px;
->>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
   color: #444444;
   line-height: normal;
 
 }
-<<<<<<< HEAD
-.profile-info-summary p{
-  font-size: 18px;
-  font-weight: 300;
-color: #000000;
-margin-top: 10px;
-}
-.profile-info-summary .work-info p{
-  font-size: 13px;
-  color: #000000;
-font-size: 20px;
-font-weight: 500;
-margin-top: 10px;
-}
-.profile-info-summary .work-info p span{
-  
-font-size: 15px;
-  font-weight: 300;
-color: #444444;
-}
-
-.reusable-info-list p.h6{
-  font-size: 22px;
-  font-weight: 600;
-=======
 
 .profile-info-summary p {
   font-size: 16px;
@@ -116,20 +62,13 @@ color: #444444;
   font-size: 18px;
   line-height: normal;
   font-family: "LexendFontSemiBold", sans-serif;
->>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
   color: #444444f0;
 
 }
 
-<<<<<<< HEAD
-.reusable-info-list p{
-  font-size: 18px;
-  font-weight: 400;
-=======
 .reusable-info-list p {
   font-size: 14px;
   font-family: "LexendFontMedium", sans-serif;
->>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
 }
 
 .reusable-info-list p span{

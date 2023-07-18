@@ -82,8 +82,8 @@ function AdminAttendanceFilter({ allData, reports, setReports }) {
             let lowercaseQuery = e.target.value.toLowerCase();
 
             // Filter the array based on the name key
-            let filteredData = allData.filter(function (item) {
-                let lowercaseName = item.submittedBy.firstname.toLowerCase();
+            let filteredData = allData?.filter(function (item) {
+                let lowercaseName =item.submittedBy ? item.submittedBy.firstname.toLowerCase() : item.firstname;
                 return lowercaseName.includes(lowercaseQuery);
             });
             setReports(filteredData);

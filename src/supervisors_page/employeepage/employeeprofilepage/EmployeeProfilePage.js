@@ -43,7 +43,6 @@ export default function EmployeeProfilePage() {
         setModalType(modalType);
     }
 
-<<<<<<< HEAD
     function closeModal() {
         setIsOpen(false);
     }
@@ -122,27 +121,6 @@ export default function EmployeeProfilePage() {
 
 
                 </div>
-=======
-  return (
-    <div className="employee-profile-page">
-      <ReusableHeader />
-      <div className="profile-content my-4 p-4">
-        <div className="back-to-previous">
-          <Icon
-            icon="mdi:arrow-back-circle"
-            onClick={goBack}
-            className="arrowback-icon me-3"
-          />
-          Back to list
-        </div>
-        <div className="d-flex align-item-start  profile-info-summary mt-4">
-          <img src={userData?.photo} alt="" />
-          <div className="d-flex">
-            <div className="names mx-5">
-              <h4>{userData?.fullName}</h4>
-              <p>{userData?.maritalStatus}</p>
-              <p>{userData?.sex}</p>
->>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
             </div>
             <Modal
                 isOpen={modalIsOpen}
@@ -170,26 +148,5 @@ export default function EmployeeProfilePage() {
                     isLoading={isLoading} />
             </Modal>
         </div>
-<<<<<<< HEAD
     )
 }
-=======
-        <div className="">
-          <ReusableInformationList
-            title="Personal Information"
-            information={personalInfo}
-          />
-          <ReusableInformationList
-            title="Bank Information"
-            information={bankInfo}
-          />
-          <ReusableInformationList
-            title="Other Information"
-            information={otherInfo}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
->>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609

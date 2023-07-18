@@ -106,7 +106,7 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("profile")}
           >
             <Icon icon="uiw:user" />
-            <span>Super Admin Profile</span>
+            <span>{user?.role==="super-admin" && "Super "}Admin Profile</span>
           </p>
 
           <p

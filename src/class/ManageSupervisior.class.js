@@ -49,7 +49,7 @@ class manageSupervisiorOBJ {
    verify = async (id) => {
     try {
       //check if data is empty
-      const { data } = await api.get(`api/superadmin/verify-supervisor/${id}`);
+      const { data } = await api.put(`api/superadmin/verify-supervisor/${id}`);
       return data;
     } catch (err) {
       throw err?.response?.data;

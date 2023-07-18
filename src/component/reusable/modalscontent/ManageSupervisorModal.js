@@ -4,7 +4,7 @@ import adminSupervisorList from "../../data/ListOfAdminSupervisors";
 import { Icon } from "@iconify/react";
 import "./modalscreen.css";
 import manageSupervisior from "../../../class/ManageSupervisior.class";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function ManageSupervisorModal({
@@ -12,58 +12,70 @@ export default function ManageSupervisorModal({
   buttonClick,
   supervisorName,
   getRole,
-  id
+  id,
+  supervisor,
+  setSupervisor
 }) {
   const navigate = useNavigate();
   const [actionTitle, setActionTitle] = useState("");
   const [actionText, setActionText] = useState("");
   const [buttonText, setButtonText] = useState("");
-  const [isLoading,setIsLoading] = useState(false)
-  
+  const [isLoading, setIsLoading] = useState(false)
 
- const actionClick = (action)=>{
-  if (action === "Verify") {
-    setIsLoading(true)
-    console.log(id,'iddd')
-    manageSupervisior.verify(id).then((res)=>{
-      console.log(res,'response')
-      toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
-      setIsLoading(false)
-      closeModal()
-      
-    }).catch((err)=>{
-      console.log(err,'err')
-      toast.error(err.message)
-      setIsLoading(false)
-    })
-   console.log(action)
-  } else if (action === "Delete") {
-    setIsLoading(true)
-    console.log(id,'iddd')
-    manageSupervisior.undoVerified (id).then((res)=>{
-      console.log(res,'response')
-      setIsLoading(false)
-      toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
-      closeModal()
-    }).catch((err)=>{
-      console.log(err,'err')
-      toast.error(err.message)
-      setIsLoading(false)
-    })
-  }else if(action === "Unverify"){
-    setIsLoading(true)
-    console.log(id,'iddd')
-    manageSupervisior.undoVerified (id).then((res)=>{
-      console.log(res,'response')
-      toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
-      setIsLoading(false)
-      closeModal()
-    }).catch((err)=>{
-      console.log(err,'err')
-      toast.error(err.message)
-      setIsLoading(false)
-    })
-  }
+
+  const actionClick = (action) => {
+    if (action === "Verify") {
+      setIsLoading(true)
+      manageSupervisior.verify(id).then((res) => {
+        let data = res.data
+        // Map through the 'employee' array and replace the updated item with the matching '_id'
+        const updatedSupervisorArray = supervisor.map((item) =>
+          item._id === data._id ? data : item
+        );
+
+        setSupervisor(updatedSupervisorArray);
+        toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+        setIsLoading(false)
+        closeModal()
+
+      }).catch((err) => {
+        console.log(err, 'err')
+        toast.error(err.message)
+        setIsLoading(false)
+      })
+   
+    } else if (action === "Delete") {
+      setIsLoading(true)
+      manageSupervisior.undoVerified(id).then((res) => {
+        setIsLoading(false)
+        toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+        let data = res.data
+        // Map through the 'employee' array and replace the updated item with the matching '_id'
+        const updatedSupervisorArray = supervisor.map((item) =>
+          item._id === data._id ? data : item
+        );
+
+        setSupervisor(updatedSupervisorArray);
+        closeModal()
+      }).catch((err) => {
+        console.log(err, 'err')
+        toast.error(err.message)
+        setIsLoading(false)
+      })
+    } else if (action === "Unverify") {
+      setIsLoading(true)
+      console.log(id, 'iddd')
+      manageSupervisior.undoVerified(id).then((res) => {
+        console.log(res, 'response')
+        toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+        setIsLoading(false)
+        closeModal()
+      }).catch((err) => {
+        console.log(err, 'err')
+        toast.error(err.message)
+        setIsLoading(false)
+      })
+    }
   }
   useEffect(() => {
     if (buttonClick === "verify") {
@@ -78,7 +90,7 @@ export default function ManageSupervisorModal({
         `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the LIPWDMS portal`
       );
       setButtonText("Delete");
-    }else if(buttonClick === "unverify"){
+    } else if (buttonClick === "unverify") {
       setActionTitle("Verify Supervisor");
       setActionText(
         `Are you sure you want to unverify ${supervisorName} as a ${getRole}? This will restrict ${supervisorName} from having full access to the LIPWDMS portal`
@@ -106,11 +118,10 @@ export default function ManageSupervisorModal({
           <span className="mt-2 mb-5 text-center">{actionText}</span>
 
           <button
-          disabled={isLoading}
-            className={`btn modal-button my-4 ${
-              buttonText === "Verify" ? "verify-btn" : "delete-btn"
-            }`}
-            onClick={()=>{
+            disabled={isLoading}
+            className={`btn modal-button my-4 ${buttonText === "Verify" ? "verify-btn" : "delete-btn"
+              }`}
+            onClick={() => {
               actionClick(buttonText)
             }}
           >
