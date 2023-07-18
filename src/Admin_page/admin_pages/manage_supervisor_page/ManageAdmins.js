@@ -12,9 +12,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
-import adminSupervisorList from "../../../component/data/ListOfAdminSupervisors";
 import "./managesupervisor.css";
-import ManageSupervisorModal from "../../../component/reusable/modalscontent/ManageSupervisorModal";
 import manageSupervisior from "../../../class/ManageSupervisior.class";
 import dataOBJs from "../../../class/data.class";
 // import jsPDF from 'jspdf'
@@ -22,17 +20,19 @@ import domtoimage from 'dom-to-image';
 import { RotatingLines } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import AdminAttendanceFilter from "../admin_employee_list_page/AdminAttendanceFilter";
+import superAdmin from "../../../class/super.class";
+import ManageSupervisorModal from "../../../component/reusable/modalscontent/ManageSupervisorModal";
 
-export default function ManageSupervisor() {
+export default function ManageAdmins() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [buttonClick, setButtonClick] = useState("");
-  const [supervisorName, setSupervisorName] = useState("");
+  const [adminName, setAdminName] = useState("");
   const [getRole, setGetRole] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [modalClosed, setModalClosed] = useState(false);
-  const [supervisor, setSupervisor] = useState([])
+  const [admin, setAdmin] = useState([])
   const [userId, setUserId] = useState([])
   const [zone, setZone] = useState([])
   const [selectedZone, setSelectedZone] = useState('')
@@ -44,10 +44,11 @@ export default function ManageSupervisor() {
   const { user } = useSelector((state) => state?.user)
   const [allData, setAllData] = useState([])
 
-  function openModal(buttonClick, supervisorName, getRole, id) {
+  function openModal(buttonClick, adminName, getRole, id) {
+    setAdminName(adminName);
     setIsOpen(true);
     setButtonClick(buttonClick);
-    setSupervisorName(supervisorName);
+    
     setGetRole(getRole);
     setUserId(id)
   }
@@ -64,7 +65,7 @@ export default function ManageSupervisor() {
 
   // const handleDownload = () => {
   //   setIsLoading(true)
-  //   if (!pdfRef.current || !supervisor) {
+  //   if (!pdfRef.current || !admin) {
   //     console.error('PDF reference is not available.');
   //     return;
   //   }
@@ -73,8 +74,8 @@ export default function ManageSupervisor() {
 
   //   // Set background color to white
   //   input.style.backgroundColor = 'white';
-  //   const divToHide = input.querySelector('.manage-supervisor-header');
-  //   const divToHide2 = input.querySelector('.manage-supervisor-table');
+  //   const divToHide = input.querySelector('.manage-admin-header');
+  //   const divToHide2 = input.querySelector('.manage-admin-table');
 
   //   if (divToHide) {
 
@@ -113,7 +114,7 @@ export default function ManageSupervisor() {
 
   //         // Add image content
   //         pdf.addImage(dataUrl, 'PNG', offsetX, offsetY, imgWidth, imgHeight);
-  //         pdf.save('Supervisors_and_Admins.pdf');
+  //         pdf.save('admins_and_Admins.pdf');
   //       };
 
   //       img.src = dataUrl;
@@ -160,11 +161,11 @@ export default function ManageSupervisor() {
 
 
   useEffect(() => {
-    manageSupervisior.getAll().then((res) => {
-      const supervisorData = res?.data;
-      setTotalCount(supervisorData.length)
-      setSupervisor(supervisorData);
-      setAllData(supervisorData)
+    superAdmin.getAll().then((res) => {
+      const adminData = res?.data;
+      setTotalCount(adminData.length)
+      setAdmin(adminData);
+      setAllData(adminData)
     });
   }, [search, selectedZone]);
 
@@ -177,92 +178,24 @@ export default function ManageSupervisor() {
     setPage(0);
   };
 
-  useEffect(() => {
-    const getZone = async () => {
-      try {
-        const [zoneResponse] = await Promise.all([
-          dataOBJs.getZone(),
-        ]);
-        console.log(zoneResponse, 'zones')
-        let arr = []
-        zoneResponse.map((a) => {
-          arr.push({
-            name: a.name,
-            value: a._id
-          })
-        })
-        setZone(arr)
-      } catch (err) {
-
-      }
-    }
-    getZone()
-  }, [])
-
-  const getLocationFromZone = (id) => {
-    console.log(id, zone.filter((a) => a.value === id), 'zone')
-    return zone && zone.filter((a) => a.value === id)[0]?.name
-  }
 
   return (
     <>
-      <div className="manage-supervisor-page">
-        <div className="container manage-supervisor-header">
+      <div className="manage-admin-page">
+        <div className="container manage-admin-header">
           <div className="d-flex align-items-center justify-content-between ">
-            <h1>Supervisors ({totalCount})</h1>
-            {/* <div className="d-flex filter-option-section align-items-center  mx-4">
-              <div className="search-button px-2 mx-1">
-                <Icon icon="eva:search-outline" className="me-2 search-icon" />
-                <input value={search} onChange={(e) => setSearch(e.target.value)} type="search" name="" placeholder="Search Reports" />
-              </div>
-              <div className="form-field mx-1">
-                <select name="lga" id="">
-                  <option>LGAs</option>
-                  {
-                    lgaValue && lgaValue.map((a, i) => {
-                      return (
-                        <option value={a.value}>{a.name}</option>
-                      )
-                    })
-                  }
-                </select>
-              </div>
-              <div className="form-field mx-1">
-                <select placeholder="select zone" onChange={(e) => handleZoneSelected(e.target.value)} name="zones" id="">
+            <h1>admins ({totalCount})</h1>
 
-                  {
-                    zone && zone.map((a, i) => {
-                      return (
-                        <option value={a?.value}>{a?.name}</option>
-                      )
-                    })
-                  }
-                </select>
-              </div>
-            </div> */}
             <AdminAttendanceFilter
-              reports={supervisor}
-              setReports={setSupervisor}
+              reports={admin}
+              setReports={setAdmin}
               allData={allData}
             />
-            {/* <div className="export">
-              <button className="btn export-file-btn" disabled={isLoading} onClick={handleDownload}>
-              {isLoading ? (
-                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" />
-              ) : (
-                <>
-                <img width="20" className="export-icon" height="20" src="https://img.icons8.com/ios-filled/20/ffffff/export-pdf.png" alt="export-pdf"/>
-                Export
-                </>
-                
-              )}
-                
-              </button>
-            </div> */}
+
           </div>
         </div>
 
-        <div className="manage-supervisor-table" >
+        <div className="manage-admin-table" >
           <TableContainer component={Paper} >
             <Table>
               <TableHead>
@@ -277,32 +210,32 @@ export default function ManageSupervisor() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {supervisor && supervisor
+                {admin && admin
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((supervisor, index) => (
-                    <TableRow key={supervisor.id}>
+                  .map((adminData, index) => (
+                    <TableRow key={adminData.id}>
                       <TableCell>{index + 1}</TableCell>
 
                       <TableCell>
                         <p className="d-flex flex-column admin-name">
-                          {supervisor.firstname}
-                          <span>{supervisor.email}</span>
+                          {adminData.firstname}
+                          <span>{adminData.email}</span>
                         </p>
                       </TableCell>
-                      <TableCell>{supervisor.role}</TableCell>
-                      <TableCell>{supervisor?.zone?.name}</TableCell>
-                      <TableCell>{supervisor.lga.name}</TableCell>
-                      <TableCell>{supervisor.phone}</TableCell>
+                      <TableCell>{adminData.role}</TableCell>
+                      <TableCell>{adminData?.zone?.name}</TableCell>
+                      <TableCell>{adminData.lga.name}</TableCell>
+                      <TableCell>{adminData.phone}</TableCell>
                       <TableCell>
                         <div className="d-flex">
                           <button
-                            className="btn manage-supervisor-btn"
+                            className="btn manage-admin-btn"
                             onClick={() =>
                               openModal(
-                                "delete",
-                                supervisor.firstname,
-                                supervisor.role,
-                                supervisor._id
+                                "delete-admin",
+                                adminData.firstname,
+                                adminData.role,
+                                adminData._id
                               )
                             }
                           >
@@ -311,8 +244,8 @@ export default function ManageSupervisor() {
                           </button>
 
                           {
-                            supervisor?.isVerified === true ? <p
-                              className="btn manage-supervisor-btn"
+                            adminData?.isVerified === true ? <p
+                              className="btn manage-admin-btn"
 
                             >
 
@@ -322,13 +255,13 @@ export default function ManageSupervisor() {
                               />{" "}
                               Verified
                             </p> : <button
-                              className="btn manage-supervisor-btn"
+                              className="btn manage-admin-btn"
                               onClick={() =>
                                 openModal(
-                                  "verify",
-                                  supervisor.firstname,
-                                  supervisor.role,
-                                  supervisor._id
+                                  "verify-admin",
+                                  adminData.firstname,
+                                  adminData.role,
+                                  adminData._id
                                 )
                               }
                             >
@@ -351,7 +284,7 @@ export default function ManageSupervisor() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={supervisor.length}
+              count={admin.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -381,11 +314,11 @@ export default function ManageSupervisor() {
         <ManageSupervisorModal
           closeModal={closeModal}
           buttonClick={buttonClick}
-          supervisorName={supervisorName}
+          supervisorName={adminName}
           getRole={getRole}
           id={userId}
-          supervisor={supervisor}
-          setSupervisor={setSupervisor}
+          supervisor={admin}
+          setSupervisor={setAdmin}
         />
       </Modal>
 

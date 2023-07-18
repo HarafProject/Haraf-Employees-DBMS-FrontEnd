@@ -82,60 +82,42 @@ export default function AttendanceReportTable({ onRowClick }) {
   };
   // Sample array of objects
 
-  //get list of zone and filter
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const [zoneResponse, tableDataResponse] = await Promise.all([
-  //         dataOBJs.getZone(),
-  //         AdminAttendance.getAllZone()
-  //       ]);
+  // get list of zone and filter
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [zoneResponse, tableDataResponse] = await Promise.all([
+          dataOBJs.getZone(),
+          AdminAttendance.getAllZone()
+        ]);
 
-  //       const allZonesCount = tableDataResponse.length;
+        const allZonesCount = tableDataResponse.length;
 
-  //       const zoneData = zoneResponse.map((zone) => {
-  //         const count = tableDataResponse.reduce((acc, item) => {
-  //           return acc + (item.zone.name === zone.name ? 1 : 0);
-  //         }, 0);
+        const zoneData = zoneResponse.map((zone) => {
+          const count = tableDataResponse.reduce((acc, item) => {
+            return acc + (item.zone.name === zone.name ? 1 : 0);
+          }, 0);
 
-  //         return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
-  //       });
+          return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
+        });
 
-  //       const filterTable = activeTab === 'allZones'
-  //         ? tableDataResponse
-  //         : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
+        const filterTable = activeTab === 'allZones'
+          ? tableDataResponse
+          : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
 
-  //       setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
+        setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
 
-  //       let filteredTableData = filterTable;
+     
 
-  //       if (searchData && searchData.trim().length >= 1) {
-  //         const filterSearch = filterTable.filter((item) => {
-  //           const firstName = item?.submittedBy?.firstname || '';
-  //           return firstName.toLowerCase().startsWith(searchData.toLowerCase());
-  //         });
-  //         filteredTableData = filterSearch;
-  //       }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //       if (selectedlgaValue) {
-  //         const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
-  //         filteredTableData = lgaFilter;
-  //       }
-  //       if (filteredTableData.length >= 1) {
-  //         setTableData(filteredTableData);
-  //       } else {
-  //         setTableData(tableDataResponse)
-  //       }
+    fetchData();
+  }, [activeTab]);
 
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
 
-  //   fetchData();
-  // }, [activeTab, searchData, selectedlgaValue, tableData]);
-
-  console.log(searchData, 'search')
 
 
   // //get all lga
@@ -232,16 +214,16 @@ export default function AttendanceReportTable({ onRowClick }) {
                         <TableCell>
 
                           {report?.attendanceRecord
-                            .flatMap(obj => obj.attempt)
-                            .filter(attempt => attempt.status === 'Present')
+                            // .flatMap(obj => obj.attempt)
+                            .filter(item => item.status === 'Present')
                             .length}
 
                         </TableCell>
                         <TableCell>
 
                           {report?.attendanceRecord
-                            .flatMap(obj => obj.attempt)
-                            .filter(attempt => attempt.status === 'Absent')
+                            // .flatMap(obj => obj.attempt)
+                            .filter(item => item.status === 'Absent')
                             .length}
 
                         </TableCell>

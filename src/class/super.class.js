@@ -151,7 +151,7 @@ class superOBJ {
       throw err?.response?.data;
     }
   };
-   //get ward
+  //get ward
   getWard = async () => {
     try {
       //check if data is empty
@@ -162,7 +162,41 @@ class superOBJ {
       throw err?.response?.data;
     }
   };
-  
+
+  //get Get  all Supervisors
+  getAll = async () => {
+    try {
+      //check if data is empty
+      const { data } = await api.get("api/superadmin/list-of-admins");
+      return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+    //verify supervisor
+    verifyAdmin = async (id) => {
+      try {
+        //check if data is empty
+        const { data } = await api.put(`api/superadmin/verify-admin/${id}`);
+        return data;
+      } catch (err) {
+        throw err?.response?.data;
+      }
+    };
+
+    //undo verified 
+    //get by id
+    undoVerifiedAdmin = async (id) => {
+      try {
+        //check if data is empty
+        const { data } = await api.put(`api/superadmin/undo-admin-verification/${id}`);
+        return data;
+      } catch (err) {
+        throw err?.response?.data;
+      }
+    };
+
 }
 
 

@@ -10,6 +10,7 @@ import ManageSupervisor from "../manage_supervisor_page/ManageSupervisor";
 import AttendanceReportTable from "../attendance_page/AttendanceReportTable";
 import RequestFromSupervisor from "../request_from_supervisor_page/RequestFromSupervisor";
 import { useDispatch, useSelector } from "react-redux";
+import ManageAdmins from "../manage_supervisor_page/ManageAdmins";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
@@ -45,13 +46,13 @@ export default function AdminHomePage() {
   return (
     <div className="admin-dashboard">
       {/* <div className="sidebar "> */}<div className="admin hamburger-icon" onClick={handleClick}>
-          <Icon
-            icon={clicked ? "jam:close" : "ci:menu-alt-02"}
-            className={clicked ? "close" : "bar"}
-          />
-        </div>
+        <Icon
+          icon={clicked ? "jam:close" : "ci:menu-alt-02"}
+          className={clicked ? "close" : "bar"}
+        />
+      </div>
       <div className={`sidebar ${clicked ? "open" : ""}`}>
-         
+
         <div className="p-3">
           <img src={profile} alt="" />
           <div>
@@ -106,7 +107,7 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("profile")}
           >
             <Icon icon="uiw:user" />
-            <span>{user?.role==="super-admin" && "Super "}Admin Profile</span>
+            <span>{user?.role === "super-admin" ? "Manage Admins" : "Admin Profile"}</span>
           </p>
 
           <p
@@ -114,11 +115,14 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("logout")}
           >
             <Icon icon="ant-design:logout-outlined" />
-            <span onClick={() => navigate("/admin")}>Log Out</span>
+            <span onClick={() => {
+              localStorage.clear()
+              navigate("/admin", { replace: true })
+            }}>Log Out</span>
           </p>
         </div>
 
-       
+
       </div>
       <div className="content px-3">
         <div className="mx-3">
@@ -134,7 +138,8 @@ export default function AdminHomePage() {
                 <div><RequestFromSupervisor /> </div>
               )}
               {selectedComponent === "manage" && <ManageSupervisor />}
-              {selectedComponent === "profile" && <SuperAdminProfile />}
+              {(selectedComponent === "profile" && user?.role === "admin") && <SuperAdminProfile />}
+              {(selectedComponent === "profile" && user?.role === "super-admin") && <ManageAdmins />}
               {/* {selectedComponent === 'logout' && <div>Loan </div>} */}
             </div>
           </div>

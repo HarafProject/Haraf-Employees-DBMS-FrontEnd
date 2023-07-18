@@ -6,6 +6,7 @@ import "./modalscreen.css";
 import manageSupervisior from "../../../class/ManageSupervisior.class";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import superAdmin from "../../../class/super.class";
 
 export default function ManageSupervisorModal({
   closeModal,
@@ -43,7 +44,7 @@ export default function ManageSupervisorModal({
         toast.error(err.message)
         setIsLoading(false)
       })
-   
+
     } else if (action === "Delete") {
       setIsLoading(true)
       manageSupervisior.undoVerified(id).then((res) => {
@@ -75,6 +76,45 @@ export default function ManageSupervisorModal({
         toast.error(err.message)
         setIsLoading(false)
       })
+    } else if (action === "Verify-Admin") {
+      setIsLoading(true)
+      superAdmin.verifyAdmin(id).then((res) => {
+        let data = res.data
+        toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+        setIsLoading(false)
+        // Map through the 'employee' array and replace the updated item with the matching '_id'
+        const updatedSupervisorArray = supervisor.map((item) =>
+          item._id === data._id ? data : item
+        );
+
+        setSupervisor(updatedSupervisorArray);
+        closeModal()
+
+      }).catch((err) => {
+        console.log(err, 'err')
+        toast.error(err.message)
+        setIsLoading(false)
+      })
+    } else if (action === "Delete-Admin") {
+      setIsLoading(true)
+      superAdmin.undoVerifiedAdmin(id).then((res) => {
+      
+        let data = res.data
+        toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+        setIsLoading(false)
+        // Map through the 'employee' array and replace the updated item with the matching '_id'
+        const updatedSupervisorArray = supervisor.map((item) =>
+          item._id === data._id ? data : item
+        );
+
+        setSupervisor(updatedSupervisorArray);
+        closeModal()
+
+      }).catch((err) => {
+        console.log(err, 'err')
+        toast.error(err.message)
+        setIsLoading(false)
+      })
     }
   }
   useEffect(() => {
@@ -96,6 +136,18 @@ export default function ManageSupervisorModal({
         `Are you sure you want to unverify ${supervisorName} as a ${getRole}? This will restrict ${supervisorName} from having full access to the LIPWDMS portal`
       );
       setButtonText("Unverify");
+    } else if (buttonClick === "verify-admin") {
+      setActionTitle("Verify-Admin");
+      setActionText(
+        `Are you sure you want to verify ${supervisorName} as a ${getRole}? This will allow ${supervisorName} to have full access to the LIPWDMS portal`
+      );
+      setButtonText("Verify-Admin");
+    } else if (buttonClick === "delete-admin") {
+      setActionTitle("Delete-Admin");
+      setActionText(
+        `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the LIPWDMS portal`
+      );
+      setButtonText("Delete-Admin");
     }
   }, [buttonClick, getRole, supervisorName]);
 
