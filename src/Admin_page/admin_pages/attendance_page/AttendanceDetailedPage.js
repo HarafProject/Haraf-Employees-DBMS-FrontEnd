@@ -172,7 +172,9 @@ export default function AttendanceDetailedPage() {
                 <TableCell>SP. Action</TableCell>
               </TableRow>
             </TableHead>
-            {tableData.length >=1 && tableData.map((beneficiary, index) => (
+            {tableData && tableData
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((beneficiary, index) => (
               <TableRow key={beneficiary._id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>
@@ -215,7 +217,7 @@ export default function AttendanceDetailedPage() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={receivedArray.length}
+            count={tableData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -19,6 +19,7 @@ import manageSupervisior from "../../../class/ManageSupervisior.class";
 import dataOBJs from "../../../class/data.class";
 import jsPDF from 'jspdf'
 import domtoimage from 'dom-to-image';
+import { RotatingLines } from "react-loader-spinner";
 
 export default function ManageSupervisor() {
   const [page, setPage] = useState(0);
@@ -68,9 +69,16 @@ const pdfRef = useRef()
 
     // Set background color to white
     input.style.backgroundColor = 'white';
-    const divToHide = input.querySelector('.div-to-hide');
+    const divToHide = input.querySelector('.manage-supervisor-header');
+    const divToHide2 = input.querySelector('.manage-supervisor-table');
+    
     if (divToHide) {
       divToHide.style.backgroundColor = 'transparent';
+      divToHide.style.position = 'relative'
+      
+    }
+    if(divToHide2){
+      divToHide2.style.marginTop = '0'
     }
     domtoimage
       .toPng(input)
@@ -117,6 +125,10 @@ const pdfRef = useRef()
       input.style.backgroundColor = '';
       if (divToHide) {
         divToHide.style.backgroundColor = 'white';
+        divToHide.style.position = 'fixed'
+      }
+      if(divToHide2){
+        divToHide2.style.marginTop = '150px'
       }
     });
   };
@@ -208,7 +220,7 @@ const getLocationFromZone = (id)=>{
   return (
     <>
       <div className="manage-supervisor-page py-3" ref={pdfRef}>
-        <div className="container manage-supervisor-header div-to-hide py-4">
+        <div className="container manage-supervisor-header py-4">
           <h4 className="header-title mt-4">LIPWDMS Super Admin Portal</h4>
           <div className="d-flex align-items-center   mt-5 ">
             <h1>Supervisors & Admins ({totalCount})</h1>
@@ -244,11 +256,16 @@ const getLocationFromZone = (id)=>{
             </div>
             <div className="export">
               <button className="btn export-file-btn" disabled={isLoading} onClick={handleDownload}>
-                <Icon
-                  icon="mingcute:file-export-fill"
-                  className="export-icon"
-                />
+              {isLoading ? (
+                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" />
+              ) : (
+                <>
+                <img width="20" className="export-icon" height="20" src="https://img.icons8.com/ios-filled/20/ffffff/export-pdf.png" alt="export-pdf"/>
                 Export
+                </>
+                
+              )}
+                
               </button>
             </div>
           </div>
