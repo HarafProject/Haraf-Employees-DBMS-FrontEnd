@@ -17,9 +17,9 @@ export default function SuperAdminProfile() {
   const [edited, setEdited] = useState(false);
 
   const [userData, setUserData] = useState({
-    firstname: user.firstname,
-    surname: user.surname,
-    phone: user.phone,
+    firstname: user?.firstname,
+    surname: user?.surname,
+    phone: user?.phone,
   });
 
   const handleChange = (e) => {
