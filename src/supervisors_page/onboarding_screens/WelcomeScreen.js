@@ -10,7 +10,11 @@ export default function WelcomeScreen() {
       <div className="d-flex flex-column justify-content-space-between  align-items-center welcome-screen-content py-5">
 
           <img src={profile} alt="" />
+<<<<<<< HEAD
       
+=======
+        </div>
+>>>>>>> main
         <h1 className="my-2">LIPW Management System{<br />}(LIPWMS)</h1>
         <p className="mt-5">Kindly select an action below</p>
         <div className="d-flex flex-column welcome-screen-button mt-5">

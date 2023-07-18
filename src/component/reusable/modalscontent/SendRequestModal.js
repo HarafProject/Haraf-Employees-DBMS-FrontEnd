@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./modalscreen.css";
-import { RotatingLines } from "react-loader-spinner";
 
-export default function SendRequestModal({
-  closeModal,
-  actionType,
-  action,
-  isLoading,
-}) {
+export default function SendRequestModal({ closeModal, actionType }) {
   const [requestText, setRequestText] = useState("");
   // const [showSnackbar, setShowSnackbar] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -18,14 +12,27 @@ export default function SendRequestModal({
     setRequestText(event.target.value);
   };
   const handleSendRequest = () => {
-    action(requestText);
+    closeModal();
+
     // setShowSnackbar(true);
   };
+
+  // useEffect(() => {
+  //     let timeout;
+  //     if (showSnackbar) {
+  //         timeout = setTimeout(() => {
+  //             setShowSnackbar(false);
+  //         }, 500);
+  //     }
+
+  //     return () => {
+  //         clearTimeout(timeout);
+  //     };
+  // }, [showSnackbar]);
 
   useEffect(() => {
     if (actionType === "add") {
       setModalTitle("Add New Employee Request ");
-
       setModalText(
         "You don’t have permission to add new employees after initial data capture, kindly request access to the regional lead by stating reason for the request below"
       );
@@ -70,19 +77,9 @@ export default function SendRequestModal({
             onChange={handleRequestTextChange}
           />
 
-          {isLoading && (
-            <button className="btn modal-button my-4">
-              <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
-            </button>
-          )}
-          {!isLoading && (
-            <button
-              className="btn modal-button my-4"
-              onClick={handleSendRequest}
-            >
-              Send Request
-            </button>
-          )}
+          <button className="btn modal-button my-4" onClick={handleSendRequest}>
+            Send Request
+          </button>
         </div>
       </div>
     </div>

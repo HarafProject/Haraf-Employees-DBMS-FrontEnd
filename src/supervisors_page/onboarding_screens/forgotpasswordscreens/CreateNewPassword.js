@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function CreateNewPassword() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(true);
   const [message, setMessage] = useState("");
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarType, setSnackbarType] = useState("");

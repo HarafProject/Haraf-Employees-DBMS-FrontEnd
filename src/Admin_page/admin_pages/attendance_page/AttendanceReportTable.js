@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Table,
   TableContainer,
@@ -13,17 +13,24 @@ import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import attendanceReportData from "../../../component/data/AttendanceReportData";
 import "./attendance.css";
+import AdminAttendance from "../../../class/adminAttendanceReport.class";
+import dataOBJs from "../../../class/data.class";
 
 export default function AttendanceReportTable({ onRowClick }) {
   const [activeTab, setActiveTab] = useState("allZones");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
+  const [tableData,setTableData] = useState([])
+  const [zone,setZone] = useState([])
+  const [lgaValue,setLgaValue] = useState([])
+  const [selectedlgaValue,setSelectedLgaValue] = useState([])
+  
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
+    setSelectedLgaValue('')
     setPage(0);
   };
-
+const [searchData,setSearchData] = useState('')
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -33,22 +40,6 @@ export default function AttendanceReportTable({ onRowClick }) {
     setPage(0);
   };
 
-  const filteredData =
-    activeTab === "allZones"
-      ? attendanceReportData
-      : attendanceReportData.filter(
-          (report) => report.zone.replace(/\s/g, "") === activeTab
-        );
-  const totalCount = attendanceReportData.length;
-  const countAdamawaSouth = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa South"
-  ).length;
-  const countAdamawaNorth = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa North"
-  ).length;
-  const countAdamawaCentral = attendanceReportData.filter(
-    (report) => report.zone === "Adamawa Central"
-  ).length;
 
   const isTimePastFour = (time) => {
     const [hour, minutes] = time.split(":");
@@ -63,57 +54,116 @@ export default function AttendanceReportTable({ onRowClick }) {
 
     return adjustedHour >= 16; // 16 represents 4:00 PM
   };
+// Sample array of objects
 
+//get list of zone and filter
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const [zoneResponse, tableDataResponse] = await Promise.all([
+        dataOBJs.getZone(),
+        AdminAttendance.getAllZone()
+      ]);
+
+      const allZonesCount = tableDataResponse.length;
+      
+      const zoneData = zoneResponse.map((zone) => {
+        const count = tableDataResponse.reduce((acc, item) => {
+          return acc + (item.zone.name === zone.name ? 1 : 0);
+        }, 0);
+
+        return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
+      });
+
+      const filterTable = activeTab === 'allZones'
+        ? tableDataResponse
+        : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
+
+      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
+
+      let filteredTableData = filterTable;
+
+      if (searchData && searchData.trim().length >= 1) {
+        const filterSearch = filterTable.filter((item) => {
+          const firstName = item?.submittedBy?.firstname || '';
+          return firstName.toLowerCase().startsWith(searchData.toLowerCase());
+        });
+        filteredTableData = filterSearch;
+      }
+
+      if (selectedlgaValue) {
+        const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
+        filteredTableData = lgaFilter;
+      }
+      if(filteredTableData.length >=1){
+        setTableData(filteredTableData);
+      }else{
+        setTableData(tableDataResponse)
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchData();
+}, [activeTab, searchData, selectedlgaValue, tableData]);
+
+console.log(searchData,'search')
+
+
+//get all lga
+useEffect(()=>{
+  let zoneID = zone.filter((e)=> e.tab === activeTab)
+  if(zone && zoneID[0]?.id){
+    let lga = []
+    dataOBJs.getLgaByZone(zoneID[0]?.id).then((res)=>{
+      res.map((a)=>{
+        lga.push({
+          name:a.name,
+          value:a._id
+        })
+      })
+      setLgaValue(lga)
+    })
+  }else{
+    setLgaValue([])
+  }
+},[activeTab])
+
+
+  
   return (
     <>
       <div className="dashboard-attendance-table-section my-3">
         <div className="attendance-header  pt-5 pe-5">
           <h4 className="header-title">LIPWDMS Super Admin Portal</h4>
-          <div className="d-flex  tab-header my-4">
+          <div className="d-flex tab-header my-4">
+          {zone && zone.map((item) => (
             <div
-              className={`tab-item ${activeTab === "allZones" ? "active" : ""}`}
-              onClick={() => handleTabChange("allZones")}
+              key={item.tab}
+              className={`tab-item ${activeTab === item.tab ? 'active' : ''}`}
+              onClick={() => handleTabChange(item.tab)}
             >
-              All Zones ({totalCount})
+              {item.label} ({item.count})
             </div>
-            <div
-              className={`tab-item ${
-                activeTab === "AdamawaSouth" ? "active" : ""
-              }`}
-              onClick={() => handleTabChange("AdamawaSouth")}
-            >
-              Adamawa South ({countAdamawaSouth})
-            </div>
-            <div
-              className={`tab-item ${
-                activeTab === "AdamawaNorth" ? "active" : ""
-              }`}
-              onClick={() => handleTabChange("AdamawaNorth")}
-            >
-              Adamawa North ({countAdamawaNorth})
-            </div>
-            <div
-              className={`tab-item ${
-                activeTab === "AdamawaCentral" ? "active" : ""
-              }`}
-              onClick={() => handleTabChange("AdamawaCentral")}
-            >
-              Adamawa Central ({countAdamawaCentral})
-            </div>
-          </div>
+          ))}
+        </div>
           <div className="d-flex filter-option-section align-items-center py-4 my-2">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
-              <input type="search" name="" placeholder="Search Reports" />
+              <input type="search" value={searchData} onChange={e=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
             </div>
             <div className="form-field mx-2">
-              <select name="lga" id="">
-                <option>LGAs</option>
-                <option value="guyuk">Guyuk</option>
-                <option value="numan">Numan</option>
-                <option value="Ganye">Ganye</option>
-                <option value="girei">Girei</option>
-                <option value="michika">Michika</option>
+              <select name="lga" id="" onChange={(e)=> setSelectedLgaValue(e.target.value)}>
+                <option value="">LGAs</option>
+               {
+                lgaValue.map((a,i)=>{
+                  return( <option value={a?.value} key={i}>{a?.name}</option>
+
+                  )
+                })
+               }
               </select>
             </div>
             <div className="form-field mx-2 date-select">
@@ -144,82 +194,96 @@ export default function AttendanceReportTable({ onRowClick }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredData
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((report, index) => (
-                    <TableRow
-                      key={report.id}
-                      onClick={() => onRowClick(report.id)}
-                    >
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.supervisor_name}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.date}
-                        </Link>
-                      </TableCell>
-                      <TableCell
-                        className={
-                          isTimePastFour(report.time_sent) ? "red-color" : ""
-                        }
+                {tableData && tableData
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((report, index) => {
+                    const queryParam = encodeURIComponent(JSON.stringify(report))
+                      return(
+                        <TableRow
+                        key={index}
+                        as="a"
+                        href={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                        
                       >
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                           {report?.submittedBy?.firstname}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          
+                        {new Date(report?.date).toISOString().split('T')[0]}
+                         
+                          </Link>
+                        </TableCell>
+                        <TableCell
+                          className={
+                            isTimePastFour(new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })) ? "red-color" : ""
+                          }
                         >
-                          {report.time_sent}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.present}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.absent}
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.location}
-                        </Link>
-                      </TableCell>
-                      <TableCell className="commentColumn">
-                        <Link
-                          to={`/detailed-attendance/${report.id}`}
-                          key={report.id}
-                        >
-                          {report.comment}
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                     
+                          {report?.attendanceRecord
+                            .flatMap(obj => obj.attempt)
+                            .filter(attempt => attempt.status === 'Present')
+                            .length}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {report?.attendanceRecord
+                            .flatMap(obj => obj.attempt)
+                            .filter(attempt => attempt.status === 'Absent')
+                            .length}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {report?.lga?.name}
+                          </Link>
+                        </TableCell>
+                        <TableCell className="commentColumn">
+                          <Link
+                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
+                            key={index}
+                          >
+                          {report?.comment}
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                      )
+                  })}
               </TableBody>
             </Table>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={filteredData.length}
+              count={tableData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

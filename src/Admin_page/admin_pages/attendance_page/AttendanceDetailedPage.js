@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Table,
   TableContainer,
@@ -11,13 +11,19 @@ import {
   Avatar,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams,useLocation } from "react-router-dom";
 import attendanceReportData from "../../../component/data/AttendanceReportData";
 import "./attendance.css";
+import supervisor from "../../../class/supervisor.class";
+import dataOBJs from "../../../class/data.class";
 
 export default function AttendanceDetailedPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [searchData, setSearchData] = useState("");
+  const [tableData, setTableData] = useState([]);
+  const [zone, setZone] = useState([]);
+  const [selectedZone, setSelectedZone] = useState("");
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -29,20 +35,56 @@ export default function AttendanceDetailedPage() {
   };
 
   const { id } = useParams();
-  const navigate = useNavigate();
 
-  const report = attendanceReportData.find((item) => item.id === parseInt(id));
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const dataParam = queryParams.get("data");
+  let receivedArray = dataParam ? JSON.parse(decodeURIComponent(dataParam)) : [];
 
-  if (!report) {
-    navigate("/admin-home");
-    return null;
-  }
+  useEffect(() => {
+    if (dataParam) {
+      const attendanceRecord = receivedArray?.attendanceRecord || [];
+      setTableData(attendanceRecord);
+      console.log(attendanceRecord, "testing");
+    }
+  }, [dataParam]);
+
+  useEffect(() => {
+    supervisor.getWorkTypology((res) => {
+      console.log(res, "toplogy");
+    });
+
+    dataOBJs.getZone().then((res) => {
+      const arr = res.map((a) => ({
+        name: a.name,
+        value: a._id,
+      }));
+      setZone(arr);
+      console.log(arr, "res from zone");
+    });
+  }, []);
+
+  useEffect(() => {
+    if (searchData && searchData.length >= 1) {
+      const filterSearch = receivedArray?.attendanceRecord.filter((item) =>
+        item?.employee.toLowerCase().startsWith(searchData.toLowerCase())
+      );
+      setTableData(filterSearch);
+    } else if (selectedZone) {
+      const filterZone = receivedArray?.attendanceRecord?.filter(
+        (i) => i.zone === selectedZone
+      );
+      setTableData(filterZone);
+      console.log(filterZone);
+    } else if (dataParam) {
+      const attendanceRecord = receivedArray?.attendanceRecord || [];
+      setTableData(attendanceRecord);
+    }
+  }, [dataParam, receivedArray?.attendanceRecord, searchData, selectedZone]);
 
   const goBack = () => {
     window.history.go(-1);
   };
-  const filteredData = report.beneficiary;
-
   return (
     <div className="my-4 px-auto attendance-detailed-page">
       <div className=" container-fluid attendance-detailed-header px-4">
@@ -58,30 +100,32 @@ export default function AttendanceDetailedPage() {
         <div className="d-flex justify-content-between attendance-info">
           <p>
             Supervisor : {<br />}
-            <span>{report.supervisor_name}</span>
+            <span>{receivedArray?.submittedBy?.firstname }</span>
           </p>
           <p>
             Date Submitted: {<br />}
-            <span>{report.date}</span>
+            <span>
+            {new Date(receivedArray?.updatedAt).toLocaleDateString()}
+            </span>
           </p>
           <p>
             Time Submitted: {<br />}
-            <span>{report.time_sent}</span>
+            <span>{new Date(receivedArray?.updatedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</span>
           </p>
           <p>
             Report from: {<br />}
-            <span>{report.location}</span>
+            <span>{receivedArray?.lga?.name}</span>
           </p>
           <p>
             Supervisor's Comment: {<br />}
-            <span>{report.comment}</span>
+            <span>{receivedArray?.comment}</span>
           </p>
         </div>
         <div className="d-flex align-items-center justify-content-between py-3 mt-3">
           <div className="d-flex filter-option-section align-items-center">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
-              <input type="search" name="" placeholder="Search Reports" />
+              <input type="search" value={searchData} onChange={(e)=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
             </div>
             <div className="form-field mx-2">
               <select name="worktypology" id="">
@@ -96,12 +140,15 @@ export default function AttendanceDetailedPage() {
               </select>
             </div>
             <div className="form-field mx-2">
-              <select name="ward" id="">
+              <select name="ward" id="" onChange={(e)=> setSelectedZone(e.target.value)}>
                 <option value="">Zones</option>
-                <option value="all">All</option>
-                <option value="adsouth">Admawa South</option>
-                <option value="adnorth">Adamawa North</option>
-                <option value="adcentral">Adamawa Central</option>
+                {
+                  zone && zone.map((res,i)=>{
+                    return(
+                      <option value={res.value} key={i}>{res.name}</option>
+                    )
+                  })
+                }
               </select>
             </div>
           </div>
@@ -110,7 +157,6 @@ export default function AttendanceDetailedPage() {
           </div>
         </div>
       </div>
-
       <div className="detailed-attendance-table mx-4">
         <TableContainer component={Paper}>
           <Table>
@@ -126,52 +172,52 @@ export default function AttendanceDetailedPage() {
                 <TableCell>SP. Action</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {filteredData.map((beneficiary, index) => (
-                <TableRow key={beneficiary.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>
-                    <Avatar
-                      alt={beneficiary.full_name}
-                      src={beneficiary.image}
-                    />
-                  </TableCell>
-                  <TableCell>{beneficiary.full_name}</TableCell>
-                  <TableCell>
-                    <div></div>
-                    {beneficiary.attendance_status === "Present" ? (
-                      <p className="present">
-                        Present <Icon icon="charm:tick" className="present" />{" "}
-                      </p>
+            {tableData && tableData
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((beneficiary, index) => (
+              <TableRow key={beneficiary._id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  <Avatar
+                    alt={beneficiary?.employee}
+                    // src={beneficiary?.image}
+                  />
+                </TableCell>
+                <TableCell>{beneficiary?.employee}</TableCell>
+                <TableCell>
+                  <div></div>
+                  {beneficiary?.status === "Present" ? (
+                    <p className="present">
+                      Present <Icon icon="charm:tick" className="present" />{" "}
+                    </p>
+                  ) : (
+                    <p className="absent">
+                      Absent <Icon icon="charm:cross" className="absent" />{" "}
+                    </p>
+                  )}
+                </TableCell>
+                <TableCell>{beneficiary?.workTypology}</TableCell>
+                <TableCell>{beneficiary?.ward}</TableCell>
+                <TableCell>{receivedArray?.submittedBy?.firstname}</TableCell>
+                <TableCell >
+                 <div className="d-flex sp-action-column"> {beneficiary?.attempt.map((action) => (
+                  <p className="sp-action me-2" key={action?.id}>
+                    {action?.status === "present" ? (
+                      <Icon icon="charm:tick" className="present" />
                     ) : (
-                      <p className="absent">
-                        Absent <Icon icon="charm:cross" className="absent" />{" "}
-                      </p>
+                      <Icon icon="charm:cross" className="absent" />
                     )}
-                  </TableCell>
-                  <TableCell>{beneficiary.work_typology}</TableCell>
-                  <TableCell>{beneficiary.ward}</TableCell>
-                  <TableCell>{report.supervisor_name}</TableCell>
-                  <TableCell className="d-flex sp-action-column">
-                    {beneficiary.sp_action.map((action) => (
-                      <p className="sp-action me-2" key={action.id}>
-                        {action.status === "present" ? (
-                          <Icon icon="charm:tick" className="present" />
-                        ) : (
-                          <Icon icon="charm:cross" className="absent" />
-                        )}
-                        <span>{action.time_tick}</span>
-                      </p>
-                    ))}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+                    <span>{action?.time_tick}</span>
+                  </p>
+                ))}</div>
+                </TableCell>
+              </TableRow>
+            ))}
           </Table>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={filteredData.length}
+            count={tableData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

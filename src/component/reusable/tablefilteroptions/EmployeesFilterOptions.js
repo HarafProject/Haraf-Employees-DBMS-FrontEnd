@@ -10,6 +10,8 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   const [typologyList, setTypologyList] = useState([]);
   const [tempData, setTempData] = useState([]);
   const { user } = useSelector((state) => state?.user);
+
+  
   async function fetchWards() {
     try {
       const ward_list = await dataOBJs.getWardsByLga(user.lga);
