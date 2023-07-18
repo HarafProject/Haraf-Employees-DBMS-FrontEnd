@@ -60,7 +60,7 @@ const pdfRef = useRef()
 
   const handleDownload = () => {
     setIsLoading(true)
-    if (!pdfRef.current) {
+    if (!pdfRef.current || !supervisor) {
       console.error('PDF reference is not available.');
       return;
     }
@@ -73,7 +73,7 @@ const pdfRef = useRef()
     const divToHide2 = input.querySelector('.manage-supervisor-table');
     
     if (divToHide) {
-      divToHide.style.backgroundColor = 'transparent';
+      
       divToHide.style.position = 'relative'
       
     }
@@ -124,7 +124,7 @@ const pdfRef = useRef()
       // Reset background color after capturing
       input.style.backgroundColor = '';
       if (divToHide) {
-        divToHide.style.backgroundColor = 'white';
+       
         divToHide.style.position = 'fixed'
       }
       if(divToHide2){
