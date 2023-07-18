@@ -8,7 +8,7 @@ import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.clas
 import axios from "axios";
 
 export default function DeleteRequestTab() {
-
+  
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [itemIdToModal, setItemIdToModal] = useState(0)
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);

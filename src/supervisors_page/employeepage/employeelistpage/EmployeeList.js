@@ -118,7 +118,7 @@ export default function EmployeeListTable() {
                     setUsersData={setUsersData}
                 />
                 <div>
-                    <div className="employee-list-table p-3 my-3">
+                    <div className="employee-list-table px-3 mt-3">
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>

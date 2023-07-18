@@ -27,7 +27,7 @@ export default function ManageSupervisorModal({
     console.log(id,'iddd')
     manageSupervisior.verify(id).then((res)=>{
       console.log(res,'response')
-      toast.sucess(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+      toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
       setIsLoading(false)
       closeModal()
       
@@ -43,7 +43,7 @@ export default function ManageSupervisorModal({
     manageSupervisior.undoVerified (id).then((res)=>{
       console.log(res,'response')
       setIsLoading(false)
-      toast.sucess(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+      toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
       closeModal()
     }).catch((err)=>{
       console.log(err,'err')
@@ -55,7 +55,7 @@ export default function ManageSupervisorModal({
     console.log(id,'iddd')
     manageSupervisior.undoVerified (id).then((res)=>{
       console.log(res,'response')
-      toast.sucess(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
+      toast.success(` You have successfully ${buttonClick} ${supervisorName} as a ${getRole}`)
       setIsLoading(false)
       closeModal()
     }).catch((err)=>{

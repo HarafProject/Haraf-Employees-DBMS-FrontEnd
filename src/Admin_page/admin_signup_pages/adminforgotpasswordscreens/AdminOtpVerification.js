@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import "./adminforgotpassword.css";
+// import "../../../supervisors_page/onboarding_screens/forgotpasswordscreens/forgotpassword.css";
 import { Icon } from "@iconify/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";

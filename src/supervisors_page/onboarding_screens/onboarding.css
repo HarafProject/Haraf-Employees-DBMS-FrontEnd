@@ -44,7 +44,7 @@
 
 .signup-content p.screen-title {
   font-size: 20px;
-  font-weight: lighter;
+  font-weight: 500;
   line-height: normal;
 }
 
@@ -106,7 +106,7 @@
   border: none;
   color: #ffffff;
   background-color: transparent;
-  font-size: 16px;
+  font-size: 14px;
   line-height: normal;
 }
 
@@ -151,11 +151,11 @@
   text-align: center;
 }
 
-.forgot-password span a {
+.forgot-password span a, .forgot-password span {
   text-decoration: none;
-  color: #f99c39;
+  color: #FB9129;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -167,25 +167,61 @@
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 1025px) {
-    
-}
 
-@media only screen and (max-width: 992px) {
-}
 
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
+  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+    width: 300px;
+  }
 }
-
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
+  .welcome-screen-content img {
+    width: 45%;
 }
-@media only screen and (max-width: 600px) {
+.signup-content img {
+  width: 25%;
 }
-@media only screen and (max-width: 567px) {
+  .welcome-screen-content h1 {
+    font-size: 25px;
 }
-@media only screen and (max-width: 426px) {
+  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+    width: 250px;
+    margin-top: 15px !important;
+  }
+  .onboarding-screen .btn.login {
+    margin: 10px 0 !important;
+  }
 }
-@media only screen and (max-width: 375px) {
+@media screen and (max-width: 567px) {
 }
-@media only screen and (max-width: 320px) {
+@media screen and (max-width: 426px) {
+  .welcome-screen-content img {
+    width: 30%;
+}
+.welcome-screen-content h1 {
+  font-size: 18px;
+}
+.signup-content p.title, .welcome-screen-content p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+  .form-area{
+    flex-direction: column !important;
+  }
+  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+    width: 200px;
+    font-size: 16px;
+      padding: 5px 10px;
+}
+.signup-content p.screen-title {
+  margin-top: 1rem !important;
+}
+}
+@media screen and (max-width: 375px) {
+  .signup-content .form-field {
+    width: 235px;
+    font-size: 14px;
+    padding: 0 10px;
+}
 }

@@ -58,21 +58,19 @@ export default function SelectWardsForAttendance() {
   }
 
   return (
-    <section>
+    <div>
       <ReusableHeader />
-      <div className='margin'>
-        <div className='select-typ'>
-          <div className='header'>
+      <div className='my-5 py-5 ward-page'>
+        <div className='mt-5 pt-3 select-ward-section'>
+          
             <h3>Select Wards</h3>
-            <p>
+            <p className='text-center'>
               Please choose the employee wards for whom you will be taking attendance.
             </p>
-          </div>
-          <div className='wrapper'>
-            <div className='grid'>
+            <div className='wards-list my-5'>
               {wards.map((item) => (
                 <label className='toggle' key={item._id}>
-                  <div>
+                  <div className='ward'>
                     <input
                       type='checkbox'
                       name={item._id}
@@ -80,15 +78,16 @@ export default function SelectWardsForAttendance() {
                       checked={checkedItems.includes(item._id)}
                       onChange={(event) => handleChange(event, item._id)}
                     />
-                    {item.name}
+                    <span className='mx-2'>{item.name}</span>                    
                   </div>
                 </label>
               ))}
             </div>
-            <button onClick={handleSubmit}>Proceed</button>
-          </div>
+            
+            <button onClick={handleSubmit} className='btn ward-btn mx-auto'>Proceed</button>
+        
         </div>
       </div>
-    </section>
+    </div>
   )
 }

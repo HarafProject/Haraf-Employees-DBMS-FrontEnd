@@ -106,8 +106,8 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
   }
 
   return (
-    <div className="filter-option-section  mt-3">
-      <div className="d-flex align-items-center justify-content-between ">
+    <div className="filter-option-section admin  mt-3">
+      <div className="filter d-flex align-items-center justify-content-between ">
         <div className="search-button px-2 mx-2">
           <Icon icon="eva:search-outline" className="me-2 search-icon" />
           <input type="search" onChange={handleFilter} name="search" placeholder="Search Member" />

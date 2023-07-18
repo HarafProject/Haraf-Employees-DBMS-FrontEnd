@@ -114,33 +114,6 @@ export default function NotificationScreen() {
     };
 
 
-    // const notificationList = [
-    //     {
-    //         message: "Request to edit Kadwama's profile approved",
-    //         buttonType: "Edit",
-    //         date_time: "5 mins ago"
-    //     },
-    //     {
-    //         message: "Request to edit John Deo's profile approved",
-    //         buttonType: "Edit",
-    //         date_time: "30 mins ago",
-    //     },
-    //     {
-    //         message: "Request to delete Kadwama's as an employee approved",
-    //         buttonType: "Delete",
-    //         date_time: "3 hrs ago"
-    //     },
-    //     {
-    //         message: "Request to edit Lawblaze's profile approved",
-    //         buttonType: "Edit",
-    //         date_time: "3 hrs ago"
-    //     },
-    //     {
-    //         message: "Request to add new employee approved",
-    //         buttonType: "Add",
-    //         date_time: "3 hrs ago"
-    //     },
-    // ];
     return (
         <div className="notification-page">
             <ReusableHeader />

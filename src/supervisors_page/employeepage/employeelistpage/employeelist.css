@@ -59,10 +59,12 @@
 }
 
 .employees-table-section .css-1ygcj2i-MuiTableCell-root {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-family: "LexendFontReqular", sans-serif;
   line-height: normal;
   color: #444444;
+  border-bottom: 0;
+  white-space: nowrap;
 }
 
 .employees-table-section .css-1wlk0hk-MuiAvatar-root {
@@ -72,13 +74,16 @@
 
 .employees-table-section .css-1ex1afd-MuiTableCell-root {
   letter-spacing: 0px;
+  max-width: 100px;
   border-bottom: 1px solid #00000090;
-
+font-family: "LexendFontLight", sans-serif;
   padding: 10px 16px;
   color: #000000;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 300;
   line-height: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* CSS for the floating button */
@@ -120,3 +125,72 @@ font-size: 16px;
   font-size: 24px;
   color: #ffffff;
 } */
+
+@media only screen and (max-width: 800px) {
+  .employees-table-section .css-1ygcj2i-MuiTableCell-root {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .empty-list-screen .empty-list-content .btn.add-employee {
+    width: 250px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .empty-list-screen .empty-list-content .btn.add-employee {
+    width: 200px;
+    font-size: 18px;
+  }
+.employees-table-section .css-1ygcj2i-MuiTableCell-root {
+    font-size: 14px;
+}
+.employees-table-section .css-1ex1afd-MuiTableCell-root {
+  padding: 10px;
+  font-size: 12px;
+}.employees-table-section .css-1wlk0hk-MuiAvatar-root {
+  width: 40px;
+  height: 40px;
+}
+.floating-button span {
+  font-size: 14px;
+}
+
+.employees-table-section  .css-rqglhn-MuiTable-root {
+
+  width: 70%;
+}
+}
+@media screen and (max-width: 426px) {
+  .empty-list-screen .empty-list-content p {
+    font-size: 18px;
+  }
+.empty-list-screen .empty-list-content span {
+  font-size: 14px;
+  width: 300px;
+}
+.empty-list-screen .empty-list-content .btn.add-employee {
+  width: 150px;
+  font-size: 14px;
+}
+.empty-list-screen .empty-list-content .btn.add-employee .iconify {
+  font-size: 20px;
+}
+}
+@media screen and (max-width: 375px) {
+  .floating-button {
+    bottom: 5px;
+    font-size: 10px;
+    padding: 5px 10px;
+}
+ 
+.empty-list-screen .empty-list-content span {
+  font-size: 14px;
+  width: 300px;
+}
+.floating-button {
+  right: 20px;
+}
+
+}

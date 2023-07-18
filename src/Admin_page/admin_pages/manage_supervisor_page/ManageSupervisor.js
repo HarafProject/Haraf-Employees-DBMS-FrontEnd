@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef} from "react";
 import Modal from "react-modal";
 import {
   Table,
@@ -17,6 +17,9 @@ import "./managesupervisor.css";
 import ManageSupervisorModal from "../../../component/reusable/modalscontent/ManageSupervisorModal";
 import manageSupervisior from "../../../class/ManageSupervisior.class";
 import dataOBJs from "../../../class/data.class";
+import jsPDF from 'jspdf'
+import domtoimage from 'dom-to-image';
+import { RotatingLines } from "react-loader-spinner";
 
 export default function ManageSupervisor() {
   const [page, setPage] = useState(0);
@@ -30,9 +33,12 @@ export default function ManageSupervisor() {
   const [supervisor,setSupervisor] = useState([])
   const [userId,setUserId] = useState([])
   const [zone,setZone] = useState([])
+  const [selectedZone,setSelectedZone] = useState('')
   const [lgaValue,setLgaValue] = useState([])
  const [search,setSearch] = useState('')
-  
+ const [totalCount,setTotalCount] = useState(0)
+ const [isLoading,setIsLoading] = useState(false)
+const pdfRef = useRef()
 
   function openModal(buttonClick, supervisorName, getRole,id) {
     setIsOpen(true);
@@ -52,45 +58,129 @@ export default function ManageSupervisor() {
     setModalClosed(false);
   }
 
+  const handleDownload = () => {
+    setIsLoading(true)
+    if (!pdfRef.current || !supervisor) {
+      console.error('PDF reference is not available.');
+      return;
+    }
+
+    const input = pdfRef.current;
+
+    // Set background color to white
+    input.style.backgroundColor = 'white';
+    const divToHide = input.querySelector('.manage-supervisor-header');
+    const divToHide2 = input.querySelector('.manage-supervisor-table');
+    
+    if (divToHide) {
+      
+      divToHide.style.position = 'relative'
+      
+    }
+    if(divToHide2){
+      divToHide2.style.marginTop = '0'
+    }
+    domtoimage
+      .toPng(input)
+      .then((dataUrl) => {
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const img = new Image();
+
+        img.onload = () => {
+          const contentWidth = img.width;
+          const contentHeight = img.height;
+
+          let imgWidth, imgHeight;
+          let offsetX = 0;
+          let offsetY = 0;
+          const aspectRatio = contentWidth / contentHeight;
+
+          if (aspectRatio > 1) {
+            imgWidth = pdfWidth;
+            imgHeight = imgWidth / aspectRatio;
+            offsetY = 0;
+          } else {
+            imgHeight = pdfHeight;
+            imgWidth = imgHeight * aspectRatio;
+            offsetX = (pdfWidth - imgWidth) / 2;
+          }
+
+          // Add image content
+          pdf.addImage(dataUrl, 'PNG', offsetX, offsetY, imgWidth, imgHeight);
+          pdf.save('Supervisors_and_Admins.pdf');
+        };
+
+        img.src = dataUrl;
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        console.error('Error generating PDF:', error);
+        setIsLoading(false)
+      })
+    .finally(() => {
+      setIsLoading(false)
+      // Reset background color after capturing
+      input.style.backgroundColor = '';
+      if (divToHide) {
+       
+        divToHide.style.position = 'fixed'
+      }
+      if(divToHide2){
+        divToHide2.style.marginTop = '150px'
+      }
+    });
+  };
 
   const handleZoneSelected = (e)=>{
     console.log(e,'inpiu')
-    dataOBJs.getLgaByZone(e).then((res)=>{
-      let arr =[]
-    res.map((a)=>{
-      console.log(a,'reseee')
-      arr.push({
-        name:a.name,
-        value:a._id
+    setSelectedZone(e)
+    if(e){
+      dataOBJs.getLgaByZone(e).then((res)=>{
+        let arr =[]
+      res.map((a)=>{
+        console.log(a,'reseee')
+        arr.push({
+          name:a.name,
+          value:a._id
+        })
       })
-    })
-    console.log(arr,'new arr')
-      setLgaValue(arr)
-    })
+      console.log(arr,'new arr')
+        setLgaValue(arr)
+      })
+    }
+ 
   }
 //get supervisior details 
-
 
 
 
 useEffect(() => {
   manageSupervisior.getAll().then((res) => {
     const supervisorData = res?.data;
+    setTotalCount(supervisorData.length)
+    let filteredSupervisorData = supervisorData;
 
     if (search && search.trim().length >= 1) {
-      const searchFilter = supervisorData.filter((a) => {
+      filteredSupervisorData = supervisorData.filter((a) => {
         const firstName = a?.firstname || '';
         return firstName.toLowerCase().startsWith(search.toLowerCase());
       });
-      setSupervisor(searchFilter);
-    } else {
-      setSupervisor(supervisorData);
     }
+
+    if (selectedZone) {
+      filteredSupervisorData = filteredSupervisorData.filter((a) => a.zone === selectedZone);
+    }
+
+    setSupervisor(filteredSupervisorData);
   });
-}, [search]);
+}, [search, selectedZone]);
 
 
 
+
+console.log(supervisor,'supervisior data')
 
 
   const handleChangePage = (event, newPage) => {
@@ -100,7 +190,7 @@ useEffect(() => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const totalCount = adminSupervisorList.length;
+
 useEffect(()=>{
  const getZone = async()=>{
   try{
@@ -122,14 +212,19 @@ useEffect(()=>{
  }
  getZone()
 },[])
+
+const getLocationFromZone = (id)=>{
+  console.log(id,zone.filter((a)=> a.value === id),'zone')
+  return zone && zone.filter((a)=> a.value === id)[0]?.name
+}
   return (
     <>
-      <div className="manage-supervisor-page py-3">
+      <div className="manage-supervisor-page py-3" ref={pdfRef}>
         <div className="container manage-supervisor-header py-4">
           <h4 className="header-title mt-4">LIPWDMS Super Admin Portal</h4>
-          <div className="d-flex align-items-center  mt-5 ">
+          <div className="d-flex align-items-center   mt-5 ">
             <h1>Supervisors & Admins ({totalCount})</h1>
-            <div className="d-flex filter-option-section align-items-center mx-4">
+            <div className="d-flex filter-option-section align-items-center  mx-4">
               <div className="search-button px-2 mx-1">
                 <Icon icon="eva:search-outline" className="me-2 search-icon" />
                 <input value={search} onChange={(e)=> setSearch(e.target.value)} type="search" name="" placeholder="Search Reports" />
@@ -147,9 +242,8 @@ useEffect(()=>{
                 </select>
               </div>
               <div className="form-field mx-1">
-                <select onChange={(e) => handleZoneSelected(e.target.value)} name="zones" id="">
-                  <option>Zones</option>
-                  <option value="all">All</option>
+                <select placeholder="select zone" onChange={(e) => handleZoneSelected(e.target.value)} name="zones" id="">
+                 
                  {
                   zone && zone.map((a,i)=>{
                     return(
@@ -161,19 +255,24 @@ useEffect(()=>{
               </div>
             </div>
             <div className="export">
-              <button className="btn export-file-btn">
-                <Icon
-                  icon="mingcute:file-export-fill"
-                  className="export-icon"
-                />
+              <button className="btn export-file-btn" disabled={isLoading} onClick={handleDownload}>
+              {isLoading ? (
+                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" />
+              ) : (
+                <>
+                <img width="20" className="export-icon" height="20" src="https://img.icons8.com/ios-filled/20/ffffff/export-pdf.png" alt="export-pdf"/>
                 Export
+                </>
+                
+              )}
+                
               </button>
             </div>
           </div>
         </div>
 
-        <div className="manage-supervisor-table">
-          <TableContainer component={Paper}>
+        <div className="manage-supervisor-table" >
+          <TableContainer component={Paper} >
             <Table>
               <TableHead>
                 <TableRow>
@@ -199,7 +298,7 @@ useEffect(()=>{
                       </p>
                     </TableCell>
                     <TableCell>{supervisor.role}</TableCell>
-                    <TableCell>{supervisor.zone}</TableCell>
+                    <TableCell>{getLocationFromZone(supervisor.zone)}</TableCell>
                     <TableCell>{supervisor.phone}</TableCell>
                     <TableCell>
                       <div className="d-flex">

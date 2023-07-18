@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 .profile-info-summary{
+=======
+.employee-profile-page{
+  /* height: 100vh; */
+}
+.profile-info-summary {
+>>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
   line-height: normal;
   white-space: nowrap;
 }
+
 .arrowback-icon {
+<<<<<<< HEAD
   width: 60px;
   height: 60px;
   color: #0280CA;
@@ -25,10 +34,35 @@
 .profile-info-summary h4{
   font-size: 28px;
   font-weight: 600;   
+=======
+  width: 30px;
+  height: 30px;
+  color: #0280ca;
+}
+
+.profile-info-summary img {
+  /* max-width: 12%; */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.reusable-info-list{
+  margin-top: 40px;
+}
+.back-to-previous {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 70px;
+}
+
+.profile-info-summary h4 {
+  font-size: 22px;
+>>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
   color: #444444;
   line-height: normal;
 
 }
+<<<<<<< HEAD
 .profile-info-summary p{
   font-size: 18px;
   font-weight: 300;
@@ -52,18 +86,55 @@ color: #444444;
 .reusable-info-list p.h6{
   font-size: 22px;
   font-weight: 600;
+=======
+
+.profile-info-summary p {
+  font-size: 16px;
+  color: #000000;
+  margin-top: 5px;
+  font-family: "LexendFontLight", sans-serif;
+}
+
+.profile-info-summary .work-info p {
+  color: #000000;
+  font-size: 16px;
+  margin-top: 10px;
+  font-family: "LexendFontMedium", sans-serif;
+}
+
+.profile-info-summary .work-info p span {
+  font-size: 14px;
+  color: #444444;
+  font-family: "LexendFontLight", sans-serif;
+}
+.personalinfo-user{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.reusable-info-list p.h6 {
+  margin-bottom: 0;
+  font-size: 18px;
+  line-height: normal;
+  font-family: "LexendFontSemiBold", sans-serif;
+>>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
   color: #444444f0;
 
 }
 
+<<<<<<< HEAD
 .reusable-info-list p{
   font-size: 18px;
   font-weight: 400;
+=======
+.reusable-info-list p {
+  font-size: 14px;
+  font-family: "LexendFontMedium", sans-serif;
+>>>>>>> 9fa833b26a54a32d7b741269f265f35358dbe609
 }
 
 .reusable-info-list p span{
   font-size: 14px;
-  font-weight: 300;
+  font-family: "LexendFontLight", sans-serif;
   color: #444444;
 }
 
@@ -81,4 +152,92 @@ font-weight: 400;
 .btn.delete-user{
 background: #D40505;
 color: #ffffff;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .profile-info-summary h4{
+    font-size: 20px;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .back-to-previous {
+    margin-top: 50px;
+  }
+  .profile-content {
+    padding: 1rem !important;
+  }
+  .profile-info-summary .work-info p {
+   
+    font-size: 14px;
+  }
+
+  .profile-info-summary h4,
+  .reusable-info-list p.h6 {
+    font-size: 16px;
+  }
+
+}
+@media only screen and (max-width: 576px) {
+  .profile-info-summary h4, .reusable-info-list p.h6, .profile-info-summary p  {
+    font-size: 14px;
+}
+}
+
+@media only screen and (max-width: 426px) {
+  .back-to-previous {
+    margin-top: 30px;
+}
+.names{
+  margin: 15px 0 !important;
+}
+  .profile-info-summary {
+    flex-direction: column;
+  }
+
+
+  .reusable-info-list p {
+    font-size: 13px;
+  }
+
+  .reusable-info-list p span, .profile-info-summary .work-info p span {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+
+.reusable-info-list p, .profile-info-summary .work-info p  {
+  font-size: 12px;
+}
+
+.profile-info-summary img {
+  width: 80px;
+  height: 80px;
+}
+.reusable-info-list{
+  margin-top: 1rem !important;
+}.personalinfo-user{
+    grid-template-columns: 1fr 1fr;
+  }
+  .reusable-info-list p{
+    margin-bottom: revert;
+  }
+  .reusable-info-list p.h6 {
+    margin-bottom: 0;
+}
+.back-to-previous{
+  font-size: 16px;
+}
+.arrowback-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5rem !important;
+}
+}
+
+@media only screen and (max-width: 320px) {
+  
 }

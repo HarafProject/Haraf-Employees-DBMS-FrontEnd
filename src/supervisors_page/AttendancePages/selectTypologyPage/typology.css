@@ -1,64 +1,67 @@
-.margin {
-  margin-top: 8rem;
-}
-/* Select Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-label {
-  line-height: normal;
+.select-ward-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
 }
 
-.check {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-input[type="checkbox"]:checked {
-  background-color: #f99c39;
-}
-
-.select-typ {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.header {
-  text-align: center;
-  width: 40%;
-  margin: 0 auto;
-}
-.header h3 {
-  font-size: 28px;
+.ward-page h3 {
+  font-size: 32px;
   color: #0280ca;
 }
 
-.wrapper {
-  width: 70%;
-  margin: 0 auto;
-}
 
-.grid {
+.wards-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 40px 100px;
 }
 
-.grid label {
-  margin: 1rem 0;
-}
 
 .toggle {
   color: #444444;
 }
 
-.toggle div {
+.select-ward-section input[type="checkbox"] {
+  text-align: center;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  appearance: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 4px;
+  border: 2px solid #444444;
+  outline: none;
+  box-shadow: none;
+  /* accent-color: rgba(249, 156, 57, 1); */
+  font-weight: 900;
+}
+
+input[type='checkbox']:checked {
+  background-color: #f99c39;
+  border: none;
+}
+
+input[type='checkbox']:checked:after {
+  content: '\2714';
+  line-height: normal;
+  color: white;
+}
+
+.select-ward-section input[type="checkbox"]:hover {
+  border-color: #f99c39;
+}
+
+.toggle .ward {
+  display: flex;
+  align-items: center;
+  font-family: "LexendFontReqular", sans-serif;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  color: #000000;
 }
 
 .toggle p {
@@ -66,23 +69,105 @@ input[type="checkbox"]:checked {
   font-size: 12px;
   padding: 0 2rem;
 }
-
-.select-typ button {
-  display: block;
-  width: 40%;
-  margin: 0 auto;
-  border: none;
-  padding: 0.5rem 2rem;
-  background-color: #0280ca;
-  color: #fff;
-  border-radius: 25px;
+.select-ward-section .btn.ward-btn{
+  width: 400px;
+  padding: 10px;
+border-radius: 100px;
+background-color: rgba(2, 128, 202, 1);
+font-size: 30px;
+line-height: normal;
+text-align: center;
+color: #ffffff;
+outline: none;
+text-align: center;
 }
 
-.last-check {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  margin: 3rem 0;
-  color: #444444;
-}
 /* End of select typography */
+
+
+@media only screen and (max-width: 1026px) {
+  .toggle .ward {
+    font-size: 18px;
+  } 
+}
+
+
+@media only screen and (max-width: 768px) {
+  .select-ward-section .btn.ward-btn {
+    width: 300px;
+    padding: 5px 0;
+    font-size: 24px;
+    
+  }
+  .select-ward-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .ward-page h3 {
+    font-size: 25px;
+  }
+  .select-ward-section p{
+    width: 450px;
+  }
+  .select-ward-section input[type="checkbox"] {
+    
+    width: 30px;
+    height: 30px;
+  }
+  .toggle .ward {
+    font-size: 16px;
+}
+}
+@media only screen and (max-width: 426px) {
+  .ward-page h3 {
+    font-size: 20px;
+}
+.select-ward-section p {
+  width: 350px;
+  font-size: 14px;
+}
+.wards-list {
+  gap: 30px 50px;
+}
+.toggle .ward {
+  font-size: 13px;
+}
+.select-ward-section input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-width: 1.5px;
+}
+.select-ward-section .btn.ward-btn {
+  width: 200px;
+  font-size: 18px;
+}
+}
+@media only screen and (max-width: 376px) {
+  .select-ward-section p {
+    width: 300px;
+    font-size: 12px;
+}
+.toggle .ward {
+  font-size: 10px;
+}
+.wards-list {
+  gap: 30px;
+}
+.select-ward-section .btn.ward-btn {
+  width: 150px;
+  font-size: 16px;
+}
+}
+@media only screen and (max-width: 320px) {
+  .select-ward-section p {
+    width: 260px;
+  }
+  .ward-page h3 {
+    font-size: 18px;
+}
+.wards-list {
+  gap: 20px 30px;
+}
+}

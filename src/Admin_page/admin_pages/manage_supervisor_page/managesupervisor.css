@@ -2,6 +2,7 @@
   position: fixed;
   background-color: #ffffff;
   top: 0;
+  max-width: 100vw;
   /* width: 79%; */
 }
 
@@ -27,7 +28,7 @@
 }
 
 .export-file-btn .export-icon {
-  font-size: 20px;
+  object-fit: contain;
 }
 
 .manage-supervisor-table {

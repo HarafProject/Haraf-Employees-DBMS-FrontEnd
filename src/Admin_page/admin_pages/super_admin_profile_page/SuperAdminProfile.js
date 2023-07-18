@@ -17,9 +17,9 @@ export default function SuperAdminProfile() {
   const [edited, setEdited] = useState(false);
   
   const [userData, setUserData] = useState({
-    firstname: user.firstname,
-    surname: user.surname,
-    phone: user.phone,
+    firstname: user?.firstname,
+    surname: user?.surname,
+    phone: user?.phone,
   });
 
   const handleChange = (e) => {
@@ -59,61 +59,34 @@ export default function SuperAdminProfile() {
       setButtonText("Save");
     }
   };
-
-  function cancelEdit() {
-    setUserData({
-      firstname: user.firstname,
-      surname: user.surname,
-      phone: user.phone,
-    });
-    setEditable(false);
-    setButtonText("Edit Profile");
-  }
-
   return (
     <section>
       <section className="login-container">
-        <h3 className="login-heading">Supervisor Login</h3>
-        <section>
-          {!editable && (
-            <div className="input-form">
-              <label htmlFor="">Name</label>
-              <input
-                value={`${userData.firstname} ${userData.surname}`}
-                onChange={handleChange}
-                disabled={!editable}
-                type="text"
-                placeholder="Lazarus Kadwama"
-              />
-            </div>
-          )}
+        <div className="profile">
+          <img
+            className="profile-picture"
+            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            alt=""
+          />
           {editable && (
-            <div className="input-form">
-              <label htmlFor="">First Name</label>
-              <input
-                value={userData.firstname}
-                name="firstname"
-                onChange={handleChange}
-                disabled={!editable}
-                type="text"
-                placeholder="Lazarus Kadwama"
-              />
+            <div className="camera-bg">
+              <Icon icon="typcn:camera" color="white" />
             </div>
           )}
+        </div>
 
-          {editable && (
-            <div className="input-form">
-              <label htmlFor="">Surname</label>
-              <input
-                type="text"
-                name="surname"
-                value={userData.surname}
-                onChange={handleChange}
-                disabled={!editable}
-                placeholder="+234902494030"
-              />
-            </div>
-          )}
+        <section>
+          <div className="input-form">
+            <label htmlFor="">Name</label>
+            <input
+              className={editable ? "border-orange" : "border-black"}
+              value={inputValue1}
+              onChange={handleInputChange1}
+              disabled={!editable}
+              type="text"
+              placeholder="Lazarus Kadwama"
+            />
+          </div>
           <div className="input-form">
             <label htmlFor="">Phone Number</label>
             <input
@@ -143,37 +116,20 @@ export default function SuperAdminProfile() {
               placeholder="Super Admin 1"
             />
           </div>
-
-          {isLoading && (
-            <center className="btn edit-button">
-              <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
-            </center>
-          )}
-
-          {!isLoading && (
-            <div className="d-flex justify-content-between mb-3">
-              {editable && (
-                <button className="edit-button" onClick={cancelEdit}>
-                  Cancel
-                </button>
-              )}
-
-              <button onClick={handleButtonClick} className="edit-button">
-                {!editable ? (
-                  <div className="icon-bg">
-                    <Icon
-                      icon="fluent:edit-20-filled"
-                      color="#f99c39"
-                      className="edit-icon"
-                    />
-                  </div>
-                ) : (
-                  ""
-                )}
-                {buttonText}
-              </button>
-            </div>
-          )}
+          <button onClick={handleButtonClick} className="edit-button">
+            {!editable ? (
+              <div className="icon-bg">
+                <Icon
+                  icon="fluent:edit-20-filled"
+                  color="#f99c39"
+                  className="edit-icon"
+                />
+              </div>
+            ) : (
+              ""
+            )}
+            {buttonText}
+          </button>
         </section>
       </section>
     </section>

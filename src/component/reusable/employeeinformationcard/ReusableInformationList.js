@@ -3,9 +3,9 @@ import React from "react";
 
 const ReusableInformationList = ({ title, information }) => {
   return (
-    <div className="mt-5 reusable-info-list">
+    <div className=" reusable-info-list">
       <p className="h6">{title}</p>
-      <div className="d-flex justify-content-between mt-3 personalinfo-user">
+      <div className="personalinfo-user">
         {information.map((item, index) => (
           <p className="d-flex flex-column info" key={index}>
             <span>{item.label}</span>
