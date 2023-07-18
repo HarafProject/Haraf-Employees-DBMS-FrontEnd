@@ -114,7 +114,7 @@ export default function CreateAdminAccountScreen() {
     }
   }, [dataOBJs, formik.values.zonalRegion]);
   return (
-    <div className="onboarding-screen">
+    <div className="onboarding-screen admin">
       {/* <div className="login-screen"> */}
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
         <div className="d-flex flex-column align-items-center signup-screen-logo">

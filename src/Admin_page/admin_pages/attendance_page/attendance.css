@@ -80,8 +80,8 @@
   border-bottom: 3px solid #0280ca;
 }
 
-.attendance-table {
-  margin-top: 170px;
+.dashboard-attendance-table-section .attendance-table {
+  margin-top: 130px;
 }
 
 .red-color a {
@@ -172,3 +172,37 @@ p .absent {
   color: #ff0000;
   font-weight: 600;
 }
+
+
+
+
+@media only screen and (max-width: 1027px) {
+  .dashboard-attendance-table-section .attendance-table {
+    margin-top: 80px;
+  }
+  
+      
+  }
+  
+  @media only screen and (max-width: 992px) {
+  }
+  
+  @media only screen and (max-width: 800px) {
+  
+  
+  }
+  
+  @media only screen and (max-width: 768px) {
+  }
+  @media only screen and (max-width: 600px) {
+  
+  }
+  @media only screen and (max-width: 567px) {
+  }
+  @media only screen and (max-width: 426px) {
+  }
+  @media only screen and (max-width: 375px) {
+  }
+  @media only screen and (max-width: 320px) {
+  }
+  

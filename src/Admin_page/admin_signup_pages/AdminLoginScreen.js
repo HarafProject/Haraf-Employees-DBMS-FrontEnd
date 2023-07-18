@@ -65,18 +65,18 @@ export default function AdminLoginScreen() {
   };
 
   return (
-    <div className="admin-onboarding admin-login">
-      <div className="d-flex flex-column justify-content-space-between  align-items-center admin-signup-content py-3">
-        <div className="signup-logo text-center">
+    <div className="onboarding-screen login-screen admin">
+      <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-4">
+      
           <img src={profile} alt="" />
-          <p className="title">LIPW Management System{<br />} (LIPWMS)</p>
-        </div>
+          <p className="my-1 text-center title">LIPW Management System{<br />} (LIPWMS)</p>
+   
 
-        <form onSubmit={formik.handleSubmit} className="mt-5">
+        <form onSubmit={formik.handleSubmit} className="mt-3">
           <p className="screen-title text-center mt-5">Admin LOGIN</p>
 
           <div>
-            <div className="form-field my-3">
+            <div className="form-field my-4">
               <input
                 autoComplete="new-email"
                 type="email"
@@ -90,12 +90,12 @@ export default function AdminLoginScreen() {
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
-            <div className="form-field d-flex align-items-center justify-content-between my-3">
+            <div className="form-field d-flex align-items-center justify-content-between my-4">
               <input
                 autoComplete="new-password"
                 className=""
                 placeholder="Password *"
-                type="password"
+                type={passwordType ? "password" : "text"}
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
@@ -110,20 +110,20 @@ export default function AdminLoginScreen() {
             )}
           </div>
 
-          <div className="d-flex flex-column login-screen-button mt-5">
+          <div className="d-flex flex-column login-screen-button mt-3">
             <button
               disabled={!formik.isValid || isLoading}
               type="submit"
-              className="btn login"
+              className="btn login my-4"
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="25" strokeColor="#FFF" strokeWidth="3" />
               ) : (
                 "Login"
               )}
             </button>
           </div>
-          <p className="admin-forgot-password mt-3">
+          <p className="forgot-password">
             Forgotten Password?{" "}
             <span
               onClick={() => {

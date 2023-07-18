@@ -17,7 +17,8 @@ export default function AttendanceReportUpload() {
   const { attendance, } = useSelector((state) => state?.attendance)
   const [attendanceCount, setAttendanceCount] = useState({})
   const [attendanceComment, setAttendanceComment] = useState(null)
-  const [lateSubmissionReason, setlateSubmissionReason] = useState("")
+  // const [lateSubmissionComment, setLateSubmissionComment] = useState(null)
+  const [lateSubmissionReason, setLateSubmissionReason] = useState("")
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export default function AttendanceReportUpload() {
   }, [attendance])
 
   async function handleSubmit(params) {
-    if (!attendanceComment) return toast.error("Please enter comment.")
+    if (!attendanceComment && !lateSubmissionReason) return toast.error("Please enter comment.")
     if (!window.confirm("Are you sure you want to submit this report? Once submitted data cannot be reviewed.")) return
     let record = attendance.data.map(item => ({
       supervisor: user._id,
@@ -86,12 +87,21 @@ export default function AttendanceReportUpload() {
       setIsLoading(false)
     }
   }
+
+  const submissionTime = moment().format('h:mm A');
+  const currentTime = moment();
+  const startTime = moment().set('hour', 9).set('minute', 0);
+  const endTime = moment().set('hour', 16).set('minute', 0);
+  const isBetweenSubmissionTime = currentTime.isBetween(startTime, endTime);
+
+  
+
   return (
-    <section>
+    <div>
       <ReusableHeader />
-      <div className="margin ">
-        <div className="select-typ-report">
-          <div className="header-report">
+      <div className="container my-5 pt-5 ">
+        <div className=" select-typ-report mt-4">
+          <div className="header-report ">
             <h3>Attendance Report Upload</h3>
             <p>
               Please choose the employee typology for whom you will be taking
@@ -100,16 +110,17 @@ export default function AttendanceReportUpload() {
           </div>
           <h4>Attendance Summary</h4>
           <div className='summary-grid'>
-            <div className='summary'>
-              <h1>{attendanceCount?.Present}</h1>
+            <div className='d-flex flex-column align-items-center summary'>
+              <h1>{attendanceCount?.Present || 0}</h1>
               <p>Present</p>
             </div>
-            <div className='summary'>
+            <div className='d-flex flex-column align-items-center summary'>
               <h1>{attendanceCount?.Absent || 0}</h1>
               <p>Absent</p>
             </div>
-            <div className='summary'>
-              <h1>{moment().format('h:mm A')}</h1>
+            <div className='d-flex flex-column align-items-center summary' >
+              <h1 className={!isBetweenSubmissionTime ? 'red-text' : ''}>{submissionTime}</h1>
+              
               <p>Submission Time</p>
             </div>
           </div>
@@ -131,9 +142,9 @@ export default function AttendanceReportUpload() {
               <h4>{user.firstname} {user.surname}</h4>
             </div>
           </div>
-          <div className="msg-area">
+          <center className="msg-area">
             <textarea
-              placeholder="Supervisors comment"
+              placeholder="Supervisors comment *"
               name=""
               id=""
               cols="50"
@@ -146,10 +157,23 @@ export default function AttendanceReportUpload() {
               Kindly state any challenge experienced during the process of
               taking attendance today
             </p>
-          </div>
-          <div className="btns">
+          </center>
+
+          {!isBetweenSubmissionTime && (
+            <center className="msg-area">
+              <textarea
+                placeholder="Kindly include reason *"
+                cols="50"
+                className="message red-text"
+                rows="4"
+                onChange={(e) => setLateSubmissionReason(e.target.value)}
+              />
+              <p className={!isBetweenSubmissionTime ? 'red-text late-submission' : ''}>Please provide a reason for submitting the report after the designated submission time range</p>
+            </center>
+          )}
+          <div className="d-flex justify-content-around btns mt-5">
             <button
-              className="btn-back"
+              className="btn btn-back"
               onClick={() => {
                 navigate('/supervisor/attendance')
               }}
@@ -157,7 +181,7 @@ export default function AttendanceReportUpload() {
             >
               Back to attendance
             </button>
-            <button className='btn-submit' onClick={handleSubmit} disabled={isLoading}>
+            <button className='btn btn-submit' onClick={handleSubmit} disabled={isLoading}>
               {isLoading ? <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /> : "Submit Attendnace"}
             </button>
           </div>
@@ -187,6 +211,6 @@ export default function AttendanceReportUpload() {
         />
 
       </Modal>
-    </section>
+    </div>
   );
 }

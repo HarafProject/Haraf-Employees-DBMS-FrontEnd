@@ -13,11 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
+  // const [selectedComponent, setSelectedComponent] = useState("employee");
+  const [clicked, setClicked] = useState(false);
+
   const [selectedComponent, setSelectedComponent] = useState("requests");
   const { user } = useSelector((state) => state?.user)
 
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
+    setClicked(false)
   };
 
   
@@ -25,26 +29,35 @@ export default function AdminHomePage() {
     window.history.go(-1);
   };
 
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
 
   return (
     <div className="admin-dashboard">
-      <div className="sidebar ">
+      {/* <div className="sidebar "> */}<div className="admin hamburger-icon" onClick={handleClick}>
+          <Icon
+            icon={clicked ? "jam:close" : "ci:menu-alt-02"}
+            className={clicked ? "close" : "bar"}
+          />
+        </div>
+      <div className={`sidebar ${clicked ? "open" : ""}`}>
+         
         <div className="p-3">
           <img src={profile} alt="" />
-
           <div>
             <span className="name">
               {user?.firstname} {user?.surname} {<br />}  {user?.role} ID: {user?.reference}
             </span>
           </div>
         </div>
-        <div className="sidebar-navlinks d-flex flex-column justify-content-center mt-3">
+        <div className={`sidebar-navlinks d-flex flex-column justify-content-center mt-3 ${clicked ? "header-menu active" : ""}`}>
           <p
             className={selectedComponent === "employee" ? "active" : ""}
             onClick={() => handleComponentClick("employee")}
           >
             <Icon icon="healthicons:city-worker-outline" />
-            <span>Employees</span>
+            <span>Beneficiary</span>
           </p>
 
           <p
@@ -95,6 +108,8 @@ export default function AdminHomePage() {
             <span onClick={() => navigate("/admin")}>Log Out</span>
           </p>
         </div>
+
+       
       </div>
       <div className="content px-3">
         <div className="mx-3">
@@ -116,6 +131,7 @@ export default function AdminHomePage() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

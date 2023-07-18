@@ -50,6 +50,10 @@
   color: inherit;
 }
 
+.employees-table-section .search-button {
+  margin: 0 !important;
+}
+
 .employees-table-section .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
   border-radius: 10px 10px 0 0;
 }
@@ -120,3 +124,58 @@ font-size: 16px;
   font-size: 24px;
   color: #ffffff;
 } */
+@media only screen and (max-width: 1027px) {
+  .employees-table-section .filter-option-section.admin .filter {
+    margin: 0 5px !important;
+  }
+
+}
+@media  screen and (max-width: 800px) {
+ .employees-table-section .filter-option-section {
+    padding: 0 !important;
+}
+
+}
+
+@media only screen and (max-width: 768px) {
+  .employees-table-section .search-button {
+    width: 160px;
+  }
+  .employees-table-section .formfield{
+    margin-top: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {}
+
+@media only screen and (max-width: 567px) {}
+
+@media only screen and (max-width: 426px) {
+  .employees-table-section .search-button {
+    width: 120px;
+}
+.exportBtn {
+  /* margin-top */
+  width: 95px
+}
+}
+
+@media only screen and (max-width: 376px) {
+  .employees-table-section .search-button {
+    width: 140px;
+}
+.exportBtn {
+  width: 140px
+}
+
+}
+
+@media only screen and (max-width: 320px) {
+  .employees-table-section .search-button {
+    width: 230px;
+    margin: 8px 0 !important;
+}
+.exportBtn {
+  width: 230px
+}
+}

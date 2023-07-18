@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./adminforgotpassword.css";
+// import "../../../supervisors_page/onboarding_screens/forgotpasswordscreens/forgotpassword.css";
 import { RotatingLines } from "react-loader-spinner";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -45,8 +45,8 @@ export default function AdminForgottenPassword() {
   });
 
   return (
-    <div className="forgotpassword-screen">
-      <div className="">
+    <div className="forgotpassword-screen admin-site">
+      {/* <div className=""> */}
         <div className="form d-flex flex-column align-items-center p-5">
           <h1>Forgotten Password</h1>
           <p>
@@ -70,7 +70,7 @@ export default function AdminForgottenPassword() {
               }`}
             />
             {formik.errors.email && formik.touched.email && (
-              <div className="error-message">{formik.errors.email}</div>
+              <div className="error">{formik.errors.email}</div>
             )}
 
             <button
@@ -78,7 +78,7 @@ export default function AdminForgottenPassword() {
               className="btn forgotpassword-btn mt-4 mx-auto"
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="25" strokeColor="#FFF" strokeWidth="3" />
               ) : (
                 "Send OTP"
               )}
@@ -86,10 +86,10 @@ export default function AdminForgottenPassword() {
           </form>
           <p>
             Having issues or don't have access to email?{" "}
-            <span>Contact Admin</span>
+            <span><a href="mailto:">Contact Admin</a></span>
           </p>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }

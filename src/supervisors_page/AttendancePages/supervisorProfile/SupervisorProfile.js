@@ -71,11 +71,11 @@ export default function SupervisorProfile() {
   }
 
   return (
-    <section>
+    <div>
       <ReusableHeader />
-      <section className="login-container">
-        <h3 className="login-heading">Supervisor Login</h3>
-        <section>
+      <div className="supervisor-account">
+        <h3 className="">Supervisor Account</h3>
+        <div className="d-flex flex-column align-items-center">
           {!editable && (
             <div className="input-form">
               <label htmlFor="">Name</label>
@@ -118,7 +118,7 @@ export default function SupervisorProfile() {
           <div className="input-form">
             <label htmlFor="">Phone Number</label>
             <input
-              type="text"
+              type="tel"
               value={userData.phone}
               onChange={handleChange}
               disabled={!editable}
@@ -128,7 +128,7 @@ export default function SupervisorProfile() {
           <div className="input-form">
             <label htmlFor="">Email Address</label>
             <input
-              type="text"
+              type="email"
               onChange={handleChange}
               disabled={true}
               placeholder={user.email}
@@ -152,22 +152,22 @@ export default function SupervisorProfile() {
           )}
 
           {!isLoading && (
-            <div className="d-flex justify-content-between mb-3">
+            <div className="d-flex justify-content-between profile-btn mb-3">
               {editable && (
-                <button className="edit-button" onClick={cancelEdit}>
+                <button className="btn profile-edit-button save-btn mt-4" onClick={cancelEdit}>
                   Cancel
                 </button>
               )}
 
-              <button onClick={handleButtonClick} className="edit-button">
+              <button onClick={handleButtonClick} className={`btn mt-4 profile-edit-button ${buttonText === "Save" ? "save-btn" : ""}`}>
                 {!editable ? (
-                  <div className="icon-bg">
+                  // <div className="icon-bg">
                     <Icon
                       icon="fluent:edit-20-filled"
                       color="#f99c39"
                       className="edit-icon"
                     />
-                  </div>
+                  // </div>
                 ) : (
                   ""
                 )}
@@ -175,8 +175,8 @@ export default function SupervisorProfile() {
               </button>
             </div>
           )}
-        </section>
-      </section>
-    </section>
+        </div>
+      </div>
+    </div>
   );
 }

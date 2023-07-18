@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "./adminforgotpassword.css";
+// import "../../../supervisors_page/onboarding_screens/forgotpasswordscreens/forgotpassword.css";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import Modal from "react-modal";
@@ -58,7 +58,7 @@ export default function AdminCreateNewPassword() {
 
   return (
     <div className="forgotpassword-screen ">
-      <div className="">
+      {/* <div className=""> */}
         <div className="form d-flex flex-column align-items-center p-5">
           <h1>Create New Password</h1>
           <p>
@@ -79,7 +79,7 @@ export default function AdminCreateNewPassword() {
               onBlur={formik.handleBlur}
             />
             {formik.touched.password && formik.errors.password && (
-              <p className="text-end create error">{formik.errors.password}</p>
+              <p className="text-end error">{formik.errors.password}</p>
             )}
 
             <input
@@ -94,7 +94,7 @@ export default function AdminCreateNewPassword() {
             />
             {formik.touched.confirmPassword &&
               formik.errors.confirmPassword && (
-                <p className="text-end create error">
+                <p className="text-end error">
                   {formik.errors.confirmPassword}
                 </p>
               )}
@@ -134,6 +134,6 @@ export default function AdminCreateNewPassword() {
           </Modal>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }

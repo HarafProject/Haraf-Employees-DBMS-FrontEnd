@@ -74,8 +74,8 @@ export default function EmployeeProfilePage() {
   return (
     <div className="employee-profile-page">
       <ReusableHeader />
-      <div className="profile-content my-3 p-5">
-        <div className="back-to-previous my-5">
+      <div className="profile-content my-4 p-4">
+        <div className="back-to-previous">
           <Icon
             icon="mdi:arrow-back-circle"
             onClick={goBack}
@@ -83,9 +83,9 @@ export default function EmployeeProfilePage() {
           />
           Back to list
         </div>
-        <div className="d-flex align-item-start  profile-info-summary">
+        <div className="d-flex align-item-start  profile-info-summary mt-4">
           <img src={userData?.photo} alt="" />
-          <div className="d-flex my-3">
+          <div className="d-flex">
             <div className="names mx-5">
               <h4>{userData?.fullName}</h4>
               <p>{userData?.maritalStatus}</p>
@@ -106,7 +106,7 @@ export default function EmployeeProfilePage() {
             </div>
           </div>
         </div>
-        <div className="my-3">
+        <div className="">
           <ReusableInformationList
             title="Personal Information"
             information={personalInfo}

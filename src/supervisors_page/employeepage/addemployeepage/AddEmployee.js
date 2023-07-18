@@ -214,28 +214,13 @@ export default function AddEmployeeScreen({ prefilledData }) {
             <div className="add-employee-screen mt-5 py-5">
 
                 <div className="d-flex flex-column align-items-center add-employee-content mt-4">
-
-                    {/* <h5>Add Employee</h5> */}
-                    {/* <h5>{prefilledData ? 'Edit Employee' : 'Add Employee'}
-                    </h5>  */}
-                    <h5>Add Employee</h5>
-
-
-                    <form >
-                        <div className="d-flex align-items-start">
-                            <div className="mx-3">
-                                <div className="form-field my-4">
-                                    <input
-                                        type="text"
-                                        name="fullName"
-                                        placeholder="Full Name"
-                                        value={bankDetail.fullName}
-                                        disabled
-                                    />
-
-                                </div>
-                                <div className="form-field my-4">
-                                    <input autocomplete="new-accountnumber"
+                    <h5>Add Beneficiary</h5>
+                    <form className="d-flex flex-column justify-content-center">
+                        <div className="addform">
+                            <div className="d-flex my-4">
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                          <input autocomplete="new-accountnumber"
                                         type="text" name="accountNumber"
                                         onChange={(e) => setBankDetails({
                                             ...bankDetail,
@@ -245,75 +230,12 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         placeholder='Bank Account Number '
                                         autoFocus
                                     />
+                                    </div>
+                                  
                                 </div>
-                                <div className="form-field my-4" >
-                                    <select name="ward" id="" disabled={!isVerified} {...formik.getFieldProps('ward')}>
-                                        <option value="">Ward</option>
-                                        {
-                                            wardList.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
-                                        }
-
-                                    </select>
-                                    {formik.touched.ward && formik.errors.ward ? (
-                                        <div className="error">{formik.errors.ward}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-field my-4">
-                                    <input autocomplete="age" type="number" min={1} name="age" placeholder='Age ' disabled={!isVerified}
-                                        {...formik.getFieldProps('age')} />
-                                    {formik.touched.age && formik.errors.age ? (
-                                        <div className="error">{formik.errors.age}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-field my-4">
-                                    <select name="maritalStatus" id="" disabled={!isVerified}  {...formik.getFieldProps('maritalStatus')}>
-                                        <option value="">Marital Status</option>
-                                        <option value="single">Single</option>
-                                        <option value="married">Married</option>
-                                        <option value="divorce">Divorce</option>
-                                    </select>
-                                    {formik.touched.maritalStatus && formik.errors.maritalStatus ? (
-                                        <div className="error">{formik.errors.maritalStatus}</div>
-                                    ) : null}
-                                </div>
-
-                                <div className="form-field my-4">
-                                    <input autocomplete="new-housesize" type="number"
-                                        name="householdSize" placeholder='Household Size'
-                                        disabled={!isVerified}
-                                        {...formik.getFieldProps('householdSize')} />
-                                    {formik.touched.householdSize && formik.errors.householdSize ? (
-                                        <div className="error">{formik.errors.householdSize}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-field my-4"  {...formik.getFieldProps('sex')}>
-                                    <select name="sex" id="" disabled={!isVerified}>
-                                        <option value="">Sex</option>
-                                        <option value="female">Female</option>
-                                        <option value="male">Male</option>
-                                    </select>
-
-                                    {formik.touched.sex && formik.errors.sex ? (
-                                        <div className="error">{formik.errors.sex}</div>
-                                    ) : null}
-                                </div>
-
-
-                            </div>
-                            <div className="mx-3">
-                                <div className="form-field my-4">
-                                    <input autocomplete="new-phone"
-                                        type="tel" name="phone" ref={inputRef}
-                                        placeholder='Phone Number '
-                                        disabled={!isVerified}
-                                        {...formik.getFieldProps('phone')} />
-
-                                    {formik.touched.phone && formik.errors.phone ? (
-                                        <div className="error">{formik.errors.phone}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-field my-4">
-                                    <select name="" onChange={(e) => {
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                        <select name="" onChange={(e) => {
                                         if (e.target.value === bankDetail?.bankName) return
                                         const bank = JSON.parse(e.target.value)
                                         setBankDetails({
@@ -329,57 +251,175 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         {
                                             bankList?.map(item => <option key={item.id} value={JSON.stringify(item)}>{item.name}</option>)
                                         }
-                                    </select>
+                                    </select> 
+                                    </div>
+                                   
 
                                 </div>
-                                <div className="form-field my-4">
-                                    <input autocomplete="new-address"
+                            </div>
+
+                            <div className="d-flex my-4">
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                       <input
+                                        type="text"
+                                        name="fullName"
+                                        placeholder="Full Name"
+                                        value={bankDetail.fullName}
+                                        disabled
+                                    />  
+                                    </div>
+                                   
+
+                                </div>
+                                <div className="mx-2">
+                                    <div className="form-field"> 
+                                        <input autocomplete="new-phone"
+                                        type="tel" name="phone" ref={inputRef}
+                                        placeholder='Phone Number '
+                                        disabled={!isVerified}
+                                        {...formik.getFieldProps('phone')} />
+                                    </div>
+                                    
+
+                                    {formik.touched.phone && formik.errors.phone ? (
+                                        <div className="error">{formik.errors.phone}</div>
+                                    ) : null}
+                                </div>
+                            </div>
+
+                            <div className="d-flex my-4">
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                       <input autocomplete="age" type="number" min={1} name="age" placeholder='Age ' disabled={!isVerified}
+                                        {...formik.getFieldProps('age')} />  
+                                    </div>
+                                   
+                                    {formik.touched.age && formik.errors.age ? (
+                                        <div className="error">{formik.errors.age}</div>
+                                    ) : null}
+                                </div>
+                                <div className="mx-2">
+                                    <div className="form-field"  {...formik.getFieldProps('sex')}>
+                                          <select name="sex" id="" disabled={!isVerified}>
+                                        <option value="">Sex</option>
+                                        <option value="female">Female</option>
+                                        <option value="male">Male</option>
+                                    </select>
+                                    </div>
+                                  
+
+                                    {formik.touched.sex && formik.errors.sex ? (
+                                        <div className="error">{formik.errors.sex}</div>
+                                    ) : null}
+                                </div>
+                            </div>
+                            <div className="d-flex my-4">
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                       <select name="maritalStatus" id="" disabled={!isVerified}  {...formik.getFieldProps('maritalStatus')}>
+                                        <option value="">Marital Status</option>
+                                        <option value="single">Single</option>
+                                        <option value="married">Married</option>
+                                        <option value="divorce">Divorce</option>
+                                    </select>  
+                                    </div>
+                                   
+                                    {formik.touched.maritalStatus && formik.errors.maritalStatus ? (
+                                        <div className="error">{formik.errors.maritalStatus}</div>
+                                    ) : null}
+                                </div>
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                       <input autocomplete="new-address"
                                         type="text" name="address" placeholder='Home Address'
                                         disabled={!isVerified}
-                                        {...formik.getFieldProps('address')} />
+                                        {...formik.getFieldProps('address')} /> 
+                                    </div>
+                                    
                                     {formik.touched.address && formik.errors.address ? (
                                         <div className="error">{formik.errors.address}</div>
                                     ) : null}
                                 </div>
-                                <div className="form-field my-4">
-                                    <select name="workTypology" disabled={!isVerified} {...formik.getFieldProps('workTypology')}>
-                                        <option>Work Typology</option>
-                                        {typologyList?.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
+                            </div>
+                            <div className="d-flex my-4">
+                                <div className="mx-2">
+                                    <div className="form-field" >
+                                        <select name="ward" id="" disabled={!isVerified} {...formik.getFieldProps('ward')}>
+                                            <option value="">Ward</option>
+                                            {
+                                                wardList.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
+                                            }
 
-                                    </select>
-                                    {formik.touched.workTypology && formik.errors.workTypology ? (
-                                        <div className="error">{formik.errors.workTypology}</div>
+                                        </select>
+                                    </div>
+
+                                    {formik.touched.ward && formik.errors.ward ? (
+                                        <div className="error">{formik.errors.ward}</div>
                                     ) : null}
                                 </div>
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                        <input autocomplete="new-housesize" type="number"
+                                            name="householdSize" placeholder='Household Size'
+                                            disabled={!isVerified}
+                                            {...formik.getFieldProps('householdSize')} />
+                                    </div>
 
-                                <div className="form-field my-4">
-                                    <select name="specialDisability" disabled={!isVerified} {...formik.getFieldProps('specialDisability')}>
-                                        <option>Special Disability</option>
-                                        <option value="nil">N/A</option>
-                                        <option value="visibility">Visibility impairment</option>
-                                        <option value="hearing">Hearing impairment</option>
-                                        <option value="physical">Physical impairment</option>
-                                        <option value="intellectual">Intellectual impairment</option>
-                                        <option value="mental">Mental/Psychosocial impairment</option>
-                                        <option value="speech">Speech impairment</option>
-                                    </select>
-                                    {formik.touched.specialDisability && formik.errors.specialDisability ? (
-                                        <div className="error">{formik.errors.specialDisability}</div>
+                                    {formik.touched.householdSize && formik.errors.householdSize ? (
+                                        <div className="error">{formik.errors.householdSize}</div>
                                     ) : null}
                                 </div>
-                                <div className="form-field my-4">
-                                    <select name="householdHead" disabled={!isVerified}  {...formik.getFieldProps('householdHead')}>
-                                        <option>Head of House</option>
-                                        <option value="womanhead">Women headed household</option>
-                                        <option value="youthhead">Youth headed household</option>
-                                        <option value="idp">Internal displaced Persons</option>
-                                        <option value="aged">Aged</option>
-                                    </select>
+                            </div>
+                            <div className="d-flex my-4">
+                                <div className="mx-2">
+                                    <div  className="form-field">
+                                        <select name="householdHead" disabled={!isVerified}  {...formik.getFieldProps('householdHead')}>
+                                            <option>Head of House</option>
+                                            <option value="womanhead">Women headed household</option>
+                                            <option value="youthhead">Youth headed household</option>
+                                            <option value="idp">Internal displaced Persons</option>
+                                            <option value="aged">Aged</option>
+                                        </select>
+                                    </div>
+
                                     {formik.touched.householdHead && formik.errors.householdHead ? (
                                         <div className="error">{formik.errors.householdHead}</div>
                                     ) : null}
                                 </div>
+                                <div className="mx-2">
+                                    <div className="form-field ">
+                                        <select name="workTypology" disabled={!isVerified} {...formik.getFieldProps('workTypology')}>
+                                            <option>Work Typology</option>
+                                            {typologyList?.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
 
+                                        </select>
+                                    </div>
+
+                                    {formik.touched.workTypology && formik.errors.workTypology ? (
+                                        <div className="error">{formik.errors.workTypology}</div>
+                                    ) : null}
+                                </div>
+                            </div>
+                            <div className="d-flex align-items-start pic">
+                                <div className="mx-2">
+                                    <div className="form-field">
+                                        <select name="specialDisability" disabled={!isVerified} {...formik.getFieldProps('specialDisability')}>
+                                            <option>Special Disability</option>
+                                            <option value="nil">N/A</option>
+                                            <option value="visibility">Visibility impairment</option>
+                                            <option value="hearing">Hearing impairment</option>
+                                            <option value="physical">Physical impairment</option>
+                                            <option value="intellectual">Intellectual impairment</option>
+                                            <option value="mental">Mental/Psychosocial impairment</option>
+                                            <option value="speech">Speech impairment</option>
+                                        </select>
+                                    </div>
+
+                                    {formik.touched.specialDisability && formik.errors.specialDisability ? (
+                                        <div className="error">{formik.errors.specialDisability}</div>
+                                    ) : null}
+                                </div>
                                 <div className='d-flex align-items-center picture-upload-section'>
                                     <div className="profile-img mx-3">
 
@@ -400,10 +440,9 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         </span>
                                     </p>
                                 </div>
-
                             </div>
                         </div>
-                        {isLoading && <center className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
+                        {isLoading && <center className="btn mx-auto save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 
                         {
                             !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid ||!isVerified || isLoading} className="btn save-employee mt-5">

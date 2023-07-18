@@ -14,6 +14,7 @@
   line-height: normal;
   color: #7a7575;
 }
+
 .css-ahj2mt-MuiTypography-root,
 .css-ahj2mt-MuiTypography-root:first-child {
   margin: 0;
@@ -23,11 +24,13 @@
   font-weight: 400;
   line-height: normal;
 }
+
 .filter-option-section .form-field {
   border-radius: 33px;
   border: 0.6px solid #444444;
   padding: 0 15px;
 }
+
 .filter-option-section .form-field select {
   width: 130px;
   padding: 10px 0;
@@ -38,6 +41,7 @@
   font-size: 14px;
   line-height: normal;
 }
+
 .filter-option-section .form-field select option:first-child {
   color: #a6a6a68c;
 }
@@ -61,10 +65,12 @@
   color: #444444;
   height: fit-content;
 }
+
 .search-icon {
   font-size: 25px;
   color: #7a7575;
 }
+
 .filter-option-section .search-button input {
   /* width: 400px; */
   padding: 10px 0;
@@ -111,8 +117,76 @@
   color: #fff;
   display: flex;
   padding: 0.2rem 0.5rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   background-color: #0280ca;
   border-radius: 5px;
+}
+
+
+@media screen and (max-width: 1027px) {
+
+   .filter-option-section.admin .filter {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .filter-option-section.admin .form-field {
+    width: 200px;
+  }
+  .exportBtn {
+      margin-top: 14px;
+    width: 150px;
+  }
+  .filter-option-section .form-field select {
+    width: -webkit-fill-available;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .employee-list-table{
+    padding: 0 10px !important;
+  }
+  .filter-option-section.admin .form-field {
+    width: 160px;
+    margin-top: 0 !important;
+}
+.filter-option-section.admin .filter {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.exportBtn {
+  margin-top: 4px;
+}
+
+}
+@media only screen and (max-width: 600px) {
+  .filter-option-section.admin .filter {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+}
+@media only screen and (max-width: 567px) {
+}
+@media only screen and (max-width: 426px) {
+  .filter-option-section.admin .form-field {
+    width: 115px;
+}
+}
+@media only screen and (max-width: 376px) {
+  .filter-option-section.admin .filter {
+    grid-template-columns: 1fr 1fr;
+}
+.filter-option-section.admin .form-field {
+  width: 140px;
+}
+}
+@media only screen and (max-width: 320px) {
+  .filter-option-section.admin .filter {
+    grid-template-columns: 1fr;
+  }
+  .filter-option-section.admin .form-field {
+    width: 230px;
+}
+.employee-list-table {
+  padding: 0 !important;
+}
 }

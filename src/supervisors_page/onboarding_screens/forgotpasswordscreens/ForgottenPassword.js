@@ -48,19 +48,20 @@ export default function ForgottenPassword() {
 
   return (
     <div className="forgotpassword-screen ">
-      <div className="">
-        <div className="form d-flex flex-column align-items-center p-5">
-          <h1>Forgotten Password</h1>
-          <p>
-            {" "}
-            To reset your password, an OTP will be sent to your email, please
-            input the email address you registered with below
-          </p>
-          <form
-            onSubmit={formik.handleSubmit}
-            className="d-flex flex-column my-5"
-          >
-            <div className="form-field my-4">
+      {/* <div className=""> */}
+      <div className="form d-flex flex-column align-items-center p-5">
+        <h1>Forgotten Password</h1>
+        <p>
+          {" "}
+          To reset your password, an OTP will be sent to your email, please
+          input the email address you registered with below
+        </p>
+        <form
+          onSubmit={formik.handleSubmit}
+          className="d-flex flex-column my-5"
+        >
+          {/* <div> */}
+            <div className="form-field mt-4">
               <input
                 autoComplete="new-email"
                 type="email"
@@ -71,29 +72,31 @@ export default function ForgottenPassword() {
                 name="email"
                 placeholder="Email Address"
               />
-              {formik.touched.email && formik.errors.email && (
-                <div className="error">{formik.errors.email}</div>
-              )}
-            </div>
-            <button
-              type="submit"
-              disabled={!formik.isValid || isLoading}
-              className="btn forgotpassword-btn mt-4 mx-auto"
-            >
-              {" "}
-              {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
-              ) : (
-                "Send OTP"
-              )}
-            </button>
-          </form>
-          <p>
-            Having Issues or don’t have access to email?{" "}
-            <span>Contact Admin</span>
-          </p>
-        </div>
+
+            </div> {formik.touched.email && formik.errors.email && (
+              <div className="error">{formik.errors.email}</div>
+            )}
+          {/* </div> */}
+
+          <button
+            type="submit"
+            disabled={!formik.isValid || isLoading}
+            className="btn forgotpassword-btn mt-4 mx-auto"
+          >
+            {" "}
+            {isLoading ? (
+              <RotatingLines width="20" strokeColor="#FFF" strokeWidth="2" />
+            ) : (
+              "Send OTP"
+            )}
+          </button>
+        </form>
+        <p>
+          Having Issues or don’t have access to email?{" "}
+          <span><a href="mailto:">Contact Admin</a></span>
+        </p>
       </div>
+      {/* </div> */}
     </div>
   );
 }
