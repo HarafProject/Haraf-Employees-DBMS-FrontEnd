@@ -1,6 +1,3 @@
-.margin {
-  margin-top: 8rem;
-}
 
 /* Attendance list */
 
@@ -8,10 +5,9 @@
 
 /* Attendance Report */
 .summary-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  justify-items: center;
+  display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .summary h1 {
@@ -19,8 +15,7 @@
   font-size: 40px;
 }
 .select-typ-report {
-  width: 80%;
-  margin: 0 auto;
+
 }
 
 .select-typ-report h4 {
@@ -29,11 +24,11 @@
   font-size: 18px;
   font-weight: bold;
   color: #444444;
+  white-space: nowrap;
 }
 
 .header-report {
   text-align: center;
-  width: 40%;
   margin: 0 auto;
 }
 
@@ -63,37 +58,33 @@
 }
 
 .msg-area {
-  width: 60%;
-  margin: 6rem auto;
+  /* width: 60%; */
+  margin: 100px auto 20px auto;
 }
 
 .msg-area p {
+  width: 600px;
   text-align: center;
   color: #444444;
 }
 
 .message {
-  width: 100%;
+  width: 600px;
   padding: 0.5rem;
   resize: none;
 }
 
-.btns {
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-}
-.select-typ-report button {
-  width: 30%;
-  display: block;
-  padding: 0.7rem 0;
-  border-radius: 25px;
+
+.select-typ-report .btns button {
+  width: 250px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50px;
 }
 .btn-submit {
   background-color: #0280ca;
   color: #fff;
-  border: 1px;
 }
 
 .btn-back {
@@ -118,7 +109,6 @@
 
 .login-heading {
   color: #444444;
-  margin-bottom: 3rem;
   text-align: center;
 }
 
@@ -169,4 +159,124 @@
   border-radius: 30px;
   color: #fff;
   border: none;
+}
+.summary .red-text, p.late-submission{
+  color: red;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .summary h1 {
+    font-size: 34px;
+  }
+  .message {
+    width: 585px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .message {
+    width: 550px;
+}
+}
+@media only screen and (max-width: 600px) {
+  .header-report h3 {
+    font-size: 22px;
+  }
+  .header-report p, .summary p, .report p{
+    text-align: center;
+    font-size: 12px;
+  }
+  .report h4 {
+    font-size: 14px;
+  }
+  .summary h1 {
+    font-size: 24px;
+}
+.msg-area {
+  margin: 50px auto 20px auto;
+}
+.message {
+  width: 440px;
+  font-size: 12px;
+}
+.msg-area p {
+  font-size: 12px;
+  width: 400px;
+
+}
+.select-typ-report .btns button {
+  width: 170px;
+  font-size: 14px;
+}
+.select-typ-report h4 {
+  font-size: 16px;
+}
+}
+@media only screen and (max-width: 567px) {
+}
+@media only screen and (max-width: 426px) {
+  .header-report h3 {
+    font-size: 16px;
+}
+.select-typ-report h4 {
+  font-size: 14px;
+}
+summary h1 {
+  font-size: 20px;
+}
+.message {
+  width: 350px;
+}
+.msg-area p {
+  width: 300px;
+}
+.select-typ-report .btns button {
+  width: 150px;
+}
+.select-typ-report{
+  margin-top: 0 !important;
+}
+}
+@media only screen and (max-width: 376px) {
+  .header-report h3 {
+    font-size: 14px;
+}
+.header-report p, .summary p, .report p, .msg-area p {
+  
+  font-size: 10px;
+}
+.summary h1 {
+  font-size: 18px;
+}
+.select-typ-report h4 {
+  font-size: 12px;
+}
+.message {
+  width: 300px;
+}
+.select-typ-report .btns button {
+  width: 140px;
+  font-size: 12px;
+  padding: 8px;
+}
+}
+@media only screen and (max-width: 320px) {
+  .select-typ-report h4 {
+    font-size: 11px;
+}
+.summary h1 {
+  font-size: 16px;
+}
+.message {
+  width: 250px;
+}
+.msg-area p {
+  width: 250px;
+}
+.select-typ-report .btns button {
+  width: 115px;
+  font-size: 10px;
+}
 }

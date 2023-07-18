@@ -8,7 +8,7 @@ const ReusableNotificationCard = ({ notificationContent, onButtonClick }) => {
       {notificationContent.map((item, index) => (
         <>
           <div
-            className="d-flex justify-content-between align-items-center px-5"
+            className="d-flex justify-content-between align-items-center px-3"
             key={index}
           >
             <p className="">{item.message}</p>

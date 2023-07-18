@@ -102,41 +102,17 @@ export default function NotificationScreen() {
   };
 
 
-  // const notificationList = [
-  //     {
-  //         message: "Request to edit Kadwama's profile approved",
-  //         buttonType: "Edit",
-  //         date_time: "5 mins ago"
-  //     },
-  //     {
-  //         message: "Request to edit John Deo's profile approved",
-  //         buttonType: "Edit",
-  //         date_time: "30 mins ago",
-  //     },
-  //     {
-  //         message: "Request to delete Kadwama's as an employee approved",
-  //         buttonType: "Delete",
-  //         date_time: "3 hrs ago"
-  //     },
-  //     {
-  //         message: "Request to edit Lawblaze's profile approved",
-  //         buttonType: "Edit",
-  //         date_time: "3 hrs ago"
-  //     },
-  //     {
-  //         message: "Request to add new employee approved",
-  //         buttonType: "Add",
-  //         date_time: "3 hrs ago"
-  //     },
-  // ];
+  
   return (
     <div className="notification-page">
       <ReusableHeader />
 
-      <div className="notification my-3 p-5">
+      <div className="notification my-3 py-5 px-4">
         <h1 className="mt-5">NOTIFICATIONS</h1>
         <div className="notification-list mt-3">
-          <ReusableNotificationCard notificationContent={notificationList} onButtonClick={handleButtonClick} />
+          <ReusableNotificationCard notificationContent={notificationList} 
+          onButtonClick={handleButtonClick} />
+       
         </div>
       </div>
 
@@ -181,7 +157,7 @@ export default function NotificationScreen() {
         />
       )}
 
-      <div className="notification my-3 p-5">
+      {/* <div className="notification my-3 p-5">
         <h1 className="mt-5">NOTIFICATIONS</h1>
         <div className="notification-list mt-3">
           <ReusableNotificationCard
@@ -189,12 +165,11 @@ export default function NotificationScreen() {
             onButtonClick={handleButtonClick}
           />
         </div>
-      </div>
+      </div> */}
 
-      {modalIsOpen && (
+      {/* {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
-          // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           contentLabel="Example Modal"
           className={{
@@ -220,14 +195,14 @@ export default function NotificationScreen() {
             <DeleteEmployeeSuccessModal closeModal={() => setIsOpen(false)} />
           )}
         </Modal>
-      )}
+      )} */}
 
-      {selectedNotification && (
+      {/* {selectedNotification && (
         <AddEmployeeScreen
           prefilledData={selectedNotification}
           closeModal={() => setSelectedNotification(null)}
         />
-      )}
+      )} */}
     </div>
   );
 }

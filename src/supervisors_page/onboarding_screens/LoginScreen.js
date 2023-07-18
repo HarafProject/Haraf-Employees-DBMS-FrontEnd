@@ -39,6 +39,8 @@ export default function LoginScreen() {
   const [icon, setIcon] = useState("mdi:eye");
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarType, setSnackbarType] = useState("");
 
   
   const togglePasswordVisiblity = () => {
@@ -82,7 +84,8 @@ export default function LoginScreen() {
       auth
         .login(data)
         .then((res) => {
-          toast.success(res?.data?.message);
+          // toast.success(res?.data?.message);
+          setSnackbarMessage(res?.data?.message);
           localStorage.setItem("HARAF-AUTH", res?.data?.token)
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
@@ -93,7 +96,8 @@ export default function LoginScreen() {
         })
         .catch((err) => {
           console.log(err);
-          toast.error(err?.error || err);
+          // toast.error(err?.error || err);
+          setSnackbarMessage(err.error || err);
           setIsLoading(false);
           if (!err) {
             let auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
@@ -104,10 +108,21 @@ export default function LoginScreen() {
         });
     },
   });
+  useEffect(() => {
+    if (snackbarMessage) {
+      const timeout = setTimeout(() => {
+        setSnackbarMessage("");
+        setSnackbarType("");
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [snackbarMessage]);
+
 
   return (
     <div className="onboarding-screen login-screen">
-      <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-5">
+      <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-4">
        
           <img src={profile} alt="" />
           <p className="my-1 text-center title">LIPW Management System{<br />}(LIPWMS)</p>
@@ -151,14 +166,14 @@ export default function LoginScreen() {
             )}
           </div>
 
-          <div className="d-flex flex-column login-screen-button mt-3">
+          <div className="d-flex flex-column align-items-center login-screen-button mt-3">
             <button
               type="submit"
               className="btn login my-4"
               disabled={!formik.isValid || isLoading}
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="25" strokeColor="#FFF" strokeWidth="2" />
               ) : (
                 "Login"
               )}
@@ -173,8 +188,6 @@ export default function LoginScreen() {
           </p>
         </form>
       </div>
-<<<<<<< HEAD
-=======
       {/* </div> */}
       <Modal
         isOpen={modalIsOpen}
@@ -199,7 +212,7 @@ export default function LoginScreen() {
           closeModal={closeModal}
         />
       </Modal>
->>>>>>> main
+      
     </div>
   );
 }

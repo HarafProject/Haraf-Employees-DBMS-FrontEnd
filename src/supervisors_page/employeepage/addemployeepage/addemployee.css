@@ -22,27 +22,32 @@
   outline: none;
   border: none;
   background-color: transparent;
-  font-size: 16px;
+  font-size: 15px;
   line-height: normal;
   color: #444444;
+  text-overflow: ellipsis;
 }
 
 .add-employee-content .form-field select option {
   color: #000;
+  font-size: 12px;
 }
+
 .add-employee-content .form-field select option:first-child {
   color: #444444ac !important;
 }
 
 .add-employee-content .form-field select {
-  width: 400px;
+  /* width: 400px; */
+  width: -webkit-fill-available;
   padding: 10px 0;
   outline: none;
   border: none;
   color: #444444ac;
   background-color: transparent;
-  font-size: 16px;
+  font-size: 15px;
   line-height: normal;
+  text-overflow: ellipsis;
 }
 
 .add-employee-content .form-field input::placeholder {
@@ -104,7 +109,7 @@
   width: 30px;
   height: 30px;
   top: 715px;
-  left: 730px;
+  left: 720px;
   background: #ffffff;
   border: 1px solid rgba(68, 68, 68, 0.16);
   border-radius: 231.25px;
@@ -118,15 +123,17 @@
 
 .picture-upload-section p.headshot-title {
   font-size: 20px;
-  font-weight: 400;
   line-height: normal;
   color: #000000;
+  font-family: "LexendFontReqular", sans-serif;
+  white-space: nowrap;
 }
 
 .picture-upload-section p.headshot-title span {
   font-size: 14px;
   font-weight: 200;
   width: 100px;
+  white-space: pre-wrap;
 }
 
 .add-employee-content .btn.save-employee {
@@ -138,4 +145,158 @@
   font-size: 28px;
   font-weight: 400;
   line-height: normal;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1026px) {
+  .profile-img .camera {
+    left: 595px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .profile-img .camera {
+    left: 580px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .add-employee-content .form-field {
+    width: 250px;
+  }
+
+  .profile-img .camera {
+    left: 475px;
+    top: 710px;
+  }
+
+  .picture-upload-section p.headshot-title span {
+    font-size: 10px;
+
+  }
+
+  .picture-upload-section p.headshot-title {
+    font-size: 16px;
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .add-employee-content h5 {
+    font-size: 28px;
+  }
+
+  .add-employee-content .btn.save-employee {
+    width: 250px;
+    font-size: 20px;
+  }
+
+  .profile-img .camera {
+    left: 465px;
+    top: 700px;
+  }
+
+  .picture-upload-section p.headshot-title {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .add-employee-content h5 {
+    font-size: 24px;
+  }
+
+  .profile-img {
+    width: 60px;
+    height: 60px;
+    margin-left: 0 !important;
+  }
+
+  .profile-img .camera .camera-icon {
+    height: 15px;
+    width: 15px;
+  }
+
+  .profile-img .camera {
+    width: 20px;
+    height: 20px;
+    top: 535px;
+    left: 342px;
+  }
+.add-employee-content form .addform div.d-flex.my-4{
+  margin: 1rem 0 !important;
+}
+  .add-employee-content .form-field {
+    width: 260px;
+    padding: 5px 10px;
+    
+  }
+
+  .add-employee-content .form-field select,
+  .add-employee-content .form-field input {
+    padding: 5px 0;
+    font-size: 14px;
+  }
+
+  .add-employee-content .btn.save-employee {
+    width: 200px;
+  }
+
+  .add-employee-content .form-field select {
+    background-size: 0.8em auto;
+    background-position: right center;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .profile-img .camera {
+    left: 330px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .add-employee-content{
+    margin-top: 0 !important;
+  }
+  .add-employee-content h5 {
+    font-size: 20px;
+}
+  .profile-img .camera {
+    left: 330px;
+  }
+  .add-employee-content form .addform div.d-flex.my-4, .add-employee-content .pic {
+    margin: 0 !important;
+    flex-direction: column;
+    align-items: center;
+}
+.add-employee-content .form-field {
+  width: 270px;
+  margin: 11px 0 !important;
+}
+
+.profile-img .camera {
+  top: 948px;
+  left: 120px;
+}
+.picture-upload-section p.headshot-title {
+  width: auto;
+}
+.add-employee-content .btn.save-employee {
+  width: 180px;
+  font-size: 16px;
+}
+}
+@media screen and (max-width: 376px) {
+  .profile-img .camera {
+    top: 950px;
+    left: 95px;
+}
+
+}
+@media screen and (max-width: 320px) {
+
+.profile-img .camera {
+  top: 952px;
+  left: 64px;
+}
 }

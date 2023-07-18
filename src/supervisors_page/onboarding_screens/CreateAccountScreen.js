@@ -115,19 +115,19 @@ export default function CreateAccountScreen() {
     <div className="onboarding-screen">
       {/* <div className="login-screen"> */}
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
-        <div className="d-flex flex-column align-items-center signup-screen-logo">
-          <img src={profile} alt="" className="" />
-          <p className="mt-3 title text-center">
-            LIPW Management System{<br />}(LIPWMS)
-          </p>
-        </div>
+
+        <img src={profile} alt="" className="" />
+        <p className="mt-3 title text-center">
+          LIPW Management System{<br />}(LIPWMS)
+        </p>
+
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">auth SIGNUP</p>
-          <div className="d-flex align-items-start">
-            <div className="mx-3">
-              <div>
-                <div className="form-field mt-5">
+          <p className="screen-title text-center mt-5">SIGNUP</p>
+        
+            <div className="d-flex form-area">
+              <div className="">
+                <div className="form-field mx-3 mt-5">
                   <input
                     autoComplete="new-firstname"
                     type="text"
@@ -144,9 +144,28 @@ export default function CreateAccountScreen() {
                   <div className="error">{formik.errors.fname}</div>
                 )}
               </div>
+              <div className="">
+                <div className="form-field mx-3 mt-5">
+                  <input
+                    autoComplete="new-surname"
+                    id="surname"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.surname}
+                    type="text"
+                    name="surname"
+                    placeholder="Surname *"
+                  />
 
-              <div>
-                <div className="form-field mt-5">
+                </div> {formik.touched.surname && formik.errors.surname && (
+                  <div className="error">{formik.errors.surname}</div>
+                )}
+              </div>
+            </div>
+
+            <div className="d-flex form-area">
+              <div className="">
+                <div className="form-field mx-3 mt-5">
                   <input
                     autoComplete="new-phone"
                     type="tel"
@@ -163,9 +182,32 @@ export default function CreateAccountScreen() {
                   <div className="error">{formik.errors.phone}</div>
                 )}
               </div>
+              <div className="">
+                <div className="form-field mx-3 mt-5">
+                  <input
+                    autoComplete="new-email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                    id="email"
+                    name="email"
+                    placeholder="Email Address *"
+                  />
 
-              <div>
-                <div className="form-field mt-5">
+                </div>
+                {formik.touched.email && formik.errors.email && (
+                  <div className="error">{formik.errors.email}</div>
+                )}
+              </div>
+
+
+            </div>
+
+            <div className="d-flex form-area">
+
+              <div className="">
+                <div className="form-field mx-3 mt-5">
                   <select
                     name="zonalRegion"
                     id="zonalRegion"
@@ -189,70 +231,8 @@ export default function CreateAccountScreen() {
                 )}
               </div>
 
-              <div>
-                <div className="form-field d-flex align-items-center justify-content-between mt-5">
-                  <input
-                    autoComplete="new-password"
-                    className=""
-                    id="password"
-                    placeholder="Password *"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.password}
-                    type={passwordType ? "password" : "text"}
-                    name="password"
-                  />
-                  <div onClick={togglePasswordVisiblity} className="eye">
-                    <Icon icon={icon1 ? "mdi:eye" : "mdi:eye-off"} />
-                  </div>
-
-                </div>
-                {formik.touched.password && formik.errors.password && (
-                  <div className="error">{formik.errors.password}</div>
-                )}
-              </div>
-             
-            </div>
-            <div className="mx-3">
-              <div>
-                <div className="form-field mt-5">
-                  <input
-                    autoComplete="new-surname"
-                    id="surname"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.surname}
-                    type="text"
-                    name="surname"
-                    placeholder="Surname *"
-                  />
-
-                </div> {formik.touched.surname && formik.errors.surname && (
-                  <div className="error">{formik.errors.surname}</div>
-                )}
-              </div>
-
-              <div>
-                <div className="form-field mt-5">
-                  <input
-                    autoComplete="new-email"
-                    type="email"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.email}
-                    id="email"
-                    name="email"
-                    placeholder="Email Address *"
-                  />
-
-                </div>
-                {formik.touched.email && formik.errors.email && (
-                  <div className="error">{formik.errors.email}</div>
-                )}
-              </div>
-
-              <div>
-                <div className="form-field mt-5">
+              <div className="">
+                <div className="form-field mx-3 mt-5">
                   <select
                     name="lga"
                     id="lga"
@@ -275,8 +255,39 @@ export default function CreateAccountScreen() {
                 )}
               </div>
 
-              <div>
-                <div className="form-field d-flex align-items-center justify-content-between mt-5">
+            </div>
+
+            <div className="d-flex form-area">
+
+              <div className="">
+                <div className="form-field mx-3 d-flex align-items-center justify-content-between mt-5">
+                  <input
+                    autoComplete="new-password"
+                    className=""
+                    id="password"
+                    placeholder="Password *"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
+                    type={passwordType ? "password" : "text"}
+                    name="password"
+                  />
+                  <div onClick={togglePasswordVisiblity} className="eye">
+                    <Icon icon={icon1 ? "mdi:eye" : "mdi:eye-off"} />
+                  </div>
+
+                </div>
+                {formik.touched.password && formik.errors.password && (
+                  <div className="error">{formik.errors.password}</div>
+                )}
+              </div>
+
+
+
+
+
+              <div className="">
+                <div className="form-field mx-3 d-flex align-items-center justify-content-between mt-5">
                   <input
                     autoComplete="new-password"
                     className=""
@@ -297,11 +308,10 @@ export default function CreateAccountScreen() {
                   formik.errors.confirm_password && (
                     <div className="error">{formik.errors.confirm_password}</div>
                   )}</div>
-
-              
             </div>
-          </div>
-          <div className="d-flex flex-column login-screen-button mt-3">
+        
+
+          <div className="d-flex flex-column align-items-center login-screen-button mt-3">
             <button
               type="submit"
               style={{ margin: "auto" }}
@@ -309,7 +319,7 @@ export default function CreateAccountScreen() {
               disabled={!formik.isValid || isLoading}
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="2" />
               ) : (
                 "Create Account"
               )}

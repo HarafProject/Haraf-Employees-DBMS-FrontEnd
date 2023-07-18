@@ -104,7 +104,7 @@ export default function LoginOtpVerify() {
 
   return (
     <div className="forgotpassword-screen">
-      <div className="">
+      {/* <div className=""> */}
         <div className="form d-flex flex-column align-items-center p-5">
           <h1>OTP Verification</h1>
           <p>
@@ -146,7 +146,7 @@ export default function LoginOtpVerify() {
               type="submit"
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="2" />
               ) : (
                 "Verify OTP"
               )}
@@ -174,9 +174,7 @@ export default function LoginOtpVerify() {
                   )
                 </span>
               ) : (
-                <span
-                  style={{ color: "#FB9129", fontWeight: "600" }}
-                  onClick={handleResendOTP}
+                <span onClick={handleResendOTP}
                 >
                   Resend OTP
                 </span>
@@ -184,7 +182,7 @@ export default function LoginOtpVerify() {
             </p>
           )}
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 }

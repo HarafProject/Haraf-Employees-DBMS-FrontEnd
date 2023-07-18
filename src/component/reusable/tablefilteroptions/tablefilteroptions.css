@@ -1,12 +1,14 @@
 .filter-option-section p {
+  font-family: "LexendFontSemiBold", sans-serif;
   font-size: 36px;
   font-weight: 600;
   line-height: normal;
   color: #0280ca;
+  white-space: nowrap;
 }
 
 .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
-  width: 200px;
+  width: 150px;
   border-radius: 16px !important;
   letter-spacing: 0;
   font-size: 14px;
@@ -14,20 +16,23 @@
   line-height: normal;
   color: #7a7575;
 }
+
 .css-ahj2mt-MuiTypography-root,
 .css-ahj2mt-MuiTypography-root:first-child {
   margin: 0;
   font-weight: 400;
-
+  text-overflow: ellipsis;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
 }
+
 .filter-option-section .form-field {
   border-radius: 33px;
   border: 0.6px solid #444444;
   padding: 0 15px;
 }
+
 .filter-option-section .form-field select {
   width: 130px;
   padding: 10px 0;
@@ -37,7 +42,9 @@
   background-color: transparent;
   font-size: 14px;
   line-height: normal;
+  text-overflow: ellipsis;
 }
+
 .filter-option-section .form-field select option:first-child {
   color: #a6a6a68c;
 }
@@ -49,6 +56,7 @@
   background-position: center right;
   background-size: 0.8em auto;
 }
+
 .filter-option-section .form-field.date-select select {
   background-image: none;
   width: auto;
@@ -65,10 +73,12 @@
   color: #444444;
   height: fit-content;
 }
+
 .search-icon {
   font-size: 25px;
   color: #7a7575;
 }
+
 .filter-option-section .search-button input {
   /* width: 400px; */
   padding: 10px 0;
@@ -78,6 +88,7 @@
   font-size: 14px;
   line-height: normal;
   color: #7a7575;
+  text-overflow: ellipsis;
 }
 
 .filter-option-section .search-button input::placeholder {
@@ -110,3 +121,87 @@
   font-weight: bold;
   color: #ff0000;
 }
+
+
+@media only screen and (max-width: 800px) {
+  .filter-option-section p {
+    margin-top: 20px;
+    font-size: 22px;
+  }
+
+  .filter {
+    align-items: flex-start !important;
+    flex-direction: column;
+  }
+
+  .filter-option-section {
+    padding: 0 2rem !important;
+  }
+
+  .search-button {
+    margin-left: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 600px) {
+  .filter-option-section .form-field.ward select {
+    width: 80px;
+  }
+
+  .search-button {
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 567px) {}
+
+@media only screen and (max-width: 426px) {
+  .filter-option-section {
+    padding: 0 1rem !important;
+  }
+
+  .filter-option-section .form-field select {
+    font-size: 12px;
+  }
+
+  .filter-option-section p {
+    font-size: 18px;
+  }
+
+  .filter-option-section .form-field select,
+  .filter-option-section .form-field.ward select {
+    width: -webkit-fill-available;
+  }
+
+  .filter-option-section .form-field {
+
+    width: 95px;
+  }
+
+  .floating-button {
+    font-size: 12px;
+    bottom: 30px;
+    right: 35px;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .search-button {
+    width: 120px;
+    font-size: 12px;
+}
+
+.filter div.d-flex{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+ gap: 8px 0;
+ }
+ .filter-option-section .form-field, .search-button  {
+   width: 140px;
+   margin-left: 0 !important;
+}
+}
+
+@media only screen and (max-width: 320px) {}

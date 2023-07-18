@@ -36,10 +36,20 @@ export default function SuperAdminProfile() {
       setButtonText("Save");
     }
   };
+
+  function cancelEdit() {
+    // setUserData({
+    //   firstname: user.firstname,
+    //   surname: user.surname,
+    //   phone: user.phone,
+    // });
+    setEditable(false);
+    setButtonText("Edit Profile");
+  }
   return (
-    <section>
+    <div className="d-flex flex-column align-items-center admin-profile-section">
       <h2>Super Admin 1 Account</h2>
-      <section className="login-container">
+      <div className="admin-profile-page">
         <div className="profile">
           <img
             className="profile-picture"
@@ -53,7 +63,7 @@ export default function SuperAdminProfile() {
           )}
         </div>
 
-        <section>
+        <div>
           <div className="input-form">
             <label htmlFor="">Name</label>
             <input
@@ -98,22 +108,46 @@ export default function SuperAdminProfile() {
               placeholder="Super Admin 1"
             />
           </div>
-          <button onClick={handleButtonClick} className="edit-button">
+          {/* <button onClick={handleButtonClick} className={`btn mt-4 profile-edit-button ${buttonText === "Save" ? "save-btn" : ""}`}>
             {!editable ? (
-              <div className="icon-bg">
+              // <div className="icon-bg">
                 <Icon
                   icon="fluent:edit-20-filled"
                   color="#f99c39"
                   className="edit-icon"
                 />
-              </div>
+              // </div>
             ) : (
               ""
             )}
             {buttonText}
-          </button>
-        </section>
-      </section>
-    </section>
+          </button> */}
+          {/* {!isLoading && ( */}
+            <div className="d-flex justify-content-between profile-btn mb-3">
+              {editable && (
+                <button className="btn profile-edit-button save-btn mt-4" onClick={cancelEdit}>
+                  Cancel
+                </button>
+              )}
+
+              <button onClick={handleButtonClick} className={`btn mt-4 profile-edit-button mx-auto ${buttonText === "Save" ? "save-btn" : ""}`}>
+                {!editable ? (
+                  // <div className="icon-bg">
+                    <Icon
+                      icon="fluent:edit-20-filled"
+                      color="#f99c39"
+                      className="edit-icon"
+                    />
+                  // </div>
+                ) : (
+                  ""
+                )}
+                {buttonText}
+              </button>
+            </div>
+          {/* )} */}
+        </div>
+      </div>
+    </div>
   );
 }

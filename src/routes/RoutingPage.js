@@ -20,12 +20,9 @@ import AdminForgottenPassword from "../Admin_page/admin_signup_pages/adminforgot
 import AdminCreateNewPassword from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminCreateNewPassword";
 import AdminLoginOtpVerify from "../Admin_page/admin_signup_pages/adminforgotpasswordscreens/AdminOtpVerification";
 import AdminHomePage from "../Admin_page/admin_pages/admin_home_page/AdminHomePage";
-<<<<<<< HEAD
 import AttendanceDetailedPage from "../Admin_page/admin_pages/attendance_page/AttendanceDetailedPage";
 import CreateAdminAccountScreen from '../Admin_page/admin_signup_pages/AdminCreateAccount';
-=======
 
->>>>>>> main
 
 // TakeAttendancePage
 import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
@@ -55,10 +52,7 @@ const router = createBrowserRouter(
         element={<AdminCreateNewPassword />}
       />
       <Route path="/admin-home" element={<AdminHomePage />} />
-<<<<<<< HEAD
       <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage />} />
-=======
->>>>>>> main
 
       <Route
         path="/admin-employee-profile/:id"

@@ -4,12 +4,14 @@ h2 {
   font-weight: bold;
   font-size: 24px;
 }
-
-.login-container {
-  width: 60%;
-  margin: 1rem auto;
+.admin-profile-section h4 {
+  display: none;
+}
+.admin-profile-page {
+  width: 600px;
+  margin: 8rem auto;
   border: 1px solid black;
-  padding: 1rem 6rem;
+  padding: 2rem;
   border-radius: 15px;
   border: 1px solid #acacac;
   box-shadow: 0px 4px 75px 0px rgba(0, 0, 0, 0.1);
@@ -19,8 +21,8 @@ h2 {
 
 .login-heading {
   color: #444444;
-  margin-bottom: 1rem;
   text-align: center;
+  white-space: nowrap;
 }
 
 .text-margin {
@@ -116,3 +118,29 @@ img {
   width: 20%;
   border-radius: 50%;
 }
+@media only screen and (max-width: 992px) {
+  /* .admin-dashboard .content h4 .admin-profile-section{
+    display: none !important;
+  } */
+}
+  
+  @media only screen and (max-width: 800px) {
+    .admin-profile-page {
+      width: 65%;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+  }
+  @media only screen and (max-width: 600px) {
+  
+  }
+  @media only screen and (max-width: 567px) {
+  }
+  @media only screen and (max-width: 426px) {
+  }
+  @media only screen and (max-width: 375px) {
+  }
+  @media only screen and (max-width: 320px) {
+  }
+  

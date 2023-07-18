@@ -59,19 +59,19 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
 
   return (
     <div className="filter-option-section px-5 mt-3">
-      <div className=" d-flex align-items-center justify-content-between ">
-        <p className="">Employee List</p>
+      <div className=" filter d-flex align-items-center justify-content-between ">
+        <p className="">Beneficiary List</p>
         <div className="d-flex align-items-center">
-          <div className="search-button px-2 mx-2">
+          <div className="search-button px-2 mt-3 mx-2">
             <Icon icon="eva:search-outline" className="me-2 search-icon" />
             <input
               type="search"
               name="search"
-              placeholder="Search Member"
+              placeholder="Search Beneficiary"
               onChange={(e) => handleFilter(e)}
             />
           </div>
-          <div className="form-field my-4 mx-2">
+          <div className="form-field topology mt-3 mx-2">
             <select name="workTypology" onChange={(e) => handleFilter(e)}>
               <option value={""}>Work Typology</option>
               {typologyList?.map((item) => (
@@ -81,7 +81,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
               ))}
             </select>
           </div>
-          <div className="form-field my-4 mx-2">
+          <div className="form-field ward mt-3 mx-2">
             <select name="ward" id="" onChange={(e) => handleFilter(e)}>
               <option value="">Ward</option>
               {wardList?.map((item) => (
