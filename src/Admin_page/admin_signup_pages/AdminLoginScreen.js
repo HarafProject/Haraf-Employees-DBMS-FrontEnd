@@ -45,6 +45,7 @@ export default function AdminLoginScreen() {
           toast.success(res?.data?.message);
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
+          localStorage.setItem('HARAF-AUTH', res?.data?.token);
           //redirect to admin
           navigate("/admin-home", { replace: true });
           setIsLoading(false);
