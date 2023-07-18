@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./adminhome.css";
 import profile from "../../../assets/logo-light.png";
@@ -13,14 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
-  const [selectedComponent, setSelectedComponent] = useState("requests");
+  const [selectedComponent, setSelectedComponent] = useState("");
   const { user } = useSelector((state) => state?.user)
+
+
+  useEffect(() => {
+    const storedComponent = sessionStorage.getItem("lastSelectedComponent");
+    if (storedComponent) {
+      setSelectedComponent(storedComponent);
+    }
+  }, []);
 
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
+    sessionStorage.setItem("lastSelectedComponent", component);
   };
 
-  
+
   const goBack = () => {
     window.history.go(-1);
   };

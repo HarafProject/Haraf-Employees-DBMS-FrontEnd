@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableContainer,
@@ -11,26 +11,51 @@ import {
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import attendanceReportData from "../../../component/data/AttendanceReportData";
 import "./attendance.css";
 import AdminAttendance from "../../../class/adminAttendanceReport.class";
 import dataOBJs from "../../../class/data.class";
+import { useDispatch, useSelector } from "react-redux";
+import AdminAttendanceFilter from "../admin_employee_list_page/AdminAttendanceFilter";
+import { useQuery } from 'react-query'
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
+const fetchAttendanceList = async (key) => {
+
+  try {
+    const res = await AdminAttendance.getAllZone()
+    return res
+  } catch (error) {
+    toast.error(error?.error);
+  }
+};
 export default function AttendanceReportTable({ onRowClick }) {
+
   const [activeTab, setActiveTab] = useState("allZones");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [tableData,setTableData] = useState([])
-  const [zone,setZone] = useState([])
-  const [lgaValue,setLgaValue] = useState([])
-  const [selectedlgaValue,setSelectedLgaValue] = useState([])
-  
+  const [tableData, setTableData] = useState([])
+  const [zone, setZone] = useState([])
+  const [lgaValue, setLgaValue] = useState([])
+  const [selectedlgaValue, setSelectedLgaValue] = useState([])
+  const { user } = useSelector((state) => state?.user)
+  const navigate = useNavigate()
+
+  // React query fecth data
+  const { data, status } = useQuery(['fetchAttendanceList',], fetchAttendanceList)
+
+  useEffect(() => {
+    if (!data) return
+    setTableData(data)
+    console.log(data)
+
+  }, [data])
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
     setSelectedLgaValue('')
     setPage(0);
   };
-const [searchData,setSearchData] = useState('')
+  const [searchData, setSearchData] = useState('')
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -42,6 +67,7 @@ const [searchData,setSearchData] = useState('')
 
 
   const isTimePastFour = (time) => {
+
     const [hour, minutes] = time.split(":");
     const isPM = time.includes("PM");
     let adjustedHour = parseInt(hour, 10);
@@ -51,134 +77,114 @@ const [searchData,setSearchData] = useState('')
     } else if (!isPM && adjustedHour === 12) {
       adjustedHour = 0;
     }
-
+    console.log(adjustedHour >= 16)
     return adjustedHour >= 16; // 16 represents 4:00 PM
   };
-// Sample array of objects
+  // Sample array of objects
 
-//get list of zone and filter
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const [zoneResponse, tableDataResponse] = await Promise.all([
-        dataOBJs.getZone(),
-        AdminAttendance.getAllZone()
-      ]);
+  //get list of zone and filter
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [zoneResponse, tableDataResponse] = await Promise.all([
+  //         dataOBJs.getZone(),
+  //         AdminAttendance.getAllZone()
+  //       ]);
 
-      const allZonesCount = tableDataResponse.length;
-      
-      const zoneData = zoneResponse.map((zone) => {
-        const count = tableDataResponse.reduce((acc, item) => {
-          return acc + (item.zone.name === zone.name ? 1 : 0);
-        }, 0);
+  //       const allZonesCount = tableDataResponse.length;
 
-        return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
-      });
+  //       const zoneData = zoneResponse.map((zone) => {
+  //         const count = tableDataResponse.reduce((acc, item) => {
+  //           return acc + (item.zone.name === zone.name ? 1 : 0);
+  //         }, 0);
 
-      const filterTable = activeTab === 'allZones'
-        ? tableDataResponse
-        : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
+  //         return { tab: zone.name.split(' ').join('_'), label: zone.name, id: zone._id, count };
+  //       });
 
-      setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
+  //       const filterTable = activeTab === 'allZones'
+  //         ? tableDataResponse
+  //         : tableDataResponse.filter((item) => item.zone.name === activeTab.split('_').join(' '));
 
-      let filteredTableData = filterTable;
+  //       setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
 
-      if (searchData && searchData.trim().length >= 1) {
-        const filterSearch = filterTable.filter((item) => {
-          const firstName = item?.submittedBy?.firstname || '';
-          return firstName.toLowerCase().startsWith(searchData.toLowerCase());
-        });
-        filteredTableData = filterSearch;
-      }
+  //       let filteredTableData = filterTable;
 
-      if (selectedlgaValue) {
-        const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
-        filteredTableData = lgaFilter;
-      }
-      if(filteredTableData.length >=1){
-        setTableData(filteredTableData);
-      }else{
-        setTableData(tableDataResponse)
-      }
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //       if (searchData && searchData.trim().length >= 1) {
+  //         const filterSearch = filterTable.filter((item) => {
+  //           const firstName = item?.submittedBy?.firstname || '';
+  //           return firstName.toLowerCase().startsWith(searchData.toLowerCase());
+  //         });
+  //         filteredTableData = filterSearch;
+  //       }
 
-  fetchData();
-}, [activeTab, searchData, selectedlgaValue, tableData]);
+  //       if (selectedlgaValue) {
+  //         const lgaFilter = filteredTableData.filter((item) => item.lga._id === selectedlgaValue);
+  //         filteredTableData = lgaFilter;
+  //       }
+  //       if (filteredTableData.length >= 1) {
+  //         setTableData(filteredTableData);
+  //       } else {
+  //         setTableData(tableDataResponse)
+  //       }
 
-console.log(searchData,'search')
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
+  //   fetchData();
+  // }, [activeTab, searchData, selectedlgaValue, tableData]);
 
-//get all lga
-useEffect(()=>{
-  let zoneID = zone.filter((e)=> e.tab === activeTab)
-  if(zone && zoneID[0]?.id){
-    let lga = []
-    dataOBJs.getLgaByZone(zoneID[0]?.id).then((res)=>{
-      res.map((a)=>{
-        lga.push({
-          name:a.name,
-          value:a._id
-        })
-      })
-      setLgaValue(lga)
-    })
-  }else{
-    setLgaValue([])
-  }
-},[activeTab])
+  console.log(searchData, 'search')
 
 
-  
+  // //get all lga
+  // useEffect(() => {
+  //   let zoneID = zone.filter((e) => e.tab === activeTab)
+  //   if (zone && zoneID[0]?.id) {
+  //     let lga = []
+  //     dataOBJs.getLgaByZone(zoneID[0]?.id).then((res) => {
+  //       res.map((a) => {
+  //         lga.push({
+  //           name: a.name,
+  //           value: a._id
+  //         })
+  //       })
+  //       setLgaValue(lga)
+  //     })
+  //   } else {
+  //     setLgaValue([])
+  //   }
+  // }, [activeTab])
+
+
+
   return (
     <>
       <div className="dashboard-attendance-table-section my-3">
-        <div className="attendance-header  pt-5 pe-5">
-          <h4 className="header-title">LIPWDMS Super Admin Portal</h4>
+        {
+          user?.role === "super-admin" &&
           <div className="d-flex tab-header my-4">
-          {zone && zone.map((item) => (
-            <div
-              key={item.tab}
-              className={`tab-item ${activeTab === item.tab ? 'active' : ''}`}
-              onClick={() => handleTabChange(item.tab)}
-            >
-              {item.label} ({item.count})
-            </div>
-          ))}
-        </div>
-          <div className="d-flex filter-option-section align-items-center py-4 my-2">
-            <div className="search-button px-2 mx-2">
-              <Icon icon="eva:search-outline" className="me-2 search-icon" />
-              <input type="search" value={searchData} onChange={e=> setSearchData(e.target.value)} name="" placeholder="Search Reports" />
-            </div>
-            <div className="form-field mx-2">
-              <select name="lga" id="" onChange={(e)=> setSelectedLgaValue(e.target.value)}>
-                <option value="">LGAs</option>
-               {
-                lgaValue.map((a,i)=>{
-                  return( <option value={a?.value} key={i}>{a?.name}</option>
-
-                  )
-                })
-               }
-              </select>
-            </div>
-            <div className="form-field mx-2 date-select">
-              <Icon icon="simple-line-icons:calender" className="me-3" />
-              <select name="date" id="">
-                <option>Date</option>
-                <option value="29Oct">29 Oct, 2023</option>
-                <option value="1jul">1 July, 2023</option>
-                <option value="9jul">9 July, 2023</option>
-              </select>
-            </div>
+            {zone && zone.map((item) => (
+              <div
+                key={item.tab}
+                className={`tab-item ${activeTab === item.tab ? 'active' : ''}`}
+                onClick={() => handleTabChange(item.tab)}
+              >
+                {item.label} ({item.count})
+              </div>
+            ))}
           </div>
-        </div>
+        }
 
-        <div className="attendance-table pt-5">
+        <AdminAttendanceFilter
+          allData={data}
+          reports={tableData}
+          setReports={setTableData}
+        />
+
+
+        <div className="attendance-table">
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
@@ -194,89 +200,63 @@ useEffect(()=>{
                 </TableRow>
               </TableHead>
               <TableBody>
-                {tableData && tableData
+                {tableData
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((report, index) => {
-                    const queryParam = encodeURIComponent(JSON.stringify(report))
-                      return(
-                        <TableRow
+                    console.log(report)
+                    return (
+                      <TableRow
                         key={index}
-                        as="a"
-                        href={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                        
+                        onClick={() => navigate("/detailed-attendance", { state: report })}
+                        style={{ cursor: "pointer" }}
                       >
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
-                           {report?.submittedBy?.firstname}
-                          </Link>
+
+                          {report?.submittedBy?.firstname} {report?.submittedBy?.surname}
+
                         </TableCell>
                         <TableCell>
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
-                          
-                        {new Date(report?.date).toISOString().split('T')[0]}
-                         
-                          </Link>
+
+                          {new Date(report?.date).toISOString().split('T')[0]}
                         </TableCell>
                         <TableCell
                           className={
-                            isTimePastFour(new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })) ? "red-color" : ""
+                            isTimePastFour(new Date(report?.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })) ? "red-color" : ""
                           }
                         >
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
+
                           {new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
-                          </Link>
+
                         </TableCell>
                         <TableCell>
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
-                     
+
                           {report?.attendanceRecord
                             .flatMap(obj => obj.attempt)
                             .filter(attempt => attempt.status === 'Present')
                             .length}
-                          </Link>
+
                         </TableCell>
                         <TableCell>
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
+
                           {report?.attendanceRecord
                             .flatMap(obj => obj.attempt)
                             .filter(attempt => attempt.status === 'Absent')
                             .length}
-                          </Link>
+
                         </TableCell>
                         <TableCell>
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
+
                           {report?.lga?.name}
-                          </Link>
+
                         </TableCell>
                         <TableCell className="commentColumn">
-                          <Link
-                            to={`/detailed-attendance/${report?._id}?data=${queryParam}`}
-                            key={index}
-                          >
+
                           {report?.comment}
-                          </Link>
+
                         </TableCell>
                       </TableRow>
-                      )
+                    )
                   })}
               </TableBody>
             </Table>
@@ -291,7 +271,7 @@ useEffect(()=>{
             />
           </TableContainer>
         </div>
-      </div>
+      </div >
     </>
   );
 }

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import admin from "../../../class/admin.class";
-import superAdmin from "../../../class/super.class";
-import dataOBJs from "../../../class/data.class";
-import supervisor from "../../../class/supervisor.class";
 import {
   Table,
   TableHead,
@@ -17,12 +14,10 @@ import {
 } from "@mui/material";
 import { useQuery } from 'react-query'
 import { toast } from "react-toastify"
-
-import usersData from "./AdminEmployeeData";
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 
-import "./adminemployeelist.css";
+import "./adminEmployeeList.css";
 
 const fetchEmployeesList = async (key) => {
 
@@ -45,10 +40,10 @@ export default function AdminEmployeeList() {
 
   useEffect(() => {
     if (!data) return
-    console.log(data.data)
     setBeneficiaries(data.data)
 
   }, [data])
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -56,44 +51,6 @@ export default function AdminEmployeeList() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-
-  const [search, setSearch] = useState('')
-
-
-
-
-  // useEffect(() => {
-  //   const performSearch = async () => {
-  //     try {
-  //       const response = await superAdmin.search({ searchParams: search });
-
-  //       // Process the response data here
-  //       console.log(response.data?.beneficiaries);
-  //       setSupervisors(response.data?.beneficiaries);
-  //     } catch (error) {
-  //       // Handle error here
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   const debounce = (func, delay) => {
-  //     let timer;
-  //     return (...args) => {
-  //       clearTimeout(timer);
-  //       timer = setTimeout(() => {
-  //         func(...args);
-  //       }, delay);
-  //     };
-  //   };
-
-  //   const delayedSearch = debounce(performSearch, 10); // Set the desired debounce delay time in milliseconds (e.g., 500ms)
-
-  //   if (search) {
-  //     delayedSearch();
-  //   }
-  // }, [search]);
-
 
 
   return (

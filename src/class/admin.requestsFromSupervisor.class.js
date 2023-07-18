@@ -28,7 +28,8 @@ class AdminRequestFromSupervisorOBJ {
   getAllAddEmployeeRequest = async () => {
     try {
       //check if data is empty
-      const { data } = await api.get("api/superadmin/edit-employee-request");
+      const { data } = await api.get("api/superadmin/add-employee-request");
+      console.log(data)
       return data;
     } catch (err) {
       throw err?.response?.data;
@@ -41,6 +42,17 @@ class AdminRequestFromSupervisorOBJ {
       //check if data is empty
       const { data } = await api.get("api/superadmin/employee-request/:id");
       return data;
+    } catch (err) {
+      throw err?.response?.data;
+    }
+  };
+
+  //POST decline employee Request
+  handleSupervisorRequest = async (itemIdToModal, type, action, reason) => {
+    // console.log(itemIdToModal);
+    try {
+      const { response } = await api.put(`api/admin/handle-request/${itemIdToModal}?type=${type}&action=${action}`, { reason });
+      return response;
     } catch (err) {
       throw err?.response?.data;
     }

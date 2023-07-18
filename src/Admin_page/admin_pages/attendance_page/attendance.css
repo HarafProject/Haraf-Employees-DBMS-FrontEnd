@@ -81,10 +81,10 @@
 }
 
 .attendance-table {
-  margin-top: 170px;
+  margin-top: 1rem;
 }
 
-.red-color a {
+.red-color {
   color: red !important;
 }
 

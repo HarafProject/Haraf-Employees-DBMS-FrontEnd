@@ -51,9 +51,9 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
       let lowercaseQuery = e.target.value.toLowerCase();
 
       // Filter the array based on the name key
-      let filteredData = allData.filter(function (item) {
-        let lowercaseName = item.fullName.toLowerCase();
-        return lowercaseName.includes(lowercaseQuery);
+      let filteredData = allData?.filter(function (item) {
+        let lowercaseName = item?.fullName?.toLowerCase();
+        return lowercaseName?.includes(lowercaseQuery);
       });
       setUsersData(filteredData);
     }

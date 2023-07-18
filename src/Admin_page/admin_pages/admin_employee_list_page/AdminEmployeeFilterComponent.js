@@ -6,6 +6,7 @@ import dataOBJs from "../../../class/data.class";
 import supervisor from "../../../class/supervisor.class";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+
 const fetchLocationData = async (key) => {
 
   try {
@@ -26,7 +27,8 @@ const fetchLocationData = async (key) => {
     toast.error(error?.error);
   }
 };
-function AdminEmployeeFilterComponent({ allData, beneficiaries, setBeneficiaries }) {
+
+function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
   const [zoneList, setZoneList] = useState([]);
   const [lgaList, setLgaList] = useState([]);
   const [wardList, setWardList] = useState([]);
@@ -56,9 +58,6 @@ function AdminEmployeeFilterComponent({ allData, beneficiaries, setBeneficiaries
       setLgaList(data?.lgaData)
     }
   }, [zoneList])
-
-
-
 
   function handleFilter(e) {
 
@@ -134,7 +133,6 @@ function AdminEmployeeFilterComponent({ allData, beneficiaries, setBeneficiaries
               <option
                 key={i}
                 value={a._id}
-
               >
                 {a.name}
               </option>
@@ -165,10 +163,7 @@ function AdminEmployeeFilterComponent({ allData, beneficiaries, setBeneficiaries
             ))}
           </select>
         </div>
-        {/* <div className="exportBtn">
-          <Icon icon="clarity:export-solid" color="white" />
-          <span>Export</span>
-        </div> */}
+
       </div>
     </div>
   );

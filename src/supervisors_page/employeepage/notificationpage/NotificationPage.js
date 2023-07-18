@@ -84,7 +84,7 @@ export default function NotificationScreen() {
         if (buttonType === 'Add') {
             setSelectedNotification(null);
             setIsOpen(false);
-            navigate('/supervisor/add-employee');
+            navigate('/supervisor/verify-beneficiary');
 
         } else if (buttonType === 'Delete') {
             setSelectedNotification(notification);

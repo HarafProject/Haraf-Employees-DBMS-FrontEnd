@@ -209,9 +209,5 @@ export default function EmployeeListTable() {
             {/* ):
             (<EmptyEmployeeList />)} */}
         </>
-
-
-
-
     )
 }

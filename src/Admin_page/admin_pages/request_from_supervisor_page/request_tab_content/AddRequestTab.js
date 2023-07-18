@@ -7,18 +7,6 @@ import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
 
 export default function AddRequestTab() {
-
- 
-
-
-  const data = [
-    { id: 1, name: "Kishimu Shanwas", status: "Veiw Request" },
-    { id: 2, name: "JKishimu Shanwas", status: "Veiw Request" },
-    { id: 3, name: "BKishimu Shanwas", status: "Veiw Request" },
-    { id: 4, name: "AKishimu Shanwas", status: "Veiw Request" },
-    { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
-    { id: 4, name: "AKishimu Shanwas", status: "Resolved" },
-  ];
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
@@ -26,13 +14,12 @@ export default function AddRequestTab() {
   const [approveSnackBar, setApproveSnackBar] = useState(false);
 
   const [itemIdToModal, setItemIdToModal] = useState(0);
-   const [addData, setAddData] = useState([]);
+  const [modalData, setModalData] = useState()
+  const [addData, setAddData] = useState([]);
 
-  const openDeclineSnackBar = async() => {
+  const openDeclineSnackBar = async () => {
+    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "declined");
     setDeclineSnackBar(true);
-      const res = await EmployeeRequest.declineEmployeeRequest({
-      itemIdToModal
-    });
 
   };
 
@@ -40,12 +27,10 @@ export default function AddRequestTab() {
     setDeclineSnackBar(false);
   };
 
-  const openApproveSnackBar = async() => {
+  const openApproveSnackBar = async () => {
+    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "approved");
     setApproveSnackBar(true);
-        const res = await EmployeeRequest.declineEmployeeRequest({
-       itemIdToModal
-     });
-// console.log(res);
+    // console.log(res);
   };
 
   const closeApproveSnackBar = () => {
@@ -57,11 +42,10 @@ export default function AddRequestTab() {
   };
   const [activeTabButton, setActiveTabButton] = useState("");
 
-  function openRequestModal(activeTabButton,itemId,) {
+  function openRequestModal(activeTabButton, itemId,) {
     setIsRequestModalOpen(true);
-    console.log('itme  id',itemId)
     setActiveTabButton(activeTabButton);
-    setItemIdToModal(itemId.id);
+    setItemIdToModal(itemId._id);
   }
   const closeResolvedModal = () => {
     setResolvedIsModalOpen(false);
@@ -73,55 +57,53 @@ export default function AddRequestTab() {
     setActiveTabButton(activeTabButton);
   }
 
-   const handleFetchAddRequestData = async () => {
-     try {
-       const {data} = await EmployeeRequest.getAllAddEmployeeRequest();
-       setAddData(data)
-       console.log("this is add request", data);
-      
-     } catch (error) {
-       console.error(error);
-       
-     }
-   };
+  const handleFetchAddRequestData = async () => {
+    try {
+      const { data } = await EmployeeRequest.getAllAddEmployeeRequest();
+      setAddData(data)
 
-   useEffect(() => {
-     handleFetchAddRequestData();
-   }, []);
+    } catch (error) {
+      console.error(error);
 
-   
+    }
+  };
+
+  useEffect(() => {
+    handleFetchAddRequestData();
+  }, []);
+
+
   return (
     <div>
       <div>
         <div>
-          {addData.length &&
-            addData.map((item) => (
-              <div
-                className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
-                key={item._id}
-              >
-                <p>
-                  Edit Kadwama Lazarus’s profile request from
-                  {item.name}
-                </p>
+          {addData?.map((item, i) => (
+            <div
+              className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
+              key={item._id}
+            >
+              <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Add Employee request from {item.user.firstname} {item.user.surname}</p>
 
-                {item.status === "Resolved" ? (
-                  <button
-                    className={"btn-black"}
-                    onClick={() => openResolvedModal("add")}
-                  >
-                    Resolved
-                  </button>
-                ) : (
-                  <button
-                    className={"btn-orange"}
-                    onClick={() => openRequestModal("add", item)}
-                  >
-                    View Request
-                  </button>
-                )}
-              </div>
-            ))}
+              {item.status === "Resolved" ? (
+                <button
+                  className={"btn-black"}
+                  onClick={() => openResolvedModal("add")}
+                >
+                  Resolved
+                </button>
+              ) : (
+                <button
+                  className={"btn-orange"}
+                  onClick={() => {
+                    openRequestModal("add", item);
+                    setModalData(item);
+                  }}
+                >
+                  View Request
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -149,6 +131,7 @@ export default function AddRequestTab() {
           openDeclineSnackBar={openDeclineSnackBar}
           openApproveSnackBar={openApproveSnackBar}
           activeTabButton={activeTabButton}
+          modalData={modalData}
         />
       </Modal>
 
@@ -183,8 +166,8 @@ export default function AddRequestTab() {
             icon="system-uicons:cross"
             className="snackbar-close"
           />
-          <p>Edit Request Decline</p>
-          <button onClick={closeDeclineSnackBar}>Undo</button>
+          <p>Add Employee request Declined Succesfully</p>
+          <button onClick={closeDeclineSnackBar}>Close</button>
         </div>
       )}
       {approveSnackBar && (
@@ -195,8 +178,8 @@ export default function AddRequestTab() {
             onClick={closeApproveSnackBar}
             className="snackbar-close"
           />
-          <p>Signed in request approved</p>
-          <button onClick={closeApproveSnackBar}>Undo</button>
+          <p>Add Employee request Declined Succesfully</p>
+          <button onClick={closeDeclineSnackBar}>Close</button>
         </div>
       )}
       {/* )} */}

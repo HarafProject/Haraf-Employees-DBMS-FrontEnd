@@ -17,7 +17,7 @@ const navigate = useNavigate()
       const { message } = await supervisor.deleteEmployee(employee.id, employee.notification)
       toast.success(message)
       closeModal()
-      navigate('/employee-list')
+      navigate('/supervisor/employee-list')
     } catch (error) {
       console.log(error)
       toast.error(error)
@@ -54,14 +54,6 @@ const navigate = useNavigate()
         </div>
       </div>
 
-
-
-      <button
-        className="btn modal-button delete-btn my-4"
-        onClick={() => navigate("/employee-list")}
-      >
-        Delete
-      </button>
     </div>
 
   );

@@ -7,38 +7,34 @@ import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
 
 export default function EditRequestTab() {
-  
+
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
 
-    const [editRequest, setEditRequest] = useState([]);
-const [itemIdToModal, setItemIdToModal] = useState(0);
+  const [editRequest, setEditRequest] = useState([]);
+  const [itemIdToModal, setItemIdToModal] = useState(0);
+  const [modalData, setModalData] = useState()
 
- 
   const openDeclineSnackBar = async () => {
+
+    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "declined");
     setDeclineSnackBar(true);
-    const res = await EmployeeRequest.declineEmployeeRequest({
-      itemIdToModal,
-    });
   };
 
   const closeDeclineSnackBar = () => {
     setDeclineSnackBar(false);
   };
 
-  const openApproveSnackBar = () => {
+  const openApproveSnackBar = async () => {
+    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "approved");
     setApproveSnackBar(true);
   };
 
-  const closeApproveSnackBar = async() => {
+  const closeApproveSnackBar = async () => {
     setApproveSnackBar(false);
-     setApproveSnackBar(true);
-        const res = await EmployeeRequest.declineEmployeeRequest({
-       itemIdToModal
-     });
   };
 
   const closeRequestModal = () => {
@@ -47,10 +43,10 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
   const [activeTabButton, setActiveTabButton] = useState("");
 
   function openRequestModal(activeTabButton, itemId) {
-    console.log('dfdfdf',itemId)
+
     setIsRequestModalOpen(true);
     setActiveTabButton(activeTabButton);
-    setItemIdToModal(itemId); 
+    setItemIdToModal(itemId._id);
   }
   const closeResolvedModal = () => {
     setResolvedIsModalOpen(false);
@@ -61,40 +57,39 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
     setActiveTabButton(activeTabButton);
   }
 
- 
-    const handleFetchEditRequestData = async () => {
-      try {
-        const  {data}  = await EmployeeRequest.getAllEditEmployeeRequest();
-        console.log('this is edit request',data)
-        setEditRequest(data);
-        
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
-    useEffect(() => {
-      handleFetchEditRequestData();
-    }, []);
+  const handleFetchEditRequestData = async () => {
+    try {
+      const { data } = await EmployeeRequest.getAllEditEmployeeRequest();
+      console.log('this is edit request', data)
+      setEditRequest(data);
 
-    const data = [
-      { id: 1,  beneficiary: "beneficiary",  supervisor: "supervisor", status: "status" },
-      
-    ];
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleFetchEditRequestData();
+  }, []);
+
+  const data = [
+    { id: 1, beneficiary: "beneficiary", supervisor: "supervisor", status: "status" },
+
+  ];
   return (
     <div>
       <div>
         <div>
-          {editRequest.length &&
-            editRequest.map((item) => (
+          {
+            editRequest?.map((item, i) => (
               <div
                 className="d-flex justify-content-between my-4 px-4 py-2 request-bg"
                 key={item._id}
               >
-                <p>
-                  Edit {item?.employee} pepe request from{" "}
-                  {item?.user?.firstname}
-                </p>
+
+                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Edit Employee request from {item.user.firstname} {item.user.surname}</p>
+
 
                 {item.status === "Resolved" ? (
                   <button
@@ -106,7 +101,10 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
                 ) : (
                   <button
                     className={"btn-orange"}
-                    onClick={() => openRequestModal("edit", item)}
+                    onClick={() => {
+                      openRequestModal("edit", item);
+                      setModalData(item);
+                    }}
                   >
                     View Request
                   </button>
@@ -140,6 +138,7 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
           openDeclineSnackBar={openDeclineSnackBar}
           openApproveSnackBar={openApproveSnackBar}
           activeTabButton={activeTabButton}
+          modalData={modalData}
         />
       </Modal>
 
@@ -174,8 +173,8 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
             icon="system-uicons:cross"
             className="snackbar-close"
           />
-          <p>Edit Request Decline</p>
-          <button onClick={closeDeclineSnackBar}>Undo</button>
+          <p>Edit Employee request Declined Succesfully</p>
+          <button onClick={closeDeclineSnackBar}>Close</button>
         </div>
       )}
       {approveSnackBar && (
@@ -186,8 +185,8 @@ const [itemIdToModal, setItemIdToModal] = useState(0);
             onClick={closeApproveSnackBar}
             className="snackbar-close"
           />
-          <p>Signed in request approved</p>
-          <button onClick={closeApproveSnackBar}>Undo</button>
+          <p>Edit Employee request Approved Succesfully</p>
+          <button onClick={closeApproveSnackBar}>Close</button>
         </div>
       )}
       {/* )} */}

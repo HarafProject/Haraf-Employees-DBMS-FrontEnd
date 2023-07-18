@@ -15,7 +15,7 @@ export default function SuperAdminProfile() {
   const [editable, setEditable] = useState(false);
   const [buttonText, setButtonText] = useState("Edit Profile");
   const [edited, setEdited] = useState(false);
-
+  
   const [userData, setUserData] = useState({
     firstname: user.firstname,
     surname: user.surname,
@@ -72,7 +72,6 @@ export default function SuperAdminProfile() {
 
   return (
     <section>
-      <ReusableHeader />
       <section className="login-container">
         <h3 className="login-heading">Supervisor Login</h3>
         <section>
