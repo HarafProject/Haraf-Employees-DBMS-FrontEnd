@@ -1,12 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  //baseURL: "http://127.0.0.1:5000",
-<<<<<<< HEAD
-  baseURL: "https://haraf-edm.onrender.com",
-=======
-   baseURL: "https://haraf-edm.onrender.com",
->>>>>>> main
+  baseURL: "http://127.0.0.1:5000",
+  //  baseURL: "https://haraf-edm.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },

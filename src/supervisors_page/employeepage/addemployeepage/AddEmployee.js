@@ -445,11 +445,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                         {isLoading && <center className="btn mx-auto save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 
                         {
-<<<<<<< HEAD
-                            !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || !isVerified || isLoading} className="btn save-employee mx-auto mt-5">
-=======
                             !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid ||!isVerified || isLoading} className="btn save-employee mt-5">
->>>>>>> main
                                 {isEditEmployee ? 'Save Changes' : 'Save Employee'}
                             </button>
                         }

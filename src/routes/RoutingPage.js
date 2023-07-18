@@ -53,16 +53,12 @@ const router = createBrowserRouter(
         element={<AdminCreateNewPassword />}
       />
       <Route path="/admin-home" element={<AdminHomePage />} />
-<<<<<<< HEAD
-      <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage />} />
-=======
->>>>>>> main
 
       <Route
         path="/admin-employee-profile"
         element={<AdminEmployeeProfile />}
       />
-<Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage/>} />
+      <Route path="/detailed-attendance/:id" element={<AttendanceDetailedPage />} />
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
 
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}

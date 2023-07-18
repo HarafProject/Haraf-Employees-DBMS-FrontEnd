@@ -95,14 +95,8 @@ export default function LoginScreen() {
           setIsLoading(false);
         })
         .catch((err) => {
-<<<<<<< HEAD
-          console.log(err);
-          // toast.error(err?.error || err);
-          setSnackbarMessage(err.error || err);
-=======
          
           toast.error(err?.error || err);
->>>>>>> main
           setIsLoading(false);
           if (!err) {
             let auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
@@ -220,10 +214,6 @@ export default function LoginScreen() {
           closeModal={closeModal}
         />
       </Modal>
-<<<<<<< HEAD
-      
-=======
->>>>>>> main
     </div>
   );
 }

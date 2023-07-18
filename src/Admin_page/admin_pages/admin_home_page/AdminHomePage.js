@@ -13,14 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const [selectedComponent, setSelectedComponent] = useState("employee");
+  // const [selectedComponent, setSelectedComponent] = useState("employee");
   const [clicked, setClicked] = useState(false);
 
-=======
   const [selectedComponent, setSelectedComponent] = useState("requests");
   const { user } = useSelector((state) => state?.user)
->>>>>>> main
 
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
@@ -32,12 +29,9 @@ export default function AdminHomePage() {
     window.history.go(-1);
   };
 
-<<<<<<< HEAD
   const handleClick = () => {
     setClicked(!clicked);
   };
-=======
->>>>>>> main
 
   return (
     <div className="admin-dashboard">
