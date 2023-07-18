@@ -199,17 +199,17 @@ export default function AttendanceDetailedPage() {
                 <TableCell>{beneficiary?.workTypology}</TableCell>
                 <TableCell>{beneficiary?.ward}</TableCell>
                 <TableCell>{receivedArray?.submittedBy?.firstname}</TableCell>
-                <TableCell className="d-flex sp-action-column">
-                  {beneficiary?.attempt.map((action) => (
-                    <p className="sp-action me-2" key={action?.id}>
-                      {action?.status === "present" ? (
-                        <Icon icon="charm:tick" className="present" />
-                      ) : (
-                        <Icon icon="charm:cross" className="absent" />
-                      )}
-                      <span>{action?.time_tick}</span>
-                    </p>
-                  ))}
+                <TableCell >
+                 <div className="d-flex sp-action-column"> {beneficiary?.attempt.map((action) => (
+                  <p className="sp-action me-2" key={action?.id}>
+                    {action?.status === "present" ? (
+                      <Icon icon="charm:tick" className="present" />
+                    ) : (
+                      <Icon icon="charm:cross" className="absent" />
+                    )}
+                    <span>{action?.time_tick}</span>
+                  </p>
+                ))}</div>
                 </TableCell>
               </TableRow>
             ))}
