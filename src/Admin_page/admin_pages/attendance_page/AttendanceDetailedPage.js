@@ -107,7 +107,7 @@ export default function AttendanceDetailedPage() {
         let lowercaseName = item.employee.fullName?.toLowerCase();
         return lowercaseName.includes(lowercaseQuery);
       });
-     setAttendanceRecord(filteredData);
+      setAttendanceRecord(filteredData);
     }
   }
 
@@ -148,6 +148,11 @@ export default function AttendanceDetailedPage() {
             Supervisor's Comment: {<br />}
             <span>{receivedArray?.comment}</span>
           </p>
+          {receivedArray?.reason && <p>
+            Late Submission reason: {<br />}
+            <span>{receivedArray?.reason}</span>
+          </p>}
+
         </div>
         <div className="d-flex align-items-center justify-content-end py-3 mt-3">
           <div className="d-flex filter-option-section align-items-center">

@@ -11,6 +11,7 @@ import { useQuery } from 'react-query'
 import supervisor from "../../../class/supervisor.class";
 import { toast } from "react-toastify";
 import ViewReason from "../../../component/reusable/modalscontent/ViewReason";
+import { RotatingLines } from "react-loader-spinner";
 
 const fetchNotifications = async (key) => {
     try {
@@ -34,7 +35,7 @@ export default function NotificationScreen() {
 
         let notice = []
         for (let i = 0; i < data.notifications.length; i++) {
-            console.log(data.notifications[i])
+          
             if (data.notifications[i].request?.type === "add-employee") {
 
                 notice.push({
@@ -107,9 +108,12 @@ export default function NotificationScreen() {
                         notificationId: notificationList[notification].notificationId
                     }
                 });
+                
         } else if (buttonType === "View Reason") {
+
+            setReason("Un-Authorized Action. Please contact Admin.")
             setIsOpen(true);
-            setReason(notificationList[notification].reason)
+
         }
     };
 
@@ -120,9 +124,13 @@ export default function NotificationScreen() {
 
             <div className="notification my-3 p-5">
                 <h1 className="mt-5">NOTIFICATIONS</h1>
-                <div className="notification-list mt-3">
-                    <ReusableNotificationCard notificationContent={notificationList} onButtonClick={handleButtonClick} />
-                </div>
+                {
+                    status === "loading" ? <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div> :
+                        <div className="notification-list mt-3">
+                            <ReusableNotificationCard notificationContent={notificationList} onButtonClick={handleButtonClick} />
+                        </div>
+                }
+
             </div>
 
             {modalIsOpen && (

@@ -99,19 +99,19 @@ export default function AddEmployeeScreen({ prefilledData }) {
 
         setBankDetails({
             ...bankDetail,
-            // accountNumber: verificationInfo.accountNumber,
-            // bankCode: verificationInfo.bankCode,
-            accountNumber: "0121027651",
-            bankCode: "058",
-            bankName: verificationInfo.bankName
+            fullName: verificationInfo.fullName,
+            accountNumber: verificationInfo.accountNumber,
+            bankCode: verificationInfo.bankCode,
+            bankName: verificationInfo.bankName,
+            BVN: verificationInfo.bvn
         })
-        setCallVerify(true)
+        setIsVerified(true)
+
     }, [location])
 
     useEffect(() => {
-        if (!bankDetail?.bankName || !bankDetail?.accountNumber) return
-        verifyBankDetails()
-    }, [callVerify])
+        inputRef.current.focus();
+    }, [isVerified])
 
 
     async function verifyBankDetails() {
@@ -124,8 +124,6 @@ export default function AddEmployeeScreen({ prefilledData }) {
                 fullName: bankDetails.accountName
             })
             toast.success(message)
-            setIsVerified(true)
-            inputRef.current.focus();
 
         } catch (error) {
             if (error === "You are currently offline.") {
@@ -202,11 +200,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                     setIsOnline(false)
                     openModal()
                 } else {
-                    setBankDetails({
-                        ...bankDetail,
-                        fullName: ""
-                    })
-                    setIsVerified(false)
+
                     toast.error(error)
                     toast.error(error?.error)
                 }
@@ -329,7 +323,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                                         placeholder='Phone Number '
                                         disabled={!isVerified}
                                         {...formik.getFieldProps('phone')}
-                                        autoFocus />
+                                    />
 
                                     {formik.touched.phone && formik.errors.phone ? (
                                         <div className="error">{formik.errors.phone}</div>

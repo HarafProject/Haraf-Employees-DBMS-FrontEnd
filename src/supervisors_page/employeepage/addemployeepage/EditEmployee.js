@@ -104,7 +104,8 @@ export default function EditEmployeeScreen() {
       fullName: data.employee.fullName,
       accountNumber: data.employee.accountNumber,
       bankCode: data.employee.bankCode,
-      bankName: data.employee.bankName
+      bankName: data.employee.bankName,
+      BVN:data.employee.BVN
 
     })
     setImageData(data.employee.photo)
@@ -121,6 +122,7 @@ export default function EditEmployeeScreen() {
       householdHead: data.employee.householdHead,
     };
     formik.setValues(updatedValues);
+    setIsVerified(true)
   }, [data])
 
 
@@ -216,7 +218,6 @@ export default function EditEmployeeScreen() {
         setIsLoading(false)
         toast.error(error)
         toast.error(error?.error)
-        console.error('Form submission error:', error);
       }
     },
   });
@@ -273,6 +274,7 @@ export default function EditEmployeeScreen() {
                     onBlur={verifyBankDetails}
                     placeholder='Bank Account Number '
                     autoFocus
+                    disabled
                   />
                 </div>
                 <div className="form-field my-4" >
@@ -374,6 +376,7 @@ export default function EditEmployeeScreen() {
 
                   }} placeholder='Select Bank'
                     onBlur={verifyBankDetails}
+                    disabled
                   >
                     <option>{bankDetail?.bankName}</option>
                     {

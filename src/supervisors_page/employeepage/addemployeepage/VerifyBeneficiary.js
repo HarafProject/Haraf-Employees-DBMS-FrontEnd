@@ -7,10 +7,14 @@ import Modal from 'react-modal';
 import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkModal';
 import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from 'react-router-dom';
+
 export default function VerifyBeneficiary() {
     const navigate = useNavigate(); const [bankList, setbankList] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
+    const [img, setImg] = useState(null)
+    const [isVerified, setIsVerified] = useState(false)
+    const [verifiedDetails, setVerifiedDetails] = useState({})
     const [bankDetail, setBankDetails] = useState({
         bankName: "Select Bank",
     })
@@ -22,17 +26,18 @@ export default function VerifyBeneficiary() {
     }
     // Create state variables to hold the values of the input fields
     const [inputValues, setInputValues] = useState({
-        accountNumber: "0122734405",
-        bankcode: '10001',
-        firstname: "Valentine",
-        lastname: "Roakes",
-        bankName:"Select Bank"
+        accountNumber: "",
+        bankcode: '',
+        firstname: "",
+        lastname: "",
+        bankName: "Select Bank"
 
     })
 
     async function fetchBankList() {
         try {
             const bank_list = await supervisor.getBankList();
+
             setbankList(bank_list.banks)
         } catch (error) {
             if (error === "You are currently offline.") {
@@ -48,21 +53,27 @@ export default function VerifyBeneficiary() {
 
     async function verifyBeneficiaryInfo() {
 
-        if (!inputValues.accountNumber || !inputValues.bankcode || !inputValues.firstname || !inputValues.lastname ||!inputValues.bankName) return toast.error("All inputs are required.")
+        if (!inputValues.accountNumber || !inputValues.bankcode || !inputValues.firstname || !inputValues.lastname || !inputValues.bankName) return toast.error("All inputs are required.")
         setIsLoading(true)
         try {
-            // const data = await supervisor.verifyBeneficiary(inputValues)
-            const data = await supervisor.verifyBeneficiary({
-                ...inputValues,
-                bankcode:"10001",
-            })
+            const data = await supervisor.verifyBeneficiary(inputValues)
+
+            setImg(`data:image/jpeg;base64,${data.bankDetails.photo}`)
             toast.success(data.message)
-            navigate("/supervisor/add-employee", { state: data.bankDetails,replace:true })
+            setIsVerified(true)
+            setVerifiedDetails(data.bankDetails)
 
         } catch (error) {
-            console.log(error)
             toast.error(error)
             toast.error(error?.error)
+            toast.error(error?.message)
+            if (error.error.message) {
+                return toast.error(error?.error?.message)
+            } else {
+               return toast.error("Invalid Input. Please check the input and try again.")
+            }
+
+
         } finally {
             setIsLoading(false)
         }
@@ -87,6 +98,15 @@ export default function VerifyBeneficiary() {
             <ReusableHeader />
             <div className='verify-beneficiary'>
                 <h2>Verify Beneficiary</h2>
+
+                {//Display BVN photo if verified
+                    isVerified &&
+                    <div className="bvn-photo">
+                        <img src={img} />
+                    </div>
+                }
+
+
                 <div className='form-flex'>
                     <div>
                         <div>
@@ -126,7 +146,6 @@ export default function VerifyBeneficiary() {
                                 onChange={(e) => {
                                     if (e.target.value === inputValues?.bankName) return
                                     const bank = JSON.parse(e.target.value)
-                                    console.log(bank)
                                     setInputValues({
                                         ...inputValues,
                                         bankName: bank.name,
@@ -147,7 +166,8 @@ export default function VerifyBeneficiary() {
                 {isLoading && <button className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
 
 
-                {!isLoading && <button onClick={verifyBeneficiaryInfo}>Verify</button>}
+                {(!isLoading && !isVerified) && <button onClick={verifyBeneficiaryInfo}>Verify</button>}
+                {(!isLoading && isVerified) && <button onClick={() => navigate("/supervisor/add-employee", { state: verifiedDetails, replace: true })}>Continue</button>}
             </div>
             <Modal
                 isOpen={modalIsOpen}

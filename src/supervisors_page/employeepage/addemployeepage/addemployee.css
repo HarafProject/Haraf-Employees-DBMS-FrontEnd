@@ -17,7 +17,7 @@
 }
 
 .add-employee-content .form-field input {
-  /* width: 400px; */
+  width: 100%;
   padding: 10px 0;
   outline: none;
   border: none;

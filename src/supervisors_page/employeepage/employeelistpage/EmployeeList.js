@@ -11,12 +11,13 @@ import SendRequestModal from '../../../component/reusable/modalscontent/SendRequ
 import EmptyEmployeeList from './EmptyEmployeeListScreen';
 import { useDispatch, useSelector } from "react-redux";
 import supervisor from "../../../class/supervisor.class";
+import { RotatingLines } from "react-loader-spinner";
 
 import { toast } from "react-toastify";
 
 
 const fetchEmployees = async (key, offline) => {
-   
+
     try {
         if (offline) {
             return "offline"
@@ -27,7 +28,7 @@ const fetchEmployees = async (key, offline) => {
 
 
     } catch (error) {
-        if(error==="You are currently offline."){
+        if (error === "You are currently offline.") {
             return "offline"
         }
         toast.error(error?.error);
@@ -76,10 +77,10 @@ export default function EmployeeListTable() {
     };
 
 
-    const openModal = (getModalType) => { 
+    const openModal = (getModalType) => {
         setIsOpen(true);
-        setModalType(getModalType()); 
-      };
+        setModalType(getModalType());
+    };
 
     function closeModal() {
         setIsOpen(false);
@@ -112,11 +113,15 @@ export default function EmployeeListTable() {
             <ReusableHeader />
             {/* {usersData.length > 0 ? ( */}
             <div className="employees-table-section py-5 my-4">
-                <EmployeeTableFilterOption
-                    allData={data?.employees}
-                    usersData={usersData}
-                    setUsersData={setUsersData}
-                />
+                {
+                    status === "loading" ? <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{color:"#0173bc"}}>Loading please wait...</p></div> :
+                        <EmployeeTableFilterOption
+                            allData={data?.employees}
+                            usersData={usersData}
+                            setUsersData={setUsersData}
+                        />
+                }
+
                 <div>
                     <div className="employee-list-table px-3 mt-3">
                         <TableContainer component={Paper}>

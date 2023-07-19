@@ -63,7 +63,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
     <div className="filter-option-section px-5 mt-3">
       <div className=" filter d-flex align-items-center justify-content-between ">
         <p className="">Beneficiary List</p>
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center ">
           <div className="search-button px-2 mt-3 mx-2">
             <Icon icon="eva:search-outline" className="me-2 search-icon" />
             <input
