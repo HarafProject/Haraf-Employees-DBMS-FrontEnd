@@ -5,6 +5,7 @@
   align-items: center;
   height: auto;
   height: fit-content;
+ 
 }
 .welcome-screen,
 .login-screen {
@@ -167,7 +168,11 @@
   margin-top: 10px;
 }
 
-
+@media screen and (max-width: 1026px) {
+  .onboarding-screen{
+    height: 100vh;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {

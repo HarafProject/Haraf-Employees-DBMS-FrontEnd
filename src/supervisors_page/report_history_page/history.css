@@ -1,0 +1,48 @@
+.report-history-section h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: normal;
+    color: #0280CA;
+    margin-bottom: 20px;
+
+}
+
+.report-history-section ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+
+.history-list p {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: normal;
+    color: #000000;
+
+}
+
+.history-list p span {
+    font-weight: 600;
+}
+
+.history-list .btn.history-btn {
+    width: 130px;
+    padding: 10px;
+    border-radius: 33px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+    color: #ffffff;
+
+}
+
+.history-list .btn.pending {
+    background-color: #FFA81B;
+
+}
+
+.history-list .btn.sent {
+    background-color: #0280CA;
+
+}
