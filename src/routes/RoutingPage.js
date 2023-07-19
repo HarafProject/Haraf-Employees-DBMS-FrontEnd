@@ -43,22 +43,13 @@ const router = createBrowserRouter(
       <Route path="/admin" element={<AdminWelcomeScreen />} />
       <Route path="/admin-login" element={<AdminLoginScreen />} />
       <Route path="/admin-create-account" element={<CreateAdminAccountScreen />} />
-      <Route
-        path="/admin-forgot-password"
-        element={<AdminForgottenPassword />}
-      />
+      <Route path="/admin-forgot-password" element={<AdminForgottenPassword />} />
       <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
-      <Route
-        path="/admin-create-password"
-        element={<AdminCreateNewPassword />}
-      />
+      <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
       <Route path="/admin-home" element={<AdminHomePage />} />
-
-      <Route
-        path="/admin-employee-profile"
-        element={<AdminEmployeeProfile />}
-      />
+      <Route path="/admin-employee-profile" element={<AdminEmployeeProfile />} />
       <Route path="/detailed-attendance" element={<AttendanceDetailedPage />} />
+      
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
 
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}

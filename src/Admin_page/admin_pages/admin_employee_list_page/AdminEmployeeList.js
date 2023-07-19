@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import admin from "../../../class/admin.class";
+
 import {
   Table,
   TableHead,
@@ -17,7 +18,7 @@ import { toast } from "react-toastify"
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 
-import "./adminEmployeeList.css";
+import "./adminemployeelist.css";
 
 const fetchEmployeesList = async (key) => {
 

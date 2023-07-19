@@ -16,11 +16,13 @@ import AddEmployeeScreen from "./employeepage/addemployeepage/AddEmployee";
 import EmployeeProfilePage from "./employeepage/employeeprofilepage/EmployeeProfilePage";
 import SupervisorProfile from "./AttendancePages/supervisorProfile/SupervisorProfile";
 import EditEmployeeScreen from "./employeepage/addemployeepage/EditEmployee";
+import ReportHistory from "./report_history_page/ReportHistory";
 import { replace } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import OnlineMode from "../component/reusable/modalscontent/OnlineMode";
 import Modal from 'react-modal';
 import VerifyBeneficiary from "./employeepage/addemployeepage/VerifyBeneficiary";
+
 const SupervisorHome = () => {
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -78,11 +80,13 @@ const SupervisorHome = () => {
         <Route path="/employee-list-empty" element={<EmptyEmployeeList />} />
         <Route path="/employee-profile" element={<EmployeeProfilePage />} />
         <Route path="/notification" element={<NotificationScreen />} />
+        
         {/* <Route path="/biometric-capture" element={<BiometricScreen />} /> */}
 
         <Route path='/wards' element={<SelectWardsForAttendance />} />
         <Route path='/profile' element={<SupervisorProfile />} />
         <Route path='/attendance' element={<TakeAttendance />} />
+        <Route path="/report-history" element={<ReportHistory />} />
         <Route
           path='/attendance-report'
           element={<AttendanceReportUpload />}
