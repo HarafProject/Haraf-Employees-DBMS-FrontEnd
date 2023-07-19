@@ -75,7 +75,10 @@
     color: #ffffff;
 
   }
-
+  .header-menu li a:hover,
+  .header-menu li a.active {
+    font-size: 22px;
+  }
   .header-menu {
     width: 100%;
     display: flex;
