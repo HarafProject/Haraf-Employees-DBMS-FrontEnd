@@ -7,6 +7,10 @@ import Modal from 'react-modal';
 import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkModal';
 import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from 'react-router-dom';
+
+
+
+
 export default function VerifyBeneficiary() {
     const navigate = useNavigate(); const [bankList, setbankList] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -49,7 +53,7 @@ export default function VerifyBeneficiary() {
     async function verifyBeneficiaryInfo() {
 
         if (!inputValues.accountNumber || !inputValues.bankcode || !inputValues.firstname || !inputValues.lastname ||!inputValues.bankName) return toast.error("All inputs are required.")
-        setIsLoading(true)
+        setIsLoading(true);
         try {
             // const data = await supervisor.verifyBeneficiary(inputValues)
             const data = await supervisor.verifyBeneficiary({
@@ -57,6 +61,7 @@ export default function VerifyBeneficiary() {
                 bankcode:"10001",
             })
             toast.success(data.message)
+            
             navigate("/supervisor/add-employee", { state: data.bankDetails,replace:true })
 
         } catch (error) {
@@ -119,7 +124,7 @@ export default function VerifyBeneficiary() {
                             />
                         </div>
 
-                        <div>
+                        <div className='select-field'>
                             <select
                                 name="bankcode"
                                 value={inputValues?.bankcode}
@@ -142,12 +147,13 @@ export default function VerifyBeneficiary() {
                             </select>
                         </div>
                     </div>
+                    
                 </div>
 
-                {isLoading && <button className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                {isLoading && <button className="btn verify-btn save-employee"><RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" /></button>}
 
 
-                {!isLoading && <button onClick={verifyBeneficiaryInfo}>Verify</button>}
+                {!isLoading && <button className='btn verify-btn' onClick={verifyBeneficiaryInfo}>Verify</button>}
             </div>
             <Modal
                 isOpen={modalIsOpen}

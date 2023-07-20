@@ -44,12 +44,12 @@ export default function ResolvedRequestModal({ closeModal, activeTabButton }) {
               eiusmod tempor incididunt ut labore et dolore magna aliqua
             </p>
           </div>
-          <div className="d-flex justify-content-between request-info my-3">
+          <div className="request-info my-3">
             <p>
-              Request sents by: <span>Musa</span>
+              Request sents by: <span> Musa</span>
             </p>
             <p>
-              Date: <span>17th July 2023</span>
+               Date: <span> 17th July 2023</span>
             </p>
           </div>
           <div className="approved mt-4">

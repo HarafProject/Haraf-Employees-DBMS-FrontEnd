@@ -4,39 +4,39 @@ const listOfReportHistory = [
       "lga": "Guyuk",
       "date": "18th July, 2023",
       "time": "3:34pm",
-      "supervisor_name": "John Doe",
+      "supervisor_name": "Kadwama Lazarus",
       "report_status": "pending"
     },
     {
       "wards": "banjiram",
-      "lga": "yola north",
-      "date": "18th July, 2023",
-      "time": "3:34pm",
-      "supervisor_name": "Jane Smith",
+      "lga": "Guyuk",
+      "date": "17th July, 2023",
+      "time": "2:00pm",
+      "supervisor_name": "Kadwama Lazarus",
       "report_status": "sent"
     },
     {
       "wards": "gulak",
       "lga": "Guyuk",
-      "date": "18th July, 2023",
-      "time": "3:34pm",
-      "supervisor_name": "Michael Johnson",
+      "date": "16th July, 2023",
+      "time": "3:55pm",
+      "supervisor_name": "Kadwama Lazarus",
       "report_status": "sent"
     },
     {
       "wards": "gulak",
-      "lga": "yola north",
-      "date": "18th July, 2023",
-      "time": "3:34pm",
-      "supervisor_name": "Emily Brown",
+      "lga": "Guyuk",
+      "date": "15th July, 2023",
+      "time": "1:00pm",
+      "supervisor_name": "Kadwama Lazarus",
       "report_status": "sent"
     },
     {
       "wards": "gulak",
-      "lga": "michika",
-      "date": "18th July, 2023",
+      "lga": "Guyuk",
+      "date": "14th July, 2023",
       "time": "3:34pm",
-      "supervisor_name": "David Lee",
+      "supervisor_name": "Kadwama Lazarus",
       "report_status": "sent"
     }
   ]

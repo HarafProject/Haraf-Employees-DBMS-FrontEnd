@@ -14,11 +14,11 @@ export default function ReportHistory() {
             <ReusableHeader />
             <div className="report-history-section my-5 p-5">
                 <h1>Report History</h1>
-                <div className="history-list mt-3">
+                {/* <div className="history-list mt-3"> */}
 
                     {reportHistory.map((item, index) => (
-                        <div key={index}>
-                            <div className='d-flex align-items-center justify-content-between'>
+                        <div className="history-list mt-3" key={index}>
+                            <div className='history-list d-flex align-items-center justify-content-between'>
                                 <p>
                                     {item.wards}, {item.lga}_{item.date} ( {item.time})
                                     <span> {item.supervisor_name}</span>
@@ -28,7 +28,7 @@ export default function ReportHistory() {
                             <hr />
                         </div>
                     ))}
-                </div>
+                {/* </div> */}
             </div>
         </div>
     )

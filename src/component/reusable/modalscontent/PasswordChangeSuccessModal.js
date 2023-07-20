@@ -18,8 +18,8 @@ export default function PasswordChangeSuccessModal({ closeModal }) {
       <div className="d-flex flex-column align-items-center modal-content">
         <Icon icon="ep:success-filled" className="success-icon my-3" />
 
-        <p className="mt-4">Password Changed Successfully </p>
-        <span>Proceed to login, remember to use your new password</span>
+        <h5 className="mt-4 fw-bold">Password Changed Successfully </h5>
+        <p className="text-center">Proceed to login, remember to use your new password</p>
 
         <button
           className="btn modal-button my-4"

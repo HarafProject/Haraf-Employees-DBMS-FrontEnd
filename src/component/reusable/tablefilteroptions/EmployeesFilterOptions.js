@@ -60,7 +60,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   }
 
   return (
-    <div className="filter-option-section px-5 mt-3">
+    <div className="reusable filter-option-section px-5 mt-5">
       <div className=" filter d-flex align-items-center justify-content-between ">
         <p className="">Beneficiary List</p>
         <div className="d-flex align-items-center">

@@ -51,7 +51,7 @@
 }
 
 .employees-table-section .search-button {
-  margin: 0 !important;
+  margin: 0;
 }
 
 .employees-table-section .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
@@ -132,7 +132,7 @@ font-size: 16px;
 }
 @media  screen and (max-width: 800px) {
  .employees-table-section .filter-option-section {
-    padding: 0 !important;
+    /* padding: 0 !important; */
 }
 
 }
@@ -146,9 +146,6 @@ font-size: 16px;
   }
 }
 
-@media only screen and (max-width: 600px) {}
-
-@media only screen and (max-width: 567px) {}
 
 @media only screen and (max-width: 426px) {
   .employees-table-section .search-button {
@@ -178,4 +175,8 @@ font-size: 16px;
 .exportBtn {
   width: 230px
 }
+/* .employees-table-section .search-button {
+  width: 230px;
+  margin: 8px 0 0 0 !important;
+} */
 }

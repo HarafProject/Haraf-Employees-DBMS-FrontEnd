@@ -65,7 +65,11 @@ hr {
 
 }
 
-@media only screen and (max-width: 768px) {}
+@media only screen and (max-width: 768px) {
+  .notification{
+    padding: 3rem 1rem !important;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .notification h1 {
