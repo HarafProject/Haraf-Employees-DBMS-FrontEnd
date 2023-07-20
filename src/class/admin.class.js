@@ -2,6 +2,18 @@ import api from "../API";
 
 class adminOBJ {
   //work-typology
+
+  confirmAdminCode = async (code) => {
+    try {
+        const response = await api.post("api/admin/confirm-code", code);
+
+        return response.data;
+
+    } catch (err) {
+
+      throw err?.response?.data;
+    }
+  }
   addWorkTypology = async (data) => {
     try {
       //check if data is empty

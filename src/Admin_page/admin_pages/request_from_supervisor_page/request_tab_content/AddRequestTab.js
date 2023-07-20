@@ -5,21 +5,34 @@ import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
-export default function AddRequestTab() {
+export default function AddRequestTab({setIsSubmitting}) {
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false)
   const [itemIdToModal, setItemIdToModal] = useState(0);
   const [modalData, setModalData] = useState()
   const [addData, setAddData] = useState([]);
 
   const openDeclineSnackBar = async () => {
-    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "declined");
-    setDeclineSnackBar(true);
+
+    try {
+      setIsSubmitting(true)
+      const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "add", "declined");
+      setDeclineSnackBar(true);
+      setAddData(addData.filter(item => item._id !== res.request._id))
+    } catch (error) {
+      toast.error(error)
+      toast.error(error?.error)
+    } finally {
+      setIsSubmitting(false)
+    }
+
 
   };
 
@@ -28,8 +41,18 @@ export default function AddRequestTab() {
   };
 
   const openApproveSnackBar = async () => {
-    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "approved");
-    setApproveSnackBar(true);
+    try {
+      setIsSubmitting(true)
+      const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "add", "approved");
+      setApproveSnackBar(true);
+      setAddData(addData.filter(item => item._id !== res.request._id))
+    } catch (error) {
+      toast.error(error)
+      toast.error(error?.error)
+    } finally {
+      setIsSubmitting(false)
+    }
+
     // console.log(res);
   };
 
@@ -59,12 +82,15 @@ export default function AddRequestTab() {
 
   const handleFetchAddRequestData = async () => {
     try {
+      setIsLoading(true)
       const { data } = await EmployeeRequest.getAllAddEmployeeRequest();
       setAddData(data)
 
     } catch (error) {
       console.error(error);
 
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -76,6 +102,7 @@ export default function AddRequestTab() {
   return (
     <div>
       <div>
+        {isLoading && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
         <div>
           {addData?.map((item, i) => (
             <div
@@ -95,8 +122,11 @@ export default function AddRequestTab() {
                 <button
                   className={"btn-orange"}
                   onClick={() => {
-                    openRequestModal("add", item);
-                    setModalData(item);
+                    if (!isLoading) {
+                      openRequestModal("add", item);
+                      setModalData(item);
+                    }
+
                   }}
                 >
                   View Request

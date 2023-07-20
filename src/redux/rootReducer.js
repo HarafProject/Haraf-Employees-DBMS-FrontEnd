@@ -5,6 +5,7 @@ import userReducer from "./reducers/userReducer";
 import jwtReducer from "./reducers/jwtReducer";
 import employeeReducer from "./reducers/employeeReducer";
 import attendanceReducer from "./reducers/attendanceReducer";
+import adminReducer from "./reducers/adminReducer";
 
 const persistConfig = {
   key: "root",
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   auth: jwtReducer,
   employee: employeeReducer,
-  attendance: attendanceReducer
+  attendance: attendanceReducer,
+  admin: adminReducer
 });
 
 // export default rootReducer;

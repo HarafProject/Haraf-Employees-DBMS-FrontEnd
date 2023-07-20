@@ -72,6 +72,11 @@ export default function EmployeeProfilePage() {
         }
     }
 
+    const capitalizeWords = (str) => {
+        return str.replace(/\b\w/g, (match) => match.toUpperCase());
+      };
+
+
     return (
         <div className="employee-profile-page">
             <ReusableHeader />
@@ -80,18 +85,18 @@ export default function EmployeeProfilePage() {
                     <Icon icon="mdi:arrow-back-circle" onClick={goBack} className='arrowback-icon me-3' />
                     Back to list
                 </div>
-                <div className="d-flex align-item-center  profile-info-summary">
-                    <div className='image'>
+                <div className="d-flex align-items-center  profile-info-summary">
+                    <div className='image me-1 pe-1'>
                         <img src={userData?.photo} alt="" />
                     </div>
 
-                    <div className="d-flex my-3">
-                        <div className="names mx-5">
+                    <div className="d-flex">
+                        <div className="names mx-4">
                             <h4> {userData?.fullName}</h4>
                             <p><span>Marital Status: </span>{userData?.maritalStatus}</p>
                             <p><span>Sex: </span> {userData?.sex}</p>
                         </div>
-                        <div className='work-info mx-5'>
+                        <div className='work-info mx-4'>
                             <p> <span>Work Topology: </span>{userData?.workTypology?.name}</p>
                             <p><span>Ward:</span> {userData?.ward?.name}</p>
                             <p><span>Age:</span> {userData?.age} Years</p>
@@ -105,7 +110,7 @@ export default function EmployeeProfilePage() {
                     <ReusableInformationList title="Other Information" information={otherInfo} />
                 </div>
 
-                <div className='d-flex mt-2'>
+                <div className='d-flex mt-2 benefiacy-profile-btn'>
 
                     {/* <button onClick={openModal} className="btn request-edit mt-5 ">Request Edit Access</button>
                     <button onClick={openModal} className="btn delete-user mt-5 mx-4">Delete Employee</button> */}

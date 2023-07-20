@@ -6,10 +6,13 @@ import { useQuery } from "react-query";
 import admin from "../../../class/admin.class";
 import { toast } from "react-toastify"
 import supervisor from "../../../class/supervisor.class";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function AttendanceAnalytics() {
   const [type, setType] = useState("daily")
-  const [values, setValues] = useState([])
+  const [dateValues, setDateValues] = useState([])
+  const [weekValues, setWeekValues] = useState([])
+  const [mthValues, setMthValues] = useState([])
   const [value, setValue] = useState(null)
   const [typologyData, setTypologyData] = useState([])
   const [typologyValue, setTypologyValue] = useState(null)
@@ -32,6 +35,7 @@ export default function AttendanceAnalytics() {
   ]
   const fetchAnalyticsData = async (key, type, value) => {
     if (!type || !value) return
+    console.log(type, value)
     try {
 
       const [analytics, typologyData] = await Promise.all([
@@ -53,14 +57,13 @@ export default function AttendanceAnalytics() {
 
   useEffect(() => {
     if (!data) return
-    console.log(data)
     // Group data by unique LGA names and count status occurrences
     groupData(data.analytics.data)
     setTypologyData(data.typologyData.workTypology)
   }, [data])
 
   function groupData(data) {
-    const groupedData = data.reduce((acc, item) => {
+    const groupedData = data?.reduce((acc, item) => {
       const lgaName = item.lga.name;
       const status = item.status;
 
@@ -79,23 +82,23 @@ export default function AttendanceAnalytics() {
 
   async function fetchDates(params) {
     const data = await admin.getAttendanceDates()
-    setValues(data.dates)
+    setDateValues(data.dates)
 
   }
   async function fetchWeeks(params) {
     const data = await admin.getAttendanceWeeks()
-    setValues(data.weeks)
+    setWeekValues(data.weeks)
 
   }
   async function fetchMonths(params) {
-    setValues(months)
+    setMthValues(months)
   }
 
   function handleTypology(e) {
- 
+
     if (!e.target.value) {
       setTypologyValue("")
-    }else{
+    } else {
       setTypologyValue(e.target.value)
       groupData(data.analytics.data.filter(item => item.workTypology === e.target.value))
     }
@@ -211,39 +214,15 @@ export default function AttendanceAnalytics() {
         <AdminEmployeeDataSummary />
         <div className="d-flex align-items-center justify-content-between mt-5 ">
           <h5>Attendance Overview</h5>
+          {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
           <div className="d-flex filter-option-section align-items-center">
-            {/* <div className="form-field mx-1">
-              <select name="lga" id="">
-                <option>LGAs</option>
-                <option value="guyuk">Guyuk</option>
-                <option value="numan">Numan</option>
-                <option value="Ganye">Ganye</option>
-                <option value="girei">Girei</option>
-                <option value="michika">Michika</option>
-              </select>
-            </div>
-            <div className="form-field mx-1">
-              <select name="ward" id="">
-                <option value="">Ward</option>
-                <option value="banjiram">Banjiram</option>
-                <option value="bobini">Bobini</option>
-                <option value="bodeno">Bodeno</option>
-                <option value="chikila">Chikila</option>
-                <option value="dukul">Dukul</option>
-                <option value="dumna">Dumna</option>
-                <option value="guyuk">Guyuk</option>
-                <option value="kola">Kola</option>
-                <option value="lokoro">Lokoro</option>
-                <option value="purokayo">Purokayo</option>
-              </select>
-            </div> */}
- 
+
             <div className="form-field mx-1">
               <select name="type" id="" onChange={(e) => {
                 setTypologyValue("")
                 setType(e.target.value)
               }}>
-                <option value={null}>Interval</option>
+                <option value="">Interval</option>
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
@@ -256,27 +235,35 @@ export default function AttendanceAnalytics() {
                 setValue(e.target.value)
               }}>
                 <option value="">Value</option>
-                {values.map((item, i) => {
-                  if (type === "daily") {
-                    return (
-                      <option key={i} value={item}>
-                        {new Date(item).toDateString()}
-                      </option>
-                    );
-                  } else if (type === "weekly") {
-                    return (
-                      <option key={i} value={item}>
+
+                {
+                  type === "daily" && <>
+                    {
+                      dateValues.map((item, i) => <option key={i} value={item}>{new Date(item).toDateString()}</option>)
+                    }
+                  </>
+                }
+
+                {
+                  type === "weekly" && <>
+                    {
+                      weekValues.map((item, i) => <option key={i} value={item}>
                         week {item}
-                      </option>
-                    );
-                  } else {
-                    return (
+                      </option>)
+                    }
+                  </>
+                }
+
+                {
+                  type === "monthly" && <>
+                    {mthValues.map((item, i) =>
                       <option key={i} value={i + 1}>
                         {item}
                       </option>
-                    );
-                  }
-                })}
+                    )}
+                  </>
+                }
+
               </select>
             </div>
 

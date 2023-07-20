@@ -5,23 +5,35 @@ import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
-export default function EditRequestTab() {
+export default function EditRequestTab({setIsSubmitting}) {
 
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false)
   const [editRequest, setEditRequest] = useState([]);
   const [itemIdToModal, setItemIdToModal] = useState(0);
   const [modalData, setModalData] = useState()
 
   const openDeclineSnackBar = async () => {
 
-    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "declined");
-    setDeclineSnackBar(true);
+    try {
+      setIsSubmitting(true)
+      const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "declined");
+      setEditRequest(editRequest.filter(item => item._id !== res.request._id))
+      setDeclineSnackBar(true);
+    } catch (error) {
+      toast.error(error)
+      toast.error(error?.error)
+    } finally {
+      setIsSubmitting(false)
+    }
+
   };
 
   const closeDeclineSnackBar = () => {
@@ -29,8 +41,19 @@ export default function EditRequestTab() {
   };
 
   const openApproveSnackBar = async () => {
-    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "approved");
-    setApproveSnackBar(true);
+
+    try {
+      setIsSubmitting(true)
+      const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "edit", "approved");
+      setEditRequest(editRequest.filter(item => item._id !== res.request._id))
+      setApproveSnackBar(true);
+    } catch (error) {
+      toast.error(error)
+      toast.error(error?.error)
+    } finally {
+      setIsSubmitting(false)
+    }
+
   };
 
   const closeApproveSnackBar = async () => {
@@ -60,12 +83,16 @@ export default function EditRequestTab() {
 
   const handleFetchEditRequestData = async () => {
     try {
+      setIsLoading(true)
       const { data } = await EmployeeRequest.getAllEditEmployeeRequest();
-      console.log('this is edit request', data)
+      // editRequest.filter(item=>item._id !== data)
+
       setEditRequest(data);
 
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -73,13 +100,11 @@ export default function EditRequestTab() {
     handleFetchEditRequestData();
   }, []);
 
-  const data = [
-    { id: 1, beneficiary: "beneficiary", supervisor: "supervisor", status: "status" },
 
-  ];
   return (
     <div>
       <div>
+        {isLoading && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
         <div>
           {
             editRequest?.map((item, i) => (
@@ -88,7 +113,7 @@ export default function EditRequestTab() {
                 key={item._id}
               >
 
-                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Edit Employee request from {item.user.firstname} {item.user.surname}</p>
+                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Edit Employee request from {item?.user?.firstname} {item?.user?.surname}</p>
 
 
                 {item.status === "Resolved" ? (
@@ -102,8 +127,10 @@ export default function EditRequestTab() {
                   <button
                     className={"btn-orange"}
                     onClick={() => {
-                      openRequestModal("edit", item);
-                      setModalData(item);
+                      if (!isLoading) {
+                        openRequestModal("edit", item);
+                        setModalData(item);
+                      }
                     }}
                   >
                     View Request

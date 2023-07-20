@@ -3,7 +3,7 @@
     font-weight: 600;
     line-height: normal;
     color: #0280CA;
-    margin-bottom: 20px;
+    margin-top: 20px;
 
 }
 
@@ -45,4 +45,65 @@
 .history-list .btn.sent {
     background-color: #0280CA;
 
+}
+
+@media screen and (max-width: 800px) {
+    
+    .history-list p {
+        font-size: 18px;
+    }
+    .history-list .btn.history-btn {
+        width: 100px;
+    }
+}
+@media screen and (max-width: 800px) {
+    
+    .history-list p {
+        font-size: 16px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+@media screen and (max-width: 576px) {
+    .history-list .btn.history-btn {
+        width: 78px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    
+    .report-history-section.p-5 {
+        padding: 1.5rem!important;
+    }
+    .history-list{
+        flex-direction: column;
+    }
+    .history-list {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .history-list .btn.history-btn {
+        padding: 5px;
+        margin-top: 7px;
+        font-size: 16px;
+        width: 100px;
+    }
+    .history-list hr {
+        margin: 5px;
+    }
+    .report-history-section h1 {
+        font-size: 26px;
+        margin: 20px 0;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .history-list p {
+        max-width: 320px;
+    }
+    .history-list .btn.history-btn {
+       
+        width: 80px;
+    }
 }

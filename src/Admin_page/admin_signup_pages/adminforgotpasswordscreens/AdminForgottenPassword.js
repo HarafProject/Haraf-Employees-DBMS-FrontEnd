@@ -31,7 +31,7 @@ export default function AdminForgottenPassword() {
         .then((res) => {
           console.log(res);
           dispatch(setToken(res?.data?.token));
-          const redirectURL = `/admin-send-otp?email=${values.email}`;
+          const redirectURL = `/admins/send-otp?email=${values.email}`;
           navigate(redirectURL, { replace: true });
           toast.success(res?.data?.message);
           setIsLoading(false);

@@ -34,7 +34,7 @@ export default function AdminLoginOtpVerify() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace("/admin-create-password");
+         navigate("/admins/create-password",{replace:true});
           setIsLoading(false);
         })
         .catch((err) => {

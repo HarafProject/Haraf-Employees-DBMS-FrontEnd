@@ -51,8 +51,9 @@ class AdminRequestFromSupervisorOBJ {
   handleSupervisorRequest = async (itemIdToModal, type, action, reason) => {
     // console.log(itemIdToModal);
     try {
-      const { response } = await api.put(`api/admin/handle-request/${itemIdToModal}?type=${type}&action=${action}`, { reason });
-      return response;
+      const { data } = await api.put(`api/admin/handle-request/${itemIdToModal}?type=${type}&action=${action}`, { reason });
+  
+      return data;
     } catch (err) {
       throw err?.response?.data;
     }

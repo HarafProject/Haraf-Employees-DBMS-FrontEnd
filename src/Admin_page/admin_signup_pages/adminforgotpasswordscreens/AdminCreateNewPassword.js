@@ -45,7 +45,7 @@ export default function AdminCreateNewPassword() {
         .then((res) => {
           console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace("/admin-login");
+          navigate("/admins/login",{replace:true});
           setIsLoading(false);
         })
         .catch((err) => {

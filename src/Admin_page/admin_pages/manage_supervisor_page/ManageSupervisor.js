@@ -160,14 +160,23 @@ export default function ManageSupervisor() {
 
 
   useEffect(() => {
-    manageSupervisior.getAll().then((res) => {
-      const supervisorData = res?.data;
-      setTotalCount(supervisorData.length)
-      setSupervisor(supervisorData);
-      setAllData(supervisorData)
-    });
-  }, [search, selectedZone]);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const res = await manageSupervisior.getAll();
+        const supervisorData = res?.data;
+        setTotalCount(supervisorData.length);
+        setSupervisor(supervisorData);
+        setAllData(supervisorData);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        console.log(error);
+      }
+    };
 
+    fetchData();
+  }, [search, selectedZone]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -183,7 +192,7 @@ export default function ManageSupervisor() {
         const [zoneResponse] = await Promise.all([
           dataOBJs.getZone(),
         ]);
-        console.log(zoneResponse, 'zones')
+
         let arr = []
         zoneResponse.map((a) => {
           arr.push({
@@ -240,11 +249,16 @@ export default function ManageSupervisor() {
                 </select>
               </div>
             </div> */}
-            <AdminAttendanceFilter
+
+            {isLoading ? <div className='d-flex align-items-center px-5 py-3'>
+              <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />
+              <p style={{ color: "#0173bc" }}>Loading please wait...</p>
+            </div> : <AdminAttendanceFilter
               reports={supervisor}
               setReports={setSupervisor}
               allData={allData}
             />
+            }
             {/* <div className="export">
               <button className="btn export-file-btn" disabled={isLoading} onClick={handleDownload}>
               {isLoading ? (
@@ -285,7 +299,7 @@ export default function ManageSupervisor() {
 
                       <TableCell>
                         <p className="d-flex flex-column admin-name">
-                          {supervisor.firstname}
+                          {supervisor.firstname} {supervisor.surname}
                           <span>{supervisor.email}</span>
                         </p>
                       </TableCell>

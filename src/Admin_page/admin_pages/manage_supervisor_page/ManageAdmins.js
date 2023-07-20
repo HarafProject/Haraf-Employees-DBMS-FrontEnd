@@ -48,7 +48,7 @@ export default function ManageAdmins() {
     setAdminName(adminName);
     setIsOpen(true);
     setButtonClick(buttonClick);
-    
+
     setGetRole(getRole);
     setUserId(id)
   }
@@ -161,12 +161,22 @@ export default function ManageAdmins() {
 
 
   useEffect(() => {
-    superAdmin.getAll().then((res) => {
-      const adminData = res?.data;
-      setTotalCount(adminData.length)
-      setAdmin(adminData);
-      setAllData(adminData)
-    });
+    const fetchData = async () => {
+      try {
+        setIsLoading(true); // Start loading
+        const res = await superAdmin.getAll();
+        const adminData = res?.data;
+        setTotalCount(adminData.length);
+        setAdmin(adminData);
+        setAllData(adminData);
+        setIsLoading(false); // Finish loading
+      } catch (error) {
+        setIsLoading(false); // In case of an error, finish loading
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, [search, selectedZone]);
 
 
@@ -186,11 +196,17 @@ export default function ManageAdmins() {
           <div className="d-flex align-items-center justify-content-between ">
             <h1>admins ({totalCount})</h1>
 
-            <AdminAttendanceFilter
+            {isLoading ? <div className='d-flex align-items-center px-5 py-3'>
+              <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />
+              <p style={{ color: "#0173bc" }}>Loading please wait...</p>
+            </div> : <AdminAttendanceFilter
               reports={admin}
               setReports={setAdmin}
               allData={allData}
             />
+            }
+
+
 
           </div>
         </div>
@@ -218,7 +234,7 @@ export default function ManageAdmins() {
 
                       <TableCell>
                         <p className="d-flex flex-column admin-name">
-                          {adminData.firstname}
+                          {adminData.firstname} {adminData.surname}
                           <span>{adminData.email}</span>
                         </p>
                       </TableCell>

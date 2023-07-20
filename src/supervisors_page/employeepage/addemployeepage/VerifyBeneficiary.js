@@ -139,7 +139,7 @@ export default function VerifyBeneficiary() {
                             />
                         </div>
 
-                        <div>
+                        <div className='select-field'>
                             <select
                                 name="bankcode"
                                 value={inputValues?.bankcode}
@@ -161,13 +161,14 @@ export default function VerifyBeneficiary() {
                             </select>
                         </div>
                     </div>
+                    
                 </div>
 
-                {isLoading && <button className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                {isLoading && <button className="btn verify-btn save-employee"><RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" /></button>}
 
 
-                {(!isLoading && !isVerified) && <button onClick={verifyBeneficiaryInfo}>Verify</button>}
-                {(!isLoading && isVerified) && <button onClick={() => navigate("/supervisor/add-employee", { state: verifiedDetails, replace: true })}>Continue</button>}
+                {(!isLoading && !isVerified) && <button className="btn verify-btn save-employee" onClick={verifyBeneficiaryInfo}>Verify</button>}
+                {(!isLoading && isVerified) && <button onClick={() => navigate("/supervisor/add-employee", { state: verifiedDetails, replace: true })} className="btn verify-btn save-employee">Continue</button>}
             </div>
             <Modal
                 isOpen={modalIsOpen}

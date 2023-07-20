@@ -17,6 +17,7 @@ import { useQuery } from 'react-query'
 import { toast } from "react-toastify"
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
+import { RotatingLines } from "react-loader-spinner";
 
 import "./adminemployeelist.css";
 
@@ -44,7 +45,7 @@ export default function AdminEmployeeList() {
     setBeneficiaries(data.data)
 
   }, [data])
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -58,11 +59,16 @@ export default function AdminEmployeeList() {
     <>
       <div className="employees-table-section">
         <AdminEmployeeDataSummary beneficiaries={beneficiaries} />
-        <AdminEmployeeFilterComponent
-          allData={data?.data}
-          beneficiaries={beneficiaries}
-          setBeneficiaries={setBeneficiaries}
-        />
+
+        {
+          status === "loading" ? <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div> :
+            <AdminEmployeeFilterComponent
+              allData={data?.data}
+              beneficiaries={beneficiaries}
+              setBeneficiaries={setBeneficiaries}
+            />
+        }
+
         <div>
           <div className="employee-list-table p-3 my-3">
             <TableContainer component={Paper}>
@@ -81,7 +87,7 @@ export default function AdminEmployeeList() {
                 </TableHead>
                 <TableBody>
                   {beneficiaries.map((user, index) => (
-                    <TableRow onClick={() => navigate("/admin-employee-profile", { state: user })}>
+                    <TableRow onClick={() => navigate("/admins/home/employee-profile", { state: user })}>
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>
                         <Avatar alt={user.name} src={user.photo} />

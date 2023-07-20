@@ -5,13 +5,15 @@ import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";
-import axios from "axios";
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
-export default function DeleteRequestTab() {
-  
+export default function DeleteRequestTab({setIsSubmitting}) {
+
   const [requestModalIsOpen, setIsRequestModalOpen] = useState(false);
   const [itemIdToModal, setItemIdToModal] = useState(0)
   const [resolvedModalIsOpen, setResolvedIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const [declineSnackBar, setDeclineSnackBar] = useState(false);
   const [approveSnackBar, setApproveSnackBar] = useState(false);
@@ -21,11 +23,18 @@ export default function DeleteRequestTab() {
 
 
   const openDeclineSnackBar = async () => {
-    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal,"delete","declined");
+    try {
+      setIsSubmitting(true)
+      const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "delete", "declined");
+      setDeclineSnackBar(true);
+      setDeleteData(deleteData.filter(item => item._id !== res.request._id))
+    } catch (error) {
+      toast.error(error)
+      toast.error(error?.error)
+    } finally {
+      setIsSubmitting(false)
+    }
 
-    // const res = await axios.delete(`https://example.com/id/${itemIdToModal}`);
-
-    setDeclineSnackBar(true);
   };
 
   const closeDeclineSnackBar = () => {
@@ -33,10 +42,18 @@ export default function DeleteRequestTab() {
   };
 
   const openApproveSnackBar = async () => {
-    setApproveSnackBar(true);
-    setApproveSnackBar(true);
-    const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal,"delete","approved");
-   
+    try {
+      setIsSubmitting(true)
+      const res = await EmployeeRequest.handleSupervisorRequest(itemIdToModal, "delete", "approved");
+      setApproveSnackBar(true);
+      setDeleteData(deleteData.filter(item => item._id !== res.request._id))
+    } catch (error) {
+      toast.error(error)
+      toast.error(error?.error)
+    } finally {
+      setIsSubmitting(false)
+    }
+
   };
 
   const closeApproveSnackBar = () => {
@@ -67,11 +84,17 @@ export default function DeleteRequestTab() {
 
   const handleFetchDeleteRequestData = async () => {
     try {
+      setIsLoading(true)
       const { data } = await EmployeeRequest.getAllDeleteEmployeeRequest();
       setDeleteData(data);
-      console.log('DEGLETdE DAggTA', deleteData)
+
     } catch (error) {
-      console.error(error);
+
+      toast.error(error)
+      toast.error(error?.error)
+      toast.error(error?.message)
+    } finally {
+      setIsLoading(false)
     }
 
   };
@@ -83,6 +106,7 @@ export default function DeleteRequestTab() {
   return (
     <div>
       <div>
+        {isLoading && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
         <div>
           {
             deleteData?.map((item, i) => (
@@ -104,8 +128,11 @@ export default function DeleteRequestTab() {
                   <button
                     className={"btn-orange"}
                     onClick={() => {
-                      openRequestModal("delete", item);
-                      setModalData(item);
+                      if (!isLoading) {
+                        openRequestModal("delete", item);
+                        setModalData(item);
+                      }
+
                     }}
                   >
                     View Request

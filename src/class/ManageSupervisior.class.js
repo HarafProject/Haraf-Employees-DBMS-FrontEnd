@@ -70,7 +70,7 @@ class manageSupervisiorOBJ {
   undoVerified = async (id) => {
     try {
       //check if data is empty
-      const { data } = await api.get(`api/superadmin/undo-supervisor-verification/${id}`);
+      const { data } = await api.put(`api/superadmin/undo-supervisor-verification/${id}`);
       return data;
     } catch (err) {
       throw err?.response?.data;

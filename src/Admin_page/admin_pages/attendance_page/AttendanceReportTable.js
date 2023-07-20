@@ -19,6 +19,7 @@ import AdminAttendanceFilter from "../admin_employee_list_page/AdminAttendanceFi
 import { useQuery } from 'react-query'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
 
 const fetchAttendanceList = async (key) => {
 
@@ -48,7 +49,7 @@ export default function AttendanceReportTable({ onRowClick }) {
   useEffect(() => {
     if (!data) return
     setTableData(data)
- 
+
 
   }, [data])
   const handleTabChange = (tabName) => {
@@ -78,7 +79,7 @@ export default function AttendanceReportTable({ onRowClick }) {
     } else if (!isPM && adjustedHour === 12) {
       adjustedHour = 0;
     }
- 
+
     return adjustedHour >= 16; // 16 represents 4:00 PM
   };
   // Sample array of objects
@@ -108,7 +109,7 @@ export default function AttendanceReportTable({ onRowClick }) {
 
         setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
 
-     
+
 
       } catch (error) {
         console.log(error);
@@ -159,7 +160,7 @@ export default function AttendanceReportTable({ onRowClick }) {
             ))}
           </div>
         }
-
+        {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
         <AdminAttendanceFilter
           allData={data}
           reports={tableData}
@@ -190,7 +191,7 @@ export default function AttendanceReportTable({ onRowClick }) {
                     return (
                       <TableRow
                         key={index}
-                        onClick={() => navigate("/detailed-attendance", { state: report })}
+                        onClick={() => navigate("/admins/home/detailed-attendance", { state: report })}
                         style={{ cursor: "pointer" }}
                       >
                         <TableCell>{index + 1}</TableCell>
@@ -201,7 +202,7 @@ export default function AttendanceReportTable({ onRowClick }) {
                         </TableCell>
                         <TableCell>
 
-                          {new Date(report?.date).toISOString().split('T')[0]}
+                          {new Date(report?.date).toDateString()}
                         </TableCell>
                         <TableCell
                           className={

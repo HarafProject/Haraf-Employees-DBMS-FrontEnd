@@ -122,7 +122,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   transition: all 0.3s ease-out;
   z-index: 500;
 }
@@ -140,6 +140,12 @@ font-size: 30px;
 font-weight: 600;
 line-height: normal;
 color: #000000;
+
+}
+.request-info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 120px;
 
 }
 .sendrequest-modal p.request-by, .sendrequest-modal .request-info p{
@@ -180,7 +186,8 @@ color: #000000;
 
 
 }
-.sendrequest-modal .request-info p{
+.sendrequest-modal .request-info p {
+  white-space: nowrap;
 
 }
 .sendrequest-modal .request-info span{
@@ -196,4 +203,128 @@ font-size: 15px;
 font-weight: 600;
 background: #0280CA;
 margin: 0 10px;
+}
+
+
+
+@media screen and (max-width: 800px) {
+  .modal-screen {
+    width: 550px;
+    padding: 1rem !important;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .modal-screen {
+    width: 470px;
+  }
+  .modal-screen .textarea {
+    width: 380px;
+    height: 100px;
+  }
+  .modal-screen .btn.modal-button {
+    width: 220px;
+    margin-top: 0 !important;
+  }
+  .modal-screen .approved h3 {
+    font-size: 18px;
+  }
+  
+}
+@media screen and (max-width: 522px) {
+  .modal-screen {
+    width: 420px;
+}
+.request-info {
+  gap: 0 50px;
+}
+
+}
+@media screen and (max-width: 426px) {
+  .modal-base {
+    top: 15%;
+  }
+  .modal-screen {
+    width: 370px;
+}
+.modal-screen .textarea {
+  width: 290px;
+}
+.modal-screen p.no-network {
+  font-size: 20px;
+}
+.success-icon, .network-icon {
+  width: 50px;
+  height: 50px;
+}
+.modal-screen p.no-network {
+  font-size: 16px;
+  white-space: nowrap;
+}
+.sendrequest-modal p.request-by span, .sendrequest-modal .request-info span {
+  font-size: 14px;
+}
+.request-info {
+  gap: 0 10px;
+}
+}
+@media screen and (max-width: 376px) {
+  .modal-screen .textarea {
+    height: auto;
+}
+.modal-screen {
+  width: 320px;
+}
+.modal-screen .textarea {
+  width: 260px;
+}
+.modal-screen .btn.modal-button {
+  width: 200px;
+  font-size: 16px;
+}
+.btn.close-button {
+  font-size: 30px;
+  --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+}
+.modal-screen .modal-title .error-icon {
+  font-size: 22px;
+}
+.modal-screen .modal-title span {
+  font-size: 20px;
+}
+.modal-screen p {
+  font-size: 13px;
+  margin-top: 0.6rem !important;
+}
+.success-icon, .network-icon {
+  width: 30px;
+  height: 30px;
+}
+.modal-screen h5{
+  font-size: 18px;
+}
+
+.modal-screen .request-info {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.modal-screen .approved{
+  margin-top: 0 !important;
+}
+.modal-screen .approved h3 {
+  font-size: 16px;
+}
+.modal-screen .approved p {
+  font-size: 14px;
+}
+}
+@media screen and (max-width: 320px) {
+  .modal-screen {
+    width: 280px;
+}
+.modal-screen .textarea {
+  width: 230px;
+}
 }

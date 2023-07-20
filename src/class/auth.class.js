@@ -1,6 +1,7 @@
 import api from "../API";
 
 class authOBJ {
+  
   //auths reg
   register = async (data) => {
     try {

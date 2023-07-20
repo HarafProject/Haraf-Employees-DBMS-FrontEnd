@@ -1,76 +1,171 @@
 .verify-beneficiary {
-    margin: 6rem auto;
-    width: 80%;
-  }
+  margin: 8rem auto 2rem auto;
+}
+
+.verify-beneficiary h2 {
+  color: #0280ca;
+  text-align: center;
+}
+
+.verify-beneficiary .form-flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.verify-beneficiary input {
+  width: 300px;
+  padding: 0.75rem;
+  border-radius: 5px;
+  margin: 1.5rem 0;
+  border: 1px solid black;
+  outline: none;
+  font-size: 16px;
+}
+
+.verify-beneficiary  .select-field {
+  width: 300px;
+  overflow: hidden;
+  background-image: url("../../../assets/arrow.png");
+  background-repeat: no-repeat;
+  background-position: 270px center;
+  background-size: 1em auto;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  border: 1px solid black;
+  outline: none;
   
-  .verify-beneficiary h2 {
-    color: #0280ca;
-    text-align: center;
-    margin-top: 1rem;
+  border-radius: 5px;
+  margin: 1.5rem 0;
+
+}
+
+.verify-beneficiary select {
+  text-overflow: ellipsis;
+  background: transparent;
+  max-width: 300px;
+padding: 0.75rem 3.2rem 0.75rem 0.75rem;
+  font-size: 16px;
+  border: 0;
+  outline: none;
+  -webkit-appearance: none;
+
+}
+.verify-beneficiary select option{
+  font-size: 14px;
+}
+
+.verify-beneficiary .btn.verify-btn,
+.btn.verify-btn:hover {
+  display: block;
+  width: 40%;
+  margin: 1rem auto;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #0280ca;
+  padding: 0.6rem 0;
+  border-radius: 25px;
+}
+
+.verify-beneficiary .user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.verify-beneficiary .user p:nth-child(1) {
+  font-size: 14px;
+}
+
+.verify-beneficiary .user img {
+  width: 50px;
+  border-radius: 60%;
+}
+
+.verify-beneficiary .user p {
+  font-size: 12px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+  .verify-beneficiary input,
+  .verify-beneficiary  .select-field {
+    width: 250px;
   }
 
-  .verify-beneficiary .bvn-photo{
-    width: 30%;
-    margin: 1rem auto;
+  .verify-beneficiary  .select-field {
+    background-position: 210px center;
   }
 
-  .verify-beneficiary .bvn-photo img{
-    width: 100%;
-    height: 100%;
+  .verify-beneficiary select {
+    padding-right: 6.5rem;
   }
+}
+
+@media screen and (max-width: 522px) {
+  .verify-beneficiary input, .verify-beneficiary  .select-field {
+    width: 230px;
+}
+.verify-beneficiary select {
+  padding-right: 6.8rem;
+}
+.verify-beneficiary  .select-field {
+  background-position: 200px center;
+}
+}
+
+@media only screen and (max-width: 426px) {
+  .verify-beneficiary {
+    margin-top: 5rem ;
+}
+.verify-beneficiary h2{
+  font-size: 20px;
+}
   .verify-beneficiary .form-flex {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  
-  .verify-beneficiary input {
-    width: 25rem;
-    padding: 0.75rem;
-    border-radius: 5px;
-    margin: 1.5rem 0;
-    border: 1px solid black;
-  }
-  
-  .verify-beneficiary  select {
-    width: 25rem;
-    padding: 0.75rem;
-    margin: 1.5rem 0;
-    border-radius: 5px;
-  }
-  
-  .verify-beneficiary button {
-    display: block;
-    width: 40%;
-    margin: 1rem auto;
-    border: none;
-    color: white;
-    background-color: #0280ca;
-    padding: 0.6rem 0;
-    border-radius: 25px;
-  }
-
-  .verify-beneficiary button:hover {
-
-    color: white;
-    background-color: #0280ca;
-
-  }
-  
-  .verify-beneficiary .user {
-    display: flex;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+}
+.verify-beneficiary input, .verify-beneficiary .select-field {
+  width: 320px;
+}
+.verify-beneficiary  .select-field {
+  background-position: 280px center;
+}
+.verify-beneficiary select {
+  padding-right: 3rem;
+}
+.verify-beneficiary select option{
+  font-size: 12px;
+}
+.verify-beneficiary input, .verify-beneficiary  .select-field {
+  margin: 1rem 0;
+}
+}
+
+@media only screen and (max-width: 375px) {
+  .verify-beneficiary input, .verify-beneficiary .select-field {
+    width: 280px;
+}
+.verify-beneficiary .select-field {
+  background-position: 275px center;
+}
+.verify-beneficiary select option{
+  font-size: 10px;
+}
+}
+
+@media only screen and (max-width: 320px) {
+  .verify-beneficiary input, .verify-beneficiary .select-field {
+    width: 270px;
   }
-  
-  .verify-beneficiary .user p:nth-child(1) {
-    font-size: 14px;
+  .verify-beneficiary  .select-field {
+    background-position: 235px center;
   }
-  
-  .verify-beneficiary .user img {
-    width: 50px;
-    border-radius: 60%;
+  .verify-beneficiary select {
+    padding-right: 6rem;
   }
-  
-  .verify-beneficiary .user p {
-    font-size: 12px;
-  }
+}

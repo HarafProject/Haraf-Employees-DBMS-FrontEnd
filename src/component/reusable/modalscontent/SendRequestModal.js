@@ -27,11 +27,11 @@ export default function SendRequestModal({closeModal, actionType, action, isLoad
             setModalText("You don’t have permission to add new employees after initial data capture, kindly request access to the regional lead by stating reason for the request below");
         } else if (actionType === 'edit') {
             setModalTitle('Profile Edit Request');
-            setModalText("You don't have permission to edit an employees profile, request access from super admin by stating reason for profile edit");
+            setModalText("You don't have permission to edit an beneficiary profile, request access from super admin by stating reason for profile edit");
         }
         else if (actionType === 'delete') {
             setModalTitle('Delete employee Request');
-            setModalText("You don't have permission to delete an employees, request access from super admin by stating reason to delete employee");
+            setModalText("You don't have permission to delete an beneficiary, request access from super admin by stating reason to delete beneficiary");
         }
     }, [actionType]);
 

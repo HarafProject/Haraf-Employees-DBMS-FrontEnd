@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import profile from "../../assets/logo-light.png";
 import './adminonboarding.css'
-import { useFormik } from "formik";
+import { replace, useFormik } from "formik";
 import * as Yup from "yup";
 import admin from "../../class/admin.class";
 import { toast } from "react-toastify";
@@ -90,9 +90,8 @@ export default function CreateAdminAccountScreen() {
       admin
         .register(data)
         .then((res) => {
-          console.log(res);
           toast.success(res?.data?.message);
-          window.location.replace("/admin-login");
+          navigate("/admins/login",{replace:true});
           setIsLoading(false);
         })
         .catch((err) => {
@@ -298,7 +297,7 @@ export default function CreateAdminAccountScreen() {
           Already have an account?{" "}
           <span
             onClick={() => {
-              navigate("/admin-login");
+              navigate("/admins/login",{replace:true});
             }}
           >
             {" "}

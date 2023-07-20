@@ -27,6 +27,8 @@ import CreateAdminAccountScreen from '../Admin_page/admin_signup_pages/AdminCrea
 // TakeAttendancePage
 import AdminEmployeeProfile from "../Admin_page/admin_pages/admin_employee_list_page/AdminEmployeeProfile/AdminEmployeeProfile";
 import SupervisorHome from '../supervisors_page/SupervisorHome';
+import AdminIndexPage from '../Admin_page/admin_signup_pages/AdminIndexPage';
+import AdminHomeIndexPage from '../Admin_page/admin_pages/admin_home_page/AdminHomeIndexPage';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -40,16 +42,24 @@ const router = createBrowserRouter(
 
       <Route path="supervisor/*" element={<SupervisorHome />} />
 
-      <Route path="/admin" element={<AdminWelcomeScreen />} />
-      <Route path="/admin-login" element={<AdminLoginScreen />} />
-      <Route path="/admin-create-account" element={<CreateAdminAccountScreen />} />
-      <Route path="/admin-forgot-password" element={<AdminForgottenPassword />} />
-      <Route path="/admin-send-otp" element={<AdminLoginOtpVerify />} />
-      <Route path="/admin-create-password" element={<AdminCreateNewPassword />} />
-      <Route path="/admin-home" element={<AdminHomePage />} />
-      <Route path="/admin-employee-profile" element={<AdminEmployeeProfile />} />
-      <Route path="/detailed-attendance" element={<AttendanceDetailedPage />} />
-      
+      {/* Only users with Admin code can access d following pages */}
+      <Route path="/admin/:id" element={<AdminWelcomeScreen />} />
+
+      <Route path="/admins" element={<AdminIndexPage />} >
+        <Route path="login" element={<AdminLoginScreen />} />
+        <Route path="create-account" element={<CreateAdminAccountScreen />} />
+        <Route path="forgot-password" element={<AdminForgottenPassword />} />
+        <Route path="send-otp" element={<AdminLoginOtpVerify />} />
+        <Route path="create-password" element={<AdminCreateNewPassword />} />
+        <Route path="home" element={<AdminHomeIndexPage />} >
+          <Route path="" element={<AdminHomePage />} />
+          <Route path="employee-profile" element={<AdminEmployeeProfile />} />
+          <Route path="detailed-attendance" element={<AttendanceDetailedPage />} />
+        </Route>
+
+      </Route>
+
+
       {/* <Route path="dashboard/*" element={<Dashboard />} /> */}
 
       {/* This page is only available after the user has finished selecting all typology to see it copy the path to the browser*/}

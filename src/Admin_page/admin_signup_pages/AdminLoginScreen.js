@@ -47,7 +47,7 @@ export default function AdminLoginScreen() {
           dispatch(loginSuccess(res?.data?.user));
           localStorage.setItem('HARAF-AUTH', res?.data?.token);
           //redirect to admin
-          navigate("/admin-home", { replace: true });
+          navigate("/admins/home", { replace: true });
           setIsLoading(false);
         })
         .catch((err) => {
@@ -127,7 +127,7 @@ export default function AdminLoginScreen() {
             Forgotten Password?{" "}
             <span
               onClick={() => {
-                navigate("/admin-forgot-password");
+                navigate("/admins/forgot-password");
               }}
             >
               Reset Here
