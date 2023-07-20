@@ -15,8 +15,8 @@ export default function ReportSentSuccessModal({ closeModal }) {
       <div className="d-flex flex-column align-items-center modal-content">
         <Icon icon="ep:success-filled" className="success-icon my-3" />
 
-        <p className="mt-4">Report Sent Successfully</p>
-        <span>Your report for today has been sent successfully</span>
+        <h5 className="mt-4">Report Sent Successfully</h5>
+        <span className="text-center">Your report for today has been sent successfully</span>
 
         <button className="btn modal-button my-4" onClick={closeModal}>
           OK

@@ -130,6 +130,13 @@ font-size: 16px;
   .employees-table-section .css-1ygcj2i-MuiTableCell-root {
     font-size: 16px;
   }
+  .employees-table-section{
+    margin-top: 0 !important;
+  }
+  .floating-button {
+    bottom: 70px;
+    right: 50px;
+  }
 }
 @media screen and (max-width: 768px) {
   .empty-list-screen .empty-list-content .btn.add-employee {
@@ -177,6 +184,9 @@ font-size: 16px;
 .empty-list-screen .empty-list-content .btn.add-employee .iconify {
   font-size: 20px;
 }
+.floating-button {
+  right: 25px;
+}
 }
 @media screen and (max-width: 375px) {
   .floating-button {
@@ -194,3 +204,7 @@ font-size: 16px;
 }
 
 }
+@media screen and (max-width: 375px){
+.floating-button {
+    bottom: 60px;
+}}

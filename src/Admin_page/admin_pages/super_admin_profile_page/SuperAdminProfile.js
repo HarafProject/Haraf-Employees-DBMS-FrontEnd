@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import "./adminprofile.css";
+// import "./adminprofile.css";
 import { useSelector, useDispatch } from "react-redux";
 import SuperAdminProfileSetUp from "../../../class/superadminProfile.class";
 import { toast } from "react-toastify";
@@ -72,10 +72,10 @@ export default function SuperAdminProfile() {
   }
 
   return (
-    <section>
-      <section className="login-container">
-        <h3 className="login-heading">Admin Profile</h3>
-        <section>
+    <div>
+      <div className="supervisor-account">
+        <h3 className="">Admin Profile</h3>
+        <div className="d-flex flex-column align-items-center"> 
           {!editable && (
             <div className="input-form">
               <label htmlFor="">Name</label>
@@ -152,14 +152,14 @@ export default function SuperAdminProfile() {
           )}
 
           {!isLoading && (
-            <div className="d-flex justify-content-between mb-3">
+            <div className="d-flex justify-content-between profile-btn mb-3">
               {editable && (
-                <button className="edit-button" onClick={cancelEdit}>
+                <button className="btn profile-edit-button save-btn mt-4" onClick={cancelEdit}>
                   Cancel
                 </button>
               )}
 
-              <button onClick={handleButtonClick} className="edit-button">
+              <button onClick={handleButtonClick} className={`btn mt-4 profile-edit-button ${buttonText === "Save" ? "save-btn" : ""}`}>
                 {!editable ? (
                   <div className="icon-bg">
                     <Icon
@@ -175,8 +175,9 @@ export default function SuperAdminProfile() {
               </button>
             </div>
           )}
-        </section>
-      </section>
-    </section>
+        </div>
+      </div>
+
+    </div>
   );
 }

@@ -91,21 +91,16 @@
   border-radius: 20px;
 }
 
-<<<<<<< HEAD
-@media only screen and (max-width: 1027px) {
-  .content {
-=======
 .user-info-section {
  
 }
 
 /* .user-info-section{
->>>>>>> main
     width: auto;
     margin-left: 225px;
   }
 
-}
+} */
 
 @media screen and (max-width: 992px) {
   .admin.hamburger-icon {
@@ -157,6 +152,7 @@
     transition: 0.3s ease-in-out;
     /* z-index: 100; */
   }
+  
 
   .sidebar p span {
     font-size: 22px;

@@ -7,22 +7,22 @@ export default function AdminWelcomeScreen() {
 
   return (
     <div className="onboarding-screen welcome-screen admin">
-    
+
       <div className="d-flex flex-column justify-content-space-between  align-items-center welcome-screen-content py-5">
-        
-          <img src={profile} alt="" />
-      
+
+        <img src={profile} alt="" />
+
         <h1 className="my-2">LIPW Management System</h1>
         <p className="mt-5">Hello Admin, Kindly select an action below</p>
         <div className="d-flex flex-column welcome-screen-button mt-5">
-          {/* <button
+          <button
             onClick={() => {
               navigate("/admin-create-account");
             }}
             className="btn create-account "
           >
             Create Account
-          </button> */}
+          </button>
           <button
             onClick={() => {
               navigate("/admin-login");

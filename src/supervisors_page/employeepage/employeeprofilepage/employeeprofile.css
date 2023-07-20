@@ -117,6 +117,15 @@ color: #ffffff;
   .reusable-info-list p.h6 {
     font-size: 16px;
   }
+  .profile-info-summary h4 , .profile-info-summary p{
+   white-space: normal;
+  
+  }
+  
+  .btn.request-edit, .btn.delete-user {
+    width: 215px;
+    font-size: 18px;
+  }
 
 }
 @media only screen and (max-width: 576px) {
@@ -134,6 +143,7 @@ color: #ffffff;
 }
   .profile-info-summary {
     flex-direction: column;
+    align-items: flex-start !important;
   }
 
 
@@ -144,6 +154,10 @@ color: #ffffff;
   .reusable-info-list p span, .profile-info-summary .work-info p span {
     font-size: 12px;
   }
+  .btn.request-edit, .btn.delete-user {
+    width: 180px;
+    font-size: 14px;
+}
 }
 
 @media only screen and (max-width: 376px) {
@@ -167,7 +181,9 @@ color: #ffffff;
   .reusable-info-list p.h6 {
     margin-bottom: 0;
 }
-.back-to-previous{
+
+.back-to-previous {
+  margin: 3rem 0 10px 0 !important;
   font-size: 16px;
 }
 .arrowback-icon {
@@ -178,5 +194,20 @@ color: #ffffff;
 }
 
 @media only screen and (max-width: 320px) {
+  .btn.request-edit, .btn.delete-user {
+    /* width: 457px; */
+    font-size: 12px;
+    margin-top: 10px !important;
+}
+.benefiacy-profile-btn{
+  flex-direction: column;
+  align-items: center;
+}
+.benefiacy-profile-btn .btn.delete-user{
+  margin: 5px 0 !important;
   
+}
+.btn.request-edit, .btn.delete-user {
+  width: 150px;
+}
 }

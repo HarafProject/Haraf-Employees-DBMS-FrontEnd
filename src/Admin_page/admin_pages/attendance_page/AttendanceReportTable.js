@@ -93,7 +93,7 @@ export default function AttendanceReportTable({ onRowClick }) {
         ]);
 
         const allZonesCount = tableDataResponse.length;
-
+        console.log(allZonesCount)
         const zoneData = zoneResponse.map((zone) => {
           const count = tableDataResponse.reduce((acc, item) => {
             return acc + (item.zone.name === zone.name ? 1 : 0);
@@ -108,7 +108,7 @@ export default function AttendanceReportTable({ onRowClick }) {
 
         setZone([{ tab: 'allZones', label: 'All Zones', count: allZonesCount, id: '' }, ...zoneData]);
 
-     
+
 
       } catch (error) {
         console.log(error);

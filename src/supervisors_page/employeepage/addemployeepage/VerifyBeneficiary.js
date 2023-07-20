@@ -139,7 +139,7 @@ export default function VerifyBeneficiary() {
                             />
                         </div>
 
-                        <div>
+                        <div className='select-field'>
                             <select
                                 name="bankcode"
                                 value={inputValues?.bankcode}
@@ -161,9 +161,10 @@ export default function VerifyBeneficiary() {
                             </select>
                         </div>
                     </div>
+                    
                 </div>
 
-                {isLoading && <button className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                {isLoading && <button className="btn verify-btn save-employee"><RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" /></button>}
 
 
                 {(!isLoading && !isVerified) && <button onClick={verifyBeneficiaryInfo}>Verify</button>}

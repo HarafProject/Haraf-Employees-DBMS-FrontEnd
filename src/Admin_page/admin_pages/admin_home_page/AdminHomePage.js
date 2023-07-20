@@ -14,7 +14,7 @@ import ManageAdmins from "../manage_supervisor_page/ManageAdmins";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
-  const [selectedComponent, setSelectedComponent] = useState("");
+  const [selectedComponent, setSelectedComponent] = useState("employee");
   // const [selectedComponent, setSelectedComponent] = useState("employee");
   const [clicked, setClicked] = useState(false);
 
@@ -138,8 +138,8 @@ export default function AdminHomePage() {
                 <div><RequestFromSupervisor /> </div>
               )}
               {selectedComponent === "manage" && <ManageSupervisor />}
-              {(selectedComponent === "profile" && user?.role === "admin") && <SuperAdminProfile />}
-              {(selectedComponent === "profile" && user?.role === "super-admin") && <ManageAdmins />}
+              {selectedComponent === "profile" && <SuperAdminProfile />}
+              {/* {(selectedComponent === "profile" && user?.role === "super-admin") && <ManageAdmins />} */}
               {/* {selectedComponent === 'logout' && <div>Loan </div>} */}
             </div>
           </div>
