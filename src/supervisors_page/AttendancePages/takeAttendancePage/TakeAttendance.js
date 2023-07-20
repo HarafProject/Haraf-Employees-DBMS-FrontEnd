@@ -26,8 +26,6 @@ export default function TakeAttendance() {
 
     if (!attendance.date) navigate('/supervisor/wards')
     setAttendanceData(attendance)
-    console.log(attendanceData);
-    console.log(attendanceData.attendanceWards);
   }, [attendance])
 
 
@@ -61,33 +59,6 @@ export default function TakeAttendance() {
     setShowModal(false); // Hide modal
   }
 
-
-
-
-
-
-  // function handleSubmit() {
-
-  //   if (offline) {
-
-  //     if (attendance.saved) return alert("Attendance Saved")
-  //     if (!window.confirm("Are you sure you want to save report. Once saved attendance cannot be editied.")) return
-  //     dispatch(updateAttendance({ ...attendance, saved: true }));
-  //     alert("Attendance Saved Successfully.")
-
-  //   } else {
-  //     navigate('/supervisor/attendance-report')
-  //   }
-
-  // }
-
-
-  // function handleDiscard() {
-  //   if (!window.confirm("Are you sure you want to discard this report?")) return
-  //   dispatch(updateAttendance({}))
-  //   dispatch(attendanceWards([]))
-  //   navigate("/supervisor/wards", { replace: true })
-  // }
 
   return (
     <div>

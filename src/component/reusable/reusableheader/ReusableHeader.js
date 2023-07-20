@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import logo from '../../../assets/logo.png';
 import './header.css';
@@ -10,6 +10,7 @@ import { attendanceWards, updateAttendance } from "../../../redux/reducers/atten
 import { updateEmployees, updateWards } from "../../../redux/reducers/employeeReducer";
 
 const ReusableHeader = () => {
+  const navigate = useNavigate()
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -18,13 +19,16 @@ const ReusableHeader = () => {
   const { offline } = useSelector((state) => state?.user)
 
   const closeMobileMenu = () => setClicked(false);
+
   function logout(params) {
+    if(!window.confirm("This action will removed all un-sent reports and data. Do you still want to log out?")) return
     dispatch(logoutSuccess())
     dispatch(clearToken())
     dispatch(updateAttendance({}))
     dispatch(updateEmployees([]))
     dispatch(updateWards([]))
     dispatch(attendanceWards([]))
+    navigate("/", {replace:true})
 
   }
 
@@ -45,7 +49,7 @@ const ReusableHeader = () => {
           <li> <NavLink to='/supervisor/notification' onClick={closeMobileMenu}>Notifications</NavLink> </li>
           <li> <NavLink to='/supervisor/report-history' onClick={closeMobileMenu}>Report History</NavLink> </li>          
           <li>
-            {offline ? <p>Offline</p> : <NavLink to='/' onClick={logout}>Logout</NavLink>
+            {offline ? <p>Offline</p> : <div onClick={logout}>Logout</div>
             }
           </li>
         </ul>

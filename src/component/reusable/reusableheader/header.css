@@ -39,12 +39,28 @@
   font-family: "LexendFontReqular", sans-serif;
 }
 
+.header-menu li div{
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+  color: #0173BC;
+  margin: 0 8px;
+  width: 80%;
+  font-family: "LexendFontReqular", sans-serif;
+}
+
 .header-menu li a:hover,
 .header-menu li a.active {
   color: #f99c39;
   font-size: 16px;
 }
 
+.header-menu li div:hover,
+.header-menu li div.active {
+  color: #f99c39;
+  font-size: 16px;
+}
 .hamburger-icon {
   display: none;
   z-index: 999;

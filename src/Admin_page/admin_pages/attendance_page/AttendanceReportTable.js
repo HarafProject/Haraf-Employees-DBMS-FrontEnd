@@ -29,6 +29,7 @@ const fetchAttendanceList = async (key) => {
     toast.error(error?.error);
   }
 };
+
 export default function AttendanceReportTable({ onRowClick }) {
 
   const [activeTab, setActiveTab] = useState("allZones");
@@ -47,7 +48,7 @@ export default function AttendanceReportTable({ onRowClick }) {
   useEffect(() => {
     if (!data) return
     setTableData(data)
-    console.log(data)
+ 
 
   }, [data])
   const handleTabChange = (tabName) => {
@@ -77,7 +78,7 @@ export default function AttendanceReportTable({ onRowClick }) {
     } else if (!isPM && adjustedHour === 12) {
       adjustedHour = 0;
     }
-    console.log(adjustedHour >= 16)
+ 
     return adjustedHour >= 16; // 16 represents 4:00 PM
   };
   // Sample array of objects

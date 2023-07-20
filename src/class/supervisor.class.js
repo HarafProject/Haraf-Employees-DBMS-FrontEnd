@@ -245,7 +245,22 @@ class supervisorOBJ {
 
     }
   };
+  getAttendanceReport = async () => {
+    try {
 
+      const response = await api.get("api/supervisor/attendance");
+      return response.data;
+
+    } catch (err) {
+
+      if (err.message === "You are currently offline.") {
+        throw err?.message;
+      } else {
+        throw err?.response?.data;
+      }
+
+    }
+  }
 }
 
 const supervisor = new supervisorOBJ();
