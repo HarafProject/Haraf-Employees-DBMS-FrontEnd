@@ -9,12 +9,14 @@ import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from 'react-router-dom';
 
 export default function VerifyBeneficiary() {
-    const navigate = useNavigate(); const [bankList, setbankList] = useState([])
+    const navigate = useNavigate(); 
+    const [bankList, setbankList] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const [img, setImg] = useState(null)
     const [isVerified, setIsVerified] = useState(false)
     const [verifiedDetails, setVerifiedDetails] = useState({})
+    
     const [bankDetail, setBankDetails] = useState({
         bankName: "Select Bank",
     })
@@ -38,7 +40,7 @@ export default function VerifyBeneficiary() {
         try {
             const bank_list = await supervisor.getBankList();
 
-            setbankList(bank_list.banks)
+            setbankList(bank_list?.banks)
         } catch (error) {
             if (error === "You are currently offline.") {
                 openModal()
@@ -112,7 +114,7 @@ export default function VerifyBeneficiary() {
                         <div>
                             <input
                                 type='text'
-                                value={inputValues.firstname}
+                                value={inputValues?.firstname}
                                 name='firstname'
                                 placeholder='First Name'
                                 onChange={handleInputChange}
@@ -122,7 +124,7 @@ export default function VerifyBeneficiary() {
                             <input
                                 type='text'
                                 placeholder='Account Number'
-                                value={inputValues.accountNumber}
+                                value={inputValues?.accountNumber}
                                 name='accountNumber'
                                 onChange={handleInputChange}
                             />
@@ -132,7 +134,7 @@ export default function VerifyBeneficiary() {
                         <div>
                             <input
                                 type='text'
-                                value={inputValues.lastname}
+                                value={inputValues?.lastname}
                                 name='lastname'
                                 placeholder='Last Name'
                                 onChange={handleInputChange}

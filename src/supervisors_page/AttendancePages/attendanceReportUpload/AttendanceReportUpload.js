@@ -21,6 +21,7 @@ export default function AttendanceReportUpload() {
   const [lateSubmissionReason, setLateSubmissionReason] = useState("")
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  
   const dispatch = useDispatch();
 
   const openModal = () => { // Modify openModal function
@@ -148,12 +149,12 @@ export default function AttendanceReportUpload() {
               name=""
               id=""
               cols="50"
-              className="message"
+              className="message "
               rows="4"
               textarea
               onChange={(e) => setAttendanceComment(e.target.value)}
             />
-            <p>
+            <p className='my-2'>
               Kindly state any challenge experienced during the process of
               taking attendance today
             </p>
@@ -164,14 +165,14 @@ export default function AttendanceReportUpload() {
               <textarea
                 placeholder="Kindly include reason *"
                 cols="50"
-                className="message red-text"
+                className="message  red-text"
                 rows="4"
                 onChange={(e) => setLateSubmissionReason(e.target.value)}
               />
-              <p className={!isBetweenSubmissionTime ? 'red-text late-submission' : ''}>Please provide a reason for submitting the report after the designated submission time range</p>
+              <p className={!isBetweenSubmissionTime ? 'red-text late-submission my-2' : ''}>Please provide a reason for submitting the report after the designated submission time range</p>
             </center>
           )}
-          <div className="d-flex justify-content-around btns mt-5">
+          <div className="d-flex justify-content-around reportupload-btn mt-5">
             <button
               className="btn btn-back"
               onClick={() => {

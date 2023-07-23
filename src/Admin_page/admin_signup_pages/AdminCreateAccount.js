@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import profile from "../../assets/logo-light.png";
+import profile from "../../assets/logo.png";
 import './adminonboarding.css'
 import { replace, useFormik } from "formik";
 import * as Yup from "yup";
@@ -91,7 +91,7 @@ export default function CreateAdminAccountScreen() {
         .register(data)
         .then((res) => {
           toast.success(res?.data?.message);
-          navigate("/admins/login",{replace:true});
+          navigate("/admins/login", { replace: true });
           setIsLoading(false);
         })
         .catch((err) => {
@@ -116,18 +116,23 @@ export default function CreateAdminAccountScreen() {
     <div className="onboarding-screen admin">
       {/* <div className="login-screen"> */}
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
-        <div className="d-flex flex-column align-items-center signup-screen-logo">
-          <img src={profile} alt="" className="" />
-          <p className="mt-3 title text-center">
+       
+       <div className="text-center">
+        <img src={profile} alt="" className="signin-image" />
+          <p className="mt-2 title">
             LIPW Management System{<br />}(LIPWMS)
           </p>
-        </div>
+       </div>
+          
+        
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">admin SIGNUP</p>
-          <div className="d-flex align-items-start">
-            <div className="mx-3">
-              <div className="form-field my-4">
+          <p className="screen-title text-center mt-5">SUPER-ADMIN SIGNUP</p>
+
+
+          <div className="d-flex form-field-area">
+              <div className="form-area">
+              <div className="form-field mx-3 mt-5">
                 <input
                   autoComplete="new-firstname"
                   type="text"
@@ -138,11 +143,34 @@ export default function CreateAdminAccountScreen() {
                   name="fname"
                   placeholder="FirstName *"
                 />
-                {formik.touched.fname && formik.errors.fname && (
-                  <div className="error">{formik.errors.fname}</div>
-                )}
               </div>
-              <div className="form-field my-4">
+              {formik.touched.fname && formik.errors.fname && (
+                <div className="error">{formik.errors.fname}</div>
+              )}
+            </div>
+            <div className="form-area">
+              <div className="form-field mx-3 mt-5">
+                <input
+                  autoComplete="new-surname"
+                  id="surname"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.surname}
+                  type="text"
+                  name="surname"
+                  placeholder="Surname *"
+                />
+
+              </div>
+              {formik.touched.surname && formik.errors.surname && (
+                <div className="error">{formik.errors.surname}</div>
+              )}
+            </div>
+          </div>
+
+          <div className="d-flex form-field-area">
+              <div className="form-area">
+              <div className="form-field mx-3 mt-5">
                 <input
                   autoComplete="new-phone"
                   type="tel"
@@ -153,11 +181,37 @@ export default function CreateAdminAccountScreen() {
                   value={formik.values.phone}
                   placeholder="Phone Number *"
                 />
-                {formik.touched.phone && formik.errors.phone && (
-                  <div className="error">{formik.errors.phone}</div>
-                )}
+
               </div>
-              <div className="form-field my-4">
+              {formik.touched.phone && formik.errors.phone && (
+                <div className="error">{formik.errors.phone}</div>
+              )}
+            </div>
+
+            <div className="form-area">
+              <div className="form-field mx-3 mt-5">
+                <input
+                  autoComplete="new-email"
+                  type="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  id="email"
+                  name="email"
+                  placeholder="Email Address *"
+                />
+
+              </div>
+              {formik.touched.email && formik.errors.email && (
+                <div className="error">{formik.errors.email}</div>
+              )}
+            </div>
+
+          </div>
+
+          <div className="d-flex form-field-area">
+              <div className="form-area">
+              <div className="form-field mx-3 mt-5">
                 <select
                   name="zonalRegion"
                   id="zonalRegion"
@@ -174,11 +228,42 @@ export default function CreateAdminAccountScreen() {
                     </option>
                   ))}
                 </select>
-                {formik.touched.zonalRegion && formik.errors.zonalRegion && (
-                  <div className="error">{formik.errors.zonalRegion}</div>
-                )}
+
               </div>
-              <div className="form-field d-flex align-items-center justify-content-between my-4">
+              {formik.touched.zonalRegion && formik.errors.zonalRegion && (
+                <div className="error">{formik.errors.zonalRegion}</div>
+              )}
+            </div>
+            <div>
+              <div className="form-field mx-3 mt-5">
+                <select
+                  name="lga"
+                  id="lga"
+                  value={formik.values.lga}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                >
+                  <option value="" disabled>
+                    Select an LGA
+                  </option>
+                  {lgas.map((a, i) => (
+                    <option key={i} value={a._id}>
+                      {a.name}
+                    </option>
+                  ))}
+                </select>
+
+              </div>
+              {formik.touched.lga && formik.errors.lga && (
+                <div className="error">{formik.errors.lga}</div>
+              )}
+            </div>
+
+          </div>
+
+          <div className="d-flex form-field-area">
+              <div className="form-area">
+              <div className="form-field d-flex align-items-center justify-content-between mx-3 mt-5">
                 <input
                   autoComplete="new-password"
                   className=""
@@ -197,65 +282,9 @@ export default function CreateAdminAccountScreen() {
               {formik.touched.password && formik.errors.password && (
                 <div className="error">{formik.errors.password}</div>
               )}
-              <span className="">
-                Must be at least 8 characters {<br />}
-                Must have at least one special character {<br />}
-                Must have at least one number and alphabet
-              </span>
             </div>
-            <div className="mx-3">
-              <div className="form-field my-4">
-                <input
-                  autoComplete="new-surname"
-                  id="surname"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.surname}
-                  type="text"
-                  name="surname"
-                  placeholder="Surname *"
-                />
-                {formik.touched.surname && formik.errors.surname && (
-                  <div className="error">{formik.errors.surname}</div>
-                )}
-              </div>
-              <div className="form-field my-4">
-                <input
-                  autoComplete="new-email"
-                  type="email"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                  id="email"
-                  name="email"
-                  placeholder="Email Address *"
-                />
-                {formik.touched.email && formik.errors.email && (
-                  <div className="error">{formik.errors.email}</div>
-                )}
-              </div>
-              <div className="form-field my-4">
-                <select
-                  name="lga"
-                  id="lga"
-                  value={formik.values.lga}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                >
-                  <option value="" disabled>
-                    Select an LGA
-                  </option>
-                  {lgas.map((a, i) => (
-                    <option key={i} value={a._id}>
-                      {a.name}
-                    </option>
-                  ))}
-                </select>
-                {formik.touched.lga && formik.errors.lga && (
-                  <div className="error">{formik.errors.lga}</div>
-                )}
-              </div>
-              <div className="form-field d-flex align-items-center justify-content-between my-4">
+            <div>
+              <div className="form-field d-flex align-items-center justify-content-between mx-3 mt-5">
                 <input
                   autoComplete="new-password"
                   className=""
@@ -275,9 +304,11 @@ export default function CreateAdminAccountScreen() {
                 formik.errors.confirm_password && (
                   <div className="error">{formik.errors.confirm_password}</div>
                 )}
-              <span className="float-end">Both passwords must match</span>
             </div>
           </div>
+
+
+
           <div className="d-flex flex-column login-screen-button mt-3">
             <button
               type="submit"
@@ -286,7 +317,7 @@ export default function CreateAdminAccountScreen() {
               disabled={!formik.isValid || isLoading}
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="25" strokeColor="#FFF" strokeWidth="3" />
               ) : (
                 "Create Account"
               )}
@@ -297,7 +328,7 @@ export default function CreateAdminAccountScreen() {
           Already have an account?{" "}
           <span
             onClick={() => {
-              navigate("/admins/login",{replace:true});
+              navigate("/admins/login", { replace: true });
             }}
           >
             {" "}

@@ -49,7 +49,7 @@ const ReusableHeader = () => {
           <li> <NavLink to='/supervisor/notification' onClick={closeMobileMenu}>Notifications</NavLink> </li>
           <li> <NavLink to='/supervisor/report-history' onClick={closeMobileMenu}>Report History</NavLink> </li>          
           <li>
-            {offline ? <p>Offline</p> : <div onClick={logout}>Logout</div>
+            {offline ? <p className="logout-link">Offline</p> : <div onClick={logout} className="logout-link">Logout</div>
             }
           </li>
         </ul>

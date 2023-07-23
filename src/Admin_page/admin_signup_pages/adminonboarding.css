@@ -49,9 +49,8 @@
   font-size: 14px;
 }
 
-.admin-signup-content .form-field input::placeholder {
+.admin .signup-content .form-field input::placeholder {
   color: #000000;
-  
   font-weight: 200;
   background-color: transparent !important;
 }

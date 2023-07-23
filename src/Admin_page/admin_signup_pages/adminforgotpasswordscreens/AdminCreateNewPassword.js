@@ -104,7 +104,7 @@ export default function AdminCreateNewPassword() {
               disabled={!formik.isValid || isLoading}
             >
               {isLoading ? (
-                <RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" />
               ) : (
                 "Done"
               )}

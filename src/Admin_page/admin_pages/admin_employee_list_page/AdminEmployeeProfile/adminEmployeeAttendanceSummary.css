@@ -1,4 +1,4 @@
-.attendance-grid {
+/* .attendance-grid {
   margin-top: 2rem;
   border: 1px solid #f99c39;
   border-radius: 10px;
@@ -32,15 +32,28 @@
   display: flex;
   align-items: center;
   padding: 4rem;
-  gap: 3rem;
+  justify-content: space-between;
+}
+.attendance-flex{
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.attendance-flex h1 {
+.attendance-flex h5 {
+font-size: 48px;
+font-weight: 400;
+line-height: normal;
+text-align: center;
+
   text-align: center;
 }
 
-.profile-info-summary {
-  flex: 4;
+.dashboard-profile-info .profile-info-summary {
+  flex: 3;
+}
+.admin-employee-data-stats{
+  flex: 2;
 }
 
 h2 {
@@ -48,3 +61,8 @@ h2 {
   text-align: left;
   color: #0280ca;
 }
+.dashboard-profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+} */

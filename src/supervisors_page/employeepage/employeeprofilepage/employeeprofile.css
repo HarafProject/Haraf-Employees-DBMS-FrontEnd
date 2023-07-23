@@ -57,6 +57,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+.dashboard-profile-info .personalinfo-user{
+  
+  grid-template-columns: 1fr 1fr;
+}
 .reusable-info-list p.h6 {
   margin-bottom: 0;
   font-size: 18px;

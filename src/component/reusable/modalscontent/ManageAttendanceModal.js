@@ -10,30 +10,24 @@ export default function ManageAttendanceModal({ closeModal, buttonClick, onYes, 
   const [buttonText, setButtonText] = useState("");
 
   useEffect(() => {
-    if (buttonClick === "discard") {
-      setActionTitle("discard Supervisor");
+    if (buttonClick === "discardreport") {
+      setActionTitle("Discard Report");
       setActionText(
-        `Are you sure you want to discard john as a? This will allow john to have full access to the LIPWDMS portal`
-      );
-      setButtonText("discard");
-    } else if (buttonClick === "discardreport") {
-      setActionTitle("send report Supervisor");
-      setActionText(
-        `Are you sure you want to permanently send report john as a? This will disable john account on the LIPWDMS portal`
+        "Are You Sure you want to Discard this report?"
       );
       setButtonText("send report");
-    } else if (buttonClick === "savereport") {
-      setActionTitle("save report Supervisor");
+    } else if (buttonClick === "discardreport") {
+      setActionTitle("Confirm Report");
       setActionText(
-        `Are you sure you want to permanently save report john as a? This will disable john account on the LIPWDMS portal`
+        "Are you sure you want to submit this report? Once submitted data cannot be reviewed."
       );
-      setButtonText("save report");
+      setButtonText("submit report");
     }
   }, [buttonClick]);
 
   return (
     <div
-      className="modal-screen px-5 py-1 my-3"
+      className="modal-screen px-5 py-1 my-3 discard-report-modal"
       isOpen={true}
       onRequestClose={closeModal}
     >
@@ -49,12 +43,15 @@ export default function ManageAttendanceModal({ closeModal, buttonClick, onYes, 
           <p className="mt-2 text-center no-network">{actionTitle}</p>
           <span className="mt-2 mb-5 text-center">{actionText}</span>
 
-          <button className="btn" onClick={onYes}>
-            Yes
-          </button>
-          <button className="btn" onClick={onNo}>
-            No
-          </button>
+          <div className="d-flex justify-content-around report-btns my-3">
+            <button className="btn modal-button" onClick={closeModal}>
+              Yes
+            </button>
+            <button className="btn modal-button delete-btn" onClick={closeModal}>
+              No
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

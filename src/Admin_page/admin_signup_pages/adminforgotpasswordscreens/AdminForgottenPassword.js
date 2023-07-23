@@ -78,7 +78,7 @@ export default function AdminForgottenPassword() {
               className="btn forgotpassword-btn mt-4 mx-auto"
             >
               {isLoading ? (
-                <RotatingLines width="25" strokeColor="#FFF" strokeWidth="3" />
+                <RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" />
               ) : (
                 "Send OTP"
               )}

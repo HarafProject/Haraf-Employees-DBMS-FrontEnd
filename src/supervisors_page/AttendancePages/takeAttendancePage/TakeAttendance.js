@@ -18,8 +18,8 @@ export default function TakeAttendance() {
   const isSaved = location?.state
   const dispatch = useDispatch();
   const { offline } = useSelector((state) => state?.user);
-  const [showModal, setShowModal] = useState(false); 
-  const [showSnackbar, setShowSnackbar] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function TakeAttendance() {
     setShowModal(false); // Hide modal
   }
 
-  function handleModalNo() {
+  function closeModal() {
     setShowModal(false); // Hide modal
   }
 
@@ -113,7 +113,7 @@ export default function TakeAttendance() {
         <Modal
           isOpen={showModal}
           // onAfterOpen={afterOpenModal}
-          onRequestClose={handleModalNo}
+          onRequestClose={closeModal}
           contentLabel="Example Modal"
           className={{
             base: 'modal-base',
@@ -129,11 +129,11 @@ export default function TakeAttendance() {
           closeTimeoutMS={2000}
         >
 
-<ManageAttendanceModal
-          buttonClick={offline ? 'savereport' : 'discardreport'}
-          onYes={handleModalYes}
-          onNo={handleModalNo}
-        />
+          <ManageAttendanceModal
+            buttonClick={offline ? 'savereport' : 'discardreport'}
+            onYes={handleModalYes}
+            closeModal={closeModal}
+          />
         </Modal>
       )}
 
