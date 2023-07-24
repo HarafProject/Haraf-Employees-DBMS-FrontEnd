@@ -108,7 +108,7 @@
   position: absolute;
   width: 30px;
   height: 30px;
-  top: 715px;
+  top: 675px;
   left: 720px;
   background: #ffffff;
   border: 1px solid rgba(68, 68, 68, 0.16);
@@ -162,12 +162,12 @@
 
 @media screen and (max-width: 800px) {
   .add-employee-content .form-field {
-    width: 250px;
+    width: 300px;
   }
 
   .profile-img .camera {
-    left: 475px;
-    top: 710px;
+    left: 490px;
+    top: 673px
   }
 
   .picture-upload-section p.headshot-title span {
@@ -177,7 +177,7 @@
 
   .picture-upload-section p.headshot-title {
     font-size: 16px;
-    width: 150px;
+    width: 175px;
   }
 }
 
@@ -192,8 +192,8 @@
   }
 
   .profile-img .camera {
-    left: 465px;
-    top: 700px;
+    left: 470px;
+    top: 665px;
   }
 
   .picture-upload-section p.headshot-title {
@@ -220,16 +220,18 @@
   .profile-img .camera {
     width: 20px;
     height: 20px;
-    top: 535px;
-    left: 342px;
+    top: 558px;
+    left: 345px;
   }
-.add-employee-content form .addform div.d-flex.my-4{
-  margin: 1rem 0 !important;
-}
+
+  .add-employee-content form .addform div.d-flex.my-4 {
+    margin: 1rem 0 !important;
+  }
+
   .add-employee-content .form-field {
     width: 260px;
     padding: 5px 10px;
-    
+
   }
 
   .add-employee-content .form-field select,
@@ -252,51 +254,88 @@
   .profile-img .camera {
     left: 330px;
   }
+
+  .add-employee-content .form-field {
+    width: 230px;
+  }
+}
+
+@media screen and (max-width: 522px) {
+  .profile-img .camera {
+    left: 303px;
+    top: 560px;
+  }
+
+  .add-employee-content .form-field {
+    width: 220px;
+  }
 }
 
 @media screen and (max-width: 426px) {
-  .add-employee-content{
+  .add-employee-content {
     margin-top: 0 !important;
   }
+
   .add-employee-content h5 {
     font-size: 20px;
-}
+  }
+
   .profile-img .camera {
     left: 330px;
   }
-  .add-employee-content form .addform div.d-flex.my-4, .add-employee-content .pic {
-    margin: 0 !important;
+
+  .add-employee-content form,
+  .add-employee-content form .last-div {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-}
-.add-employee-content .form-field {
-  width: 270px;
-  margin: 11px 0 !important;
+    align-items: center !important;
+  }
+
+  .add-employee-content .form-field {
+    width: 320px;
+    margin: 11px 0 !important;
+  }
+
+  .profile-img .camera {
+    top: 1008px;
+    left: 120px;
+  }
+
+  .profile-img {
+    width: 75px;
+    height: 75px;
+  }
+
+  .picture-upload-section p.headshot-title {
+    width: auto;
+  }
+
+  .add-employee-content .btn.save-employee {
+    width: 180px;
+    font-size: 16px;
+  }
 }
 
-.profile-img .camera {
-  top: 948px;
-  left: 120px;
-}
-.picture-upload-section p.headshot-title {
-  width: auto;
-}
-.add-employee-content .btn.save-employee {
-  width: 180px;
-  font-size: 16px;
-}
-}
 @media screen and (max-width: 376px) {
   .profile-img .camera {
-    top: 950px;
+
     left: 95px;
-}
+  }
 
 }
+
 @media screen and (max-width: 320px) {
 
-.profile-img .camera {
-  top: 952px;
-  left: 64px;
+  .profile-img .camera {
+    top: 985px;
+    left: 64px;
+  }
+
+  .add-employee-content .form-field {
+    width: 250px;
+  }
+  .profile-img {
+    width: 55px;
+    height: 55px;
 }
 }

@@ -16,12 +16,12 @@ export default function ManageAttendanceModal({ closeModal, buttonClick, onYes, 
         "Are You Sure you want to Discard this report?"
       );
       setButtonText("send report");
-    } else if (buttonClick === "discardreport") {
+    } else if (buttonClick === "savereport") {
       setActionTitle("Confirm Report");
       setActionText(
-        "Are you sure you want to submit this report? Once submitted data cannot be reviewed."
+        "Are you sure you want to save this report? Once saved, data cannot be reviewed or edited."
       );
-      setButtonText("submit report");
+      setButtonText("save report");
     }
   }, [buttonClick]);
 
