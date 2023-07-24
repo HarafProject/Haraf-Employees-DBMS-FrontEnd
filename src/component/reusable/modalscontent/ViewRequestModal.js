@@ -42,7 +42,7 @@ export default function ViewRequestModal({
   }, [activeTabButton]);
 
   return (
-    <div className="modal-screen sendrequest-modal p-4 my-3">
+    <div className="modal-screen sendrequest-modal p-4">
       <div className="">
         <button className="btn close-button" onClick={closeModal}>
           <Icon icon="ic:round-cancel" color="#F99C39" className="close-icon" />
@@ -67,7 +67,7 @@ export default function ViewRequestModal({
               Date: <span>{new Date(modalData?.createdAt).toDateString()}</span>
             </p>
           </div>
-          <div className="d-flex">
+          <div className="d-flex request-btn-section">
             <button
               className="btn modal-button delete-request"
               onClick={declineRequest}

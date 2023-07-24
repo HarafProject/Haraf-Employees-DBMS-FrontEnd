@@ -105,3 +105,88 @@
   border: none;
   font-weight: 700;
 }
+
+.manage-supervisor-page .filter-option-section .form-field {
+  margin: 0 5px 0 0;
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .admin-name span {
+    white-space: nowrap;
+    width: 150px;
+    text-overflow: ellipsis;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .manage-supervisor-filter{
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .manage-supervisor-page h1 {
+    font-size: 20px;
+  }
+  .manage-supervisor-page {
+    margin-top: 10px;
+  }
+  .manage-supervisor-page .filter-option-section  {
+    margin-top: 0 !important;
+  }
+  .manage-supervisor-page .filter-option-section .form-field {
+    margin: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 522px) {
+  .content {
+    padding: 0 15px !important;
+}
+}
+
+@media only screen and (max-width: 426px) {
+  .manage-supervisor-page .filter-option-section div.d-flex  {
+   display: grid !important;
+   grid-template-columns: 1fr 1fr;
+  }
+  .manage-supervisor-page .filter-option-section .search-button, .manage-supervisor-page .filter-option-section .form-field {
+    margin: 0;
+    width: 170px;
+  }
+  .manage-supervisor-page .filter-option-section .form-field select {
+    width: 140px;
+}
+.manage-supervisor-page h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+}
+
+@media only screen and (max-width: 376px) {
+  .manage-supervisor-page .filter-option-section .search-button, .manage-supervisor-page .filter-option-section .form-field {
+ 
+    width: 160px;
+  }
+  .manage-supervisor-page .filter-option-section .form-field select {
+    width: 125px;
+}
+.admin-name span {
+  width: 100px;
+}
+.manage-supervisor-page h1 {
+  font-size: 16px;
+}
+}
+
+@media only screen and (max-width: 320px) {
+  .manage-supervisor-page .filter-option-section .search-button, .manage-supervisor-page .filter-option-section .form-field {
+    width: 130px;
+}
+.manage-supervisor-page .filter-option-section .form-field select {
+  width: 100px;
+}
+}

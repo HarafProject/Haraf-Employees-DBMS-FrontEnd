@@ -5,17 +5,165 @@
   border-bottom: 1px solid black;
 }
 
-.tab-buttons button {
-  display: block;
+.tab-buttons p {
   background-color: transparent;
   outline: none;
   font-size: 20px;
-  padding: 0.5rem 1.5rem;
+  padding: 5px 20px;
   border: none;
   color: #444;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-.tab-buttons button.current {
+.tab-buttons p.current {
   border-bottom: 5px solid #0280ca;
   color: #0280ca;
+}
+
+.request-bg {
+  background: rgba(245, 245, 245, 0.7);
+  font-size: 18px;
+}
+
+.btn-orange {
+  background-color: transparent;
+  color: #f99c39;
+  border: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn-black {
+  color: #000;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+}
+
+.pop-up {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pop-up span {
+  font-size: 20px;
+}
+
+.pop-up-wrapper {
+  padding: 0.5rem 1.5rem;
+  background-color: #0280ca;
+  width: 50%;
+  margin: 0 auto;
+  border: 10px;
+}
+
+.snackbar {
+  width: 50%;
+  color: #fff;
+  background-color: #0280ca;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.snackbar button {
+  border: none;
+  color: #fff;
+  background-color: transparent;
+}
+
+.snackbar-close {
+  font-size: 20px;
+}
+
+.approved h3 {
+  color: #0280ca;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.approved p {
+  color: #000;
+  text-align: center;
+  font-size: 18px;
+}
+
+.request-bg p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+@media screen and (max-width: 1027px) {
+  .tab-buttons p {
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .supervisor-request {
+    margin-top: 10px;
+
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tab-buttons p {
+    font-size: 14px;
+  }
+
+  .content div.mx-3 {
+    margin: 5px !important;
+  }
+
+  .request-bg p {
+    width: 370px;
+  }
+}
+
+@media screen and (max-width: 522px) {
+ .tab-buttons p {
+  width: 170px;
+  text-overflow:ellipsis
+ }
+ .request-bg p {
+  width: 350px;
+
+ }
+ .request-bg {
+  padding: 0 15px !important;
+ }
+}
+
+@media screen and (max-width: 426px) {
+  .request-bg p {
+    width: 200px;
+}
+}
+
+@media screen and (max-width: 376px) {
+  .request-bg {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 10px !important;
+}
+.request-bg p {
+  width: 300px;
+}
+}
+
+@media screen and (max-width: 320px) {
+  .request-bg p {
+    width: 250px;
+}
+.btn-orange{
+  font-size: 14px
+}
 }

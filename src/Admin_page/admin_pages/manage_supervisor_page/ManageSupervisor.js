@@ -216,8 +216,8 @@ export default function ManageSupervisor() {
   return (
     <>
       <div className="manage-supervisor-page">
-        <div className="container manage-supervisor-header">
-          <div className="d-flex align-items-center justify-content-between ">
+        <div className="manage-supervisor-header">
+          <div className="d-flex align-items-center justify-content-between manage-supervisor-filter">
             <h1>Supervisors ({totalCount})</h1>
             {/* <div className="d-flex filter-option-section align-items-center  mx-4">
               <div className="search-button px-2 mx-1">
@@ -251,7 +251,7 @@ export default function ManageSupervisor() {
             </div> */}
 
             {isLoading ? <div className='d-flex align-items-center px-5 py-3'>
-              <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />
+              <RotatingLines width="30" strokeColor="#0173bc" strokeWidth="3" />
               <p style={{ color: "#0173bc" }}>Loading please wait...</p>
             </div> : <AdminAttendanceFilter
               reports={supervisor}

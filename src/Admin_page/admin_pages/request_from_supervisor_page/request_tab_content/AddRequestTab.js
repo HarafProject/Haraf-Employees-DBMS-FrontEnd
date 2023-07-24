@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
 import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
-import "./requestDetail.css";
+
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
 import EmployeeRequest from "../../../../class/admin.requestsFromSupervisor.class";

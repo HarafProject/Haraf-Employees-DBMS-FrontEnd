@@ -19,24 +19,24 @@ export default function RequestFromSupervisor() {
       {isSubmitting && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Processing request! please wait...</p></div>}
       <div className="supervisor-request">
         <div className="tab-buttons">
-          <button
+          <p
             className={activeTab === "delete_request" ? "current" : ""}
             onClick={() => handleTabClick("delete_request")}
           >
             Delete Employee Request
-          </button>
-          <button
+          </p>
+          <p
             className={activeTab === "edit_request" ? "current" : ""}
             onClick={() => handleTabClick("edit_request")}
           >
             Profile Edit Request
-          </button>
-          <button
+          </p>
+          <p
             className={activeTab === "add_request" ? "current" : ""}
             onClick={() => handleTabClick("add_request")}
           >
             Add Employee Request
-          </button>
+          </p>
         </div>
         {activeTab === "delete_request" && (
           <DeleteRequestTab
