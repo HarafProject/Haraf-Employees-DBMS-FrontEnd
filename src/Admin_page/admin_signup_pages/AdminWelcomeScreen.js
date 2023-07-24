@@ -22,7 +22,7 @@ export default function AdminWelcomeScreen() {
           setOpen(true)
         }
       } catch (error) {
- 
+
         navigate(-1, { replace: true })
       }
 

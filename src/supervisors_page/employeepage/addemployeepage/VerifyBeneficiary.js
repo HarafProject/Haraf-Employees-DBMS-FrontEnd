@@ -9,7 +9,7 @@ import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from 'react-router-dom';
 
 export default function VerifyBeneficiary() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const [bankList, setbankList] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
