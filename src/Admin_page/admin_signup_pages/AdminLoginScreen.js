@@ -35,8 +35,8 @@ export default function AdminLoginScreen() {
       // Handle form submission
       setIsLoading(true);
       const data = {
-        email:values.email,
-        password:values.password,
+        email: values.email,
+        password: values.password,
       };
 
       admin
@@ -67,33 +67,37 @@ export default function AdminLoginScreen() {
   return (
     <div className="onboarding-screen login-screen admin">
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-4">
-      
-          <img src={profile} alt="" />
-          <p className="my-1 text-center title">LIPW Management System{<br />} (LIPWMS)</p>
-   
+
+        <img src={profile} alt="" />
+        <p className="my-1 text-center title">LIPW Management System{<br />} (LIPWMS)</p>
+
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">Admin LOGIN</p>
+          <p className="screen-title text-center mt-3">Admin LOGIN</p>
 
-          <div>
-            <div className="form-field my-4">
-              <input
-                autoComplete="new-email"
-                type="email"
-                name="email"
-                placeholder="Email Address *"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.email && formik.errors.email && (
+          <div className="mt-3">
+            <div className="form-area">
+              <div className="form-field ">
+                <input
+                  autoComplete="new-email"
+                  type="email"
+                  name="email"
+                  placeholder="Email Address *"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+
+              </div>{formik.touched.email && formik.errors.email && (
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
-            <div className="form-field d-flex align-items-center justify-content-between my-4">
+
+<div className="form-area">
+  <div className="form-field d-flex align-items-center justify-content-between mt-4">
               <input
                 autoComplete="new-password"
-                className=""
+
                 placeholder="Password *"
                 type={passwordType ? "password" : "text"}
                 name="password"
@@ -108,6 +112,8 @@ export default function AdminLoginScreen() {
             {formik.touched.password && formik.errors.password && (
               <div className="error">{formik.errors.password}</div>
             )}
+</div>
+            
           </div>
 
           <div className="d-flex flex-column login-screen-button mt-3">

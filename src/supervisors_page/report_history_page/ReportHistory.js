@@ -34,7 +34,7 @@ export default function ReportHistory() {
     const { data, status } = useQuery(['fetchAttendanceReports', user?.lga], fetchAttendanceReports)
     const [wardData, setWards] = useState([])
     const [reports, setReports] = useState([])
-    const { wards } = useSelector((state) => state?.attendance)
+    const { wards, attendance } = useSelector((state) => state?.attendance)
 
     useEffect(() => {
         if (!data) return
@@ -42,7 +42,21 @@ export default function ReportHistory() {
         setWards(uniqueWards)
         setReports(data.attendanceData.data)
     }, [data])
-    
+
+    useEffect(() => {
+
+        // Create a Set to store unique lga names
+        const uniqueLgaNamesSet = new Set();
+
+        // Map through the array and add lga names to the Set
+        attendance.data.forEach((obj) => {
+            uniqueLgaNamesSet.add(obj.ward.name);
+        });
+
+        // Convert the Set back to an array to get the unique lga names
+        const uniqueLgaNamesArray = Array.from(uniqueLgaNamesSet);
+        console.log(uniqueLgaNamesArray)
+    }, [attendance])
 
 
     return (
@@ -54,6 +68,17 @@ export default function ReportHistory() {
                 {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
                 <div className="history-list mt-3">
 
+                    {
+                        wardData?.length === 0 &&
+                        <div className='d-flex align-items-center justify-content-between'>
+                            {/* <p>{wardData?.map(ward => <><span key={ward._id}>{ward.name},</span> {ward.lga.name}</>)}_{new Date().toDateString()} (
+                                {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                                )
+                                <span> {user.firstname} {user.surname}</span>
+                            </p> */}
+                            <button className={`btn history-btn pending`} onClick={() => navigate("/supervisor/attendance")}>Pending</button>
+                        </div>
+                    }
                     {wardData?.length > 0 &&
                         <div className='d-flex align-items-center justify-content-between'>
                             <p>{wardData?.map(ward => <><span key={ward._id}>{ward.name},</span> {ward.lga.name}</>)}_{new Date().toDateString()} (

@@ -35,6 +35,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const [isOnline, setIsOnline] = useState(navigator.onLine);
+
     const verificationInfo = location?.state
 
     function openModal() {
@@ -105,6 +106,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
             bankName: verificationInfo.bankName,
             BVN: verificationInfo.bvn
         })
+        setImageData(verificationInfo.photo ? `data:image/jpeg;base64,${verificationInfo.photo}` : null)
         setIsVerified(true)
 
     }, [location])
@@ -171,13 +173,16 @@ export default function AddEmployeeScreen({ prefilledData }) {
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            if (!imageData) return toast.error("Headshot is required.")
+            // if (!imageData) return toast.error("Headshot is required.")
             try {
                 // Handle form submission here
                 // Create a FormData object to send the image file
                 setIsLoading(true)
                 const formData = new FormData();
-                formData.append('image', dataURLtoFile(imageData, 'image.png'));
+                if (imageData) {
+                    formData.append('image', dataURLtoFile(imageData, 'image.png'));
+                }
+
                 // Append form fields to formData
                 Object.keys(values).forEach((field) => {
 
@@ -195,6 +200,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                 navigate("/supervisor/employee-list", { replace: true, state: { display: true } })
 
             } catch (error) {
+                console.log(error)
                 setIsLoading(false)
                 if (error === "You are currently offline.") {
                     setIsOnline(false)

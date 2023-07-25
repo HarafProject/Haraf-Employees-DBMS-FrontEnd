@@ -18,8 +18,8 @@ export default function TakeAttendance() {
   const isSaved = location?.state
   const dispatch = useDispatch();
   const { offline } = useSelector((state) => state?.user);
-  const [showModal, setShowModal] = useState(false); 
-  const [showSnackbar, setShowSnackbar] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
 
   useEffect(() => {
@@ -33,6 +33,8 @@ export default function TakeAttendance() {
     if (offline) {
       if (attendance.saved) {
         setShowSnackbar(true); // Show snackbar
+        setShowModal(true)
+    
       } else {
         setShowModal(true); // Show modal
       }
@@ -49,13 +51,14 @@ export default function TakeAttendance() {
     if (offline) {
       dispatch(updateAttendance({ ...attendance, saved: true }));
       setShowSnackbar(true); // Show snackbar
+      navigate('/supervisor/report-history');
     } else {
-      navigate('/supervisor/attendance-report');
+      navigate('/supervisor/report-history');
     }
     setShowModal(false); // Hide modal
   }
 
-  function handleModalNo() {
+  function closeModal() {
     setShowModal(false); // Hide modal
   }
 
@@ -94,17 +97,12 @@ export default function TakeAttendance() {
           }
 
           {
-            !offline ? <button
-              className='btn center-button'
-              onClick={handleSubmit}
-            >
-              Send Report
-            </button> : <button
-              className='btn center-button'
-              onClick={handleSubmit}
-            >
-              Save Report
-            </button>
+            !offline ?
+              <button className='btn center-button' onClick={handleSubmit}>
+                Send Report
+              </button> : <button className='btn center-button' onClick={handleSubmit}>
+                Save Report
+              </button>
           }
 
         </div>
@@ -113,7 +111,7 @@ export default function TakeAttendance() {
         <Modal
           isOpen={showModal}
           // onAfterOpen={afterOpenModal}
-          onRequestClose={handleModalNo}
+          onRequestClose={closeModal}
           contentLabel="Example Modal"
           className={{
             base: 'modal-base',
@@ -129,11 +127,11 @@ export default function TakeAttendance() {
           closeTimeoutMS={2000}
         >
 
-<ManageAttendanceModal
-          buttonClick={offline ? 'savereport' : 'discardreport'}
-          onYes={handleModalYes}
-          onNo={handleModalNo}
-        />
+          <ManageAttendanceModal
+            buttonClick={offline ? 'savereport' : 'discardreport'}
+            onYes={handleModalYes}
+            closeModal={closeModal}
+          />
         </Modal>
       )}
 

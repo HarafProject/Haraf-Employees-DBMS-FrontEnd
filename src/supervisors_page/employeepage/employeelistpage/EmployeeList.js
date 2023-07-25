@@ -170,7 +170,7 @@ export default function EmployeeListTable() {
                             !offline &&
                             <button className="floating-button" onClick={() => user.operation === "super" ? navigate("/supervisor/verify-beneficiary") : openModal(() => 'add')}>
                                 <Icon icon="icon-park-outline:add-one" />
-                                <span>Add Employee</span>
+                                <span>Add Beneficiary</span>
                             </button>
                         }
 

@@ -79,6 +79,17 @@
   color: #ffffff;
   outline: none !important;
 }
+.discard-report-modal .btn.modal-button{
+  width: 150px;
+  border-radius: 45px;
+  background: #0173bc;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  outline: none !important;
+  margin: 0 10px;
+}
 .modal-screen .btn.modal-button.delete-btn {
   background-color: #c20a0a;
 }
@@ -227,6 +238,9 @@ margin: 0 10px;
     width: 220px;
     margin-top: 0 !important;
   }
+  .discard-report-modal .btn.modal-button {
+    width: 100px;
+  }
   .modal-screen .approved h3 {
     font-size: 18px;
   }
@@ -267,6 +281,9 @@ margin: 0 10px;
 }
 .request-info {
   gap: 0 10px;
+}
+.report-btns{
+
 }
 }
 @media screen and (max-width: 376px) {
@@ -318,6 +335,9 @@ margin: 0 10px;
 }
 .modal-screen .approved p {
   font-size: 14px;
+}
+.discard-report-modal .btn.modal-button {
+  width: 100px;
 }
 }
 @media screen and (max-width: 320px) {

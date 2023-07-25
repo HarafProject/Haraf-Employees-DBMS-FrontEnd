@@ -159,12 +159,17 @@
   font-weight: 600;
   cursor: pointer;
 }
-
+.form-area{
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
 .text-danger,
 .password-mismatch, .error {
   color: red;
   float: right;
   font-size: 12px;
+  text-align: right;
   margin-top: 10px;
 }
 
@@ -211,7 +216,7 @@
   font-weight: 400;
   line-height: normal;
 }
-  .form-area{
+  .form-field-area{
     flex-direction: column !important;
   }
   .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {

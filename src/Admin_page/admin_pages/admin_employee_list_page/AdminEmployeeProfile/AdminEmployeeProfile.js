@@ -37,61 +37,52 @@ export default function AdminEmployeeProfile() {
 
   return (
     <div className="employee-profile-page">
-      <div className="profile-content my-4 px-5">
-        <div className="back-to-previous my-4">
-          <Icon
-            icon="mdi:arrow-back-circle"
-            onClick={goBack}
-            className="arrowback-icon me-3"
-          />
+      <div className="profile-content my-2 px-5">
+        <div className="back-to-previous mt-2 mb-5">
+          <Icon icon="mdi:arrow-back-circle" onClick={goBack} className="arrowback-icon me-3" />
           Back to list
         </div>
         <div className="dashboard-profile-info">
-          <div className="dashboard-profile-infor-summary">
-            <div className="profile-summary">
-              <div className="profile-img">
-              <img  src={user.photo} alt="" />
+          <div className="d-flex flex-column profile-info-summary">
+            <div className="d-flex ">
+              <div className="profile-img image me-1 pe-1">
+                <img src={user.photo} alt="" />
               </div>
-              
-              <div className="names mx-1">
-                <h4>{user.fullName}</h4>
-                <p>
-                  {user.maritalStatus} | {user.sex}
-                </p>
-                <p>{user.phone}</p>
-              </div>
-              <div className="work-info mx-1">
-                <p>
-                  Work Topology:
-                  <span> {user?.workTypology.name} </span>
-                </p>
-                <p>
-                  Ward: <span>{user?.ward.name}</span>
-                </p>
-                <p>
-                  Age:
-                  <span>{user.age} Years</span>
-                </p>
+              <div className="d-flex">
+                <div className="names mx-4">
+                  <h4>{user.fullName}</h4>
+                  <p> {user.maritalStatus} | {user.sex} </p>
+                  <p>{user.phone}</p>
+                </div>
+                <div className="work-info mx-4">
+                  <p><span> Work Topology:</span> {user?.workTypology.name} </p>
+                  <p> <span>Ward: </span> {user?.ward.name}</p>
+                  <p><span> Age:</span> {user.age} Years
+                  </p>
+                </div>
               </div>
             </div>
+
+            <div className="admin-employee-data-stats mobile">
+            <AdminEmployeeDataSummary
+              beneficiary={user._id}
+            />
+          </div>
+
+
             <div className="my-3">
-              <ReusableInformationList
-                title="Personal Information"
-                information={personalInfo}
-              />
-              <ReusableInformationList
-                title="Bank Information"
-                information={bankInfo}
-              />
-              <ReusableInformationList
-                title="Other Information"
-                information={otherInfo}
-              />
+              <ReusableInformationList title="Personal Information" information={personalInfo} />
+              <ReusableInformationList title="Bank Information" information={bankInfo} />
+              <ReusableInformationList title="Other Information" information={otherInfo} />
             </div>
           </div>
-          <AdminEmployeeDataSummary
-            beneficiary={user._id}
-          />
+
+          <div className="admin-employee-data-stats desktop">
+            <AdminEmployeeDataSummary
+              beneficiary={user._id}
+            />
+          </div>
+
         </div>
       </div>
     </div>

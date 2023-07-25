@@ -42,7 +42,7 @@ export default function LoginScreen() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarType, setSnackbarType] = useState("");
 
-  
+
   const togglePasswordVisiblity = () => {
     setPasswordType(passwordType ? false : true);
     setIcon(!icon);
@@ -95,15 +95,15 @@ export default function LoginScreen() {
           setIsLoading(false);
         })
         .catch((err) => {
-         
+
           toast.error(err?.error || err);
           setIsLoading(false);
           if (!err) {
             let auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
-           
+
             if (auth && !isOnline) {
               openModal()
-            }else{
+            } else {
               toast.error("You appear to be offline.")
             }
           }
@@ -125,47 +125,53 @@ export default function LoginScreen() {
   return (
     <div className="onboarding-screen login-screen">
       <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-4">
-       
-          <img src={profile} alt="" />
-          <p className="my-1 text-center title">LIPW Management System{<br />}(LIPWMS)</p>
-    
+
+        <img src={profile} alt="" />
+        <p className="my-1 text-center title">LIPW Management System{<br />}(LIPWMS)</p>
+
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
           <p className="screen-title text-center mt-5">LOGIN</p>
 
           <div>
-            <div className="form-field my-4">
-              <input
-                autoComplete="new-email"
-                type="email"
-                name="email"
-                placeholder="Email Address *"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-              {formik.touched.email && formik.errors.email && (
+            <div className="form-area">
+              <div className="form-field">
+                <input
+                  autoComplete="new-email"
+                  type="email"
+                  name="email"
+                  placeholder="Email Address *"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                />
+
+              </div>  {formik.touched.email && formik.errors.email && (
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
-            <div className="form-field d-flex align-items-center justify-content-between my-4">
-              <input
-                autoComplete="new-password"
-                className=""
-                placeholder="Password *"
-                type={passwordType ? "password" : "text"}
-                name="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-              <div onClick={togglePasswordVisiblity} className="eye">
-                <Icon icon={icon ? "mdi:eye" : "mdi:eye-off"} />
+
+            <div className="form-area">
+              <div className="form-field d-flex align-items-center justify-content-between mt-4">
+                <input
+                  autoComplete="new-password"
+                  className=""
+                  placeholder="Password *"
+                  type={passwordType ? "password" : "text"}
+                  name="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                <div onClick={togglePasswordVisiblity} className="eye">
+                  <Icon icon={icon ? "mdi:eye" : "mdi:eye-off"} />
+                </div>
               </div>
+              {formik.touched.password && formik.errors.password && (
+                <div className="error">{formik.errors.password}</div>
+              )}
             </div>
-            {formik.touched.password && formik.errors.password && (
-              <div className="error">{formik.errors.password}</div>
-            )}
+
           </div>
 
           <div className="d-flex flex-column align-items-center login-screen-button mt-3">

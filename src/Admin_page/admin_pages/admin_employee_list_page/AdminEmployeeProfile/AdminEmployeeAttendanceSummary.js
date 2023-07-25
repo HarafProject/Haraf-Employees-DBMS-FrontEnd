@@ -23,16 +23,16 @@ export default function AdminEmployeeAttendanceSummary({ beneficiary }) {
 
 
   return (
-    <div>
+    <div className="admin-attendance-summary">
       <h2>Attendance Summary</h2>
       <div className="attendance-grid">
         <div className="attendance-flex ">
           <div>
-            <h1>{data?.data?.total}</h1>
+            <h5>{data?.data?.total}</h5>
             <p>Total Work days</p>
           </div>
           <div>
-            <h1 className="green">{data?.data?.present}</h1>
+            <h5 className="green">{data?.data?.present}</h5>
             <p>Total days present</p>
           </div>
         </div>
@@ -41,12 +41,12 @@ export default function AdminEmployeeAttendanceSummary({ beneficiary }) {
         <div className="border-cross"></div>
         <div className="attendance-flex">
           <div>
-            <h1 className="red">{data?.data?.absent}</h1>
+            <h5 className="red">{data?.data?.absent}</h5>
             <p>Total days absent</p>
           </div>
-          <div>
-            <h1>{Math.floor((data?.data?.present/data?.data?.total)*100)}%</h1>
-            <p>Attendance <br />Performance (%)</p>
+          <div className="">
+            <h5>{Math.floor((data?.data?.present/data?.data?.total)*100)}%</h5>
+            <p>Attendance <br /> Performance (%)</p>
           </div>
         </div>
       </div>

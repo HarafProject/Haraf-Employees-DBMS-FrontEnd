@@ -16,6 +16,7 @@ export default function VerifyBeneficiary() {
     const [img, setImg] = useState(null)
     const [isVerified, setIsVerified] = useState(false)
     const [verifiedDetails, setVerifiedDetails] = useState({})
+    
     const [bankDetail, setBankDetails] = useState({
         bankName: "Select Bank",
     })
@@ -34,12 +35,12 @@ export default function VerifyBeneficiary() {
         bankName: "Select Bank"
 
     })
-
+    
     async function fetchBankList() {
         try {
             const bank_list = await supervisor.getBankList();
 
-            setbankList(bank_list.banks)
+            setbankList(bank_list?.banks)
         } catch (error) {
             if (error === "You are currently offline.") {
                 openModal()
@@ -113,7 +114,7 @@ export default function VerifyBeneficiary() {
                         <div>
                             <input
                                 type='text'
-                                value={inputValues.firstname}
+                                value={inputValues?.firstname}
                                 name='firstname'
                                 placeholder='First Name'
                                 onChange={handleInputChange}
@@ -123,7 +124,7 @@ export default function VerifyBeneficiary() {
                             <input
                                 type='text'
                                 placeholder='Account Number'
-                                value={inputValues.accountNumber}
+                                value={inputValues?.accountNumber}
                                 name='accountNumber'
                                 onChange={handleInputChange}
                             />
@@ -133,7 +134,7 @@ export default function VerifyBeneficiary() {
                         <div>
                             <input
                                 type='text'
-                                value={inputValues.lastname}
+                                value={inputValues?.lastname}
                                 name='lastname'
                                 placeholder='Last Name'
                                 onChange={handleInputChange}

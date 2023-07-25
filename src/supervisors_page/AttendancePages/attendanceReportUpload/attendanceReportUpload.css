@@ -59,7 +59,7 @@
 
 .msg-area {
   /* width: 60%; */
-  margin: 100px auto 20px auto;
+  margin: 80px auto 20px auto;
 }
 
 .msg-area p {
@@ -75,19 +75,19 @@
 }
 
 
-.select-typ-report .btns button {
+.select-typ-report .reportupload-btn .btn{
   width: 250px;
   padding: 10px;
   font-size: 18px;
   font-weight: 500;
   border-radius: 50px;
 }
-.btn-submit {
+.reportupload-btn .btn-submit, .reportupload-btn .btn-submit:hover {
   background-color: #0280ca;
   color: #fff;
 }
 
-.btn-back {
+.reportupload-btn .btn-back, .reportupload-btn .btn-back:hover{
   color: #0280ca;
   background-color: #fff;
   border: 2px solid #0280ca;
@@ -194,9 +194,7 @@
   .summary h1 {
     font-size: 24px;
 }
-.msg-area {
-  margin: 50px auto 20px auto;
-}
+
 .message {
   width: 440px;
   font-size: 12px;
@@ -214,7 +212,10 @@
   font-size: 16px;
 }
 }
-@media only screen and (max-width: 567px) {
+@media only screen and (max-width: 568px) {
+  .select-typ-report .reportupload-btn .btn {
+    width: 200px;
+  }
 }
 @media only screen and (max-width: 426px) {
   .header-report h3 {
@@ -228,6 +229,10 @@ summary h1 {
 }
 .message {
   width: 350px;
+    margin: 10px 0;
+}
+.msg-area {
+  margin: 35px auto 20px auto;
 }
 .msg-area p {
   width: 300px;
@@ -238,6 +243,11 @@ summary h1 {
 .select-typ-report{
   margin-top: 0 !important;
 }
+.select-typ-report .reportupload-btn .btn {
+  width: 170px;
+  font-size: 16px;
+}
+
 }
 @media only screen and (max-width: 376px) {
   .header-report h3 {
@@ -255,11 +265,20 @@ summary h1 {
 }
 .message {
   width: 300px;
+  margin: 0;
 }
 .select-typ-report .btns button {
   width: 140px;
   font-size: 12px;
   padding: 8px;
+}
+.reportupload-btn{
+  flex-direction: column;
+  align-items: center;
+}
+.select-typ-report .reportupload-btn .btn {
+  margin: 10px 0;
+  width: 200px;
 }
 }
 @media only screen and (max-width: 320px) {
@@ -270,10 +289,14 @@ summary h1 {
   font-size: 16px;
 }
 .message {
-  width: 250px;
+  width: 220px;
+  margin: 9px 0;
 }
 .msg-area p {
   width: 250px;
+}
+.msg-area p {
+  margin: 0px !important;
 }
 .select-typ-report .btns button {
   width: 115px;
