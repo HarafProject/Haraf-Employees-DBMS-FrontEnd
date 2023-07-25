@@ -16,7 +16,7 @@
 
 .admin-hamburger-icon {
   display: none;
-  z-index: 999;
+  z-index: 800;
   color: #f99c39;
   font-size: 18px;
 }

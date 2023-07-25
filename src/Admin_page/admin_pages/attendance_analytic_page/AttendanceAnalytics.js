@@ -212,10 +212,10 @@ export default function AttendanceAnalytics() {
       <div>
 
         <AdminEmployeeDataSummary />
-        <div className="d-flex align-items-center justify-content-between mt-5 ">
+        <div className="d-flex align-items-center justify-content-between mt-5 analytic-filter-section">
           <h5>Attendance Overview</h5>
-          {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
-          <div className="d-flex filter-option-section align-items-center">
+          {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="30" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
+          <div className="d-flex filter-option-section align-items-center ">
 
             <div className="form-field mx-1">
               <select name="type" id="" onChange={(e) => {

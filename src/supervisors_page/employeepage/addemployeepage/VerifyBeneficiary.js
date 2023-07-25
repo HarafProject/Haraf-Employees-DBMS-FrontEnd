@@ -16,7 +16,7 @@ export default function VerifyBeneficiary() {
     const [img, setImg] = useState(null)
     const [isVerified, setIsVerified] = useState(false)
     const [verifiedDetails, setVerifiedDetails] = useState({})
-    
+
     const [bankDetail, setBankDetails] = useState({
         bankName: "Select Bank",
     })
@@ -72,7 +72,7 @@ export default function VerifyBeneficiary() {
             if (error.error.message) {
                 return toast.error(error?.error?.message)
             } else {
-               return toast.error("Invalid Input. Please check the input and try again.")
+                return toast.error("Invalid Input. Please check the input and try again.")
             }
 
 
@@ -109,8 +109,8 @@ export default function VerifyBeneficiary() {
                 }
 
 
-                <div className='form-flex'>
-                    <div>
+                <div >
+                    <div className='form-flex'>
                         <div>
                             <input
                                 type='text'
@@ -123,24 +123,24 @@ export default function VerifyBeneficiary() {
                         <div>
                             <input
                                 type='text'
-                                placeholder='Account Number'
-                                value={inputValues?.accountNumber}
-                                name='accountNumber'
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <input
-                                type='text'
                                 value={inputValues?.lastname}
                                 name='lastname'
                                 placeholder='Last Name'
                                 onChange={handleInputChange}
                             />
                         </div>
+                    </div>
+                    <div className='form-flex'>
 
+                        <div>
+                            <input
+                                type='text'
+                                placeholder='Account Number'
+                                value={inputValues?.accountNumber}
+                                name='accountNumber'
+                                onChange={handleInputChange}
+                            />
+                        </div>
                         <div className='select-field'>
                             <select
                                 name="bankcode"
@@ -163,7 +163,7 @@ export default function VerifyBeneficiary() {
                             </select>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 {isLoading && <button className="btn verify-btn save-employee"><RotatingLines width="20" strokeColor="#FFF" strokeWidth="3" /></button>}

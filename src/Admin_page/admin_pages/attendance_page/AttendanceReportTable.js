@@ -146,26 +146,36 @@ export default function AttendanceReportTable({ onRowClick }) {
   return (
     <>
       <div className="dashboard-attendance-table-section my-3">
-        {
-          user?.role === "super-admin" &&
-          <div className="d-flex tab-header my-4">
-            {zone && zone.map((item) => (
-              <div
-                key={item.tab}
-                className={`tab-item ${activeTab === item.tab ? 'active' : ''}`}
-                onClick={() => handleTabChange(item.tab)}
-              >
-                {item.label} ({item.count})
-              </div>
-            ))}
-          </div>
-        }
-        {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
-        <AdminAttendanceFilter
-          allData={data}
-          reports={tableData}
-          setReports={setTableData}
-        />
+        <div className="fixed-header-section">
+          {
+            user?.role === "super-admin" &&
+            <div className="d-flex tab-header my-4">
+              {zone && zone.map((item) => (
+                <div
+                  key={item.tab}
+                  className={`d-flex align-items-center tab-item ${activeTab === item.tab ? 'active' : ''}`}
+                  onClick={() => handleTabChange(item.tab)}
+                >
+                  <div className="desktop-span">
+                    {item.label} ({item.count})
+
+                  </div>
+                  <span className="mobile-span ">({item.count})</span>
+                </div>
+
+
+              ))}
+            </div>
+          }
+          {status === "loading" && <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="30" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div>}
+          <AdminAttendanceFilter
+            className="dashboard-attendance-filter"
+            allData={data}
+            reports={tableData}
+            setReports={setTableData}
+          />
+        </div>
+
 
 
         <div className="attendance-table">
@@ -255,6 +265,7 @@ export default function AttendanceReportTable({ onRowClick }) {
             />
           </TableContainer>
         </div>
+
       </div >
     </>
   );

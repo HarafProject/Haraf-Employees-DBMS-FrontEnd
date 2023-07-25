@@ -116,7 +116,7 @@ export default function AttendanceDetailedPage() {
   return (
     <div className="my-4 px-auto attendance-detailed-page">
       <div className=" container-fluid attendance-detailed-header px-4">
-        <h1 className="mt-2">
+        <h1 className="mt-4">
           <Icon
             icon="mdi:arrow-back-circle"
             onClick={goBack}
@@ -124,8 +124,8 @@ export default function AttendanceDetailedPage() {
           />
           Attendance Detail Page
         </h1>
-        <h2> Attendance detailed page</h2>
-        <div className="d-flex justify-content-between attendance-info">
+        {/* <h2> Attendance detailed page</h2> */}
+        <div className="d-flex justify-content-between attendance-info mt-4">
           <p>
             Supervisor : {<br />}
             <span>{receivedArray?.submittedBy?.firstname} {receivedArray?.submittedBy?.surname}</span>
@@ -144,17 +144,17 @@ export default function AttendanceDetailedPage() {
             Report from: {<br />}
             <span>{receivedArray?.lga?.name}</span>
           </p>
-          <p>
+          <p className="comment">
             Supervisor's Comment: {<br />}
             <span>{receivedArray?.comment}</span>
           </p>
-          {receivedArray?.reason && <p>
+          {receivedArray?.reason && <p className="comment">
             Late Submission reason: {<br />}
             <span>{receivedArray?.reason}</span>
           </p>}
 
         </div>
-        <div className="d-flex align-items-center justify-content-end py-3 mt-3">
+        <div className="d-flex align-items-center justify-content-end py-3 mt-3 filter-attendance">
           <div className="d-flex filter-option-section align-items-center">
             <div className="search-button px-2 mx-2">
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
@@ -178,9 +178,6 @@ export default function AttendanceDetailedPage() {
                 }
               </select>
             </div>
-          </div>
-          <div>
-            <button className="export"></button>
           </div>
         </div>
       </div>
@@ -210,7 +207,7 @@ export default function AttendanceDetailedPage() {
                       src={beneficiary?.employee?.photo}
                     />
                   </TableCell>
-                  <TableCell>{beneficiary?.employee?.fullName}</TableCell>
+                  <TableCell className="beneficiary-name">{beneficiary?.employee?.fullName}</TableCell>
                   <TableCell>
                     <div></div>
                     {beneficiary?.status === "Present" ? (
