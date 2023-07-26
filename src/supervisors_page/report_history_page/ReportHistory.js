@@ -35,6 +35,8 @@ export default function ReportHistory() {
     const [wardData, setWards] = useState([])
     const [reports, setReports] = useState([])
     const { wards, attendance } = useSelector((state) => state?.attendance)
+    const [lga, setLga] = useState("") //This is for offline view
+    const [offlineWard, setOfflineWard] = useState([])
 
     useEffect(() => {
         if (!data) return
@@ -44,7 +46,6 @@ export default function ReportHistory() {
     }, [data])
 
     useEffect(() => {
-
         // Create a Set to store unique lga names
         const uniqueLgaNamesSet = new Set();
 
@@ -55,7 +56,9 @@ export default function ReportHistory() {
 
         // Convert the Set back to an array to get the unique lga names
         const uniqueLgaNamesArray = Array.from(uniqueLgaNamesSet);
-        console.log(uniqueLgaNamesArray)
+        setLga(attendance.data[0].lga.name)
+        setOfflineWard(uniqueLgaNamesArray)
+     
     }, [attendance])
 
 
@@ -71,11 +74,11 @@ export default function ReportHistory() {
                     {
                         wardData?.length === 0 &&
                         <div className='d-flex align-items-center justify-content-between'>
-                            {/* <p>{wardData?.map(ward => <><span key={ward._id}>{ward.name},</span> {ward.lga.name}</>)}_{new Date().toDateString()} (
+                            <p>{offlineWard?.map((ward,i) => <><span key={i}>{ward},</span> {lga}</>)}_{new Date().toDateString()} (
                                 {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
                                 )
                                 <span> {user.firstname} {user.surname}</span>
-                            </p> */}
+                            </p>
                             <button className={`btn history-btn pending`} onClick={() => navigate("/supervisor/attendance")}>Pending</button>
                         </div>
                     }
