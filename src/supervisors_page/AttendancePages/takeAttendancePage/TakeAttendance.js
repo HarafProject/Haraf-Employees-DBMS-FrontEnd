@@ -33,8 +33,11 @@ export default function TakeAttendance() {
     if (offline) {
       if (attendance.saved) {
         setShowSnackbar(true); // Show snackbar
+<<<<<<< HEAD
         setShowModal(true)
     
+=======
+>>>>>>> ab34a73bba30c515397183425b2891ff3b6606ac
       } else {
         setShowModal(true); // Show modal
       }
@@ -97,12 +100,26 @@ export default function TakeAttendance() {
           }
 
           {
+<<<<<<< HEAD
             !offline ?
               <button className='btn center-button' onClick={handleSubmit}>
                 Send Report
               </button> : <button className='btn center-button' onClick={handleSubmit}>
                 Save Report
               </button>
+=======
+            !offline ? <button
+              className='btn center-button'
+              onClick={handleSubmit}
+            >
+              Send Report
+            </button> : <button
+              className='btn center-button'
+              onClick={handleSubmit}
+            >
+              Save Report
+            </button>
+>>>>>>> ab34a73bba30c515397183425b2891ff3b6606ac
           }
 
         </div>

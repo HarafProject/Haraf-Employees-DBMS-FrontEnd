@@ -53,7 +53,7 @@ export default function AdminHomePage() {
       </div>
       <div className={`sidebar ${clicked ? "open" : ""}`}>
 
-        <div className="p-3">
+        <div className="p-3 sidebar-user-info">
           <img src={profile} alt="" />
           <div>
             <span className="name">

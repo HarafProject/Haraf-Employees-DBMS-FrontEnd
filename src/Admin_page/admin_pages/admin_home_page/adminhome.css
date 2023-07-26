@@ -13,7 +13,9 @@
   background: #0280ca;
   z-index: 300;
 }
-
+.sidebar-user-info{
+  overflow: hidden;
+}
 .admin-hamburger-icon {
   display: none;
   z-index: 800;

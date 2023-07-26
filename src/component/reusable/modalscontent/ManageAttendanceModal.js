@@ -19,7 +19,7 @@ export default function ManageAttendanceModal({ closeModal, buttonClick, onYes, 
     } else if (buttonClick === "savereport") {
       setActionTitle("Confirm Report");
       setActionText(
-        "Are you sure you want to save this report? Once saved, data cannot be reviewed or edited."
+        "Are you sure you want to save this report? Once saved, data cannot be reviewed."
       );
       setButtonText("save report");
     }

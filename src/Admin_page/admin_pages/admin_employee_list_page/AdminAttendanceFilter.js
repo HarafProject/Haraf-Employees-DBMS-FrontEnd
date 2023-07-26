@@ -19,6 +19,7 @@ const fetchAttendnaceLocationData = async (key) => {
         return {
             zoneData,
             lgaData,
+            
         }
 
     } catch (error) {
@@ -46,11 +47,12 @@ function AdminAttendanceFilter({ allData, reports, setReports }) {
     }, [data])
 
     useEffect(() => {
+        
         if (user.role === "admin") {
 
             setLgaList(data?.lgaData.filter(item => item.zone._id === user.zone))
         } else {
-            setLgaList(data?.lgaData)
+            setLgaList(data?.lgaData);     
         }
     }, [zoneList])
 

@@ -35,7 +35,6 @@ export default function AddEmployeeScreen({ prefilledData }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const [isOnline, setIsOnline] = useState(navigator.onLine);
-
     const verificationInfo = location?.state
 
     function openModal() {
