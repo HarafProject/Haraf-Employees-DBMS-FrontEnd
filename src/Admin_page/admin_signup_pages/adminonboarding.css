@@ -1,0 +1,81 @@
+.onboarding-screen.admin {
+  background-color: #ffffff;
+}
+
+
+.admin .welcome-screen-content,
+.admin .signup-content{
+  color: #0280ca;
+}
+
+
+.admin .signup-content p.title,
+.admin .welcome-content p {
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+
+.admin .signup-content p.screen-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.admin .btn.login {
+  background-color: #0280ca;
+  color: #fff;
+}
+
+.admin .btn.create-account {
+  border: 1px solid #0280ca;
+  color: #0280ca;
+}
+
+.admin .form-field {
+  border: 1px solid #0280ca;
+}
+.signup-content .form-field.focused {
+  border-color: #0280ca;
+}
+.admin .form-field input {
+  color: #000;
+  font-weight: 500;
+}
+
+.admin .form-field select option , .admin .form-field select{
+  color: #000000;
+  font-size: 14px;
+}
+
+.admin .signup-content .form-field input::placeholder {
+  color: #000000;
+  font-weight: 200;
+  background-color: transparent !important;
+}
+
+
+.admin .form-field select {
+  appearance: none;
+  background-image: url("../../assets/arrow.png");
+  background-repeat: no-repeat;
+  background-position: right 15px;
+  background-size: 1em auto;
+}
+.admin .select-selected.select-arrow-active:after {
+  border-color: transparent transparent #0280ca transparent;
+  top: 7px;
+}
+
+.admin .forgot-password {
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.admin .forgot-password span a, .admin .forgot-password span {
+  color: #0280ca;
+  
+}
+

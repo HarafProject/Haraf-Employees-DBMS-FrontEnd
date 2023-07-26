@@ -1,0 +1,89 @@
+@import url("https://fonts.cdnfonts.com/css/lexend-deca");
+
+@font-face {
+  font-family: "LexendFontLighter";
+  font-weight: 200;
+  src: url("./font/LexendDeca-Thin.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendFontLight";
+  font-weight: 300;
+  src: url("./font/LexendDeca-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendFontReqular";
+  font-weight: 400;
+  src: url("./font/LexendDeca-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendFontMedium";
+  font-weight: 500;
+  src: url("./font/LexendDeca-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendFontSemiBold";
+  font-weight: 600;
+  src: url("./font/LexendDeca-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendFontBold";
+  font-weight: 700;
+  src: url("./font/LexendDeca-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendFontExtraBold";
+  font-weight: 800;
+  src: url("./font/LexendDeca-ExtraBold.ttf") format("truetype");
+}
+
+*,
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+p {
+  margin-bottom: 0;
+  font-family: "LexendFontLight", sans-serif;
+
+}
+
+input::placeholder{
+  font-family: "LexendFontLight", sans-serif;
+
+}
+input,
+select,
+select option {
+  font-family: "LexendFontReqular", sans-serif;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "LexendFontSemiBold", sans-serif;
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+.error {
+  color: rgb(236, 26, 26);
+}
+
+button {
+  font-family: "LexendFontMedium", sans-serif;
+
+}

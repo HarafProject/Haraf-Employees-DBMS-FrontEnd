@@ -1,0 +1,62 @@
+.card {
+  padding: 20px;
+  width: 300px;
+  background-color: rgba(227, 227, 227, 0.4);
+  border: none;
+  margin: 0 10px;
+}
+
+.number {
+  text-align: center;
+  color: #f99c39;
+  font-weight: bolder;
+}
+
+.card p {
+  font-size: 18px;
+  text-align: center;
+  color: #444444;
+  white-space: nowrap;
+}
+@media only screen and (max-width: 800px) {
+
+ .card {
+   padding: 15px 10px;
+   width: auto;
+ }
+ .card p {
+   font-size: 16px;
+ }
+ }
+ @media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 600px) {
+  .number {
+    font-size: 25px;
+}
+.card p {
+  font-size: 12px;
+}
+.card{
+  margin: 0 3px;
+  width: 300px;
+}
+
+}
+@media only screen and (max-width: 567px) {
+}
+@media only screen and (max-width: 426px) {
+}
+@media only screen and (max-width: 376px) {
+  .summary-card{
+    /* flex-direction: column; */
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+  }
+  .card {
+    margin: 3px;
+    width: auto;
+}
+}
+@media only screen and (max-width: 320px) {
+}

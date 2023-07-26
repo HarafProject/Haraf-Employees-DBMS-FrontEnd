@@ -1,0 +1,255 @@
+.margin,
+.attendance-page {
+  margin-top: 4rem;
+}
+
+.supervisors-attendance-table {
+  /* width: 100%; */
+  margin: 0 auto;
+}
+
+
+.attendance-prefilled-info h3 {
+  color: #0280ca;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.attendance-table .css-ati914-MuiTypography-root {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal
+}
+
+.attendance-table .css-e784if-MuiTypography-root {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.attendance-header h4 {
+  font-size: 24px;
+}
+
+.attendance-prefilled-info h4 {}
+
+.attendance-prefilled-info p {
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.attendance-table .css-1wlk0hk-MuiAvatar-root {
+
+  width: 60px;
+  height: 60px;
+}
+
+.center-container {
+  position: fixed;
+  right: 50px;
+  bottom: 30px;
+  padding: 15px 0;
+
+}
+
+.btn.center-button {
+  width: 200px;
+  border: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  background-color: #0280ca;
+  color: #fff;
+  border-radius: 25px;
+  white-space: nowrap;
+  font-weight: 500;
+  margin: 0 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.attendance-table .css-1ex1afd-MuiTableCell-root {
+  font-family: "LexendFontLight", sans-serif;
+  font-size: 14px;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+.table-icon {
+  font-size: 35px;
+  margin: 0 5px;
+}
+
+.checked-box {
+  font-weight: 600;
+  color: #008000;
+}
+
+.checked-red {font-weight: 600;
+  color: #ff0000;
+
+}
+.supervisors-attendance-table h6.MuiTypography-subtitle2 {
+font-weight: 500;
+  white-space: nowrap;
+}
+.supervisors-attendance-table p.MuiTypography-body2{
+  white-space: nowrap;
+}
+.supervisors-attendance-table .css-1ex1afd-MuiTableCell-root {
+  font-family: "LexendFontReqular",sans-serif;
+ 
+  padding: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .attendance-table .css-ati914-MuiTypography-root {
+    font-size: 18px;
+  }
+
+  .attendance-prefilled-info h3 {
+    font-size: 22px;
+  }
+
+  .attendance-prefilled-info h4 {
+    font-size: 20px;
+  }
+  .table-icon {
+    font-size: 30px;
+}
+}
+
+@media only screen and (max-width: 768px) {
+  .attendance-table .css-ati914-MuiTypography-root {
+    font-size: 16px;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .attendance-prefilled-info h3 {
+    font-size: 20px;
+}
+.attendance-prefilled-info h4 {
+  font-size: 18px;
+}
+.attendance-prefilled-info p {
+  font-size: 10px;
+}
+  .attendance-table .css-1wlk0hk-MuiAvatar-root {
+    width: 50px;
+    height: 50px;
+  }
+
+  .attendance-table .css-ati914-MuiTypography-root {
+    font-size: 15px;
+  }
+
+  .attendance-table .css-e784if-MuiTypography-root {
+    font-size: 12px;
+  }
+
+  .table-icon {
+    font-size: 25px;
+  }
+
+  .btn.center-button {
+    width: 150px;;
+    padding: 10px;
+  }
+
+  .attendance-table .css-1ex1afd-MuiTableCell-root {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+
+@media only screen and (max-width: 426px) {
+  .attendance-prefilled-info{
+    padding: 0 20px !important;
+    margin-top: 0 !important;
+  }
+  .attendance-prefilled-info h3 {
+    font-size: 16px;
+}
+.attendance-prefilled-info h4 {
+  font-size: 14px;
+}
+.attendance-prefilled-info p {
+  font-size: 8px;
+  
+}
+.supervisors-attendance-table h6.MuiTypography-subtitle2 {
+    font-size: 14px;
+    width: 100px;
+    text-overflow: ellipsis;
+  }
+  .supervisors-attendance-table p.MuiTypography-body2 {
+    font-size: 12px;
+    width: 100px;
+    text-overflow: ellipsis;
+  }
+  .supervisors-attendance-table .css-1ex1afd-MuiTableCell-root {
+  
+    padding: 10px;
+  }
+
+  .attendance-table .css-1wlk0hk-MuiAvatar-root {
+    width: 40px;
+    height: 40px;
+
+  }
+
+  .attendance-table .css-e784if-MuiTypography-root {
+    font-size: 8px;
+  }
+
+  .table-icon {
+    font-size: 18px;
+  }
+
+  .attendance-table .css-1ex1afd-MuiTableCell-root {
+    font-size: 10px;
+  }
+  .center-container {
+    right: 10px;
+    bottom: 40px;
+  }
+  .attendance-tick{
+    flex-direction: column-reverse;
+  
+  }
+  .btn.center-button {
+    margin: 0 4px;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .attendance-prefilled-info h3 {
+    font-size: 15px;
+}
+.attendance-prefilled-info h4 {
+  font-size: 12px;
+}
+.attendance-table .css-ati914-MuiTypography-root {
+  font-size: 10px;
+}
+.attendance-table .css-1wlk0hk-MuiAvatar-root {
+  width: 35px;
+  height: 35px;
+}
+
+}
+
+@media only screen and (max-width: 320px) {
+  .table-icon {
+    font-size: 16px;
+}
+.attendance-table .css-1ex1afd-MuiTableCell-root {
+  font-size: 8px;
+}
+.btn.center-button {
+  width: 120px;
+  font-size: 14px;
+}
+}

@@ -1,0 +1,131 @@
+.notification h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: normal;
+  color: #009af3ca;
+}
+
+.notification-list {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.notification-card p {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: normal;
+  text-overflow: ellipsis;
+  
+  white-space: nowrap;
+}
+
+.notification-action .btn.notification-btn {
+  width: 170px;
+  padding: 10px 15px;
+  border-radius: 45px;
+  border: 2px solid #f99c39;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  color: #444444;
+  white-space: nowrap;
+}
+
+.notification-action span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  color: #444444;
+  margin: 0 5px;
+  white-space: nowrap;
+}
+
+hr {
+  width: auto;
+  margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+  .notification h1 {
+    font-size: 25px;
+  }
+
+  .notification-card p {
+    font-size: 16px;
+  }
+
+  .notification-action .btn.notification-btn {
+    font-size: 14px;
+    width: 140px;
+    padding: 10px;
+  }
+
+
+}
+
+@media only screen and (max-width: 768px) {
+  .notification{
+    padding: 3rem 1rem !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .notification h1 {
+    font-size: 20px;
+  }
+
+  .notification-card p {
+    font-size: 14px;
+  }
+
+  .notification-action span {
+    font-size: 12px;
+  }
+
+  .notification-action .btn.notification-btn {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .notification-action{
+    flex-direction: column;
+  }
+}
+
+
+@media only screen and (max-width: 426px) {
+  .notification h1 {
+    font-size: 16px;
+    margin-top: 10px !important;
+  }
+  .notification-card p {
+    width: 200px;
+    
+}.notification-action .btn.notification-btn {
+      width: 115px;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+  .notification-card p {
+    width: 160px;
+    font-size: 12px;    
+}
+.notification-action span {
+  font-size: 10px;
+}
+}
+
+@media only screen and (max-width: 320px) {
+  .notification h1 {
+    font-size: 14px;
+  }
+  .notification-action .btn.notification-btn {
+    width: 90px;
+    font-size: 10px;
+  }
+  .notification-card p {
+    width: 140px;
+  }
+}

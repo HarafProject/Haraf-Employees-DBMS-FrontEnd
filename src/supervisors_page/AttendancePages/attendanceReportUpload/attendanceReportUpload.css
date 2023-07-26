@@ -1,0 +1,305 @@
+
+/* Attendance list */
+
+/* End of Attendance List */
+
+/* Attendance Report */
+.summary-grid {
+  display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.summary h1 {
+  color: #f99c39;
+  font-size: 40px;
+}
+.select-typ-report {
+
+}
+
+.select-typ-report h4 {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444444;
+  white-space: nowrap;
+}
+
+.header-report {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.header-report h3 {
+  font-size: 28px;
+  color: #0280ca;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  margin: 2rem 0;
+}
+
+.report p {
+  text-align: center;
+  color: #444444;
+}
+
+.report h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.msg-area {
+  /* width: 60%; */
+  margin: 80px auto 20px auto;
+}
+
+.msg-area p {
+  width: 600px;
+  text-align: center;
+  color: #444444;
+}
+
+.message {
+  width: 600px;
+  padding: 0.5rem;
+  resize: none;
+}
+
+
+.select-typ-report .reportupload-btn .btn{
+  width: 250px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50px;
+}
+.reportupload-btn .btn-submit, .reportupload-btn .btn-submit:hover {
+  background-color: #0280ca;
+  color: #fff;
+}
+
+.reportupload-btn .btn-back, .reportupload-btn .btn-back:hover{
+  color: #0280ca;
+  background-color: #fff;
+  border: 2px solid #0280ca;
+}
+
+/* Modal */
+
+.login-container {
+  width: 50%;
+  margin: 8rem auto;
+  border: 1px solid black;
+  padding: 4rem;
+  border-radius: 15px;
+  border: 1px solid #acacac;
+  box-shadow: 0px 4px 75px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* LOGIN */
+
+.login-heading {
+  color: #444444;
+  text-align: center;
+}
+
+.text-margin {
+  margin: 2rem 0;
+}
+
+.input-form {
+  margin: 2rem 0;
+}
+
+.input-form label {
+  position: relative;
+  z-index: 2;
+  margin-bottom: -1.5rem;
+  margin-left: 0.4rem;
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.input-form input {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: 0.6px solid #7b7b7b;
+  padding: 1rem;
+}
+
+.icon-bg {
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.edit-icon {
+  font-size: 27px;
+}
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  width: 40%;
+  margin: 0 auto;
+  padding: 0.5rem;
+  background-color: #0280ca;
+  border-radius: 30px;
+  color: #fff;
+  border: none;
+}
+.summary .red-text, p.late-submission{
+  color: red;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .summary h1 {
+    font-size: 34px;
+  }
+  .message {
+    width: 585px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .message {
+    width: 550px;
+}
+}
+@media only screen and (max-width: 600px) {
+  .header-report h3 {
+    font-size: 22px;
+  }
+  .header-report p, .summary p, .report p{
+    text-align: center;
+    font-size: 12px;
+  }
+  .report h4 {
+    font-size: 14px;
+  }
+  .summary h1 {
+    font-size: 24px;
+}
+
+.message {
+  width: 440px;
+  font-size: 12px;
+}
+.msg-area p {
+  font-size: 12px;
+  width: 400px;
+
+}
+.select-typ-report .btns button {
+  width: 170px;
+  font-size: 14px;
+}
+.select-typ-report h4 {
+  font-size: 16px;
+}
+}
+@media only screen and (max-width: 568px) {
+  .select-typ-report .reportupload-btn .btn {
+    width: 200px;
+  }
+}
+@media only screen and (max-width: 426px) {
+  .header-report h3 {
+    font-size: 16px;
+}
+.select-typ-report h4 {
+  font-size: 14px;
+}
+summary h1 {
+  font-size: 20px;
+}
+.message {
+  width: 350px;
+    margin: 10px 0;
+}
+.msg-area {
+  margin: 35px auto 20px auto;
+}
+.msg-area p {
+  width: 300px;
+}
+.select-typ-report .btns button {
+  width: 150px;
+}
+.select-typ-report{
+  margin-top: 0 !important;
+}
+.select-typ-report .reportupload-btn .btn {
+  width: 170px;
+  font-size: 16px;
+}
+
+}
+@media only screen and (max-width: 376px) {
+  .header-report h3 {
+    font-size: 14px;
+}
+.header-report p, .summary p, .report p, .msg-area p {
+  
+  font-size: 10px;
+}
+.summary h1 {
+  font-size: 18px;
+}
+.select-typ-report h4 {
+  font-size: 12px;
+}
+.message {
+  width: 300px;
+  margin: 0;
+}
+.select-typ-report .btns button {
+  width: 140px;
+  font-size: 12px;
+  padding: 8px;
+}
+.reportupload-btn{
+  flex-direction: column;
+  align-items: center;
+}
+.select-typ-report .reportupload-btn .btn {
+  margin: 10px 0;
+  width: 200px;
+}
+}
+@media only screen and (max-width: 320px) {
+  .select-typ-report h4 {
+    font-size: 11px;
+}
+.summary h1 {
+  font-size: 16px;
+}
+.message {
+  width: 220px;
+  margin: 9px 0;
+}
+.msg-area p {
+  width: 250px;
+}
+.msg-area p {
+  margin: 0px !important;
+}
+.select-typ-report .btns button {
+  width: 115px;
+  font-size: 10px;
+}
+}

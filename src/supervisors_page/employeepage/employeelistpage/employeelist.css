@@ -1,0 +1,210 @@
+.empty-list-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.empty-list-screen .empty-list-content img {
+  width: 15%;
+}
+
+.empty-list-screen .empty-list-content p {
+  font-size: 24px;
+  font-weight: 750;
+  line-height: normal;
+  color: #444444;
+  margin-top: 5px;
+}
+
+.empty-list-screen .empty-list-content span {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: normal;
+  color: #444444;
+  width: 400px;
+  margin: 10px 0;
+}
+
+.empty-list-screen .empty-list-content .btn.add-employee {
+  width: 300px;
+  text-align: center;
+  padding: 10px;
+  background: #0173bc;
+  border-radius: 45px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  color: #ffffff;
+}
+
+.empty-list-screen .empty-list-content .btn.add-employee .iconify {
+  font-size: 30px;
+}
+
+/*   Table   */
+.employees-table-section a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.employees-table-section .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+  border-radius: 10px 10px 0 0;
+}
+
+.employees-table-section .css-15wwp11-MuiTableHead-root {
+  background-color: #0281ca49;
+}
+
+.employees-table-section .css-1ygcj2i-MuiTableCell-root {
+  font-size: 18px;
+  font-family: "LexendFontReqular", sans-serif;
+  line-height: normal;
+  color: #444444;
+  border-bottom: 0;
+  white-space: nowrap;
+}
+
+.employees-table-section .css-1wlk0hk-MuiAvatar-root {
+  width: 50px;
+  height: 50px;
+}
+
+.employees-table-section .css-1ex1afd-MuiTableCell-root {
+  letter-spacing: 0px;
+  max-width: 100px;
+  border-bottom: 1px solid #00000090;
+font-family: "LexendFontLight", sans-serif;
+  padding: 10px 16px;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* CSS for the floating button */
+.floating-button {
+  position: fixed;
+  bottom: 30px;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0173bc;
+  color: #fff;
+  border-radius: 25px;
+  padding: 10px 20px;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 3px 30px 0px #00000080;
+}
+
+.floating-button span {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+/* .snackbar{
+  position: fixed;
+  width: 300px;
+  display: flex;
+  align-items: center;
+padding: 5px 20px ;
+background: #0173BC;
+color: #ffffff;
+font-size: 16px;
+
+}
+.snackbar .iconify.snackbar-icon{
+  font-size: 24px;
+  color: #ffffff;
+} */
+
+@media only screen and (max-width: 800px) {
+  .employees-table-section .css-1ygcj2i-MuiTableCell-root {
+    font-size: 16px;
+  }
+  .employees-table-section{
+    margin-top: 0 !important;
+  }
+  .floating-button {
+    bottom: 70px;
+    right: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .empty-list-screen .empty-list-content .btn.add-employee {
+    width: 250px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .empty-list-screen .empty-list-content .btn.add-employee {
+    width: 200px;
+    font-size: 18px;
+  }
+.employees-table-section .css-1ygcj2i-MuiTableCell-root {
+    font-size: 14px;
+}
+.employees-table-section .css-1ex1afd-MuiTableCell-root {
+  padding: 10px;
+  font-size: 12px;
+}.employees-table-section .css-1wlk0hk-MuiAvatar-root {
+  width: 40px;
+  height: 40px;
+}
+.floating-button span {
+  font-size: 14px;
+}
+
+.employees-table-section  .css-rqglhn-MuiTable-root {
+
+  width: 70%;
+}
+}
+@media screen and (max-width: 426px) {
+  .empty-list-screen .empty-list-content p {
+    font-size: 18px;
+  }
+.empty-list-screen .empty-list-content span {
+  font-size: 14px;
+  width: 300px;
+}
+.empty-list-screen .empty-list-content .btn.add-employee {
+  width: 150px;
+  font-size: 14px;
+}
+.empty-list-screen .empty-list-content .btn.add-employee .iconify {
+  font-size: 20px;
+}
+.floating-button {
+  right: 25px;
+}
+}
+@media screen and (max-width: 375px) {
+  .floating-button {
+    bottom: 5px;
+    font-size: 10px;
+    padding: 5px 10px;
+}
+ 
+.empty-list-screen .empty-list-content span {
+  font-size: 14px;
+  width: 300px;
+}
+.floating-button {
+  right: 20px;
+}
+
+}
+@media screen and (max-width: 375px){
+.floating-button {
+    bottom: 60px;
+}}

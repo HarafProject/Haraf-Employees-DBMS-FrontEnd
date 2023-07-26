@@ -1,0 +1,146 @@
+h2 {
+  text-align: center;
+  margin: 1.5rem;
+  font-weight: bold;
+  font-size: 24px;
+}
+.admin-profile-section h4 {
+  display: none;
+}
+.admin-profile-page {
+  width: 600px;
+  margin: 8rem auto;
+  border: 1px solid black;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #acacac;
+  box-shadow: 0px 4px 75px 0px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.login-heading {
+  color: #444444;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.text-margin {
+  margin: 2rem 0;
+}
+
+.input-form {
+  margin: 1rem 0;
+}
+
+.input-form label {
+  position: relative;
+  z-index: 2;
+  margin-bottom: -1.5rem;
+  margin-left: 0.4rem;
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.input-form input {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  padding: 1rem;
+}
+
+.border-orange {
+  border: 1px solid #f99c39;
+}
+
+.border-black {
+  border: 1px solid #7b7b7b;
+}
+
+.icon-bg {
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.edit-icon {
+  font-size: 27px;
+}
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin: 1.5rem auto;
+  padding: 0.5rem;
+  background-color: #0280ca;
+  border-radius: 30px;
+  color: #fff;
+  border: none;
+}
+
+input:focus {
+  outline: none;
+  /* Change the color as desired */
+}
+
+.icon-bg {
+  margin-right: 5px;
+}
+
+.profile {
+  position: relative;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.camera-bg {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f99c39;
+  top: 75%;
+  left: 70%;
+
+  padding: 4px 0;
+  width: 20%;
+  border-radius: 50%;
+}
+@media only screen and (max-width: 992px) {
+  /* .admin-dashboard .content h4 .admin-profile-section{
+    display: none !important;
+  } */
+}
+  
+  @media only screen and (max-width: 800px) {
+    .admin-profile-page {
+      width: 65%;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+  }
+  @media only screen and (max-width: 600px) {
+  
+  }
+  @media only screen and (max-width: 567px) {
+  }
+  @media only screen and (max-width: 426px) {
+  }
+  @media only screen and (max-width: 375px) {
+  }
+  @media only screen and (max-width: 320px) {
+  }
+  

@@ -1,0 +1,327 @@
+/* .profile-info-summary {
+  line-height: normal;
+  white-space: nowrap;
+}
+.arrowback-icon {
+  width: 60px;
+  height: 60px;
+  color: #0280ca;
+}
+
+.names h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.back-to-previous {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile-info-summary h4 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #444444;
+  line-height: normal;
+}
+.profile-info-summary p {
+  font-size: 18px;
+  font-weight: 300;
+  color: #000000;
+  margin-top: 10px;
+}
+.profile-info-summary .work-info p {
+  font-size: 13px;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.profile-info-summary .work-info p span {
+  font-size: 15px;
+  font-weight: 300;
+  color: #444444;
+}
+
+.reusable-info-list p.h6 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #444444f0;
+}
+
+.reusable-info-list p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.reusable-info-list p span {
+  font-size: 14px;
+  font-weight: 300;
+  color: #444444;
+}
+
+.btn.request-edit,
+.btn.delete-user {
+  width: 250px;
+  padding: 10px;
+  border-radius: 45px;
+  background: #0173bc;
+  color: #ffffff;
+  background: #0173bc;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.btn.delete-user {
+  background: #d40505;
+  color: #ffffff;
+}
+
+.dashboard-profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0;
+}
+
+.work-info span {
+  font-weight: bold;
+}
+
+.dashboard-profile-infor-summary {
+  width: 50%;
+}
+
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+} */
+
+.attendance-grid {
+  margin-top: 2rem;
+  border: 1px solid #f99c39;
+  border-radius: 10px;
+  box-shadow: 0px 17px 50px 0px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.border-center {
+  width: 100%;
+  border: #f99c39 0.5px solid;
+}
+
+.green {
+  color: #008000;
+}
+
+.red {
+  color: #b40b0b;
+}
+
+.border-cross {
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: #f99c39 0.5px solid;
+}
+
+.attendance-flex {
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+  justify-content: space-between;
+  /* gap: 3rem; */
+}
+
+.attendance-flex {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.attendance-flex h5 {
+  font-size: 48px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+
+  text-align: center;
+}
+
+.dashboard-profile-info .profile-info-summary {
+  flex: 3;
+}
+
+.admin-employee-data-stats {
+  flex: 2;
+}
+
+.admin-employee-data-stats.mobile {
+  display: none;
+}
+
+.admin-attendance-summary h2 {
+  margin: 0;
+  text-align: left;
+  color: #0280ca;
+}
+
+.dashboard-profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.employee-profile-page .work-info p span {
+  white-space: nowrap;
+}
+@media only screen and (max-width: 1027px) {
+  .attendance-flex {
+    padding: 3rem;
+  }
+
+  .profile-info-summary div.d-flex:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-info-summary .names,
+  .profile-info-summary .work-info {
+    margin: 10px 15px 0 0 !important;
+  }
+
+  .profile-info-summary div.d-flex:nth-child(2) {
+    align-items: center;
+
+  }
+  
+}
+
+@media only screen and (max-width: 992px) {}
+
+@media only screen and (max-width: 800px) {
+  .attendance-flex {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    justify-content: space-around;
+    padding: 2rem 0;
+  }
+  .admin-employee-data-stats.desktop{
+    display: none;
+  }
+  .admin-employee-data-stats.admin-employee-data-stats.mobile{
+    display: flex;
+    margin-top: 20px
+  }
+  .attendance-grid {
+    margin-top: 0.5rem;
+  }
+  .profile-info-summary .names,
+  .profile-info-summary .work-info {
+    margin: 10px 80px 0 0 !important;
+  }
+  .attendance-flex h5 {
+    font-size: 40px;
+  }
+  .admin-attendance-summary h2 {
+    font-size: 25px;
+  }
+  .attendance-flex {
+    gap: 3rem;
+    padding: 2rem 2rem;
+  }
+  .employee-profile-page .reusable-info-list p {
+    margin: 10px 0 0 0;
+  }
+  .employee-profile-page .reusable-info-list {
+    margin-top: 14px;
+}
+.profile-content {
+  padding: 2rem !important;
+}
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 600px) {
+  .employee-profile-page .profile-img {
+    width: 120px;
+    height: 120px;
+    /* border: 1px solid; */
+  }
+  .employee-profile-page .profile-info-summary  img {
+    /* max-width: 12%; */
+    width: 120px;
+    height: 120px;
+}
+.admin-attendance-summary h2 {
+  font-size: 20px;
+}
+.attendance-flex h5 {
+  font-size: 34px;
+}
+.attendance-flex {
+  padding: 1rem;
+}
+
+}
+
+@media only screen and (max-width: 567px) {}
+
+@media only screen and (max-width: 426px) {
+  .attendance-flex h5 {
+    font-size: 25px;
+}
+.employee-profile-page .profile-img, .employee-profile-page .profile-info-summary img {
+  /* max-width: 12%; */
+  width: 100px;
+  height: 100px;
+}
+.profile-info-summary .names, .profile-info-summary .work-info {
+  margin: 10px 45px 0 0 !important;
+}
+.dashboard-profile-info .personalinfo-user {
+  gap: 0 36px;
+}
+.employee-profile-page .names h4, .employee-profile-page .names p, .employee-profile-page .work-info p{
+  white-space: nowrap;
+}
+}
+
+@media only screen and (max-width: 376px) {
+  .employee-profile-page .names h4, .employee-profile-page .names p, .employee-profile-page .work-info p {
+    white-space: normal;
+}
+.attendance-flex h5 {
+  font-size: 22px;
+}
+.attendance-flex div p{
+  font-size: 12px;
+}
+.employee-profile-page .back-to-previous {
+  margin: 1rem 0 10px 0 !important;
+}
+.attendance-flex {
+  gap: 2rem;
+}
+}
+
+@media only screen and (max-width: 321px) {
+  .employee-profile-page .profile-img, .employee-profile-page .profile-info-summary img {
+    /* max-width: 12%; */
+    width: 90px;
+    height: 90px;
+}
+.attendance-flex {
+  padding: 1rem 0.5rem;
+}
+.admin-attendance-summary h2 {
+  font-size: 18px;
+}
+.employee-profile-page .profile-info-summary .names, .employee-profile-page .profile-info-summary .work-info {
+  margin: 10px 30px 0 0 !important;
+}
+}

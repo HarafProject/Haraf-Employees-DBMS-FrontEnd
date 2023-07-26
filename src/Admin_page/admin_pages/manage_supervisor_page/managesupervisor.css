@@ -1,0 +1,192 @@
+.manage-supervisor-header {
+  /* position: fixed;
+  background-color: #ffffff;
+  top: 5rem;
+  max-width: 100vw; */
+  /* width: 79%; */
+}
+
+.manage-supervisor-page h1 {
+  font-size: 23px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.manage-supervisor-page .filter-option-section .form-field select {
+  width: 100px;
+}
+
+.manage-supervisor-page .export-file-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100px;
+  padding: 10px;
+  border-radius: 3px;
+  color: #ffffff;
+  background: #0280ca;
+}
+
+.export-file-btn .export-icon {
+  object-fit: contain;
+}
+
+.manage-supervisor-table {
+  margin-top: 2rem;
+}
+
+.manage-supervisor-table .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+  border-radius: 10px 10px 0 0;
+  border: 0.7px solid #c2c2c2cb;
+  background-color: #eeeded;
+}
+
+.manage-supervisor-table .css-1ygcj2i-MuiTableCell-root {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  color: #444444;
+  white-space: nowrap;
+  border-bottom: 1px solid #c2c2c2;
+}
+
+.manage-supervisor-table .css-1ex1afd-MuiTableCell-root {
+  border-bottom: 1px solid #c2c2c2;
+  /* max-width: 100px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.admin-name span {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: normal;
+  color: #444444;
+}
+
+.btn.manage-supervisor-btn {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.btn.manage-supervisor-btn .iconify {
+  font-size: 18px;
+}
+
+.iconify.delete-icon {
+  color: #ff0000;
+}
+
+.iconify.verify-icon {
+  color: #008000;
+}
+
+.snackbar {
+  position: fixed;
+  top: 500px;
+  background-color: #0280ca;
+  color: #ffffff;
+  width: fit-content;
+  padding: 5px 20px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.snackbar-btn,
+.snackbar:focus {
+  color: #ffffff;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-weight: 700;
+}
+
+.manage-supervisor-page .filter-option-section .form-field {
+  margin: 0 5px 0 0;
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .admin-name span {
+    white-space: nowrap;
+    width: 150px;
+    text-overflow: ellipsis;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .manage-supervisor-filter{
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .manage-supervisor-page h1 {
+    font-size: 20px;
+  }
+  .manage-supervisor-page {
+    margin-top: 10px;
+  }
+  .manage-supervisor-page .filter-option-section  {
+    margin-top: 0 !important;
+  }
+  .manage-supervisor-page .filter-option-section .form-field {
+    margin: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 522px) {
+  .content {
+    padding: 0 15px !important;
+}
+}
+
+@media only screen and (max-width: 426px) {
+  .manage-supervisor-page .filter-option-section div.d-flex  {
+   display: grid !important;
+   grid-template-columns: 1fr 1fr;
+  }
+  .manage-supervisor-page .filter-option-section .search-button, .manage-supervisor-page .filter-option-section .form-field {
+    margin: 0;
+    width: 170px;
+  }
+  .manage-supervisor-page .filter-option-section .form-field select {
+    width: 140px;
+}
+.manage-supervisor-page h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+}
+
+@media only screen and (max-width: 376px) {
+  .manage-supervisor-page .filter-option-section .search-button, .manage-supervisor-page .filter-option-section .form-field {
+ 
+    width: 160px;
+  }
+  .manage-supervisor-page .filter-option-section .form-field select {
+    width: 125px;
+}
+.admin-name span {
+  width: 100px;
+}
+.manage-supervisor-page h1 {
+  font-size: 16px;
+}
+}
+
+@media only screen and (max-width: 320px) {
+  .manage-supervisor-page .filter-option-section .search-button, .manage-supervisor-page .filter-option-section .form-field {
+    width: 130px;
+}
+.manage-supervisor-page .filter-option-section .form-field select {
+  width: 100px;
+}
+}

@@ -1,0 +1,237 @@
+.onboarding-screen {
+  background-color: #03293e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  height: fit-content;
+ 
+}
+.welcome-screen,
+.login-screen {
+  height: 100vh;
+}
+.welcome-screen-content {
+  text-align: center;
+}
+
+.welcome-screen-content,
+.signup-content {
+  color: #ffffff;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.welcome-screen-content img {
+  width: 60%;
+}
+
+.signup-content img {
+  width: 30%;
+}
+
+.welcome-screen-content h1 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.signup-content p.title,
+.welcome-screen-content p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.signup-content p.screen-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.welcome-screen-button .btn,
+.signup-content .btn {
+  width: 350px;
+
+  border-radius: 50px;
+  padding: 5px 10px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboarding-screen .btn.login {
+  background-color: #f99c39;
+}
+
+.onboarding-screen .btn.create-account {
+  border: 1px solid #f99c39;
+}
+
+.signup-content .form-field {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  /* justify-content: center; */
+  padding: 5px 20px;
+  border-radius: 50px;
+  border: 1px solid #ffffff;
+  margin: 10px solid;
+}
+.signup-content .form-field.focused {
+  border-color: #ffffff;
+}
+.signup-content .form-field input {
+  /* width: 400px; */
+  padding: 10px 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: normal;
+  color: #ffffff;
+}
+
+.signup-content .form-field select option {
+  color: #000;
+  font-size: 14px;
+}
+
+.signup-content .form-field select {
+  width: 350px;
+  padding: 10px 0;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.signup-content .form-field input::placeholder {
+  color: #ffffff;
+  font-weight: 200;
+  background-color: transparent !important;
+}
+
+.signup-content .form-field input:-internal-autofill-selected {
+  appearance: none !important;
+  background-image: none !important;
+  background-color: -internal-light-dark(transparent, transparent) !important;
+  color: transparent !important;
+}
+
+.signup-content .form-field input:-webkit-autofill,
+.signup-content .form-field input:-webkit-autofill:hover,
+.signup-content .form-field input:-webkit-autofill:focus,
+.signup-content .form-field input:-webkit-autofill:active {
+  -webkit-transition-delay: 9999s;
+  transition-delay: 9999s;
+}
+.signup-content .form-field select {
+  appearance: none;
+  background-image: url("../../assets/arrow.png");
+  background-repeat: no-repeat;
+  background-position: right 15px;
+  background-size: 1em auto;
+}
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+.eye .iconify {
+  font-size: 20px;
+}
+
+.forgot-password {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.forgot-password span a, .forgot-password span {
+  text-decoration: none;
+  color: #FB9129;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.form-area{
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+.text-danger,
+.password-mismatch, .error {
+  color: red;
+  float: right;
+  font-size: 12px;
+  text-align: right;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 1026px) {
+  .onboarding-screen{
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .welcome-screen-content img {
+    width: 45%;
+}
+.signup-content img {
+  width: 25%;
+}
+  .welcome-screen-content h1 {
+    font-size: 25px;
+}
+  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+    width: 250px;
+    margin-top: 15px !important;
+  }
+  .onboarding-screen .btn.login {
+    margin: 10px 0 !important;
+  }
+}
+@media screen and (max-width: 567px) {
+}
+@media screen and (max-width: 426px) {
+  .welcome-screen-content img {
+    width: 30%;
+}
+.welcome-screen-content h1 {
+  font-size: 18px;
+}
+.signup-content p.title, .welcome-screen-content p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+  .form-field-area{
+    flex-direction: column !important;
+  }
+  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+    width: 200px;
+    font-size: 16px;
+      padding: 5px 10px;
+}
+.signup-content p.screen-title {
+  margin-top: 1rem !important;
+}
+}
+@media screen and (max-width: 375px) {
+  .signup-content .form-field {
+    width: 235px;
+    font-size: 14px;
+    padding: 0 10px;
+}
+}

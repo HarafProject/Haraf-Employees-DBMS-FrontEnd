@@ -1,0 +1,182 @@
+.supervisor-account {
+  width: 600px;
+  margin: 8rem auto;
+  border: 1px solid black;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #acacac;
+  box-shadow: 0px 4px 75px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* LOGIN */
+
+.supervisor-account h3 {
+  color: #444444;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.supervisor-account .input-form {
+  margin: 1rem 0;
+}
+
+.supervisor-account .input-form label {
+  position: relative;
+  z-index: 2;
+  margin-left: 0.4rem;
+  font-family: "LexendFontLight", sans-serif;
+  /* background-color: #f8f9fa; */
+}
+
+.supervisor-account .input-form input,
+.supervisor-account .input-form input[type="email"] {
+  display: block;
+  width: 500px;
+  border-radius: 3px;
+  border: 0.6px solid #7b7b7b;
+  padding: 1rem;
+  font-family: "LexendFontMedium", sans-serif;
+  background-color: #fff;
+}
+
+
+.edit-icon {
+  font-size: 35px;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.profile-edit-button,
+.profile-edit-button:hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 225px;
+  padding: 10px;
+  background-color: #0280ca;
+  border-radius: 30px;
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.profile-btn .profile-edit-button {
+  margin: 0 10px
+}
+
+@media only screen and (max-width: 600px) {
+  .supervisor-account {
+    padding: 1rem;
+  }
+
+  .supervisor-account {
+    width: 400px;
+  }
+
+  .supervisor-account .input-form input,
+  .supervisor-account .input-form input[type="email"] {
+    /* display: block; */
+    width: 320px;
+    padding: 15px 10px;
+    font-size: 16px;
+  }
+
+  .supervisor-account .input-form label {
+    font-size: 14px;
+  }
+
+  .supervisor-account h3 {
+    font-size: 20px;
+  }
+
+  .profile-edit-button {
+    width: 200px;
+    padding: 5px;
+  }
+
+  .save-btn {
+    width: 145px;
+  }
+
+  .edit-icon {
+    font-size: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+  }
+
+  .icon-bg {
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .supervisor-account {
+    width: 350px;
+    margin: 4rem auto 0 auto;
+  }
+
+  .supervisor-account h3 {
+    font-size: 16px;
+  }
+
+  .supervisor-account .input-form input,
+  .supervisor-account .input-form input[type="email"] {
+    /* display: block; */
+    width: 270px;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .supervisor-account .input-form label {
+    font-size: 12px;
+    padding: 0 10px !important;
+    margin-bottom: -15px !important;
+  }
+
+  .supervisor-account .input-form {
+    margin: 0;
+  }
+  .save-btn {
+    width: 120px;
+    font-size: 14px;
+}
+}
+
+@media only screen and (max-width: 376px) {
+  .supervisor-account {
+    width: 315px;
+  }
+
+  .profile-edit-button {
+    width: 140px;
+    font-size: 14px;
+  }
+
+  .edit-icon {
+    font-size: 25px;
+  }
+  .profile-edit-button {
+    width: 115px;
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+  .supervisor-account {
+    width: 274px;
+  }
+
+  .supervisor-account .input-form input,
+  .supervisor-account .input-form input[type="email"] {
+    /* display: block; */
+    width: 220px;
+  }
+  .profile-edit-button {
+    width: 90px;
+    font-size: 12px;
+}
+}
