@@ -292,8 +292,7 @@ export default function AnalyticAttendanceReport() {
               {<>
 
                 {attendanceData.map((user, index) => (
-                  <TableRow>
-                    {/* <TableRow onClick={() => navigate("/admins/home/employee-profile", { state: user })}></TableRow> */}
+                  <TableRow style={{cursor:"pointer"}} onClick={() => navigate("/admins/home/employee-profile", { state: user[0]?.employee })}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell> {user[0]?.employee?.fullName} </TableCell>
                     <TableCell> {user[0]?.employee?.sex}</TableCell>

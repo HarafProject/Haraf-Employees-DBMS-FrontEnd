@@ -117,6 +117,7 @@ export default function AdminHomePage() {
             <Icon icon="ant-design:logout-outlined" />
             <span onClick={() => {
               localStorage.clear()
+              sessionStorage.clear()
               navigate("/", { replace: true })
             }}>Log Out</span>
           </p>

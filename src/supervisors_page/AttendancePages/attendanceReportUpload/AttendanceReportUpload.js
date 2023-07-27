@@ -21,7 +21,7 @@ export default function AttendanceReportUpload() {
   const [lateSubmissionReason, setLateSubmissionReason] = useState("")
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  
+
   const dispatch = useDispatch();
 
   const openModal = () => { // Modify openModal function
@@ -69,6 +69,10 @@ export default function AttendanceReportUpload() {
     }
 
     setIsLoading(true)
+
+    // Save the report
+    dispatch(updateAttendance({ ...attendance, saved: true }));
+    // Submit the report
     try {
       const { message } = await supervisor.submitAttendance(data)
       toast.success(message)
@@ -76,10 +80,10 @@ export default function AttendanceReportUpload() {
       dispatch(attendanceWards([]))
       navigate("/supervisor/report-history", { replace: true })
     } catch (error) {
-      console.log(error)
       if (error === "You are currently offline.") {
         openModal()
       } else {
+
         toast.error(error)
         toast.error(error?.error)
       }
@@ -95,7 +99,7 @@ export default function AttendanceReportUpload() {
   const endTime = moment().set('hour', 16).set('minute', 0);
   const isBetweenSubmissionTime = currentTime.isBetween(startTime, endTime);
 
-  
+
 
   return (
     <div>
@@ -121,7 +125,7 @@ export default function AttendanceReportUpload() {
             </div>
             <div className='d-flex flex-column align-items-center summary' >
               <h1 className={!isBetweenSubmissionTime ? 'red-text' : ''}>{submissionTime}</h1>
-              
+
               <p>Submission Time</p>
             </div>
           </div>

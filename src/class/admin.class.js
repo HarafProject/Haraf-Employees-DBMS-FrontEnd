@@ -261,10 +261,10 @@ class adminOBJ {
     }
   };
 
-  getEmployeeSummary = async (employeeId) => {
+  getEmployeeSummary = async (employeeId,type,value) => {
     try {
 
-      const response = await api.get(`api/admin/beneficiary-attendance-summary/${employeeId}`);
+      const response = await api.get(`api/admin/beneficiary-attendance-summary/${employeeId}?type=${type}&value=${value}`);
 
       return response.data;
       //store res data

@@ -44,7 +44,10 @@ export default function TakeAttendance() {
   }
 
   function handleDiscard() {
-    setShowModal(true); // Show modal
+    if (!window.confirm("Are you sure you want to discard this report?")) return
+    dispatch(updateAttendance({}))
+    dispatch(attendanceWards([]))
+    navigate("/supervisor/report-history", { replace: true })
   }
 
   function handleModalYes() {

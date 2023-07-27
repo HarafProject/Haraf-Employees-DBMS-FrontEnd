@@ -46,11 +46,13 @@ export default function ReportHistory() {
     }, [data])
 
     useEffect(() => {
+
+        if (!attendance.date) return
         // Create a Set to store unique lga names
         const uniqueLgaNamesSet = new Set();
 
         // Map through the array and add lga names to the Set
-        attendance.data.forEach((obj) => {
+        attendance?.data?.forEach((obj) => {
             uniqueLgaNamesSet.add(obj.ward.name);
         });
 
@@ -58,7 +60,7 @@ export default function ReportHistory() {
         const uniqueLgaNamesArray = Array.from(uniqueLgaNamesSet);
         setLga(attendance.data[0].lga.name)
         setOfflineWard(uniqueLgaNamesArray)
-     
+
     }, [attendance])
 
 
@@ -72,9 +74,9 @@ export default function ReportHistory() {
                 <div className="history-list mt-3">
 
                     {
-                        wardData?.length === 0 &&
+                        (wardData?.length === 0 && wards.length !== 0) &&
                         <div className='d-flex align-items-center justify-content-between'>
-                            <p>{offlineWard?.map((ward,i) => <><span key={i}>{ward},</span> {lga}</>)}_{new Date().toDateString()} (
+                            <p>{offlineWard?.map((ward, i) => <><span key={i}>{ward},</span> {lga}</>)}_{new Date().toDateString()} (
                                 {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
                                 )
                                 <span> {user.firstname} {user.surname}</span>
@@ -82,7 +84,7 @@ export default function ReportHistory() {
                             <button className={`btn history-btn pending`} onClick={() => navigate("/supervisor/attendance")}>Pending</button>
                         </div>
                     }
-                    {wardData?.length > 0 &&
+                    {(wardData?.length > 0 && wards.length !== 0) &&
                         <div className='d-flex align-items-center justify-content-between'>
                             <p>{wardData?.map(ward => <><span key={ward._id}>{ward.name},</span> {ward.lga.name}</>)}_{new Date().toDateString()} (
                                 {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
