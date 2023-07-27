@@ -34,7 +34,7 @@ export default function AttendanceGraphChart() {
     ]
     const fetchAnalyticsData = async (key, type, value) => {
         if (!type || !value) return
-        console.log(type, value)
+     
         try {
 
             const [analytics, typologyData] = await Promise.all([

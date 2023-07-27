@@ -74,7 +74,7 @@ export default function AttendanceReportUpload() {
       toast.success(message)
       dispatch(updateAttendance({}))
       dispatch(attendanceWards([]))
-      navigate("/supervisor/attendance", { replace: true })
+      navigate("/supervisor/report-history", { replace: true })
     } catch (error) {
       console.log(error)
       if (error === "You are currently offline.") {

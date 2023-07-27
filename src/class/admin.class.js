@@ -145,6 +145,17 @@ class adminOBJ {
       throw err?.response?.data;
     }
   };
+
+    //get all DataCount
+    getAnalyticsReportData = async (type, value,lga) => {
+      try {
+        //check if data is empty
+        const { data } = await api.get(`api/admin/beneficiary-attendance-analytics/report?type=${type}&value=${value}&lga=${lga}`);
+        return data;
+      } catch (err) {
+        throw err?.response?.data;
+      }
+    };
   //get all Get Supervisors
   getAllGetSupervisors = async () => {
     try {

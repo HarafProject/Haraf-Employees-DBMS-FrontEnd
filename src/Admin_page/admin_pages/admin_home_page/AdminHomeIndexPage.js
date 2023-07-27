@@ -6,7 +6,6 @@ const AdminHomeIndexPage = () => {
     const { user } = useSelector((state) => state?.user)
     const navigate = useNavigate()
     useEffect(() => {
-        console.log(user)
         if (!user) navigate(-1, { replace: true })
     }, [user])
 
