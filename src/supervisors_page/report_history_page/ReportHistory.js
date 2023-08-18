@@ -76,7 +76,7 @@ export default function ReportHistory() {
                 <div className="history-list mt-3">
 
                     {
-                        (wardData?.length === 0 && wards.length !== 0) &&
+                        (wardData?.length === 0 && wards.length === 0) &&
                         <div className='d-flex align-items-center justify-content-between'>
                             <p>{offlineWard?.map((ward, i) => <><span key={i}>{ward},</span> {lga}</>)}_{new Date().toDateString()} (
                                 {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
