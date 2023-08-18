@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import dataOBJs from "../../class/data.class";
 import { useNavigate } from "react-router-dom";
 
-
 const fetchAttendanceReports = async (key, lgaId) => {
     if (!lgaId) return
     try {
@@ -59,6 +58,9 @@ export default function ReportHistory() {
         // Convert the Set back to an array to get the unique lga names
         const uniqueLgaNamesArray = Array.from(uniqueLgaNamesSet);
         setLga(attendance.data[0].lga.name)
+        console.log(uniqueLgaNamesArray)
+        console.log(wardData.length)
+        console.log(wards.length)
         setOfflineWard(uniqueLgaNamesArray)
 
     }, [attendance])
@@ -74,12 +76,12 @@ export default function ReportHistory() {
                 <div className="history-list mt-3">
 
                     {
-                        (wardData?.length === 0 && wards.length !== 0) &&
+                        (wardData?.length === 0 && wards.length === 0) &&
                         <div className='d-flex align-items-center justify-content-between'>
                             <p>{offlineWard?.map((ward, i) => <><span key={i}>{ward},</span> {lga}</>)}_{new Date().toDateString()} (
                                 {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
                                 )
-                                <span> {user.firstname} {user.surname}</span>
+                                <span> {user?.firstname} {user?.surname} {console.log(offlineWard)}</span>
                             </p>
                             <button className={`btn history-btn pending`} onClick={() => navigate("/supervisor/attendance")}>Pending</button>
                         </div>
@@ -89,7 +91,7 @@ export default function ReportHistory() {
                             <p>{wardData?.map(ward => <><span key={ward._id}>{ward.name},</span> {ward.lga.name}</>)}_{new Date().toDateString()} (
                                 {new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
                                 )
-                                <span> {user.firstname} {user.surname}</span>
+                                <span> {user?.firstname} {user?.surname}</span>
                             </p>
                             <button className={`btn history-btn pending`} onClick={() => navigate("/supervisor/attendance")}>Pending</button>
                         </div>
@@ -98,7 +100,7 @@ export default function ReportHistory() {
                     <hr />
                     {reports?.map((item, index) => {
                         const uniqueWards = Array.from(
-                            new Map(item.attendanceRecord.map(obj => [obj.ward._id, obj.ward]))
+                            new Map(item?.attendanceRecord?.map(obj => [obj.ward._id, obj.ward]))
                                 .values()
                         );
                         let wards = uniqueWards
@@ -110,7 +112,7 @@ export default function ReportHistory() {
                                         {wards?.map(ward => <span key={ward._id}>{ward.name}</span>)}, {item.lga.name}_{new Date(item.date).toDateString()} (
                                         {new Date(item?.updatedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
                                         )
-                                        <span> {item.submittedBy.firstname} {item.submittedBy.surname}</span>
+                                        <span> {item?.submittedBy?.firstname} {item?.submittedBy?.surname}</span>
                                     </p>
                                     <button className={`btn history-btn sent`}>Submitted</button>
                                 </div>
