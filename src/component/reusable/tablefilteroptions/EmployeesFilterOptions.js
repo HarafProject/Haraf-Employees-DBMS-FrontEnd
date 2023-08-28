@@ -11,7 +11,6 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   const [tempData, setTempData] = useState([]);
   const { user } = useSelector((state) => state?.user);
 
-  
   async function fetchWards() {
     try {
       const ward_list = await dataOBJs.getWardsByLga(user.lga);
@@ -23,15 +22,16 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
 
   async function fetchTypology() {
     const typology_list = await supervisor.getWorkTypology();
+    console.log(typology_list)
 
     setTypologyList(typology_list.workTypology);
     // setWardList(ward_list)
   }
   useEffect(() => {
-    fetchWards()
-    fetchTypology()
-    setTempData(allData)
-  }, [allData])
+    fetchWards();
+    fetchTypology();
+    setTempData(allData);
+  }, [allData]);
 
   function handleFilter(e) {
     if (e.target.name === "workTypology") {
@@ -75,7 +75,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
           </div>
           <div className="form-field topology mt-3 mx-2">
             <select name="workTypology" onChange={(e) => handleFilter(e)}>
-              <option value={""}>Work Typology</option>
+              <option value={""}>Work Topology</option>
               {typologyList?.map((item) => (
                 <option key={item._id} value={item._id}>
                   {item?.name}
