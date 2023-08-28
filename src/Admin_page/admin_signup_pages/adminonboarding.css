@@ -2,12 +2,10 @@
   background-color: #ffffff;
 }
 
-
 .admin .welcome-screen-content,
-.admin .signup-content{
+.admin .signup-content {
   color: #0280ca;
 }
-
 
 .admin .signup-content p.title,
 .admin .welcome-content p {
@@ -16,7 +14,6 @@
   font-weight: 600;
   line-height: normal;
 }
-
 
 .admin .signup-content p.screen-title {
   font-size: 20px;
@@ -44,7 +41,8 @@
   font-weight: 500;
 }
 
-.admin .form-field select option , .admin .form-field select{
+.admin .form-field select option,
+.admin .form-field select {
   color: #000000;
   font-size: 14px;
 }
@@ -54,7 +52,6 @@
   font-weight: 200;
   background-color: transparent !important;
 }
-
 
 .admin .form-field select {
   appearance: none;
@@ -74,8 +71,15 @@
   font-size: 14px;
 }
 
-.admin .forgot-password span a, .admin .forgot-password span {
+.admin .forgot-password span a,
+.admin .forgot-password span {
   color: #0280ca;
-  
+}
+.admin-logo img {
+  width: 100px;
 }
 
+.admin-logo .mrcplogo {
+  margin-left: 1rem;
+  width: 150px;
+}

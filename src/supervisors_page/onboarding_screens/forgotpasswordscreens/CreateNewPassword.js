@@ -10,6 +10,7 @@ import PasswordChangeSuccessModal from "../../../component/reusable/modalsconten
 import auth from "../../../class/auth.class";
 import "react-toastify/dist/ReactToastify.css";
 
+
 export default function CreateNewPassword() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);

@@ -5,7 +5,6 @@
   align-items: center;
   height: auto;
   height: fit-content;
- 
 }
 .welcome-screen,
 .login-screen {
@@ -152,20 +151,22 @@
   text-align: center;
 }
 
-.forgot-password span a, .forgot-password span {
+.forgot-password span a,
+.forgot-password span {
   text-decoration: none;
-  color: #FB9129;
+  color: #fb9129;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 }
-.form-area{
+.form-area {
   display: flex;
   flex-direction: column;
   align-items: baseline;
 }
 .text-danger,
-.password-mismatch, .error {
+.password-mismatch,
+.error {
   color: red;
   float: right;
   font-size: 12px;
@@ -174,27 +175,31 @@
 }
 
 @media screen and (max-width: 1026px) {
-  .onboarding-screen{
+  .onboarding-screen {
     height: 100vh;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+  .signup-content .form-field,
+  .welcome-screen-button .btn,
+  .signup-content .btn {
     width: 300px;
   }
 }
 @media screen and (max-width: 600px) {
   .welcome-screen-content img {
     width: 45%;
-}
-.signup-content img {
-  width: 25%;
-}
+  }
+  .signup-content img {
+    width: 25%;
+  }
   .welcome-screen-content h1 {
     font-size: 25px;
-}
-  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+  }
+  .signup-content .form-field,
+  .welcome-screen-button .btn,
+  .signup-content .btn {
     width: 250px;
     margin-top: 15px !important;
   }
@@ -207,31 +212,54 @@
 @media screen and (max-width: 426px) {
   .welcome-screen-content img {
     width: 30%;
-}
-.welcome-screen-content h1 {
-  font-size: 18px;
-}
-.signup-content p.title, .welcome-screen-content p {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: normal;
-}
-  .form-field-area{
+  }
+  .welcome-screen-content h1 {
+    font-size: 18px;
+  }
+  .signup-content p.title,
+  .welcome-screen-content p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .form-field-area {
     flex-direction: column !important;
   }
-  .signup-content .form-field, .welcome-screen-button .btn, .signup-content .btn {
+  .signup-content .form-field,
+  .welcome-screen-button .btn,
+  .signup-content .btn {
     width: 200px;
     font-size: 16px;
-      padding: 5px 10px;
-}
-.signup-content p.screen-title {
-  margin-top: 1rem !important;
-}
+    padding: 5px 10px;
+  }
+  .signup-content p.screen-title {
+    margin-top: 1rem !important;
+  }
 }
 @media screen and (max-width: 375px) {
   .signup-content .form-field {
     width: 235px;
     font-size: 14px;
     padding: 0 10px;
+  }
 }
+
+.login-screen-logos img {
+  display: block;
+}
+
+.login-screen-logos .haraf {
+  width: 100px;
+}
+
+.login-screen-logos .mcrp {
+  width: 150px;
+}
+
+
+.login-screen-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
 }

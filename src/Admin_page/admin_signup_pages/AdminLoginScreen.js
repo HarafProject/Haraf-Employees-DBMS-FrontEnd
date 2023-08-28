@@ -4,8 +4,10 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import profile from "../../assets/logo.png";
+import mcrpLogo from "../../assets/mcrp_logo.jpeg";
 import "./adminonboarding.css";
 import admin from "../../class/admin.class";
+import mcrp from "../../assets/mcrp_logo.jpeg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -45,7 +47,7 @@ export default function AdminLoginScreen() {
           toast.success(res?.data?.message);
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
-          localStorage.setItem('HARAF-AUTH', res?.data?.token);
+          localStorage.setItem("HARAF-AUTH", res?.data?.token);
           //redirect to admin
           navigate("/admins/home", { replace: true });
           setIsLoading(false);
@@ -67,13 +69,14 @@ export default function AdminLoginScreen() {
   return (
     <div className="onboarding-screen login-screen admin">
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-4">
-
-        <img src={profile} alt="" />
-        <p className="my-1 text-center title">LIPW Management System{<br />} (LIPWMS)</p>
-
+        <div className="admin-logo">
+          <img src={profile} alt="" />
+          <img src={mcrpLogo} alt="" className="mrcplogo" />
+        </div>
+        <h1 className="my-2">MCRP/HARAF</h1>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-3">Admin LOGIN</p>
+          <p className="screen-title text-center mt-3">LOGIN</p>
 
           <div className="mt-3">
             <div className="form-area">
@@ -87,33 +90,31 @@ export default function AdminLoginScreen() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-
-              </div>{formik.touched.email && formik.errors.email && (
+              </div>
+              {formik.touched.email && formik.errors.email && (
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
 
-<div className="form-area">
-  <div className="form-field d-flex align-items-center justify-content-between mt-4">
-              <input
-                autoComplete="new-password"
-
-                placeholder="Password *"
-                type={passwordType ? "password" : "text"}
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <div onClick={togglePasswordVisibility} className="admin-eye">
-                <Icon icon={icon ? "mdi:eye" : "mdi:eye-off"} />
+            <div className="form-area">
+              <div className="form-field d-flex align-items-center justify-content-between mt-4">
+                <input
+                  autoComplete="new-password"
+                  placeholder="Password *"
+                  type={passwordType ? "password" : "text"}
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <div onClick={togglePasswordVisibility} className="admin-eye">
+                  <Icon icon={icon ? "mdi:eye" : "mdi:eye-off"} />
+                </div>
               </div>
+              {formik.touched.password && formik.errors.password && (
+                <div className="error">{formik.errors.password}</div>
+              )}
             </div>
-            {formik.touched.password && formik.errors.password && (
-              <div className="error">{formik.errors.password}</div>
-            )}
-</div>
-            
           </div>
 
           <div className="d-flex flex-column login-screen-button mt-3">

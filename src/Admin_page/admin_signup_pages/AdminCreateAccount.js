@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import profile from "../../assets/logo.png";
-import './adminonboarding.css'
+import mcrpLogo from "../../assets/mcrp_logo.jpeg";
+import "./adminonboarding.css";
 import { replace, useFormik } from "formik";
 import * as Yup from "yup";
 import admin from "../../class/admin.class";
@@ -116,22 +117,20 @@ export default function CreateAdminAccountScreen() {
     <div className="onboarding-screen admin">
       {/* <div className="login-screen"> */}
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
-       
-       <div className="text-center">
-        <img src={profile} alt="" className="signin-image" />
-          <p className="mt-2 title">
-            LIPW Management System{<br />}(LIPWMS)
-          </p>
-       </div>
-          
-        
+        <div className="text-center">
+          <div className="admin-logo">
+            <img src={profile} alt="" />
+            <img src={mcrpLogo} alt="" className="mrcplogo" />
+          </div>
+
+          <h2 className="my-2">MCRP/HARAF</h2>
+        </div>
 
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-5">SUPER-ADMIN SIGNUP</p>
-
+          <p className="screen-title text-center mt-5">SIGNUP</p>
 
           <div className="d-flex form-field-area">
-              <div className="form-area">
+            <div className="form-area">
               <div className="form-field mx-3 mt-5">
                 <input
                   autoComplete="new-firstname"
@@ -160,7 +159,6 @@ export default function CreateAdminAccountScreen() {
                   name="surname"
                   placeholder="Surname *"
                 />
-
               </div>
               {formik.touched.surname && formik.errors.surname && (
                 <div className="error">{formik.errors.surname}</div>
@@ -169,7 +167,7 @@ export default function CreateAdminAccountScreen() {
           </div>
 
           <div className="d-flex form-field-area">
-              <div className="form-area">
+            <div className="form-area">
               <div className="form-field mx-3 mt-5">
                 <input
                   autoComplete="new-phone"
@@ -181,7 +179,6 @@ export default function CreateAdminAccountScreen() {
                   value={formik.values.phone}
                   placeholder="Phone Number *"
                 />
-
               </div>
               {formik.touched.phone && formik.errors.phone && (
                 <div className="error">{formik.errors.phone}</div>
@@ -200,17 +197,15 @@ export default function CreateAdminAccountScreen() {
                   name="email"
                   placeholder="Email Address *"
                 />
-
               </div>
               {formik.touched.email && formik.errors.email && (
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
-
           </div>
 
           <div className="d-flex form-field-area">
-              <div className="form-area">
+            <div className="form-area">
               <div className="form-field mx-3 mt-5">
                 <select
                   name="zonalRegion"
@@ -228,7 +223,6 @@ export default function CreateAdminAccountScreen() {
                     </option>
                   ))}
                 </select>
-
               </div>
               {formik.touched.zonalRegion && formik.errors.zonalRegion && (
                 <div className="error">{formik.errors.zonalRegion}</div>
@@ -252,17 +246,15 @@ export default function CreateAdminAccountScreen() {
                     </option>
                   ))}
                 </select>
-
               </div>
               {formik.touched.lga && formik.errors.lga && (
                 <div className="error">{formik.errors.lga}</div>
               )}
             </div>
-
           </div>
 
           <div className="d-flex form-field-area">
-              <div className="form-area">
+            <div className="form-area">
               <div className="form-field d-flex align-items-center justify-content-between mx-3 mt-5">
                 <input
                   autoComplete="new-password"
@@ -306,8 +298,6 @@ export default function CreateAdminAccountScreen() {
                 )}
             </div>
           </div>
-
-
 
           <div className="d-flex flex-column login-screen-button mt-3">
             <button
