@@ -4,6 +4,14 @@
   z-index: 100;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+
+.header-logo{
+  color: #0173BC;
+  font-size: 28px;
+  text-decoration: none;
+  font-weight: 500;
+
+}
 .header-content ul{
   padding-left: 0;
 }
