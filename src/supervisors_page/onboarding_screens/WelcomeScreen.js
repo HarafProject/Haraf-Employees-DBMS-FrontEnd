@@ -11,7 +11,7 @@ export default function WelcomeScreen() {
 
           <img src={profile} alt="" />
       
-        <h1 className="my-2">LIPW Management System{<br />}(LIPWMS)</h1>
+        <h1 className="my-2">MCRP Management System{<br />}(MCRPMS)</h1>
         <p className="mt-5">Kindly select an action below</p>
         <div className="d-flex flex-column welcome-screen-button mt-5">
           <button

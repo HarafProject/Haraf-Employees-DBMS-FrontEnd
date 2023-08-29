@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
-import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
+
 
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
@@ -115,7 +115,7 @@ export default function DeleteRequestTab({setIsSubmitting}) {
                 key={item._id}
               >
 
-                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Delete Employee request from {item.user.firstname} {item.user.surname}</p>
+                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Delete Beneficiary request from {item.user.firstname} {item.user.surname}</p>
 
                 {item.status === "Resolved" ? (
                   <button
@@ -172,29 +172,7 @@ export default function DeleteRequestTab({setIsSubmitting}) {
         />
       </Modal>
 
-      <Modal
-        isOpen={resolvedModalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeResolvedModal}
-        contentLabel="Example Modal"
-        className={{
-          base: "modal-base",
-          afterOpen: "modal-base_after-open",
-          beforeClose: "modal-base_before-close",
-        }}
-        overlayClassName={{
-          base: "overlay-base",
-          afterOpen: "overlay-base_after-open",
-          beforeClose: "overlay-base_before-close",
-        }}
-        shouldCloseOnOverlayClick={true}
-        closeTimeoutMS={2000}
-      >
-        <ResolvedRequestModal
-          closeModal={closeResolvedModal}
-          activeTabButton={activeTabButton}
-        />
-      </Modal>
+      
 
       {declineSnackBar && (
         <div className="d-flex justify-content-between align-items-center px-4 py-2 snackbar ">
@@ -203,7 +181,7 @@ export default function DeleteRequestTab({setIsSubmitting}) {
             icon="system-uicons:cross"
             className="snackbar-close"
           />
-          <p>Delete Employee request Declined Succesfully</p>
+          <p>Delete Beneficiary request Declined Succesfully</p>
           <button onClick={closeDeclineSnackBar}>Close</button>
         </div>
       )}
@@ -215,7 +193,7 @@ export default function DeleteRequestTab({setIsSubmitting}) {
             onClick={closeApproveSnackBar}
             className="snackbar-close"
           />
-          <p>Delete Employee request approved Succesfully</p>
+          <p>Delete Beneficiary request approved Succesfully</p>
           <button onClick={closeApproveSnackBar}>Close</button>
         </div>
       )}

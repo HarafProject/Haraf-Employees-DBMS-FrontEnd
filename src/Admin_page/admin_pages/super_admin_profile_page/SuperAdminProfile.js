@@ -74,7 +74,7 @@ export default function SuperAdminProfile() {
   return (
     <div>
       <div className="supervisor-account">
-        <h3 className="">Admin Profile</h3>
+        <h3 className="">Zonal Supervisor Profile</h3>
         <div className="d-flex flex-column align-items-center"> 
           {!editable && (
             <div className="input-form">
@@ -141,7 +141,7 @@ export default function SuperAdminProfile() {
               value={user.role}
               onChange={handleChange}
               disabled={true}
-              placeholder="Super Admin 1"
+              placeholder="Zonal Admin 1"
             />
           </div>
 

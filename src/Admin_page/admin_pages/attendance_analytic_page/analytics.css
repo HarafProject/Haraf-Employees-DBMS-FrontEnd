@@ -12,6 +12,7 @@
   color: #0280ca;
   white-space: nowrap;
 }
+
 .beneficiary-statistics .box {
   width: 230px;
   padding: 10px;
@@ -36,7 +37,7 @@
   cursor: pointer;
 }
 
-.analytic-report-page .filter-option-section .form-field select option:nth-child(1){
+.analytic-report-page .filter-option-section .form-field select option:nth-child(1) {
 
   color: #7a7575;
 
@@ -69,7 +70,7 @@
   font-weight: 400;
   line-height: normal;
   border: none;
-white-space: nowrap;
+  white-space: nowrap;
 
 }
 
@@ -108,7 +109,7 @@ white-space: nowrap;
   height: 50px;
 }
 
-.analytic-report-page .employee-list-table .css-1ex1afd-MuiTableCell-root{
+.analytic-report-page .employee-list-table .css-1ex1afd-MuiTableCell-root {
   letter-spacing: 0px;
   border-bottom: 1px solid #C2C2C2;
   white-space: nowrap;
@@ -118,45 +119,91 @@ white-space: nowrap;
   font-weight: 300;
   line-height: normal;
 }
+
 .analytic-report-page .employee-list-table .css-1ex1afd-MuiTableCell-root .days-worked p {
 
   font-size: 14px;
 }
+
 .analytic-report-page .employee-list-table .css-1ex1afd-MuiTableCell-root .days-worked {
-font-weight: 500;
+  font-weight: 500;
   font-size: 11px;
 }
+
 .analytic-report-page .employee-list-table .ward,
 .analytic-report-page .employee-list-table .ward {
-text-align: center;
+  text-align: center;
 }
 
 
-.days-worked .tickred{
+.days-worked .tickred {
   color: red;
 }
-.days-worked .tickgreen{
+
+.days-worked .tickgreen {
   color: #008000;
 }
 
 
-.graph-filter-section .btn.export-btn{
+.graph-filter-section .btn.export-btn {
   color: #ffffff;
   background-color: #0280CA;
   text-transform: capitalize;
   font-family: Lato;
-font-size: 14px;
-font-weight: 400;
-line-height: normal;
-padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  padding: 10px;
+  white-space: nowrap;
 
 }
 
 .attendance-analytic-page .employee-list-table {
-  padding: 0  !important;
+  padding: 0 !important;
 }
 
+
+.export-pdf-header {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;  
+  /* visibility: hidden; */
+}
+
+.export-pdf-header .logo-export-image{
+  height: auto;
+  width: 120px;
+}
+.export-pdf-header img{
+  width: 100%;
+  object-fit: contain;
+}
+.export-pdf-header h5, .export-pdf-header span{
+  font-size: 16px;
+  color: #0280CA;
+}
+
+
+
+@media screen and (max-width: 1026px) {
+  .graph-filter-section .filter-option-section .form-field select {
+    width: 96px;
+  }
+
+  .graph-filter-section .search-button {
+    width: 160px;
+  }
+}
+
+@media screen and (max-width: 992px) {}
+
+
 @media screen and (max-width: 768px) {
+  .graph-filter-section {
+    align-items: center;
+  }
+
   .attendance-analytic-page .summary-card {
     margin-top: 30px;
   }
@@ -165,29 +212,44 @@ padding: 10px;
     flex-direction: column;
     align-items: flex-start !important;
   }
-
-  .attendance-analytic-page .filter-option-section {
-    margin-top: 20px;
-  }
 }
 
 @media screen and (max-width: 600px) {
   .admin-dashboard .content h4 {
     font-size: 20px;
   }
-  .graph-filter-section{
-    flex-direction: column;
+
+  .graph-filter-section {
+    display: grid !important;
   }
-  .graph-filter-section .btn.export-btn{
+
+  .graph-filter-section .btn.export-btn {
     margin: 15px 0 0 0 !important;
-  
+
   }
+
   .attendance-analytic-page .tab-header.mx-5 {
     margin: 0 !important;
- }
- .attendance-analytic-page .tab-headers {
-   justify-content: space-between;
- }
+  }
+
+  .attendance-analytic-page .tab-headers {
+    /* justify-content: space-between; */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .graph-filter-section .filter-option-section {
+    padding: 5px 0;
+  }
+
+  .graph-filter-section .filter-option-section .form-field select {
+    width: 115px;
+  }
+
+  .graph-filter-section .filter-option-section .form-field select {
+    background-position: 74px center;
+  }
+
 }
 
 @media screen and (max-width: 522px) {
@@ -196,22 +258,52 @@ padding: 10px;
   }
 
   .attendance-analytic-page .filter-option-section .form-field select {
-    width: 120px;
+    width: 130px;
     padding: 10px 20px 10px 0;
+    background-position: 110px center;
   }
+
+  .graph-filter-section .filter-option-section {
+    padding: 5px 0;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 60px;
+  }
+
   .attendance-analytic-page .filter-option-section {
     margin-top: 0;
+  }
+
+  .analytic-report-page .graph-filter-section .filter-option-section .form-field {
+    margin: 0 !important;
+  }
+
+  .graph-filter-section .filter-option-section .search-button {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .graph-filter-section .btn.export-btn {
+    width: 160px;
+  }
+
+  .attendance-analytic-page .card p {
+    width: 80px;
+    white-space: normal;
+  }
+
 }
-}
+
 @media screen and (max-width: 480px) {
-  
-.attendance-analytic-page .filter-option-section .form-field select {
-  width: 110px;
-  padding: 10px 30px 10px 0;
+
+  .attendance-analytic-page .filter-option-section .form-field select {
+    width: 110px;
+    padding: 10px 30px 10px 0;
+  }
 }
-}
+
 @media screen and (max-width: 426px) {
-  
+
   .content {
     padding: 0 1rem !important;
   }
@@ -220,12 +312,17 @@ padding: 10px;
     width: auto;
   }
 
+
   .attendance-analytic-page .filter-option-section .form-field select {
-    width: 90px;
+    width: 130px;
+    padding: 10px 20px 10px 0;
+    background-position: 110px center;
   }
-.graph-filter-section .filter-option-section .form-field {
-  width: 130px;
-}
+
+  .graph-filter-section .filter-option-section .form-field {
+    width: 155px;
+  }
+
   .admin-dashboard .content h4 {
 
     margin-top: 10px;
@@ -242,18 +339,27 @@ padding: 10px;
 
   .attendance-analytic-page .filter-option-section .form-field select {
     width: 115px;
-}
+    background-position: 100px center;
+  }
 
-  .graph-filter-section .filter-option-section .form-field {
+  .graph-filter-section .filter-option-section .form-field,
+  .graph-filter-section .search-button, .graph-filter-section .btn.export-btn {
     width: 150px;
-}
+
+  }
+
+  .attendance-analytic-page .card p {
+    width: auto;
+    white-space: nowrap;
+  }
 }
 
 @media screen and (max-width: 320px) {
-  .attendance-analytic-page .filter-option-section .form-field select {
-    width: 95px;
-  }
-  .graph-filter-section .filter-option-section .form-field {
-    width: 125px;
+  .graph-filter-section .filter-option-section .form-field, .graph-filter-section .search-button, .graph-filter-section .btn.export-btn {
+    width: 130px;
+}
+.attendance-analytic-page .filter-option-section .form-field select {
+  width: 100px;
+  background-position: 88px center;
 }
 }

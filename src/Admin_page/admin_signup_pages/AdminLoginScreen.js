@@ -69,7 +69,7 @@ export default function AdminLoginScreen() {
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-4">
 
         <img src={profile} alt="" />
-        <p className="my-1 text-center title">LIPW Management System{<br />} (LIPWMS)</p>
+        <p className="my-1 text-center title">MCRP Management System{<br />}(MCRPMS)</p>
 
 
         <form onSubmit={formik.handleSubmit} className="mt-3">

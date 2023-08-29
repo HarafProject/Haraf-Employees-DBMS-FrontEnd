@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ReusableHeader from '../../../component/reusable/reusableheader/ReusableHeader'
@@ -10,6 +12,7 @@ import supervisor from '../../../class/supervisor.class';
 import { updateAttendance, attendanceWards } from '../../../redux/reducers/attendanceReducer';
 import NoNetworkModal from '../../../component/reusable/modalscontent/NoNetworkModal';
 import Modal from 'react-modal';
+import AttendanceTable from '../takeAttendancePage/AttendanceTable';
 
 export default function AttendanceReportUpload() {
   const navigate = useNavigate()
@@ -93,6 +96,7 @@ export default function AttendanceReportUpload() {
     }
   }
 
+
   const submissionTime = moment().format('h:mm A');
   const currentTime = moment();
   const startTime = moment().set('hour', 9).set('minute', 0);
@@ -109,44 +113,48 @@ export default function AttendanceReportUpload() {
           <div className="header-report ">
             <h3>Attendance Report Upload</h3>
             <p>
-              Please choose the employee typology for whom you will be taking
-              attendance
+              Please ensure you are submitting the factual and accurate attendance, {<br />} once submitted the action can not be undone
             </p>
           </div>
           <h4>Attendance Summary</h4>
           <div className='summary-grid'>
-            <div className='d-flex flex-column align-items-center summary'>
-              <h1>{attendanceCount?.Present || 0}</h1>
-              <p>Present</p>
+            <div>
+              <div className='d-flex flex-column align-items-center summary'>
+                <h1>{attendanceCount?.Present || 0}</h1>
+                <p>Present</p>
+              </div>
+              <div className="report mt-5">
+                <p>Report For:</p>
+                <h4>{attendance.date}</h4>
+              </div>
             </div>
-            <div className='d-flex flex-column align-items-center summary'>
-              <h1>{attendanceCount?.Absent || 0}</h1>
-              <p>Absent</p>
-            </div>
-            <div className='d-flex flex-column align-items-center summary' >
-              <h1 className={!isBetweenSubmissionTime ? 'red-text' : ''}>{submissionTime}</h1>
+         
 
-              <p>Submission Time</p>
+            <div>
+              <div className='d-flex flex-column align-items-center summary'>
+                <h1>{attendanceCount?.Absent || 0}</h1>
+                <p>Absent</p>
+              </div>
+              <div className="report mt-5">
+                <p>Report From:</p>
+                <h4>{attendance.data[0]?.lga?.name} LGA</h4>
+              </div>
             </div>
+
+            <div>
+              <div className='d-flex flex-column align-items-center summary' >
+                <h1 className={!isBetweenSubmissionTime ? 'red-text' : ''}>{submissionTime}</h1>
+
+                <p>Submission Time</p>
+              </div>
+              <div className="report mt-5">
+                <p>Report By:</p>
+                <h4>{user.firstname} {user.surname}</h4>
+              </div>
+            </div>
+
           </div>
-          <div className="report-grid">
-            <div className="report">
-              <p>Report For:</p>
-              <h4>{attendance.date}</h4>
-            </div>
-            <div className="report">
-              <p>Report From:</p>
-              <h4>{attendance.data[0]?.lga?.name} lga</h4>
-            </div>
-            {/* <div className='report'>
-              <p>Report From wards:</p>
-              <h4>{user.lga.name} lga</h4>
-            </div> */}
-            <div className='report'>
-              <p>Report By:</p>
-              <h4>{user.firstname} {user.surname}</h4>
-            </div>
-          </div>
+
           <center className="msg-area">
             <textarea
               placeholder="Supervisors comment *"
@@ -219,3 +227,5 @@ export default function AttendanceReportUpload() {
     </div>
   );
 }
+
+

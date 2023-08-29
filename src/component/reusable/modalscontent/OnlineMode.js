@@ -28,7 +28,7 @@ export default function OnlineMode({ closeModal }) {
 
                 <div className="d-flex flex-column align-items-center modal-content">
                     <Icon icon="carbon:network-public" className="network-icon" />
-                    <p className="mt-2 text-center no-network">Nerwork Detected</p>
+                    <p className="mt-2 text-center no-network">NeTwork Detected</p>
                     <span className="mt-2 mb-5 text-center">
                         You are currently using offline mode. Network detected<br />
                         You can now switch to online mode.{" "}

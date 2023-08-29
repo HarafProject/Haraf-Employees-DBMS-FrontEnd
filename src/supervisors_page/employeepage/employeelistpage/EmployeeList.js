@@ -131,7 +131,7 @@ export default function EmployeeListTable() {
                                         <TableCell>S/N</TableCell>
                                         <TableCell>Headshots</TableCell>
                                         <TableCell>Name</TableCell>
-                                        <TableCell>Topology</TableCell>
+                                        <TableCell>Typology</TableCell>
                                         <TableCell>Ward</TableCell>
                                         <TableCell>Phone Number</TableCell>
                                         <TableCell>Age</TableCell>

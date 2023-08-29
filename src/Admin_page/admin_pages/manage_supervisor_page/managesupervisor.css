@@ -6,7 +6,7 @@
   /* width: 79%; */
 }
 
-.manage-supervisor-page h1 {
+.manage-supervisor-page h1, .manage-admin-page h1 {
   font-size: 23px;
   font-weight: 400;
   line-height: normal;
@@ -31,17 +31,17 @@
   object-fit: contain;
 }
 
-.manage-supervisor-table {
+.manage-supervisor-table, .manage-admin-table {
   margin-top: 2rem;
 }
 
-.manage-supervisor-table .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+.manage-supervisor-table .css-11xur9t-MuiPaper-root-MuiTableContainer-root, .manage-admin-table .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
   border-radius: 10px 10px 0 0;
   border: 0.7px solid #c2c2c2cb;
   background-color: #eeeded;
 }
 
-.manage-supervisor-table .css-1ygcj2i-MuiTableCell-root {
+.manage-supervisor-table .css-1ygcj2i-MuiTableCell-root, .manage-admin-table .css-1ex1afd-MuiTableCell-root {
   font-size: 16px;
   font-weight: 500;
   line-height: normal;
@@ -50,7 +50,7 @@
   border-bottom: 1px solid #c2c2c2;
 }
 
-.manage-supervisor-table .css-1ex1afd-MuiTableCell-root {
+.manage-supervisor-table .css-1ex1afd-MuiTableCell-root, .manage-admin-table .css-1ex1afd-MuiTableCell-root {
   border-bottom: 1px solid #c2c2c2;
   /* max-width: 100px; */
   white-space: nowrap;
@@ -69,12 +69,12 @@
   color: #444444;
 }
 
-.btn.manage-supervisor-btn {
+.btn.manage-supervisor-btn, .btn.manage-admin-btn {
   font-size: 12px;
   font-weight: 700;
 }
 
-.btn.manage-supervisor-btn .iconify {
+.btn.manage-supervisor-btn .iconify, .btn.manage-admin-btn .iconify {
   font-size: 18px;
 }
 
@@ -127,7 +127,7 @@
     flex-direction: column;
     align-items: flex-start !important;
   }
-  .manage-supervisor-page h1 {
+  .manage-supervisor-page h1, .manage-admin-page h1 {
     font-size: 20px;
   }
   .manage-supervisor-page {
@@ -159,7 +159,7 @@
   .manage-supervisor-page .filter-option-section .form-field select {
     width: 140px;
 }
-.manage-supervisor-page h1 {
+.manage-supervisor-page h1, .manage-admin-page h1 {
   font-size: 18px;
   margin-bottom: 10px;
 }
@@ -177,7 +177,7 @@
 .admin-name span {
   width: 100px;
 }
-.manage-supervisor-page h1 {
+.manage-supervisor-page h1, .manage-admin-page h1 {
   font-size: 16px;
 }
 }

@@ -235,7 +235,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
 
                 <div className="d-flex flex-column align-items-center add-employee-content mt-4">
 
-                    <h5>Add Employee</h5>
+                    <h5>Add Beneficiary</h5>
 
 
                     <form >
@@ -444,22 +444,13 @@ export default function AddEmployeeScreen({ prefilledData }) {
                             <div className='d-flex align-items-center picture-upload-section mt-3'>
                                 <div className="profile-img mx-3 ">
 
-                                    {imageData && <img src={imageData} alt="Captured" />}
+                                    {imageData && <img src={imageData} alt="beneficiary image" />}
 
-                                    {!imageData && <img src={profile} alt='' />}
-                                    <button className="camera" onClick={(e) => {
-                                        e.preventDefault()
-                                        openModal()
-                                    }} disabled={!isVerified}>
-                                        <Icon icon="heroicons-solid:camera" className='camera-icon' />
-                                    </button>
+                                    {!imageData && <img src={profile} alt='beneficiary image' />}
+                                   
 
                                 </div>
-                                <p className="headshot-title">
-                                    Employees headshot {<br />} <span>
-                                        Please take a clear well lighted headshot
-                                    </span>
-                                </p>
+                               
                             </div>
                         </div>
 
@@ -468,7 +459,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                     {isLoading && <center className="btn save-employee mt-5"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
                     {
                         !isLoading && <button type="button" onClick={formik.handleSubmit} disabled={!formik.isValid || !isVerified || isLoading} className="btn save-employee mt-5">
-                            {isEditEmployee ? 'Save Changes' : 'Save Employee'}
+                            {isEditEmployee ? 'Save Changes' : 'Save Beneficiary'}
                         </button>
                     }
 

@@ -120,7 +120,7 @@ export default function CreateAdminAccountScreen() {
        <div className="text-center">
         <img src={profile} alt="" className="signin-image" />
           <p className="mt-2 title">
-            LIPW Management System{<br />}(LIPWMS)
+          MCRP Management System (MCRPMS){<br />} LIPW
           </p>
        </div>
           

@@ -40,7 +40,7 @@ const ReusableHeader = () => {
           <img src={logo} alt="logo" />
         </NavLink>
 
-        <h1>LIPWMS Supervisor Portal</h1>
+        <h1>MCRP/LIPW Supervisor Portal</h1>
 
         <ul className={clicked ? "header-menu active" : "header-menu"} id="header-menu" >
           <li> <NavLink to='/supervisor/employee-list' onClick={closeMobileMenu}>Beneficiary List</NavLink> </li>

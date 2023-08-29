@@ -194,7 +194,7 @@ export default function ManageAdmins() {
       <div className="manage-admin-page">
         <div className="container manage-admin-header">
           <div className="d-flex align-items-center justify-content-between ">
-            <h1>admins ({totalCount})</h1>
+            <h1>Zonal Supervisors ({totalCount})</h1>
 
             {isLoading ? <div className='d-flex align-items-center px-5 py-3'>
               <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />
@@ -262,7 +262,6 @@ export default function ManageAdmins() {
                           {
                             adminData?.isVerified === true ? <p
                               className="btn manage-admin-btn"
-
                             >
 
                               <Icon
@@ -270,7 +269,9 @@ export default function ManageAdmins() {
                                 className="verify-icon"
                               />{" "}
                               Verified
-                            </p> : <button
+                            </p> 
+                            : 
+                            <button
                               className="btn manage-admin-btn"
                               onClick={() =>
                                 openModal(
@@ -281,7 +282,6 @@ export default function ManageAdmins() {
                                 )
                               }
                             >
-
                               <Icon
                                 icon="carbon:x"
                                 className="verify-icon"

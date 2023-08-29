@@ -247,7 +247,7 @@ export default function EditEmployeeScreen() {
           {/* <h5>Add Employee</h5> */}
           {/* <h5>{prefilledData ? 'Edit Employee' : 'Add Employee'}
                     </h5>  */}
-          <h5>Edit Employee</h5>
+          <h5>Edit Beneficiary</h5>
 
 
           <form >
@@ -461,7 +461,7 @@ export default function EditEmployeeScreen() {
 
                   </div>
                   <p className="headshot-title">
-                    Employees headshot {<br />} <span>
+                  Beneficiary headshot {<br />} <span>
                       Please take a clear well lighted headshot
                     </span>
                   </p>

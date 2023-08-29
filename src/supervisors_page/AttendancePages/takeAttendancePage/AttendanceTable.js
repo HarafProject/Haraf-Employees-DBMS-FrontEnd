@@ -11,11 +11,18 @@ import {
 import tableData from './tableData'
 import { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
+
+import checkbox from '../../../assets/checkbox.svg';
+import checkboxCancel from '../../../assets/cancel-box-outline.svg';
+import checkboxFilled from '../../../assets/checkbox-checked-filled.svg';
+
+
+
 // import './takeAttendance.css'
 import { useDispatch, useSelector } from "react-redux";
 import { updateAttendance, attendanceRecord } from '../../../redux/reducers/attendanceReducer'
 
-export default function AttendanceTable({ attendance }) {
+export default function AttendanceTable({ attendance, onReasonSelect }) {
 
   const [record, setRecord] = useState([])
   
@@ -72,6 +79,9 @@ export default function AttendanceTable({ attendance }) {
     // Handle form submission if needed
   }
 
+  
+  
+
   return (
     <div className="px-4 py-2 mt-2">
       <TableContainer
@@ -94,10 +104,11 @@ export default function AttendanceTable({ attendance }) {
                     <p className={row.status === "Present" ? 'checked-box' : 'empty-checkbox'}>
                       Present
                     </p>
-                    <Icon
+                    {/* <Icon
                       icon={row.status === "Present" ? 'carbon:checkbox-checked-filled' : 'carbon:checkbox'}
                       className={row.status === "Present" ? 'checked-box table-icon' : 'empty-checkbox table-icon'}
-                    />
+                    /> */}
+                    <img src={row.status === "Present" ? checkboxFilled : checkbox} alt="" className='table-icon' />
                   </div>
                 </TableCell>
                 <TableCell>
@@ -105,12 +116,28 @@ export default function AttendanceTable({ attendance }) {
                     <p className={row.status === "Absent" ? 'checked-red' : 'empty-checkbox'}>
                       Absent
                     </p>
-                    <Icon
+                    {/* <Icon
                       icon={row.status === "Absent" ? 'mdi:cancel-box-outline' : 'carbon:checkbox'}
                       className={row.status === "Absent" ? 'checked-red table-icon' : 'empty-checkbox table-icon'}
-                    />
+                    /> */}
+                    <img src={row.status === "Absent" ? checkboxCancel : checkbox} alt="" className='table-icon' />
                   </div>
                 </TableCell>
+                {row.status === "Absent" && 
+                <TableCell className='table-select-field'>
+                  <div className="my-table-select">
+                     <select name="" id=""  >
+                    <option value="">select reason</option>
+                    <option value="sick">Sick</option>
+                    <option value="bereaved">Bereaved</option>
+                    <option value="maternity">Maternity</option>
+                    <option value="paternity">Paternity</option>
+                    <option value="others">Others</option>                    
+                  </select>
+                  </div>
+                 
+                </TableCell>
+}
               </TableRow>
             ))}
           </TableBody>

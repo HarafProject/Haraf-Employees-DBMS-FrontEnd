@@ -19,7 +19,7 @@ export default function RequestFromSupervisor() {
           className={activeTab === "delete_request" ? "current" : ""}
           onClick={() => handleTabClick("delete_request")}
         >
-          Delete Employee Request
+          Delete Beneficiary Request
         </button>
         <button
           className={activeTab === "edit_request" ? "current" : ""}
@@ -31,7 +31,7 @@ export default function RequestFromSupervisor() {
           className={activeTab === "add_request" ? "current" : ""}
           onClick={() => handleTabClick("add_request")}
         >
-          Add Employee Request
+          Add Beneficiary Request
         </button>
       </div>
       {activeTab === "delete_request" && (

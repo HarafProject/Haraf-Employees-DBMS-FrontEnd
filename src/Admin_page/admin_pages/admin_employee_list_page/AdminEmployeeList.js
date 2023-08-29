@@ -70,7 +70,7 @@ export default function AdminEmployeeList() {
         }
 
         <div>
-          <div className="employee-list-table p-3 my-3">
+          <div className="employee-list-table my-3">
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
@@ -78,7 +78,7 @@ export default function AdminEmployeeList() {
                     <TableCell>S/N</TableCell>
                     <TableCell>Headshot</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Topology</TableCell>
+                    <TableCell>Typology</TableCell>
                     <TableCell>Phone Number</TableCell>
                     <TableCell>Ward</TableCell>
                     <TableCell>Age</TableCell>

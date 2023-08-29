@@ -27,6 +27,7 @@ export default function AdminEmployeeDataSummary() {
     //     <h1 className="number">{supervisors.length}</h1>
     //     <p>Total Employees</p>
     <div className="d-flex align-items-center justify-content-between summary-card">
+      
       <div className="card">
         <h1 className="number">{data?.data?.beneficiaryCount}</h1>
         <p>Total Beneficiaries</p>

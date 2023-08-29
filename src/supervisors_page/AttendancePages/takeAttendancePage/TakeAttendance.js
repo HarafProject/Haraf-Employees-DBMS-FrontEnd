@@ -91,6 +91,7 @@ export default function TakeAttendance() {
         <AttendanceTable
           attendance={attendanceData}
           setAttendanceData={setAttendanceData}
+          
         />
         <div className='d-flex center-container'>
           {

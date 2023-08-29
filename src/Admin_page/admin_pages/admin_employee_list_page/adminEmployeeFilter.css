@@ -1,4 +1,4 @@
-.filter-option-section p {
+.filter-option-section.admin p {
   font-size: 36px;
   font-weight: 600;
   line-height: normal;
@@ -25,13 +25,13 @@
   line-height: normal;
 }
 
-.filter-option-section .form-field {
+.filter-option-section.admin .form-field {
   border-radius: 33px;
   border: 0.6px solid #444444;
   padding: 0 15px;
 }
 
-.filter-option-section .form-field select {
+.filter-option-section.admin .form-field select {
   width: 130px;
   padding: 10px 0;
   outline: none;
@@ -40,19 +40,19 @@
   background-color: transparent;
   font-size: 14px;
   line-height: normal;
-   appearance: none;
+  appearance: none;
   background-image: url("../../../assets/arrow.png");
   background-repeat: no-repeat;
   background-position: center right;
   background-size: 0.8em auto;
 }
 
-.filter-option-section .form-field select option:first-child {
+.filter-option-section.admin .form-field select option:first-child {
   color: #a6a6a68c;
 }
 
 
-.search-button {
+.filter-option-section.admin .search-button {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -62,6 +62,8 @@
   border: 0.6px solid #444444;
   color: #444444;
   height: fit-content;
+  margin: 0 !important;
+
 }
 
 .search-icon {
@@ -69,7 +71,7 @@
   color: #7a7575;
 }
 
-.filter-option-section .search-button input {
+.filter-option-section.admin .search-button input {
   /* width: 400px; */
   padding: 10px 0;
   outline: none;
@@ -80,33 +82,33 @@
   color: #7a7575;
 }
 
-.filter-option-section .search-button input::placeholder {
+.filter-option-section.admin .search-button input::placeholder {
   color: #7a7575;
   background-color: transparent !important;
 }
 
-.filter-option-section .search-button input:-internal-autofill-selected {
+.filter-option-section.admin .search-button input:-internal-autofill-selected {
   appearance: none !important;
   background-image: none !important;
   background-color: -internal-light-dark(transparent, transparent) !important;
   color: transparent !important;
 }
 
-.filter-option-section .search-button input:-webkit-autofill,
-.filter-option-section .search-button input:-webkit-autofill:hover,
-.filter-option-section .search-button input:-webkit-autofill:focus,
-.filter-option-section .search-button input:-webkit-autofill:active {
+.filter-option-section.admin .search-button input:-webkit-autofill,
+.filter-option-section.admin .search-button input:-webkit-autofill:hover,
+.filter-option-section.admin .search-button input:-webkit-autofill:focus,
+.filter-option-section.admin .search-button input:-webkit-autofill:active {
   -webkit-transition-delay: 9999s;
   transition-delay: 9999s;
 }
 
-.filter-option-section .form-field select option {
+.filter-option-section.admin .form-field select option {
   background-color: #fff;
   color: #333;
   padding: 8px;
 }
 
-.filter-option-section .form-field select option[value="option-value"] {
+.filter-option-section.admin .form-field select option[value="option-value"] {
   font-weight: bold;
   color: #ff0000;
 }
@@ -119,72 +121,101 @@
   align-items: center;
   background-color: #0280ca;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 
 @media screen and (max-width: 1027px) {
 
-   .filter-option-section.admin .filter {
+  .filter-option-section.admin .filter {
     display: grid !important;
     grid-template-columns: 1fr 1fr 1fr;
   }
+
   .filter-option-section.admin .form-field {
     width: 200px;
   }
+
   .exportBtn {
-      margin-top: 14px;
+    margin-top: 14px;
     width: 150px;
   }
-  .filter-option-section .form-field select {
+
+  .filter-option-section.admin .form-field select {
     width: -webkit-fill-available;
   }
 }
 
 
 @media only screen and (max-width: 768px) {
-  .employee-list-table{
+  .employee-list-table {
     padding: 0 10px !important;
   }
+
   .filter-option-section.admin .form-field {
     width: 160px;
-    margin-top: 0 !important;
-}
-.filter-option-section.admin .filter {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.exportBtn {
-  margin-top: 4px;
-}
+    margin: 0 10px 0 0 !important;
+  }
+
+  .filter-option-section.admin .filter {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .filter-option-section.admin .search-button {
+    width: 160px;
+    margin: 0 10px 0 0 !important;
+  }
+
+  .exportBtn {
+    margin-top: 4px;
+  }
 
 }
+
 @media only screen and (max-width: 600px) {
   .filter-option-section.admin .filter {
     grid-template-columns: 1fr 1fr 1fr;
+  }
 }
+
+@media only screen and (max-width: 522px) {
+
+  .filter-option-section.admin .form-field,
+  .filter-option-section.admin .search-button {
+    width: 150px;
+    margin: 5px 0 !important;
+  }
 }
-@media only screen and (max-width: 567px) {
-}
+
 @media only screen and (max-width: 426px) {
-  .filter-option-section.admin .form-field {
-    width: 115px;
-}
-}
-@media only screen and (max-width: 376px) {
+  .filter-option-section.admin .form-field,
+  .filter-option-section.admin .search-button {
+    width: 180px;
+  }
   .filter-option-section.admin .filter {
     grid-template-columns: 1fr 1fr;
 }
-.filter-option-section.admin .form-field {
-  width: 140px;
 }
+
+@media only screen and (max-width: 376px) {
+  .filter-option-section.admin .form-field,
+  .filter-option-section.admin .search-button {
+    width: 155px;
+    margin: 5px !important;
+  }
+
 }
+
 @media only screen and (max-width: 320px) {
   .filter-option-section.admin .filter {
     grid-template-columns: 1fr;
   }
-  .filter-option-section.admin .form-field {
-    width: 230px;
-}
-.employee-list-table {
-  padding: 0 !important;
-}
+  .filter-option-section.admin .form-field,
+  .filter-option-section.admin .search-button {
+    width: 250px;
+  }
+
+  .employee-list-table {
+    padding: 0 !important;
+  }
 }

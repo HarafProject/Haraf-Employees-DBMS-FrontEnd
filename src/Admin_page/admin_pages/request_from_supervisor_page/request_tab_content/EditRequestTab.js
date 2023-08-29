@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ViewRequestModal from "../../../../component/reusable/modalscontent/ViewRequestModal";
-import ResolvedRequestModal from "../../../../component/reusable/modalscontent/ResolvedRequestModal";
+
 import "./requestDetail.css";
 import Modal from "react-modal";
 import { Icon } from "@iconify/react";
@@ -113,7 +113,7 @@ export default function EditRequestTab({setIsSubmitting}) {
                 key={item._id}
               >
 
-                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Edit Employee request from {item?.user?.firstname} {item?.user?.surname}</p>
+                <p> <span style={{ marginRight: '10px' }}>{i + 1}</span>Edit Beneficiary request from {item?.user?.firstname} {item?.user?.surname}</p>
 
 
                 {item.status === "Resolved" ? (
@@ -169,29 +169,7 @@ export default function EditRequestTab({setIsSubmitting}) {
         />
       </Modal>
 
-      <Modal
-        isOpen={resolvedModalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeResolvedModal}
-        contentLabel="Example Modal"
-        className={{
-          base: "modal-base",
-          afterOpen: "modal-base_after-open",
-          beforeClose: "modal-base_before-close",
-        }}
-        overlayClassName={{
-          base: "overlay-base",
-          afterOpen: "overlay-base_after-open",
-          beforeClose: "overlay-base_before-close",
-        }}
-        shouldCloseOnOverlayClick={true}
-        closeTimeoutMS={2000}
-      >
-        <ResolvedRequestModal
-          closeModal={closeResolvedModal}
-          activeTabButton={activeTabButton}
-        />
-      </Modal>
+     
 
       {declineSnackBar && (
         <div className="d-flex justify-content-between align-items-center px-4 py-2 snackbar ">
@@ -200,7 +178,7 @@ export default function EditRequestTab({setIsSubmitting}) {
             icon="system-uicons:cross"
             className="snackbar-close"
           />
-          <p>Edit Employee request Declined Succesfully</p>
+          <p>Edit Beneficiary request Declined Succesfully</p>
           <button onClick={closeDeclineSnackBar}>Close</button>
         </div>
       )}
@@ -212,7 +190,7 @@ export default function EditRequestTab({setIsSubmitting}) {
             onClick={closeApproveSnackBar}
             className="snackbar-close"
           />
-          <p>Edit Employee request Approved Succesfully</p>
+          <p>Edit Beneficiary request Approved Succesfully</p>
           <button onClick={closeApproveSnackBar}>Close</button>
         </div>
       )}

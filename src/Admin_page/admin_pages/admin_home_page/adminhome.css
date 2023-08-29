@@ -2,6 +2,9 @@
   display: flex;
 }
 
+.admin-dashboard h3{
+  color: #ffffff;
+}
 .sidebar {
   position: fixed;
   width: 250px;
@@ -39,15 +42,17 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 8px 15px;
+  padding: 8px 10px;
   margin: 10px 0;
+  width: 250px;
+  overflow-y: hidden;
 }
 
 .sidebar p span {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: normal;
   line-height: normal;
-  margin: 0 13px;
+  margin: 0 10px;
   color: #ffffff;
   white-space: nowrap;
 }
@@ -105,6 +110,9 @@
 } */
 
 @media screen and (max-width: 992px) {
+  .sidebar .sidebar-navlinks p {
+    width: auto;
+  }
   .admin.hamburger-icon {
     display: block;
     position: absolute;
@@ -183,7 +191,7 @@
 }
 
 @media only screen and (max-width: 426px) {
-  .admin-dashboard .content h4 {
+  .admin-dashboard .content h4, .admin-dashboard h3 {
       font-size: 20px;
   }
 }

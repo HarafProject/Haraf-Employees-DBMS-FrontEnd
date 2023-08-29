@@ -11,10 +11,6 @@
   background-color: #eeeded;
 }
 
-.dashboard-attendance-table-section .css-15wwp11-MuiTableHead-root,
-.detailed-attendance-table .css-15wwp11-MuiTableHead-root {
-  /* background-color: #0281ca49; */
-}
 
 .dashboard-attendance-table-section .css-1ygcj2i-MuiTableCell-root,
 .detailed-attendance-table .css-1ygcj2i-MuiTableCell-root {
@@ -25,8 +21,6 @@
   white-space: nowrap;
   border-bottom: 1px solid #c2c2c2;
 }
-
-.dashboard-attendance-table-section .css-1wlk0hk-MuiAvatar-root {}
 
 .dashboard-attendance-table-section .css-1ex1afd-MuiTableCell-root,
 .detailed-attendance-table .css-1ex1afd-MuiTableCell-root {
@@ -344,17 +338,17 @@ p .absent {
 
   .dashboard-attendance-table-section .filter-option-section div.d-flex {
     justify-content: center !important;
-    display: grid !important;
-    grid-template-columns: 2fr 1fr;
+    flex-direction: column;
+    display: flex !important;
   }
 
   .dashboard-attendance-table-section .filter-option-section .search-button,
   .dashboard-attendance-table-section .filter-option-section .form-field {
-    width: 160px;
+    width: 230px;
   }
 
   .dashboard-attendance-table-section .filter-option-section .form-field select {
-    width: 125px;
+    width: 190px;
   }
 
   .attendance-detailed-page h1 {

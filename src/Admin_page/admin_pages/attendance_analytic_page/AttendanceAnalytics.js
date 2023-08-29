@@ -24,9 +24,7 @@ export default function AttendanceAnalytics() {
 
   return (
     <div className="attendance-analytic-page">
-      <div>
-        <AdminEmployeeDataSummary />
-      </div>
+      
       <div className="attendance-tab-area py-2 my-2">
         <div className="tab-headers mt-3">
           <div
