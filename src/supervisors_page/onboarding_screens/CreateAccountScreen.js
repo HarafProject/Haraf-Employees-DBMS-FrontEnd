@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import profile from "../../assets/logo-light.png";
 import "./onboarding.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -14,6 +13,8 @@ import dataOBJs from "../../class/data.class";
 import { useDispatch } from "react-redux";
 import "./onboarding.css";
 import { RotatingLines } from "react-loader-spinner";
+import profile from "../../assets/harafLogoWhite.png";
+import mcrpLogo from "../../assets/mcrp_logo.jpeg";
 
 export default function CreateAccountScreen() {
   const navigate = useNavigate();
@@ -115,17 +116,13 @@ export default function CreateAccountScreen() {
     <div className="onboarding-screen">
       {/* <div className="login-screen"> */}
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
-        <div className="text-center">
-          <img src={profile} alt="" className="signin-image" />
-          <p className="mt-2 title">
-            MCRP Management System (MCRPMS){<br />} LIPW
-          </p>
+        <div className="login-screen-logos">
+          <img className="haraf" src={profile} alt="" />
+          <img src={mcrpLogo} alt="" />
         </div>
-
-
-
+        <h1>MCRP/HARAF</h1>
         <form onSubmit={formik.handleSubmit} className="mt-3">
-          <p className="screen-title text-center mt-3">SUPERVISOR SIGNUP</p>
+          <p className="screen-title text-center mt-3">LGA SUPERVISOR SIGNUP</p>
 
           <div className="d-flex form-field-area">
             <div className="form-area">
@@ -140,7 +137,6 @@ export default function CreateAccountScreen() {
                   name="fname"
                   placeholder="FirstName *"
                 />
-
               </div>
               {formik.touched.fname && formik.errors.fname && (
                 <div className="error">{formik.errors.fname}</div>
@@ -158,8 +154,8 @@ export default function CreateAccountScreen() {
                   name="surname"
                   placeholder="Surname *"
                 />
-
-              </div> {formik.touched.surname && formik.errors.surname && (
+              </div>{" "}
+              {formik.touched.surname && formik.errors.surname && (
                 <div className="error">{formik.errors.surname}</div>
               )}
             </div>
@@ -178,7 +174,6 @@ export default function CreateAccountScreen() {
                   value={formik.values.phone}
                   placeholder="Phone Number *"
                 />
-
               </div>
               {formik.touched.phone && formik.errors.phone && (
                 <div className="error">{formik.errors.phone}</div>
@@ -196,14 +191,11 @@ export default function CreateAccountScreen() {
                   name="email"
                   placeholder="Email Address *"
                 />
-
               </div>
               {formik.touched.email && formik.errors.email && (
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
-
-
           </div>
 
           <div className="d-flex form-field-area">
@@ -225,7 +217,6 @@ export default function CreateAccountScreen() {
                     </option>
                   ))}
                 </select>
-
               </div>
               {formik.touched.zonalRegion && formik.errors.zonalRegion && (
                 <div className="error">{formik.errors.zonalRegion}</div>
@@ -250,12 +241,11 @@ export default function CreateAccountScreen() {
                     </option>
                   ))}
                 </select>
-
-              </div>{formik.touched.lga && formik.errors.lga && (
+              </div>
+              {formik.touched.lga && formik.errors.lga && (
                 <div className="error">{formik.errors.lga}</div>
               )}
             </div>
-
           </div>
 
           <div className="d-flex form-field-area">
@@ -275,16 +265,11 @@ export default function CreateAccountScreen() {
                 <div onClick={togglePasswordVisiblity} className="eye">
                   <Icon icon={icon1 ? "mdi:eye" : "mdi:eye-off"} />
                 </div>
-
               </div>
               {formik.touched.password && formik.errors.password && (
                 <div className="error">{formik.errors.password}</div>
               )}
             </div>
-
-
-
-
 
             <div className="">
               <div className="form-field mx-3 d-flex align-items-center justify-content-between mt-5">
@@ -307,9 +292,9 @@ export default function CreateAccountScreen() {
               {formik.touched.confirm_password &&
                 formik.errors.confirm_password && (
                   <div className="error">{formik.errors.confirm_password}</div>
-                )}</div>
+                )}
+            </div>
           </div>
-
 
           <div className="d-flex flex-column align-items-center login-screen-button mt-3">
             <button

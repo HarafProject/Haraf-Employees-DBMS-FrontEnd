@@ -10,6 +10,7 @@ import PasswordChangeSuccessModal from "../../../component/reusable/modalsconten
 import auth from "../../../class/auth.class";
 import "react-toastify/dist/ReactToastify.css";
 
+
 export default function CreateNewPassword() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -78,7 +79,7 @@ export default function CreateNewPassword() {
       <div className="form d-flex flex-column align-items-center p-5">
         <h1>Create New Password</h1>
         <p>
-          Create new password to use for logging into your active farmers
+          Create new password to use for logging into your active
           account, do not share your new password with anyone
         </p>
         <form
