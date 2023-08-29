@@ -22,16 +22,16 @@ export default function SendRequestModal({closeModal, actionType, action, isLoad
  
     useEffect(() => {
         if (actionType === 'add') {
-            setModalTitle('Add New Employee Request ');
+            setModalTitle('Add New beneficiary Request ');
 
-            setModalText("You don’t have permission to add new employees after initial data capture, kindly request access to the regional lead by stating reason for the request below");
+            setModalText("You don’t have permission to add a new beneficiary after initial data capture, kindly request access to the regional lead by stating reason for the request below");
         } else if (actionType === 'edit') {
             setModalTitle('Profile Edit Request');
-            setModalText("You don't have permission to edit an beneficiary profile, request access from super admin by stating reason for profile edit");
+            setModalText("You don't have permission to edit a beneficiary profile, request access from super admin by stating reason for profile edit");
         }
         else if (actionType === 'delete') {
-            setModalTitle('Delete employee Request');
-            setModalText("You don't have permission to delete an beneficiary, request access from super admin by stating reason to delete beneficiary");
+            setModalTitle('Delete beneficiary Request');
+            setModalText("You don't have permission to delete a beneficiary, request access from super admin by stating reason to delete beneficiary");
         }
     }, [actionType]);
 

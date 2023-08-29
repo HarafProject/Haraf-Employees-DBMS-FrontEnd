@@ -54,10 +54,11 @@ export default function AdminHomePage() {
       <div className={`sidebar ${clicked ? "open" : ""}`}>
 
         <div className="p-3 sidebar-user-info">
-          <img src={profile} alt="" />
+          {/* <img src={profile} alt="" /> */}
+          <h3>MCRP/HARAF</h3>
           <div>
             <span className="name">
-              {user?.firstname} {user?.surname} {<br />}  {user?.role} ID: {user?.reference}
+              {user?.firstname} {user?.surname} {<br />} ID: {user?.reference}
             </span>
           </div>
         </div>
@@ -91,7 +92,7 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("requests")}
           >
             <Icon icon="fluent:branch-request-20-filled" />
-            <span>Requests from Supervisors</span>
+            <span>LGA Supervisor's Requests</span>
           </p>
 
           <p
@@ -99,7 +100,7 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("manage")}
           >
             <Icon icon="material-symbols:manage-accounts-outline-rounded" />
-            <span>Manage Supervisors</span>
+            <span>Manage LGA Supervisors</span>
           </p>
 
           <p
@@ -107,12 +108,11 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("profile")}
           >
             <Icon icon="uiw:user" />
-            <span>{user?.role === "super-admin" ? "Manage Admins" : "Admin Profile"}</span>
+            <span>{user?.role === "super-admin" ? "Manage Zonal Supervisors" : "State Supervisors"}</span>
           </p>
 
           <p
             className={selectedComponent === "logout" ? "active" : ""}
-            onClick={() => handleComponentClick("logout")}
           >
             <Icon icon="ant-design:logout-outlined" />
             <span onClick={() => {
@@ -127,7 +127,7 @@ export default function AdminHomePage() {
       </div>
       <div className="content px-3">
         <div className="mx-3">
-          <h4 className="header-title">LIPWDMS {user?.role === "super-admin" ? "Super" : ""} Admin Portal</h4>
+          <h4 className="header-title">MCRP/HARAF {user?.role === "super-admin" ? "State Supervisor" : "Zonal Supervisor"}  Portal</h4>
           <div className="user-info-section py-3 my-3">
             <div>
               {selectedComponent === "employee" && <AdminEmployeeList />}

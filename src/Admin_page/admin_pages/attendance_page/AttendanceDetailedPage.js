@@ -127,7 +127,7 @@ export default function AttendanceDetailedPage() {
         {/* <h2> Attendance detailed page</h2> */}
         <div className="d-flex justify-content-between attendance-info mt-4">
           <p>
-            Supervisor : {<br />}
+            LGA Supervisor : {<br />}
             <span>{receivedArray?.submittedBy?.firstname} {receivedArray?.submittedBy?.surname}</span>
           </p>
           <p>
@@ -145,7 +145,7 @@ export default function AttendanceDetailedPage() {
             <span>{receivedArray?.lga?.name}</span>
           </p>
           <p className="comment">
-            Supervisor's Comment: {<br />}
+          LGA Supervisor's Comment: {<br />}
             <span>{receivedArray?.comment}</span>
           </p>
           {receivedArray?.reason && <p className="comment">

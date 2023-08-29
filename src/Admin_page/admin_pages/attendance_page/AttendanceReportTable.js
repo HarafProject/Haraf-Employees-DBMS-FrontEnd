@@ -9,8 +9,6 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
 import "./attendance.css";
 import AdminAttendance from "../../../class/adminAttendanceReport.class";
 import dataOBJs from "../../../class/data.class";

@@ -25,7 +25,27 @@
   font-size: 14px;
   font-weight: 500;
 }
-
+.table-select-field select{
+  width: 130px;
+  /* padding: 10px 0; */
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: normal;
+  appearance: none;
+  background-image: url("../../../assets/arrow-blue.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 0.8em auto;
+}
+.table-select-field .my-table-select{
+width: fit-content;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #0281ca55;
+ 
+}
 .attendance-header h4 {
   font-size: 24px;
 }
@@ -75,7 +95,7 @@
 }
 
 .table-icon {
-  font-size: 35px;
+  width: 35px;
   margin: 0 5px;
 }
 
@@ -114,7 +134,7 @@ font-weight: 500;
     font-size: 20px;
   }
   .table-icon {
-    font-size: 30px;
+    font-size: 28px;
 }
 }
 
@@ -149,7 +169,7 @@ font-weight: 500;
   }
 
   .table-icon {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .btn.center-button {
@@ -205,7 +225,7 @@ font-weight: 500;
   }
 
   .table-icon {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .attendance-table .css-1ex1afd-MuiTableCell-root {
@@ -243,7 +263,7 @@ font-weight: 500;
 
 @media only screen and (max-width: 320px) {
   .table-icon {
-    font-size: 16px;
+    font-size: 10px;
 }
 .attendance-table .css-1ex1afd-MuiTableCell-root {
   font-size: 8px;

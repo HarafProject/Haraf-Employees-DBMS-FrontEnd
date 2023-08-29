@@ -98,7 +98,7 @@
 } */
 
 .attendance-grid {
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: 1px solid #f99c39;
   border-radius: 10px;
   box-shadow: 0px 17px 50px 0px rgba(0, 0, 0, 0.12);
@@ -166,6 +166,8 @@
   margin: 0;
   text-align: left;
   color: #0280ca;
+  font-size: 16px;
+  white-space: nowrap;
 }
 
 .dashboard-profile-info {
@@ -177,15 +179,35 @@
 .employee-profile-page .work-info p span {
   white-space: nowrap;
 }
-@media only screen and (max-width: 1027px) {
-  .attendance-flex {
-    padding: 3rem;
+
+.attendance-grid-section .form-field {
+  width: 120px;
+}
+
+.attendance-grid-section .filter-option-section .form-field select {
+  width: 90px;
+  padding: 7px 0;
+  font-size: 14px;
+}
+
+
+
+
+@media screen and (max-width: 1027px) {
+  .attendance-grid-section {
+    flex-direction: column;
+    align-items: flex-start !important;
   }
 
-  .profile-info-summary div.d-flex:first-child {
-    flex-direction: column;
-    align-items: flex-start;
+  .attendance-grid-section .filter-option-section {
+    justify-content: space-between;
   }
+
+  .attendance-flex {
+    padding: 2rem;
+  }
+
+
 
   .profile-info-summary .names,
   .profile-info-summary .work-info {
@@ -196,12 +218,16 @@
     align-items: center;
 
   }
-  
+
+  .border-cross {
+    left: 48%;
+  }
+
 }
 
-@media only screen and (max-width: 992px) {}
+@media screen and (max-width: 992px) {}
 
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .attendance-flex {
     text-align: center;
     font-size: 14px;
@@ -209,119 +235,170 @@
     justify-content: space-around;
     padding: 2rem 0;
   }
-  .admin-employee-data-stats.desktop{
+
+  .admin-employee-data-stats.desktop {
     display: none;
   }
-  .admin-employee-data-stats.admin-employee-data-stats.mobile{
+
+  .admin-employee-data-stats.admin-employee-data-stats.mobile {
     display: flex;
     margin-top: 20px
   }
+
   .attendance-grid {
     margin-top: 0.5rem;
   }
+
   .profile-info-summary .names,
   .profile-info-summary .work-info {
     margin: 10px 80px 0 0 !important;
   }
+
+  .attendance-grid-section {
+    margin: 0 0 0 10px;
+    flex-direction: row;
+    align-items: center !important;
+  }
+
   .attendance-flex h5 {
     font-size: 40px;
   }
-  .admin-attendance-summary h2 {
-    font-size: 25px;
-  }
+
   .attendance-flex {
     gap: 3rem;
     padding: 2rem 2rem;
   }
+
   .employee-profile-page .reusable-info-list p {
     margin: 10px 0 0 0;
   }
+
   .employee-profile-page .reusable-info-list {
     margin-top: 14px;
-}
-.profile-content {
-  padding: 2rem !important;
-}
+  }
+
+  .profile-content {
+    padding: 2rem !important;
+  }
 }
 
-@media only screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {}
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .employee-profile-page .profile-img {
     width: 120px;
     height: 120px;
     /* border: 1px solid; */
   }
-  .employee-profile-page .profile-info-summary  img {
+
+  .employee-profile-page .profile-info-summary img {
     /* max-width: 12%; */
     width: 120px;
     height: 120px;
-}
-.admin-attendance-summary h2 {
-  font-size: 20px;
-}
-.attendance-flex h5 {
-  font-size: 34px;
-}
-.attendance-flex {
-  padding: 1rem;
-}
+  }
+
+  .attendance-flex h5 {
+    font-size: 34px;
+  }
+
+  .attendance-flex {
+    padding: 1rem;
+  }
 
 }
 
-@media only screen and (max-width: 567px) {}
+@media screen and (max-width: 567px) {}
 
-@media only screen and (max-width: 426px) {
+@media screen and (max-width: 426px) {
   .attendance-flex h5 {
     font-size: 25px;
-}
-.employee-profile-page .profile-img, .employee-profile-page .profile-info-summary img {
-  /* max-width: 12%; */
-  width: 100px;
-  height: 100px;
-}
-.profile-info-summary .names, .profile-info-summary .work-info {
-  margin: 10px 45px 0 0 !important;
-}
-.dashboard-profile-info .personalinfo-user {
-  gap: 0 36px;
-}
-.employee-profile-page .names h4, .employee-profile-page .names p, .employee-profile-page .work-info p{
-  white-space: nowrap;
-}
-}
+  }
 
-@media only screen and (max-width: 376px) {
-  .employee-profile-page .names h4, .employee-profile-page .names p, .employee-profile-page .work-info p {
-    white-space: normal;
-}
-.attendance-flex h5 {
-  font-size: 22px;
-}
-.attendance-flex div p{
-  font-size: 12px;
-}
-.employee-profile-page .back-to-previous {
-  margin: 1rem 0 10px 0 !important;
-}
-.attendance-flex {
-  gap: 2rem;
-}
-}
-
-@media only screen and (max-width: 321px) {
-  .employee-profile-page .profile-img, .employee-profile-page .profile-info-summary img {
+  .employee-profile-page .profile-img,
+  .employee-profile-page .profile-info-summary img {
     /* max-width: 12%; */
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-info-summary .names,
+  .profile-info-summary .work-info {
+    margin: 10px 45px 0 0 !important;
+  }
+
+  .dashboard-profile-info .personalinfo-user {
+    gap: 0 36px;
+  }
+
+  .employee-profile-page .names h4,
+  .employee-profile-page .names p,
+  .employee-profile-page .work-info p {
+    white-space: nowrap;
+  }
+
+  .attendance-grid-section {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .attendance-grid-section .filter-option-section .form-field {
+    width: 120px;
+    margin: 0 5px 0 0 !important;
+  }
+
+  .attendance-grid-section {
+    margin: 0;
+  }
+
+  .admin-attendance-summary h2 {
+    margin-bottom: 10px;
+  }
 }
-.attendance-flex {
-  padding: 1rem 0.5rem;
+
+@media screen and (max-width: 376px) {
+  .profile-info-summary div.d-flex:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .employee-profile-page .names h4,
+  .employee-profile-page .names p,
+  .employee-profile-page .work-info p {
+    white-space: normal;
+  }
+
+  .attendance-flex h5 {
+    font-size: 22px;
+  }
+
+  .attendance-flex div p {
+    font-size: 12px;
+  }
+
+  .employee-profile-page .back-to-previous {
+    margin: 1rem 0 10px 0 !important;
+  }
+
+  .attendance-flex {
+    gap: 2rem;
+  }
+
+  .employee-profile-page .profile-img,
+  .employee-profile-page .profile-info-summary img {
+
+    width: 80px;
+    height: 80px;
+  }
 }
-.admin-attendance-summary h2 {
-  font-size: 18px;
-}
-.employee-profile-page .profile-info-summary .names, .employee-profile-page .profile-info-summary .work-info {
-  margin: 10px 30px 0 0 !important;
-}
+
+@media screen and (max-width: 321px) {
+
+  .attendance-flex {
+    padding: 1rem 0.5rem;
+  }
+
+  .employee-profile-page .profile-info-summary .names,
+  .employee-profile-page .profile-info-summary .work-info {
+    margin: 10px 30px 0 0 !important;
+  }
 }

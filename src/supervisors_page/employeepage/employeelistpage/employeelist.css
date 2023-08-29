@@ -74,7 +74,7 @@
 
 .employees-table-section .css-1ex1afd-MuiTableCell-root {
   letter-spacing: 0px;
-  max-width: 100px;
+  /* max-width: 100px; */
   border-bottom: 1px solid #00000090;
 font-family: "LexendFontLight", sans-serif;
   padding: 10px 16px;

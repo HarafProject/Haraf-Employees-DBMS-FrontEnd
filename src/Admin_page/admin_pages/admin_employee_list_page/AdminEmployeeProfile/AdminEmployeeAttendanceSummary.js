@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./adminEmployeeAttendanceSummary.css";
+
 import { useQuery } from 'react-query'
 import admin from "../../../../class/admin.class";
 import { toast } from "react-toastify"
@@ -60,62 +60,63 @@ export default function AdminEmployeeAttendanceSummary({ beneficiary }) {
 
   return (
     <div className="admin-attendance-summary">
-      <h2>Attendance Summary</h2>
-      <div className="graph-filter-section d-flex justify-content-between">
-        {status === "loading" ? (
-          <div className='d-flex align-items-center py-2'>
-            <RotatingLines width="25" strokeColor="#0173bc" strokeWidth="3" />
-            <p style={{ color: "#0173bc", marginBottom: "0" }}>Loading please wait...</p></div>
-        )
-          : (
-            <div className="d-flex filter-option-section align-items-center ">
-
-              <div className="form-field mx-1">
-                <select name="type" value={type} onChange={(e) => {
-                  setValue("")
-                  setType(e.target.value)
-                }}>
-                  <option value="">Interval</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                </select>
-              </div>
-
-              <div className="form-field mx-1">
-                <select name="ward" id="" value={value} onChange={(e) => {
-                  setValue(e.target.value)
-                }}>
-                  <option value="">Value</option>
-
-                  {
-                    type === "weekly" && <>
-                      {
-                        weekValues.map((item, i) => <option key={i} value={item}>
-                          week {item}
-                        </option>)
-                      }
-                    </>
-                  }
-
-                  {
-                    type === "monthly" && <>
-                      {mthValues.map((item, i) =>
-                        <option key={i} value={i + 1}>
-                          {item}
-                        </option>
-                      )}
-                    </>
-                  }
-
-                </select>
-              </div>
-
-
-            </div>
+      <div className="attendance-grid-section d-flex align-items-center  justify-content-between">
+        <h2>Attendance Summary</h2>
+       
+          {status === "loading" ? (
+            <div className='d-flex align-items-center py-2'>
+              <RotatingLines width="25" strokeColor="#0173bc" strokeWidth="3" />
+              <p style={{ color: "#0173bc", marginBottom: "0" }}>Loading please wait...</p></div>
           )
-        }
+            : (
+              <div className="d-flex filter-option-section align-items-center ">
 
+                <div className="form-field mx-1">
+                  <select name="type" value={type} onChange={(e) => {
+                    setValue("")
+                    setType(e.target.value)
+                  }}>
+                    <option value="">Interval</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </div>
+
+                <div className="form-field mx-1">
+                  <select name="ward" id="" value={value} onChange={(e) => {
+                    setValue(e.target.value)
+                  }}>
+                    <option value="">Value</option>
+
+                    {
+                      type === "weekly" && <>
+                        {
+                          weekValues.map((item, i) => <option key={i} value={item}>
+                            week {item}
+                          </option>)
+                        }
+                      </>
+                    }
+
+                    {
+                      type === "monthly" && <>
+                        {mthValues.map((item, i) =>
+                          <option key={i} value={i + 1}>
+                            {item}
+                          </option>
+                        )}
+                      </>
+                    }
+
+                  </select>
+                </div>
+
+
+              </div>
+            )
+          }
       </div>
+
       <div className="attendance-grid">
         <div className="attendance-flex ">
           <div>

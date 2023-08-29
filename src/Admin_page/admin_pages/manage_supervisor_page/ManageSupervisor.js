@@ -218,7 +218,7 @@ export default function ManageSupervisor() {
       <div className="manage-supervisor-page">
         <div className="manage-supervisor-header">
           <div className="d-flex align-items-center justify-content-between manage-supervisor-filter">
-            <h1>Supervisors ({totalCount})</h1>
+            <h1>LGA Supervisors ({totalCount})</h1>
             {/* <div className="d-flex filter-option-section align-items-center  mx-4">
               <div className="search-button px-2 mx-1">
                 <Icon icon="eva:search-outline" className="me-2 search-icon" />
@@ -327,7 +327,6 @@ export default function ManageSupervisor() {
                           {
                             supervisor?.isVerified === true ? <p
                               className="btn manage-supervisor-btn"
-
                             >
 
                               <Icon

@@ -81,6 +81,7 @@
   text-align: center;
   color: #ffffff;
   outline: none !important;
+  white-space: nowrap;
 }
 
 .discard-report-modal .btn.modal-button {
@@ -230,7 +231,7 @@
 }
 
 .sendrequest-modal.modal-screen .btn.modal-button {
-  width: 145px;
+  width: 200px;
 }
 
 .sendrequest-modal .request-info span {}

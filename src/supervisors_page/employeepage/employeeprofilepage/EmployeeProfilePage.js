@@ -97,7 +97,7 @@ export default function EmployeeProfilePage() {
                             <p><span>Sex: </span> {userData?.sex}</p>
                         </div>
                         <div className='work-info mx-4'>
-                            <p> <span>Work Topology: </span>{userData?.workTypology?.name}</p>
+                            <p> <span>Work Typology: </span>{userData?.workTypology?.name}</p>
                             <p><span>Ward:</span> {userData?.ward?.name}</p>
                             <p><span>Age:</span> {userData?.age} Years</p>
                         </div>
@@ -118,7 +118,7 @@ export default function EmployeeProfilePage() {
                     {
                         !offline && <>
                             <button onClick={() => openModal('edit')} className="btn request-edit mt-5 ">Request Edit Access</button>
-                            <button onClick={() => openModal('delete')} className="btn delete-user mt-5 mx-4">Delete Employee</button>
+                            <button onClick={() => openModal('delete')} className="btn delete-user mt-5 mx-4">Delete Beneficiary</button>
 
                         </>
 

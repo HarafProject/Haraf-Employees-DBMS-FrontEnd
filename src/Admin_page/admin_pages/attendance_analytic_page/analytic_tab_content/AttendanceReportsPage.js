@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Icon } from '@iconify/react';
-import { useQuery } from 'react-query'
+import { useQuery } from 'react-query';
 import {
   Table,
   TableHead,
@@ -11,18 +11,18 @@ import {
   TableBody,
   TableContainer,
   Paper,
-
   TablePagination,
   Button
 } from "@mui/material";
 
-import html2pdf from 'html2pdf.js';
+// import html2pdf from 'html2pdf.js';
+import * as XLSX from 'xlsx';
 import admin from "../../../../class/admin.class";
-import supervisor from "../../../../class/supervisor.class";
 import { RotatingLines } from "react-loader-spinner";
-import analyticPageData from './AnalyticPageData';
 import { useSelector } from "react-redux";
 import dataOBJs from "../../../../class/data.class";
+import haraf from '../../../../assets/logo.png';
+import mcrp from '../../../../assets/mcrp.jpg';
 
 export default function AnalyticAttendanceReport() {
   const { user } = useSelector((state) => state?.user)
@@ -30,15 +30,14 @@ export default function AnalyticAttendanceReport() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [attendanceData, setAttendanceData] = useState([]);
   const [tempData, setTempData] = useState([]);
-  const navigate = useNavigate()
-  const [type, setType] = useState("weekly")
-  const [dateValues, setDateValues] = useState([])
-  const [weekValues, setWeekValues] = useState([])
-  const [mthValues, setMthValues] = useState([])
-  const [value, setValue] = useState(null)
-  const [lga, setLga] = useState(null)
-  const [lgaData, setLgaData] = useState([])
-  const [lgaValue, setLgaValue] = useState([]);
+  const [type, setType] = useState("weekly");
+  const [weekValues, setWeekValues] = useState([]);
+  const [mthValues, setMthValues] = useState([]);
+  const [value, setValue] = useState(null);
+  const [lga, setLga] = useState(null);
+  const [lgaData, setLgaData] = useState([]);
+  const [exportButtonClick, setExportButtonClick] = useState(false);
+  const navigate = useNavigate();
 
   let months = [
     "January",
@@ -60,10 +59,12 @@ export default function AnalyticAttendanceReport() {
 
       if (user.role === "admin") {
         const data = await dataOBJs.getLgaByZone(user.zone)
+
         setLgaData(data)
       } else if (user.role === "super-admin") {
         const data = await dataOBJs.getLga()
         setLgaData(data)
+
       }
     } catch (error) {
       console.log(error)
@@ -128,6 +129,7 @@ export default function AnalyticAttendanceReport() {
 
   const handleLga = (e) => {
     setLga(e.target.value)
+
   };
 
   useEffect(() => {
@@ -148,36 +150,75 @@ export default function AnalyticAttendanceReport() {
   };
 
 
-  const handleExportPDF = async () => {
+
+  const handleExportExcel = async () => {
+    setExportButtonClick(true)
     try {
-      const input = document.getElementById('table-to-export');
-      if (!input) {
-        return;
-      }
+      const wb = XLSX.utils.book_new();
 
-      // Save the original table width
-      const originalTableWidth = input.style.width;
+      const excelData = [
+        [],
+        [
+          'MCRP/HARAF (Beneficiary Attendance And Payment Schedule)',
+        ],
+        [
+          `Zone: ${lgaData.filter(item => item._id === lga)[0]?.zone?.name}`,
+        ],
+        [
+          `LGA: ${lgaData.filter(item => item._id === lga)[0]?.name}`,
+        ],
+        [
+          `${type}: ${type === 'weekly' ? `week ${value}` : months[value - 1]}`,
+        ],
+        // Empty row for spacing
+        [],
+        [],
 
-      // Set the table width to a fixed value for proper rendering
-      input.style.width = '1000px';
+        [
+          'S/N',
+          'Beneficiary Name',
+          'Sex',
+          'Ward',
+          type === 'weekly' ? 'Days Worked per Week' : 'Days Worked per Month (10 days)',
+          type === 'monthly' && 'Total No. Days',
+          ...(type === 'monthly' ? ['Amount to be Paid(N)', 'Account Number', 'Bank Name'] : []),
+        ],
+        ...attendanceData.map((user, index) => [
+          index + 1,
+          user[0]?.employee?.fullName,
+          user[0]?.employee?.sex,
+          user[0]?.employee?.ward?.name,
+          type === 'weekly'
+            ? user.map(item => (item.status === 'Present' ? 'Present' : 'Absent')).join(', ')
+            : user?.filter(item => item.status === 'Present')?.length,
+          type === 'weekly' ? user.length : '',
+          ...(type === 'monthly'
+            ? [user?.filter(item => item.status === 'Present')?.length * 1000,user[0]?.employee?.accountNumber, user[0]?.employee?.bankName]
+            : []),
+        ]),
+      ];
 
-      const opt = {
-        margin: 5,
-        filename: 'table_export.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
-      };
+      const ws = XLSX.utils.aoa_to_sheet(excelData);
 
-      const worker = html2pdf().from(input).set(opt);
-      await worker.save();
 
-      // Restore the original table width
-      input.style.width = originalTableWidth;
+      
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Attendance Report');
+      
+
+      XLSX.writeFile(wb, 'attendance_report.xlsx');
     } catch (error) {
-      console.error('Error exporting as PDF:', error);
+      console.error('Error exporting as Excel:', error);
     }
   };
+ 
+ 
+ 
+
+  
+
+
+
 
   function handleSearch(e) {
     let lowercaseQuery = e.target.value.toLowerCase();
@@ -209,6 +250,7 @@ export default function AnalyticAttendanceReport() {
               </div>
               <div className="form-field mx-1">
                 <select name="lga" id="" onChange={handleLga} value={lga}>
+
                   <option value="">LGA</option>
                   {lgaData.map((lga) => (
                     <option key={lga._id} value={lga._id}>
@@ -257,21 +299,53 @@ export default function AnalyticAttendanceReport() {
 
                 </select>
               </div>
-
-
             </div>
           )
         }
-        <div> <Button className="btn export-btn" onClick={handleExportPDF}>
-          <Icon icon="clarity:export-solid" className="me-1" />
-          Export report
-        </Button></div>
+
+        {
+          type === "monthly" &&
+          <div> <Button className="btn export-btn" onClick={handleExportExcel}>
+            <Icon icon="clarity:export-solid" className="me-1" />
+            Export report
+          </Button></div>
+        }
 
       </div>
 
 
-      <div className="employee-list-table mt-3">
-        <TableContainer component={Paper} id="table-to-export">
+      <div className="employee-list-table mt-3" >
+        {/* {exportButtonClick && (
+          <div className="export-pdf-header p-4 my-2">
+            <div className="d-flex justify-content-between align-items-start">
+              <div className="logo-export-image">
+                <img src={mcrp} alt="" />
+              </div>
+
+
+              <div >
+                <h5 className="text-center">Hope And Rural Aid Foundation {<br />} MCRP/LIPW Beneficiary Attendance</h5>
+                <div colSpan={6} className="text-left mt-4">
+                  Zone: <span>{lgaData.filter(item => item._id === lga)[0]?.zone?.name}
+                  </span>,
+                  LGA: <span>{lgaData.filter(item => item._id === lga)[0]?.name}
+                  </span>,  {type}: <span>{type === 'weekly' ? `week ${value}` : months[value - 1]}
+                  </span>
+                </div>
+              </div>
+
+
+              <div className="logo-export-image">
+                <img src={haraf} alt="" />
+              </div>
+            </div>
+
+          </div>
+        )} */}
+
+
+
+        <TableContainer component={Paper} id="table-to-export" >
           <Table >
             <TableHead>
               <TableRow className="text-align-center">
@@ -282,6 +356,7 @@ export default function AnalyticAttendanceReport() {
                 {type === "weekly" ? <TableCell style={{ textAlign: "center" }}>Days Worked per Week</TableCell> : <TableCell className="ward">Days Worked per Month</TableCell>}
                 {type === "weekly" ? <TableCell className="ward">Total No. Days</TableCell> : ""}
                 {type === "monthly" && <>
+                <TableCell>Amount to be Paid(N)</TableCell>
                   <TableCell>Account Number</TableCell>
                   <TableCell>Bank Name</TableCell>
                 </>}
@@ -292,7 +367,7 @@ export default function AnalyticAttendanceReport() {
               {<>
 
                 {attendanceData.map((user, index) => (
-                  <TableRow style={{cursor:"pointer"}} onClick={() => navigate("/admins/home/employee-profile", { state: user[0]?.employee })}>
+                  <TableRow style={{ cursor: "pointer" }} onClick={() => navigate("/admins/home/employee-profile", { state: user[0]?.employee })}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell> {user[0]?.employee?.fullName} </TableCell>
                     <TableCell> {user[0]?.employee?.sex}</TableCell>
@@ -324,11 +399,14 @@ export default function AnalyticAttendanceReport() {
 
                     <TableCell className="ward">
                       <p>
-                        {user?.filter(item => item.status === "Present")?.length}/{user.length}
+                        {user?.filter(item => item.status === "Present")?.length}/10
                       </p>
 
                     </TableCell>
                     {type === "monthly" && <>
+                    <TableCell>
+          {user?.filter(item => item.status === "Present")?.length * 1000}
+        </TableCell>
                       <TableCell> {user[0]?.employee?.accountNumber} </TableCell>
                       <TableCell> {user[0]?.employee?.bankName}</TableCell>
                     </>}

@@ -121,31 +121,31 @@ export default function ManageSupervisorModal({
     if (buttonClick === "verify") {
       setActionTitle("Verify Supervisor");
       setActionText(
-        `Are you sure you want to verify ${supervisorName} as a ${getRole}? This will allow ${supervisorName} to have full access to the LIPWDMS portal`
+        `Are you sure you want to verify ${supervisorName} as a ${getRole}? This will allow ${supervisorName} to have full access to the MCRP/HARAF portal`
       );
       setButtonText("Verify");
     } else if (buttonClick === "delete") {
       setActionTitle("Delete Supervisor");
       setActionText(
-        `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the LIPWDMS portal`
+        `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the MCRP/HARAF portal`
       );
       setButtonText("Delete");
     } else if (buttonClick === "unverify") {
       setActionTitle("Verify Supervisor");
       setActionText(
-        `Are you sure you want to unverify ${supervisorName} as a ${getRole}? This will restrict ${supervisorName} from having full access to the LIPWDMS portal`
+        `Are you sure you want to unverify ${supervisorName} as a ${getRole}? This will restrict ${supervisorName} from having full access to the MCRP/HARAF portal`
       );
       setButtonText("Unverify");
     } else if (buttonClick === "verify-admin") {
       setActionTitle("Verify-Admin");
       setActionText(
-        `Are you sure you want to verify ${supervisorName} as a ${getRole}? This will allow ${supervisorName} to have full access to the LIPWDMS portal`
+        `Are you sure you want to verify ${supervisorName} as a ${getRole}? This will allow ${supervisorName} to have full access to the MCRP/HARAF portal`
       );
       setButtonText("Verify-Admin");
     } else if (buttonClick === "delete-admin") {
       setActionTitle("Delete-Admin");
       setActionText(
-        `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the LIPWDMS portal`
+        `Are you sure you want to permanently delete ${supervisorName} as a ${getRole}? This will disable ${supervisorName} account on the MCRP/HARAF portal`
       );
       setButtonText("Delete-Admin");
     }

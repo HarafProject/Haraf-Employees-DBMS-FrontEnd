@@ -25,15 +25,15 @@ export default function ViewRequestModal({
 
   useEffect(() => {
     if (activeTabButton === "add") {
-      setModalText("Add Employee Request");
+      setModalText("Add Beneficiary Request");
       setModalMessage(
-        `Request to add an LIPWDMS employeee`
+        `Request to add an MCRP/HARAF benefiary`
       );
       setModalReason(modalData);
     } else if (activeTabButton === "delete") {
-      setModalText("Delete Employee Request");
+      setModalText("Delete Beneficiary Request");
       setModalMessage(
-        `Request to delete ${modalData?.employee?.fullName} as an LIPWDMS employeee`
+        `Request to delete ${modalData?.employee?.fullName} as an MCRP/HARAF beneficiary`
       );
     } else if (activeTabButton === "edit") {
       setModalText("Edit Profile Request");
@@ -51,10 +51,15 @@ export default function ViewRequestModal({
         <div className="d-flex flex-column align-items-center modal-content">
           <h6 className="modal-title"> {modalText}</h6>
           <p className="request-by mt-2">{modalMessage}</p>
-          <div class="d-flex justify-content-around align-items-center">
-            <p style={{marginRight:"3rem"}}>LGA : {modalData?.employee?.lga?.name}</p>
+
+          {activeTabButton !== "add" && (<div class="d-flex justify-content-around align-items-center">
+            <p style={{ marginRight: "3rem" }}>LGA : {modalData?.employee?.lga?.name}</p>
             <p>WARD : {modalData?.employee?.ward?.name}</p>
-          </div>
+          </div>)}
+
+
+
+
           <div className="reason-section mt-3">
             <span>Reasons</span>
             {modalData?.reason ? <p>{modalData?.reason}</p> : <p> </p>}

@@ -41,7 +41,7 @@ const navigate = useNavigate()
 
           <p className='mt-2 text-center no-network'>Delete Supervisor?</p>
           <span className='mt-2 mb-5 text-center'>
-            Are you sure you want to permanently delete {employee.name} as an supervisor? This will remove Joseph's as an supervisor on the LIPWDMS portal</span>
+            Are you sure you want to permanently delete {employee.name} as an supervisor? This will remove Joseph's as an supervisor on the MCRP/HARAF portal</span>
 
           {isLoading && <center className="btn modal-button delete-btn my-4"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 

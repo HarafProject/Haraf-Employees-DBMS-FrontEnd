@@ -119,7 +119,7 @@ export default function AttendanceGraphChart() {
         dataLabels: {
             enabled: false,
         },
-        colors: ["#444444", "#F99C39"],
+        colors: ["#ca0202", "#0280ca"],
         stroke: {
             width: 0,
         },
