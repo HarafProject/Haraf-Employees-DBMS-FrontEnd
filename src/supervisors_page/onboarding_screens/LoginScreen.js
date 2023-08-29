@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import profile from "../../assets/logo-light.png";
+
+import profile from "../../assets/harafLogoWhite.png";
+import mcrpLogo from "../../assets/mcrp_logo.jpeg";
 import "./onboarding.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -13,8 +15,8 @@ import { loginSuccess } from "../../redux/reducers/userReducer";
 import { setToken } from "../../redux/reducers/jwtReducer";
 import { RotatingLines } from "react-loader-spinner";
 import { updateWards } from "../../redux/reducers/employeeReducer";
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
 import NoNetworkModal from "../../component/reusable/modalscontent/NoNetworkModal";
 
 export default function LoginScreen() {
@@ -42,7 +44,6 @@ export default function LoginScreen() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarType, setSnackbarType] = useState("");
 
-
   const togglePasswordVisiblity = () => {
     setPasswordType(passwordType ? false : true);
     setIcon(!icon);
@@ -53,7 +54,8 @@ export default function LoginScreen() {
     // console.log(state.user.user, "state");
   });
 
-  const openModal = () => { // Modify openModal function
+  const openModal = () => {
+    // Modify openModal function
     setIsOpen(true);
   };
 
@@ -86,25 +88,26 @@ export default function LoginScreen() {
         .then((res) => {
           // toast.success(res?.data?.message);
           setSnackbarMessage(res?.data?.message);
-          localStorage.setItem("HARAF-AUTH", res?.data?.token)
+          localStorage.setItem("HARAF-AUTH", res?.data?.token);
           dispatch(setToken(res?.data?.token));
           dispatch(loginSuccess(res?.data?.user));
-          dispatch(updateWards(res?.data.wards))
+          dispatch(updateWards(res?.data.wards));
           //redirect to emp
-          navigate("/supervisor", { replace: true })
+          navigate("/supervisor", { replace: true });
           setIsLoading(false);
         })
         .catch((err) => {
-
           toast.error(err?.error || err);
           setIsLoading(false);
           if (!err) {
-            let auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)?.token
+            let auth = JSON.parse(
+              JSON.parse(localStorage.getItem("persist:root")).auth
+            )?.token;
 
             if (auth && !isOnline) {
-              openModal()
+              openModal();
             } else {
-              toast.error("You appear to be offline.")
+              toast.error("You appear to be offline.");
             }
           }
         });
@@ -121,15 +124,14 @@ export default function LoginScreen() {
     }
   }, [snackbarMessage]);
 
-
   return (
     <div className="onboarding-screen login-screen">
       <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-4">
-
-        <img src={profile} alt="" />
-        <p className="my-1 text-center title">MCRP Management System{<br />}(MCRPMS)</p>
-
-
+        <div className="login-screen-logos">
+          <img className="haraf" src={profile} alt="" />
+          <img src={mcrpLogo} alt="" />
+        </div>
+        <h1>MCRP/HARAF</h1>
         <form onSubmit={formik.handleSubmit} className="mt-3">
           <p className="screen-title text-center mt-5">LOGIN</p>
 
@@ -145,8 +147,8 @@ export default function LoginScreen() {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                 />
-
-              </div>  {formik.touched.email && formik.errors.email && (
+              </div>{" "}
+              {formik.touched.email && formik.errors.email && (
                 <div className="error">{formik.errors.email}</div>
               )}
             </div>
@@ -171,7 +173,6 @@ export default function LoginScreen() {
                 <div className="error">{formik.errors.password}</div>
               )}
             </div>
-
           </div>
 
           <div className="d-flex flex-column align-items-center login-screen-button mt-3">
@@ -203,22 +204,19 @@ export default function LoginScreen() {
         onRequestClose={closeModal}
         contentLabel="Example Modal"
         className={{
-          base: 'modal-base',
-          afterOpen: 'modal-base_after-open',
-          beforeClose: 'modal-base_before-close'
+          base: "modal-base",
+          afterOpen: "modal-base_after-open",
+          beforeClose: "modal-base_before-close",
         }}
         overlayClassName={{
-          base: 'overlay-base',
-          afterOpen: 'overlay-base_after-open',
-          beforeClose: 'overlay-base_before-close'
+          base: "overlay-base",
+          afterOpen: "overlay-base_after-open",
+          beforeClose: "overlay-base_before-close",
         }}
         shouldCloseOnOverlayClick={true}
         closeTimeoutMS={2000}
       >
-
-        <NoNetworkModal
-          closeModal={closeModal}
-        />
+        <NoNetworkModal closeModal={closeModal} />
       </Modal>
     </div>
   );

@@ -108,7 +108,7 @@ export default function LoginOtpVerify() {
         <div className="form d-flex flex-column align-items-center p-5">
           <h1>OTP Verification</h1>
           <p>
-            A One Time Pin (OTP) has been sent to your registered phone number,
+            A One Time Pin (OTP) has been sent to your registered Email,
             kindly input the pin below
           </p>
           <form
