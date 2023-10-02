@@ -22,7 +22,6 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
 
   async function fetchTypology() {
     const typology_list = await supervisor.getWorkTypology();
-    console.log(typology_list)
 
     setTypologyList(typology_list.workTypology);
     // setWardList(ward_list)
@@ -75,7 +74,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
           </div>
           <div className="form-field topology mt-3 mx-2">
             <select name="workTypology" onChange={(e) => handleFilter(e)}>
-              <option value={""}>Work Topology</option>
+              <option value={""}>Work Sector</option>
               {typologyList?.map((item) => (
                 <option key={item._id} value={item._id}>
                   {item?.name}

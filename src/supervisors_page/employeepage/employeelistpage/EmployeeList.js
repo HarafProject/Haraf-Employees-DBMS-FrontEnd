@@ -137,7 +137,8 @@ export default function EmployeeListTable() {
                     <TableCell>S/N</TableCell>
                     <TableCell>Headshots</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Topology</TableCell>
+                    <TableCell>Sector</TableCell>
+                    <TableCell>Typology</TableCell>
                     <TableCell>Ward</TableCell>
                     <TableCell>Phone Number</TableCell>
                     <TableCell>Age</TableCell>
@@ -158,7 +159,9 @@ export default function EmployeeListTable() {
                         <Avatar alt={user.fullName} src={user?.photo} />
                       </TableCell>
                       <TableCell>{user.fullName}</TableCell>
-                      <TableCell>{user.workTypology?.name}</TableCell>
+                      <TableCell>{user.workTypology?.name ? user.workTypology.name.substring(0, 15) : ''}</TableCell>
+                      <TableCell>{user.subWorkTypology?.name ? user.subWorkTypology.name.substring(0, 15) : ''}</TableCell>
+
                       <TableCell>{user.ward?.name}</TableCell>
                       <TableCell>{user.phone}</TableCell>
                       <TableCell>{user.age}</TableCell>
