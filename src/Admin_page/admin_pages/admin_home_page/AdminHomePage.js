@@ -87,13 +87,15 @@ export default function AdminHomePage() {
             <span>Attendance Analytics</span>
           </p>
 
-          <p
+{user?.role === "super-admin" && <p
             className={selectedComponent === "requests" ? "active" : ""}
             onClick={() => handleComponentClick("requests")}
           >
             <Icon icon="fluent:branch-request-20-filled" />
             <span>LGA Supervisor's Requests</span>
-          </p>
+          </p>}
+          
+
 
           <p
             className={selectedComponent === "manage" ? "active" : ""}
@@ -108,7 +110,7 @@ export default function AdminHomePage() {
             onClick={() => handleComponentClick("profile")}
           >
             <Icon icon="uiw:user" />
-            <span>{user?.role === "super-admin" ? "Manage Zonal Supervisors" : "State Supervisors"}</span>
+            <span>{user?.role === "super-admin" ? "Manage Zonal Supervisors" : "Profile"}</span>
           </p>
 
           <p

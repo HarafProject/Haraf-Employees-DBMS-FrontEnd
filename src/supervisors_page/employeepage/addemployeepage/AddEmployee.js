@@ -427,7 +427,7 @@ export default function AddEmployeeScreen({ prefilledData }) {
                             <div className="form-area">
                                 <div className="form-field mx-3 mt-3">
                                     <select name="specialDisability" disabled={!isVerified} {...formik.getFieldProps('specialDisability')}>
-                                        <option>Special Disability</option>
+                                        <option>Special Ability</option>
                                         <option value="nil">N/A</option>
                                         <option value="visibility">Visibility impairment</option>
                                         <option value="hearing">Hearing impairment</option>

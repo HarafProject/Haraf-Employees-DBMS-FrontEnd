@@ -119,8 +119,9 @@ export default function CreateAdminAccountScreen() {
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
         <div className="text-center">
           <div className="admin-logo">
+          <img src={mcrpLogo} alt="" className="mrcplogo" />
             <img src={profile} alt="" />
-            <img src={mcrpLogo} alt="" className="mrcplogo" />
+           
           </div>
 
           <h2 className="my-2">MCRP/HARAF</h2>

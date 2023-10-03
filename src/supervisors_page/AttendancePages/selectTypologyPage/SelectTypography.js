@@ -20,9 +20,9 @@ export default function SelectTypography() {
       <div className="margin ">
         <div className="select-typ">
           <div className="header">
-            <h3>Select Topology</h3>
+            <h3>Select Typology</h3>
             <p>
-              Please choose the employee topology for whom you will be taking
+              Please choose the employee typology for whom you will be taking
               attendance.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function SelectTypography() {
                   />
                   Education
                 </div>
-                <p>You can only select one topology at a time</p>
+                <p>You can only select one typology at a time</p>
               </label>
 
               <label className="toggle">

@@ -39,16 +39,16 @@ const navigate = useNavigate()
         <div className="d-flex flex-column align-items-center modal-content">
 
 
-          <p className='mt-2 text-center no-network'>Delete Supervisor?</p>
+          <p className='mt-2 text-center no-network'>Replace Supervisor?</p>
           <span className='mt-2 mb-5 text-center'>
-            Are you sure you want to permanently delete {employee.name} as an supervisor? This will remove Joseph's as an supervisor on the MCRP/HARAF portal</span>
+            Are you sure you want to permanently replace {employee.name} as an supervisor? This will remove Joseph's as an supervisor on the MCRP/HARAF portal</span>
 
           {isLoading && <center className="btn modal-button delete-btn my-4"><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></center>}
 
           {
             !isLoading &&
             <button className="btn modal-button delete-btn my-4" onClick={deleteEmployee}>
-              Delete
+              Replace
             </button>
           }
         </div>

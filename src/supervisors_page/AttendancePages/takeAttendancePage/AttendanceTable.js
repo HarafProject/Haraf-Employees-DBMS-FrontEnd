@@ -24,7 +24,21 @@ import { updateAttendance, attendanceRecord } from '../../../redux/reducers/atte
 
 export default function AttendanceTable({ attendance, onReasonSelect }) {
 
-  const [record, setRecord] = useState([])
+  const [record, setRecord] = useState([]);
+
+  const [selectedReasons, setSelectedReasons] = useState({});
+
+  // ... (other code)
+
+  function handleReasonSelect(index, selectedReason) {
+    setSelectedReasons(prevSelectedReasons => ({
+      ...prevSelectedReasons,
+      [index]: selectedReason
+    }));
+  }
+
+
+
   
   const [markAttendance, setMarkAttendance] = useState({})
   const [fireDispatch, setFireDispatch] = useState(false)
@@ -126,7 +140,10 @@ export default function AttendanceTable({ attendance, onReasonSelect }) {
                 {row.status === "Absent" && 
                 <TableCell className='table-select-field'>
                   <div className="my-table-select">
-                     <select name="" id=""  >
+                     <select  name={`reason-${index}`}
+                  id={`reason-${index}`}
+                  value={selectedReasons[index] || ""}
+                  onChange={(e) => handleReasonSelect(index, e.target.value)}  >
                     <option value="">select reason</option>
                     <option value="sick">Sick</option>
                     <option value="bereaved">Bereaved</option>

@@ -97,6 +97,7 @@ export default function LoginScreen() {
           setIsLoading(false);
         })
         .catch((err) => {
+          console.log(err)
           toast.error(err?.error || err);
           setIsLoading(false);
           if (!err) {
@@ -104,11 +105,11 @@ export default function LoginScreen() {
               JSON.parse(localStorage.getItem("persist:root")).auth
             )?.token;
 
-            if (auth && !isOnline) {
-              openModal();
-            } else {
-              toast.error("You appear to be offline.");
-            }
+            // if (auth && !isOnline) {
+            //   openModal();
+            // } else {
+            //   toast.error("You appear to be offline.");
+            // }
           }
         });
     },
@@ -128,8 +129,9 @@ export default function LoginScreen() {
     <div className="onboarding-screen login-screen">
       <div className="d-flex flex-column justify-content-between  align-items-center signup-content py-4">
         <div className="login-screen-logos">
+        <img src={mcrpLogo} alt="" />
           <img className="haraf" src={profile} alt="" />
-          <img src={mcrpLogo} alt="" />
+          
         </div>
         <h1>MCRP/HARAF</h1>
         <form onSubmit={formik.handleSubmit} className="mt-3">

@@ -417,7 +417,7 @@ export default function EditEmployeeScreen() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.specialDisability} >
-                    <option>Special Disability</option>
+                    <option>Special Ability</option>
                     <option value="nil">N/A</option>
                     <option value="visibility">Visibility impairment</option>
                     <option value="hearing">Hearing impairment</option>

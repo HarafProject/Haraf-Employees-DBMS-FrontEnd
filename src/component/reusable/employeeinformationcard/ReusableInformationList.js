@@ -7,7 +7,7 @@ const ReusableInformationList = ({ title, information }) => {
       <p className="h6">{title}</p>
       <div className="personalinfo-user">
         {information.map((item, index) => (
-          <p className="d-flex flex-column info" key={index}>
+          <p className="d-flex flex-column info my-2" key={index}>
             <span>{item.label}</span>
             {item.value}
           </p>

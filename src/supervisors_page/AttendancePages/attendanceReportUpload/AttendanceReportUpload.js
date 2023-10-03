@@ -97,6 +97,30 @@ export default function AttendanceReportUpload() {
   }
 
 
+
+
+  const [selectedReasons, setSelectedReasons] = useState({});
+  const [attendanceReasonCount, setAttendanceReasonCount] = useState({}); // Define the state for reason count
+
+  useEffect(() => {
+    const countByReason = Object.values(selectedReasons).reduce(
+      (counts, selectedReason) => {
+        counts[selectedReason] = (counts[selectedReason] || 0) + 1;
+        return counts;
+      },
+      {}
+    );
+  
+    console.log("countByReason:", JSON.stringify(countByReason, null, 2));
+  
+    setAttendanceReasonCount(countByReason);
+  }, [selectedReasons]);
+  
+
+
+
+
+
   const submissionTime = moment().format('h:mm A');
   const currentTime = moment();
   const startTime = moment().set('hour', 9).set('minute', 0);
@@ -140,6 +164,15 @@ export default function AttendanceReportUpload() {
                 <h4>{attendance.data[0]?.lga?.name} LGA</h4>
               </div>
             </div>
+
+            <div>
+          {Object.keys(attendanceReasonCount).map((reason, index) => (
+            <div className='d-flex flex-column align-items-center summary' key={index}>
+              <h1>{attendanceReasonCount[reason]}</h1>
+              <p>{reason}</p>
+            </div>
+          ))}
+        </div>
 
             <div>
               <div className='d-flex flex-column align-items-center summary' >

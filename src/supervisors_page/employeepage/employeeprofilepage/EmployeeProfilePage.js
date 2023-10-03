@@ -34,7 +34,7 @@ export default function EmployeeProfilePage() {
   const otherInfo = [
     { label: "Head of Household", value: userData?.householdHead },
     { label: "Household Size", value: userData.householdSize },
-    { label: "Special Disability", value: userData.specialDisability },
+    { label: "Special Ability", value: userData.specialDisability },
   ];
 
   function openModal(modalType) {

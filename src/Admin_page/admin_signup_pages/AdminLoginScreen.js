@@ -70,8 +70,9 @@ export default function AdminLoginScreen() {
     <div className="onboarding-screen login-screen admin">
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-4">
         <div className="admin-logo">
+        <img src={mcrpLogo} alt="" className="mrcplogo" />
           <img src={profile} alt="" />
-          <img src={mcrpLogo} alt="" className="mrcplogo" />
+          
         </div>
         <h1 className="my-2">MCRP/HARAF</h1>
 

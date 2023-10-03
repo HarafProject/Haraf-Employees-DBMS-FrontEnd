@@ -117,8 +117,9 @@ export default function CreateAccountScreen() {
       {/* <div className="login-screen"> */}
       <div className="d-flex flex-column justify-content-space-between  align-items-center signup-content py-5">
         <div className="login-screen-logos">
-          <img className="haraf" src={profile} alt="" />
+          
           <img src={mcrpLogo} alt="" />
+          <img className="haraf" src={profile} alt="" />
         </div>
         <h1>MCRP/HARAF</h1>
         <form onSubmit={formik.handleSubmit} className="mt-3">

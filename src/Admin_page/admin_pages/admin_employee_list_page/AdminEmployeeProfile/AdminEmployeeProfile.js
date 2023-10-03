@@ -33,7 +33,7 @@ export default function AdminEmployeeProfile() {
   const otherInfo = [
     { label: "Head of Household", value: user?.householdHead },
     { label: "Household Size", value: user?.householdSize },
-    { label: "Special Disability", value: user?.specialDisability },
+    { label: "Special Ability", value: user?.specialDisability },
   ];
 
   const goBack = () => {

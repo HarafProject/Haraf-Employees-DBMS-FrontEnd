@@ -151,7 +151,7 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
         </div>
         <div className="form-field my-2">
           <select name="workTypology" id="" onChange={handleFilter}>
-            <option value="">Work Typology</option>
+            <option value="">Work Topology</option>
             {typologyList.map((item, i) => (
               <option
                 key={i}

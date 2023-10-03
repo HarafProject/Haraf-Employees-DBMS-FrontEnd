@@ -34,8 +34,9 @@ export default function AdminWelcomeScreen() {
         <div className="onboarding-screen welcome-screen admin">
           <div className="d-flex flex-column justify-content-space-between  align-items-center welcome-screen-content py-5">
             <div className="admin-logo">
+            <img src={mrcpLogo} alt="" className="mrcplogo" />
               <img src={profile} alt="" />
-              <img src={mrcpLogo} alt="" className="mrcplogo" />
+              
             </div>
 
             <h1 className="my-2">MCRP/HARAF</h1>

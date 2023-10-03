@@ -162,7 +162,7 @@ export default function AttendanceDetailedPage() {
             </div>
             <div className="form-field mx-2">
               <select name="workTypology" id="" onChange={handleFilter}>
-                <option value={""}>Work Typology</option>
+                <option value={""}>Work Topology</option>
                 {typologyList.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
               </select>
             </div>
@@ -190,7 +190,7 @@ export default function AttendanceDetailedPage() {
                 <TableCell>Headshot</TableCell>
                 <TableCell>Beneficiaries</TableCell>
                 <TableCell>Attendance Status</TableCell>
-                <TableCell>Work Typology</TableCell>
+                <TableCell>Work Topology</TableCell>
                 <TableCell>Ward</TableCell>
                 {/* <TableCell>Ticked By</TableCell> */}
                 <TableCell>SP. Action</TableCell>
