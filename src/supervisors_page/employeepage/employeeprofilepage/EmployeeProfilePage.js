@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import ReusableInformationList from "../../../component/reusable/employeeinformationcard/ReusableInformationList";
 import "./employeeprofile.css";
 import Modal from "react-modal";
@@ -18,6 +18,8 @@ export default function EmployeeProfilePage() {
   const [modalType, setModalType] = useState("");
   const userData = location.state;
   const { offline } = useSelector((state) => state?.user);
+
+  const navigate = useNavigate();
 
   const personalInfo = [
     { label: "Full Name", value: userData?.fullName },
@@ -142,11 +144,19 @@ export default function EmployeeProfilePage() {
 
           {!offline && (
             <>
-              <button
+              {/* <button
                 onClick={() => openModal("edit")}
                 className="btn request-edit mt-5 "
               >
                 Request Edit Access
+              </button> */}
+              <button
+                onClick={() =>
+                  navigate("/supervisor/edit-employee", { state: {employee : userData._id}})
+                }
+                className="btn request-edit mt-5 "
+              >
+                Edit
               </button>
               <button
                 onClick={() => openModal("delete")}
