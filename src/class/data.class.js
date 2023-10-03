@@ -36,17 +36,17 @@ class dataOBJ {
     }
   };
 
-    //get lga
-    getWards = async (zoneId) => {
-      try {
-        const res = await api.get(`api/location/wards`);
-        if (res?.data?.status === "success") {
-          return res?.data?.wards;
-        }
-      } catch (err) {
-        throw err;
+  //get lga
+  getWards = async (zoneId) => {
+    try {
+      const res = await api.get(`api/location/wards`);
+      if (res?.data?.status === "success") {
+        return res?.data?.wards;
       }
-    };
+    } catch (err) {
+      throw err;
+    }
+  };
 
   //get wards by lga
   getWardsByLga = async (lgaId) => {
@@ -54,6 +54,17 @@ class dataOBJ {
       const res = await api.get(`api/location/ward/${lgaId}`);
       if (res?.data?.status === "success") {
         return res?.data?.wards;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  getWorkSector = async (id) => {
+    try {
+      const res = await api.get(`api/supervisor/sub-work-typology/${id}`);
+      if (res?.data?.status === "success") {
+        return res?.data?.subWorkTypology;
       }
     } catch (err) {
       throw err;

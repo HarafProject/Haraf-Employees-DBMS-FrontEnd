@@ -14,6 +14,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   async function fetchWards() {
     try {
       const ward_list = await dataOBJs.getWardsByLga(user.lga);
+      console.log(ward_list);
       setWardList(ward_list);
     } catch (error) {
       console.log(error);
@@ -22,7 +23,7 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
 
   async function fetchTypology() {
     const typology_list = await supervisor.getWorkTypology();
-    console.log(typology_list)
+    console.log(typology_list);
 
     setTypologyList(typology_list.workTypology);
     // setWardList(ward_list)
