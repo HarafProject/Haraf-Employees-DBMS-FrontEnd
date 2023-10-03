@@ -39,7 +39,12 @@
   line-height: normal;
   color: #ffffff;
 }
-
+.table-typology{
+  /* max-width: 100px;
+  text-overflow: ellipsis; */
+  width: 100px;
+  white-space: normal;
+}
 .empty-list-screen .empty-list-content .btn.add-employee .iconify {
   font-size: 30px;
 }
