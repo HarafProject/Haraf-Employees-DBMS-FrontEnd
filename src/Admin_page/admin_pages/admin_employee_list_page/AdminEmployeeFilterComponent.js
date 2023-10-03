@@ -136,19 +136,29 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
   }
 
   const [selectedLi, setSelectedLi] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [displayInnerDiv, setDisplayInnerDiv] = useState(true);
 
   const handleLiClick = (index) => {
-    setSelectedLi(index);
+    setSelectedLi(index === selectedLi ? null : index);
   };
 
-  const [isOpen, setIsOpen] = useState(true);
+  const handleOptionClick = (itemId) => {
+    const data = tempData?.filter((item) => {
+      const workdata = item.subWorkTypology === itemId;
+      return workdata;
+    });
+    setSelectedOption(itemId);
+    setBeneficiaries(data);
+    setDisplayInnerDiv(false);
+  };
 
   function handleFilter2() {
     setBeneficiaries(allData);
   }
 
   return (
-    <div className="filter-option-section admin  mt-3">
+    <div className="filter-option-section admin for-sector   mt-3">
       <div className="filter d-flex align-items-center justify-content-between ">
         <div className="search-button px-2 mx-2">
           <Icon icon="eva:search-outline" className="me-2 search-icon" />
@@ -190,29 +200,38 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
             ))}
           </select>
         </div>
-        <div className="form-field my-2">
-          <div>
-            {typologyList.map((item, i) => (
-              <div key={i}>
-                <li className="option-bold list-style-none" onClick={() => handleLiClick(i)}>
-                  {item.name}
-                </li>
-                <select
-                  name="workSector"
-                  id=""
-                  onChange={handleFilter}
-                  style={{ display: selectedLi === i ? "block" : "none" }}
-                >
-                  {isOpen &&
-                    workSectorData[i]?.map((item, j) => (
-                      <option value={item._id} key={j}>
-                        {item.name}
-                      </option>
-                    ))}
-                </select>
+        <div className="sector-drop-down">
+          {typologyList.map((item, i) => (
+            <div key={i}>
+              <li
+                className="option-bold "
+                onClick={() => {
+                  handleLiClick(i);
+                  setDisplayInnerDiv(true); // Show inner div when the li is clicked
+                }}
+                style={{ cursor: "pointer", listStyle: "none" }}
+              >
+                {item.name}
+              </li>
+              <div
+                className="inner-dropdown-select"
+                style={{
+                  display:
+                    selectedLi === i && displayInnerDiv ? "block" : "none", // Toggle display based on selectedLi and displayInnerDiv
+                }}
+              >
+                {workSectorData[i]?.map((item, j) => (
+                  <div
+                    key={j}
+                    onClick={() => handleOptionClick(item._id)}
+                    style={{ padding: "5px", cursor: "pointer" }}
+                  >
+                    {item.name}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

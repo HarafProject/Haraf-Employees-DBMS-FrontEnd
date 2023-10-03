@@ -128,6 +128,31 @@
   border-radius: 5px;
   white-space: nowrap;
 }
+.filter-option-section.admin.for-sector {
+}
+
+.sector-drop-down {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0px 4px 35px 0px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 70%;
+  width: 300px;
+  top: 16rem;
+  z-index: 44;
+  border-radius: 4px;
+}
+
+.inner-dropdown-select {
+  background-color: #fff;
+  box-shadow: 0px 4px 35px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+  margin-left: 2rem;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  border-radius: 4px;
+  z-index: 777;
+}
 
 @media screen and (max-width: 1027px) {
   .filter-option-section.admin .filter {
