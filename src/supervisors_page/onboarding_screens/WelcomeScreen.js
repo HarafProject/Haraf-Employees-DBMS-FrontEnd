@@ -9,9 +9,9 @@ export default function WelcomeScreen() {
   return (
     <div className="onboarding-screen welcome-screen">
       <div className="d-flex flex-column justify-content-space-between  align-items-center welcome-screen-content py-5">
-        <div className="login-screen-logos">
+        <div className="login-screen-logos"><img src={mcrpLogo} alt="" className="mcrp" />
           <img className="haraf" src={profile} alt="" />
-          <img src={mcrpLogo} alt="" className="mcrp" />
+          
         </div>
         <h1>MCRP/HARAF</h1>
 

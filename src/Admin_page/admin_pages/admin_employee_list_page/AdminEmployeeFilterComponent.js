@@ -38,7 +38,7 @@ const fetchWorkSectorData = async (id) => {
 
 console.log(fetchWorkSectorData());
 
-function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
+function AdminEmployeeFilterComponent({ allData, setBeneficiaries, showLastSelect, showOtherOption }) {
   const [zoneList, setZoneList] = useState([]);
   const [lgaList, setLgaList] = useState([]);
   const [wardList, setWardList] = useState([]);
@@ -46,6 +46,8 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
   const [tempData, setTempData] = useState([]);
   const { user } = useSelector((state) => state?.user);
   const [workSectorData, setWorkSectorData] = useState([]);
+
+  // const [showLastSelect, setShowLastSelect] = (false)
 
   // React query fecth data
   const { data, status } = useQuery(["fetchLocationData"], fetchLocationData);
@@ -118,9 +120,9 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
         e.target.value === ""
           ? tempData
           : tempData?.filter((item) => {
-              console.log(e.target.value);
-              return item.workTypology._id === e.target.value;
-            });
+            console.log(e.target.value);
+            return item.workTypology._id === e.target.value;
+          });
       setBeneficiaries(data);
     } else {
       let lowercaseQuery = e.target.value.toLowerCase();
@@ -137,7 +139,7 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
   return (
     <div className="filter-option-section admin  mt-3">
       <div className="filter d-flex align-items-center justify-content-between ">
-        <div className="search-button px-2 mx-2">
+{showOtherOption && <> <div className="search-button px-2 mx-2">
           <Icon icon="eva:search-outline" className="me-2 search-icon" />
           <input
             type="search"
@@ -193,6 +195,25 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
             ))}
           </select>
         </div>
+</>
+}
+        
+       
+
+        {!showLastSelect &&
+          <div className="form-field my-2">
+            <select name="workTypology" id="" onChange={handleFilter}>
+              {typologyList.map((item, i) => (
+                <>
+                  <option className="option-bold" key={i} value={item._id}>
+                    {item.name} <br />
+                  </option>
+                </>
+              ))}
+            </select>
+          </div>
+        }
+
       </div>
     </div>
   );

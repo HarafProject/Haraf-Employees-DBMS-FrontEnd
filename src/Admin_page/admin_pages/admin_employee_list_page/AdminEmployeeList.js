@@ -66,6 +66,8 @@ export default function AdminEmployeeList() {
               allData={data?.data}
               beneficiaries={beneficiaries}
               setBeneficiaries={setBeneficiaries}
+              showLastSelect={true}
+              showOtherOption
             />
         }
 
