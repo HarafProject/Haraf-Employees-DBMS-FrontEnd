@@ -58,6 +58,16 @@ export default function AdminEmployeeList() {
       <div className="employees-table-section">
         <AdminEmployeeDataSummary beneficiaries={beneficiaries} />
 
+        {
+          status === "loading" ? <div className='d-flex align-items-center px-5 py-3'><RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" /> <p style={{ color: "#0173bc" }}>Loading please wait...</p></div> :
+            <AdminEmployeeFilterComponent
+              allData={data?.data}
+              beneficiaries={beneficiaries}
+              setBeneficiaries={setBeneficiaries}
+              showLastSelect={true}
+              showOtherOption
+            />
+        }
         {status === "loading" ? (
           <div className="d-flex align-items-center px-5 py-3">
             <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />{" "}

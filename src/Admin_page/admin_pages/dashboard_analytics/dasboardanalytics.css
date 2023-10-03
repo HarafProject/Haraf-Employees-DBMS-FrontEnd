@@ -1,0 +1,70 @@
+.dashboard-analytic-section h1.number {
+  color: #0280CA;
+}
+
+.dashboard-analytic-graps .container-fluid {
+  background-color: #D9D9D933;
+  border-radius: 10px;
+}
+
+.dashboard-analytic-barchart {
+
+  width: 400px;
+  overflow-y: hidden;
+
+}
+
+.dashboard-analytic-barchart .apexcharts-canvas {
+  position: relative;
+  user-select: none;
+  /* height: auto; */
+  overflow-y: hidden;
+  width: min-content !important;
+
+}
+
+.dashboard-analytic-pie {}
+
+
+.donut-pie-chart-div {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 15px;
+}
+
+.donut-pie-chart-div p {
+  font-size: 18px;
+  line-height: normal;
+  text-align: center;
+  font-weight: 600;
+
+}
+
+.donut-pie-chart .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-center {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.donut-pie-chart .apexcharts-legend.apx-legend-position-bottom .apexcharts-legend-series,
+.apexcharts-legend.apx-legend-position-top .apexcharts-legend-series {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.donut-pie-chart .apexcharts-legend-series .apexcharts-legend-marker {
+
+  height: 20px !important;
+  width: 20px !important;
+  border-radius: 50% !important;
+}
+
+.donut-pie-chart .apexcharts-legend-series .apexcharts-legend-text {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  margin-top: 5px;
+}

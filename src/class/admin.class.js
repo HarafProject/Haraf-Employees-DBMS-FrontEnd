@@ -108,6 +108,7 @@ class adminOBJ {
     try {
       //check if data is empty
       const { data } = await api.get("api/admin/data-summary");
+      
       return data;
     } catch (err) {
       throw err?.response?.data;
