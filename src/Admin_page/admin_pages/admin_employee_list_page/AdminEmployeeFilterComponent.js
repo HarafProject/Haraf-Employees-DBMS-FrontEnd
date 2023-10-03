@@ -115,14 +115,15 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries, showLastSelec
           ? tempData
           : tempData?.filter((item) => item.ward._id === e.target.value);
       setBeneficiaries(data);
-    } else if (e.target.name === "workTypology") {
+    } else if (e.target.name === "workSector") {
       const data =
         e.target.value === ""
           ? tempData
           : tempData?.filter((item) => {
-            console.log(e.target.value);
-            return item.workTypology._id === e.target.value;
-          });
+              const workdata = item.subWorkTypology === e.target.value;
+              const filteredData = workdata ? workdata : null;
+              return filteredData;
+            });
       setBeneficiaries(data);
     } else {
       let lowercaseQuery = e.target.value.toLowerCase();
@@ -134,6 +135,18 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries, showLastSelec
       });
       setBeneficiaries(filteredData);
     }
+  }
+
+  const [selectedLi, setSelectedLi] = useState(null);
+
+  const handleLiClick = (index) => {
+    setSelectedLi(index);
+  };
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  function handleFilter2() {
+    setBeneficiaries(allData);
   }
 
   return (
@@ -180,20 +193,28 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries, showLastSelec
           </select>
         </div>
         <div className="form-field my-2">
-          <select name="workTypology" id="" onChange={handleFilter}>
+          <div>
             {typologyList.map((item, i) => (
-              <>
-                <option className="option-bold" key={i} value={item._id}>
-                  {item.name} <br />
-                </option>
-                {workSectorData[i]?.map((item, i) => (
-                  <option value="Kay" key={i}>
-                    {item.name}
-                  </option>
-                ))}
-              </>
+              <div key={i}>
+                <li className="option-bold list-style-none" onClick={() => handleLiClick(i)}>
+                  {item.name}
+                </li>
+                <select
+                  name="workSector"
+                  id=""
+                  onChange={handleFilter}
+                  style={{ display: selectedLi === i ? "block" : "none" }}
+                >
+                  {isOpen &&
+                    workSectorData[i]?.map((item, j) => (
+                      <option value={item._id} key={j}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
             ))}
-          </select>
+          </div>
         </div>
 </>
 }

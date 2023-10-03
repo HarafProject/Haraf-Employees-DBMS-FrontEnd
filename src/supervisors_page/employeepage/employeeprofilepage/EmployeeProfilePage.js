@@ -18,12 +18,12 @@ export default function EmployeeProfilePage() {
   const [modalType, setModalType] = useState("");
   const userData = location.state;
   const { offline } = useSelector((state) => state?.user);
+  console.log(userData);
 
   const navigate = useNavigate();
 
   const personalInfo = [
     { label: "Full Name", value: userData?.fullName },
-    { label: "Address", value: userData?.address },
     { label: "Phone Number", value: userData?.phone },
   ];
 
@@ -36,7 +36,7 @@ export default function EmployeeProfilePage() {
   const otherInfo = [
     { label: "Head of Household", value: userData?.householdHead },
     { label: "Household Size", value: userData.householdSize },
-    { label: "Special Disability", value: userData.specialDisability },
+    { label: "Special Ability", value: userData.specialDisability },
   ];
 
   function openModal(modalType) {
@@ -113,6 +113,7 @@ export default function EmployeeProfilePage() {
                 {" "}
                 <span>Work Topology: </span>
                 {userData?.workTypology?.name}
+                {":"} {userData?.subWorkTypology?.name}
               </p>
               <p>
                 <span>Ward:</span> {userData?.ward?.name}
@@ -152,7 +153,9 @@ export default function EmployeeProfilePage() {
               </button> */}
               <button
                 onClick={() =>
-                  navigate("/supervisor/edit-employee", { state: {employee : userData._id}})
+                  navigate("/supervisor/edit-employee", {
+                    state: { employee: userData._id },
+                  })
                 }
                 className="btn request-edit mt-5 "
               >

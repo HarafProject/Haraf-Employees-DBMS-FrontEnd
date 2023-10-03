@@ -9,7 +9,8 @@ const ReusableInformationList = ({ title, information }) => {
         {information.map((item, index) => (
           <p className="d-flex flex-column info" key={index}>
             <span>{item.label}</span>
-            {item.value}
+            
+            {item.value ? item.value : "Unavailable"}
           </p>
         ))}
       </div>

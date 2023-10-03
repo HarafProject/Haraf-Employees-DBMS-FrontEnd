@@ -77,7 +77,7 @@ class dataOBJ {
     try {
       const res = await api.get(`api/supervisor/sub-work-typology/${id}`);
       if (res?.data?.status === "success") {
-        
+        console.log(res?.data);
         return res?.data?.subWorkTypology;
       }
     } catch (err) {

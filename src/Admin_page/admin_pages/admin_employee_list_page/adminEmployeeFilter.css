@@ -113,6 +113,11 @@
 .options-bold {
   font-weight: 900;
 }
+
+.list-style-none {
+  list-style: none;
+  cursor: pointer;
+}
 .exportBtn {
   color: #fff;
   display: flex;
@@ -212,4 +217,8 @@
   .employee-list-table {
     padding: 0 !important;
   }
+}
+
+.sub-select {
+  display: none;
 }
