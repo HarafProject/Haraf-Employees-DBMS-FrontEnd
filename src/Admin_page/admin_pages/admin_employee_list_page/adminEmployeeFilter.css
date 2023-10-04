@@ -69,6 +69,11 @@
   color: #7a7575;
 }
 
+.workSector-arrow {
+  font-size: 15px;
+  color: #f99c39;
+}
+
 .filter-option-section.admin .search-button input {
   /* width: 400px; */
   padding: 10px 0;
@@ -136,9 +141,9 @@
   padding: 1rem;
   box-shadow: 0px 4px 35px 0px rgba(0, 0, 0, 0.15);
   position: absolute;
-  left: 70%;
+  left: 57rem;
   width: 300px;
-  top: 16rem;
+  top: 17rem;
   z-index: 44;
   border-radius: 4px;
 }
