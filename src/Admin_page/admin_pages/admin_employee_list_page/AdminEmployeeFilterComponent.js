@@ -216,6 +216,7 @@ function AdminEmployeeFilterComponent({
                 onChange={handleFilter}
                 name="search"
                 placeholder="Work Typology"
+                disabled="true"
               />
               <div onClick={toggleWorkSectorDropDown}>
                 <Icon icon="bxs:down-arrow" className="me-2 workSector-arrow" />
