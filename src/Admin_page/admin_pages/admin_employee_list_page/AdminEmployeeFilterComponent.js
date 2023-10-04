@@ -261,7 +261,7 @@ function AdminEmployeeFilterComponent({
           </>
         )}
 
-        {!showLastSelect && (
+        {showLastSelect && (
           <div className="form-field my-2">
             <select name="workTypology" id="" onChange={handleFilter}>
               {typologyList.map((item, i) => (

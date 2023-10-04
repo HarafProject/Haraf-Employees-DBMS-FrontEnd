@@ -110,6 +110,13 @@ export default function EmployeeListTable() {
   }
   // const usersPerPage = usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
+
+  const startIndex = page * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const startSerialNumber = page * rowsPerPage + 1;
+
+
+
   return (
     <>
       <ReusableHeader />
@@ -145,7 +152,9 @@ export default function EmployeeListTable() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {usersData?.map((user, index) => (
+
+
+                  {usersData.slice(startIndex, endIndex).map((user, index) => (
                     <TableRow
                       onClick={() =>
                         navigate(`/supervisor/employee-profile`, {
@@ -153,8 +162,9 @@ export default function EmployeeListTable() {
                         })
                       }
                       style={{ cursor: "pointer" }}
+                      key={index}
                     >
-                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{startSerialNumber + index }</TableCell>
                       <TableCell>
                         <Avatar alt={user.fullName} src={user?.photo} />
                       </TableCell>

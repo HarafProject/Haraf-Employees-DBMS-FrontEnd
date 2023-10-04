@@ -81,10 +81,10 @@ export default function DashboardAnalytics() {
                 <div className="container-fluid p-3 mt-3">
                     <div className="d-flex align-items-center justify-content-between filter-dashboard-analytic">
                         <h1 className="">{data?.data?.beneficiaryCount}</h1>
-                        <AdminEmployeeFilterComponent showLastSelect={false} />
+                        <AdminEmployeeFilterComponent showLastSelect={true} />
                     </div>
                     <div className="dashboard-analytic-barchart mt-5">
-                       <ChartComponent />
+                        <ChartComponent />
                     </div>
                 </div>
 

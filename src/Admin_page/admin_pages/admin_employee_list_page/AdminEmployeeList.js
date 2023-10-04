@@ -32,7 +32,7 @@ const fetchEmployeesList = async (key) => {
 
 export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [beneficiaries, setBeneficiaries] = useState([]);
   const navigate = useNavigate();
 
@@ -52,6 +52,10 @@ export default function AdminEmployeeList() {
     setPage(0);
   };
 
+  const startIndex = page * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const startSerialNumber = page * rowsPerPage + 1;
+
   console.log(beneficiaries);
   return (
     <>
@@ -64,11 +68,11 @@ export default function AdminEmployeeList() {
               allData={data?.data}
               beneficiaries={beneficiaries}
               setBeneficiaries={setBeneficiaries}
-              showLastSelect={true}
+              showLastSelect={false}
               showOtherOption
             />
         }
-        {status === "loading" ? (
+        {/* {status === "loading" ? (
           <div className="d-flex align-items-center px-5 py-3">
             <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />{" "}
             <p style={{ color: "#0173bc" }}>Loading please wait...</p>
@@ -79,7 +83,7 @@ export default function AdminEmployeeList() {
             beneficiaries={beneficiaries}
             setBeneficiaries={setBeneficiaries}
           />
-        )}
+        )} */}
 
         <div>
           <div className="employee-list-table my-3">
@@ -99,15 +103,23 @@ export default function AdminEmployeeList() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {beneficiaries.map((user, index) => (
+
+                  {/* <div>
+                     {beneficiaries.map((user, index) => (
+                  </div> */}
+
+                  {beneficiaries.slice(startIndex, endIndex).map((user, index) => (
+
+
                     <TableRow
                       onClick={() =>
                         navigate("/admins/home/employee-profile", {
                           state: user,
                         })
                       }
+                      key={index}
                     >
-                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{startSerialNumber + index}</TableCell>
                       <TableCell>
                         <Avatar alt={user.name} src={user.photo} />
                       </TableCell>
