@@ -9,12 +9,13 @@ import AttendanceAnalytics from "../attendance_analytic_page/AttendanceAnalytics
 import ManageSupervisor from "../manage_supervisor_page/ManageSupervisor";
 import AttendanceReportTable from "../attendance_page/AttendanceReportTable";
 import RequestFromSupervisor from "../request_from_supervisor_page/RequestFromSupervisor";
+import DashboardAnalytics from "../dashboard_analytics/DashboardAnalytics";
 import { useDispatch, useSelector } from "react-redux";
 import ManageAdmins from "../manage_supervisor_page/ManageAdmins";
 
 export default function AdminHomePage() {
   const navigate = useNavigate();
-  const [selectedComponent, setSelectedComponent] = useState("employee");
+  const [selectedComponent, setSelectedComponent] = useState("dashboardanalytics");
   // const [selectedComponent, setSelectedComponent] = useState("employee");
   const [clicked, setClicked] = useState(false);
 
@@ -63,6 +64,16 @@ export default function AdminHomePage() {
           </div>
         </div>
         <div className={`sidebar-navlinks d-flex flex-column justify-content-center mt-3 ${clicked ? "header-menu active" : ""}`}>
+
+          <p
+            className={selectedComponent === "dashboardanalytics" ? "active" : ""}
+            onClick={() => handleComponentClick("dashboardanalytics")}
+          >
+            <Icon icon="streamline:interface-content-chart-product-data-analysis-analytics-graph-line-business-board-chart" />
+            <span>Dashboard Analytics</span>
+          </p>
+
+
           <p
             className={selectedComponent === "employee" ? "active" : ""}
             onClick={() => handleComponentClick("employee")}
@@ -130,7 +141,8 @@ export default function AdminHomePage() {
           <h4 className="header-title">MCRP/HARAF {user?.role === "super-admin" ? "State Supervisor" : "Zonal Supervisor"}  Portal</h4>
           <div className="user-info-section py-3 my-3">
             <div>
-              {selectedComponent === "employee" && <AdminEmployeeList />}
+              {selectedComponent === "dashboardanalytics" && <DashboardAnalytics/>}
+              {selectedComponent === "employee" && <AdminEmployeeList  />}
               {selectedComponent === "reports" && <AttendanceReportTable />}
               {selectedComponent === "analytics" && (
                 <AttendanceAnalytics />
@@ -141,7 +153,7 @@ export default function AdminHomePage() {
               {selectedComponent === "manage" && <ManageSupervisor />}
               {(selectedComponent === "profile" && user?.role === "admin") && <SuperAdminProfile />}
               {(selectedComponent === "profile" && user?.role === "super-admin") && <ManageAdmins />}
-              {/* {selectedComponent === 'logout' && <div>Loan </div>} */}
+
             </div>
           </div>
         </div>

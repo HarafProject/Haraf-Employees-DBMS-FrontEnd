@@ -38,7 +38,12 @@ const fetchWorkSectorData = async (id) => {
 
 console.log(fetchWorkSectorData());
 
-function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
+function AdminEmployeeFilterComponent({
+  allData,
+  setBeneficiaries,
+  showLastSelect,
+  showOtherOption,
+}) {
   const [zoneList, setZoneList] = useState([]);
   const [lgaList, setLgaList] = useState([]);
   const [wardList, setWardList] = useState([]);
@@ -46,6 +51,8 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
   const [tempData, setTempData] = useState([]);
   const { user } = useSelector((state) => state?.user);
   const [workSectorData, setWorkSectorData] = useState([]);
+
+  // const [showLastSelect, setShowLastSelect] = (false)
 
   // React query fecth data
   const { data, status } = useQuery(["fetchLocationData"], fetchLocationData);
@@ -113,13 +120,14 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
           ? tempData
           : tempData?.filter((item) => item.ward._id === e.target.value);
       setBeneficiaries(data);
-    } else if (e.target.name === "workTypology") {
+    } else if (e.target.name === "workSector") {
       const data =
         e.target.value === ""
           ? tempData
           : tempData?.filter((item) => {
-              console.log(e.target.value);
-              return item.workTypology._id === e.target.value;
+              const workdata = item.subWorkTypology === e.target.value;
+              const filteredData = workdata ? workdata : null;
+              return filteredData;
             });
       setBeneficiaries(data);
     } else {
@@ -134,65 +142,138 @@ function AdminEmployeeFilterComponent({ allData, setBeneficiaries }) {
     }
   }
 
-  return (
-    <div className="filter-option-section admin  mt-3">
-      <div className="filter d-flex align-items-center justify-content-between ">
-        <div className="search-button px-2 mx-2">
-          <Icon icon="eva:search-outline" className="me-2 search-icon" />
-          <input
-            type="search"
-            onChange={handleFilter}
-            name="search"
-            placeholder="Search Member"
-          />
-        </div>
+  const [selectedLi, setSelectedLi] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [displayInnerDiv, setDisplayInnerDiv] = useState(true);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
-        <div className="form-field my-2">
-          <select name="zone" id="" onChange={handleFilter}>
-            <option value="">Zones</option>
-            {zoneList.map((item, i) => (
-              <option key={i} value={item._id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-field my-2">
-          <select name="lga" id="" onChange={handleFilter}>
-            <option value="">LGA's</option>
-            {lgaList?.map((a, i) => (
-              <option key={i} value={a._id}>
-                {a.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-field my-2">
-          <select name="ward" onChange={handleFilter}>
-            <option value="">Ward</option>
-            {wardList.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-field my-2">
-          <select name="workTypology" id="" onChange={handleFilter}>
-            {typologyList.map((item, i) => (
-              <>
-                <option className="option-bold" key={i} value={item._id}>
-                  {item.name} <br />
-                </option>
-                {workSectorData[i]?.map((item, i) => (
-                  <option value="Kay" key={i}>
+  const handleLiClick = (index) => {
+    setSelectedLi(index === selectedLi ? null : index);
+  };
+
+  const handleOptionClick = (itemId) => {
+    const data = tempData?.filter((item) => {
+      const workdata = item.subWorkTypology === itemId;
+      return workdata;
+    });
+    setSelectedOption(itemId);
+    setBeneficiaries(data);
+    setDisplayInnerDiv(false);
+  };
+
+  const toggleWorkSectorDropDown = () => {
+    setIsDropDownOpen(!isDropDownOpen);
+  };
+
+  return (
+    <div className="filter-option-section admin for-sector   mt-3">
+      <div className="filter d-flex align-items-center justify-content-between ">
+        {showOtherOption && (
+          <>
+            {" "}
+            <div className="search-button px-2 mx-2">
+              <Icon icon="eva:search-outline" className="me-2 search-icon" />
+              <input
+                type="search"
+                onChange={handleFilter}
+                name="search"
+                placeholder="Search Member"
+              />
+            </div>
+            <div className="form-field my-2">
+              <select name="zone" id="" onChange={handleFilter}>
+                <option value="">Zones</option>
+                {zoneList.map((item, i) => (
+                  <option key={i} value={item._id}>
                     {item.name}
                   </option>
                 ))}
-              </>
-            ))}
-          </select>
-        </div>
+              </select>
+            </div>
+            <div className="form-field my-2">
+              <select name="lga" id="" onChange={handleFilter}>
+                <option value="">LGA's</option>
+                {lgaList?.map((a, i) => (
+                  <option key={i} value={a._id}>
+                    {a.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-field my-2">
+              <select name="ward" onChange={handleFilter}>
+                <option value="">Ward</option>
+                {wardList.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="search-button px-2 mx-2">
+              <input
+                type="search"
+                onChange={handleFilter}
+                name="search"
+                placeholder="Work Typology"
+                disabled="true"
+              />
+              <div onClick={toggleWorkSectorDropDown}>
+                <Icon icon="bxs:down-arrow" className="me-2 workSector-arrow" />
+              </div>
+            </div>
+            <div
+              className="sector-drop-down"
+              style={{ display: isDropDownOpen ? "block" : "none" }}
+            >
+              {typologyList.map((item, i) => (
+                <div key={i}>
+                  <li
+                    className="option-bold "
+                    onClick={() => {
+                      handleLiClick(i);
+                      setDisplayInnerDiv(true); // Show inner div when the li is clicked
+                    }}
+                    style={{ cursor: "pointer", listStyle: "none" }}
+                  >
+                    {item.name}
+                  </li>
+                  <div
+                    className="inner-dropdown-select"
+                    style={{
+                      display:
+                        selectedLi === i && displayInnerDiv ? "block" : "none", // Toggle display based on selectedLi and displayInnerDiv
+                    }}
+                  >
+                    {workSectorData[i]?.map((item, j) => (
+                      <div
+                        key={j}
+                        onClick={() => handleOptionClick(item._id)}
+                        style={{ padding: "5px", cursor: "pointer" }}
+                      >
+                        {item.name}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {!showLastSelect && (
+          <div className="form-field my-2">
+            <select name="workTypology" id="" onChange={handleFilter}>
+              {typologyList.map((item, i) => (
+                <>
+                  <option className="option-bold" key={i} value={item._id}>
+                    {item.name} <br />
+                  </option>
+                </>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
     </div>
   );

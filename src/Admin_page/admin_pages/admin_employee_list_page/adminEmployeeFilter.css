@@ -69,6 +69,11 @@
   color: #7a7575;
 }
 
+.workSector-arrow {
+  font-size: 15px;
+  color: #f99c39;
+}
+
 .filter-option-section.admin .search-button input {
   /* width: 400px; */
   padding: 10px 0;
@@ -113,6 +118,11 @@
 .options-bold {
   font-weight: 900;
 }
+
+.list-style-none {
+  list-style: none;
+  cursor: pointer;
+}
 .exportBtn {
   color: #fff;
   display: flex;
@@ -122,6 +132,31 @@
   background-color: #0280ca;
   border-radius: 5px;
   white-space: nowrap;
+}
+.filter-option-section.admin.for-sector {
+}
+
+.sector-drop-down {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0px 4px 35px 0px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 57rem;
+  width: 300px;
+  top: 17rem;
+  z-index: 44;
+  border-radius: 4px;
+}
+
+.inner-dropdown-select {
+  background-color: #fff;
+  box-shadow: 0px 4px 35px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+  margin-left: 2rem;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  border-radius: 4px;
+  z-index: 777;
 }
 
 @media screen and (max-width: 1027px) {
@@ -212,4 +247,8 @@
   .employee-list-table {
     padding: 0 !important;
   }
+}
+
+.sub-select {
+  display: none;
 }

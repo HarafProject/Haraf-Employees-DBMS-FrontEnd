@@ -48,6 +48,19 @@ class dataOBJ {
     }
   };
 
+   // Get the total number of wards
+   getWardsCount = async () => {
+    try {
+      const res = await api.get("api/location/wards/count");
+      if (res?.data?.status === "success") {
+        return res?.data?.count;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+
   //get wards by lga
   getWardsByLga = async (lgaId) => {
     try {
@@ -64,7 +77,20 @@ class dataOBJ {
     try {
       const res = await api.get(`api/supervisor/sub-work-typology/${id}`);
       if (res?.data?.status === "success") {
+        console.log(res?.data);
         return res?.data?.subWorkTypology;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+   // Get the list of work sectors
+   getWorkSectors = async () => {
+    try {
+      const res = await api.get("api/supervisor/work-sectors");
+      if (res?.data?.status === "success") {
+        return res?.data?.workSectors;
       }
     } catch (err) {
       throw err;

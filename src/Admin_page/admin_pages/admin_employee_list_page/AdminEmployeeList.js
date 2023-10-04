@@ -13,8 +13,8 @@ import {
   Avatar,
   TablePagination,
 } from "@mui/material";
-import { useQuery } from 'react-query'
-import { toast } from "react-toastify"
+import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import AdminEmployeeFilterComponent from "./AdminEmployeeFilterComponent";
 import AdminEmployeeDataSummary from "./AdminEmployeeDataSummary";
 import { RotatingLines } from "react-loader-spinner";
@@ -22,10 +22,9 @@ import { RotatingLines } from "react-loader-spinner";
 import "./adminemployeelist.css";
 
 const fetchEmployeesList = async (key) => {
-
   try {
-    const res = await admin.getAllGetbeneficiaries()
-    return res
+    const res = await admin.getAllGetbeneficiaries();
+    return res;
   } catch (error) {
     toast.error(error?.error);
   }
@@ -35,16 +34,15 @@ export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [beneficiaries, setBeneficiaries] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // React query fecth data
-  const { data, status } = useQuery(['fetchEmployeesList',], fetchEmployeesList)
+  const { data, status } = useQuery(["fetchEmployeesList"], fetchEmployeesList);
 
   useEffect(() => {
-    if (!data) return
-    setBeneficiaries(data.data)
-
-  }, [data])
+    if (!data) return;
+    setBeneficiaries(data.data);
+  }, [data]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -54,7 +52,7 @@ export default function AdminEmployeeList() {
     setPage(0);
   };
 
-
+  console.log(beneficiaries);
   return (
     <>
       <div className="employees-table-section">
@@ -66,8 +64,22 @@ export default function AdminEmployeeList() {
               allData={data?.data}
               beneficiaries={beneficiaries}
               setBeneficiaries={setBeneficiaries}
+              showLastSelect={true}
+              showOtherOption
             />
         }
+        {status === "loading" ? (
+          <div className="d-flex align-items-center px-5 py-3">
+            <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />{" "}
+            <p style={{ color: "#0173bc" }}>Loading please wait...</p>
+          </div>
+        ) : (
+          <AdminEmployeeFilterComponent
+            allData={data?.data}
+            beneficiaries={beneficiaries}
+            setBeneficiaries={setBeneficiaries}
+          />
+        )}
 
         <div>
           <div className="employee-list-table my-3">
@@ -78,7 +90,8 @@ export default function AdminEmployeeList() {
                     <TableCell>S/N</TableCell>
                     <TableCell>Headshot</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Topology</TableCell>
+                    <TableCell>Sector</TableCell>
+                    <TableCell>Work Typology</TableCell>
                     <TableCell>Phone Number</TableCell>
                     <TableCell>Ward</TableCell>
                     <TableCell>Age</TableCell>
@@ -87,35 +100,24 @@ export default function AdminEmployeeList() {
                 </TableHead>
                 <TableBody>
                   {beneficiaries.map((user, index) => (
-                    <TableRow onClick={() => navigate("/admins/home/employee-profile", { state: user })}>
+                    <TableRow
+                      onClick={() =>
+                        navigate("/admins/home/employee-profile", {
+                          state: user,
+                        })
+                      }
+                    >
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>
                         <Avatar alt={user.name} src={user.photo} />
                       </TableCell>
-                      <TableCell>
-
-                        {user.fullName}
-
-                      </TableCell>
-                      <TableCell>
-
-                        {user.workTypology?.name}
-
-                      </TableCell>
-                      <TableCell>
-
-                        {user.phone}
-
-                      </TableCell>
-                      <TableCell>
-                        {user.ward?.name}
-                      </TableCell>
-                      <TableCell>
-                        {user.age}
-                      </TableCell>
-                      <TableCell>
-                        {user.address}
-                      </TableCell>
+                      <TableCell>{user.fullName}</TableCell>
+                      <TableCell className="table-typology">{user.workTypology?.name}</TableCell>
+                      <TableCell>{user.subWorkTypology?.name}</TableCell>
+                      <TableCell>{user.phone}</TableCell>
+                      <TableCell>{user.ward?.name}</TableCell>
+                      <TableCell>{user.age}</TableCell>
+                      <TableCell>{user.address}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
