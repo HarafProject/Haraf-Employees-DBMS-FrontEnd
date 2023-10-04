@@ -25,6 +25,7 @@ const fetchEmployee = async (key, id) => {
   }
 };
 
+
 export default function EditEmployeeScreen() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,10 +42,11 @@ export default function EditEmployeeScreen() {
   const inputRef = useRef(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchin, setIsFetching] = useState(false);
   const [edited, setEdited] = useState(false);
   const [workSectorData, setWorkSectorData] = useState([]);
   let { employee, notificationId } = location.state;
-  const { data, status } = useQuery(["fetchEmployee", employee], fetchEmployee);
+  const { data, isFetching, status } = useQuery(["fetchEmployee", employee], fetchEmployee);
 
   function openModal() {
     setIsOpen(true);
@@ -68,9 +70,10 @@ export default function EditEmployeeScreen() {
       toast.error(error.error);
     }
   }
+
   async function fetchWards() {
     try {
-    } catch (error) {}
+    } catch (error) { }
     const ward_list = await dataOBJs.getWardsByLga(user.lga);
     setWardList(ward_list);
   }
@@ -82,24 +85,28 @@ export default function EditEmployeeScreen() {
     // setWardList(ward_list)
   }
 
-  async function fetchWorkSector() {
-    const workSectorData = await dataOBJs.getWorkSector(
-      data.employee.workTypology._id
-    );
-
-    setWorkSectorData(workSectorData);
-  }
-
+  const fetchSubTypology = async (id) => {
+    if (!id) return;
+    try {
+      setIsFetching(true)
+      const res = await dataOBJs.getWorkSector(id);
+      setWorkSectorData(res)
+      // return res;
+    } catch (error) {
+      toast.error(error?.error);
+    } finally {
+      setIsFetching(false)
+    }
+  };
   useEffect(() => {
     if (!employee) return navigate(-1);
 
     fetchBankList();
     fetchWards();
     fetchTypology();
-    fetchWorkSector();
+
   }, []);
 
-  console.log(workSectorData);
 
   useEffect(() => {
     if (!data) return;
@@ -109,8 +116,8 @@ export default function EditEmployeeScreen() {
       accountNumber: data.employee.accountNumber,
       bankCode: data.employee.bankCode,
       bankName: data.employee.bankName,
-      BVN: data.employee.BVN,
     });
+
     setImageData(data.employee.photo);
     const updatedValues = {
       ward: data.employee.ward._id,
@@ -119,13 +126,16 @@ export default function EditEmployeeScreen() {
       householdSize: data.employee.householdSize,
       sex: data.employee.sex,
       phone: data.employee.phone,
-      address: data.employee.community,
+      community: data.employee.community,
       workTypology: data.employee.workTypology._id,
+      subWorkTypology: data.employee.subWorkTypology._id,
+      // PPA: data.employee.PPA,
       specialDisability: data.employee.specialDisability,
       householdHead: data.employee.householdHead,
     };
     formik.setValues(updatedValues);
     setIsVerified(true);
+    fetchSubTypology(data.employee.workTypology._id)
   }, [data]);
 
   async function verifyBankDetails() {
@@ -166,9 +176,10 @@ export default function EditEmployeeScreen() {
     householdSize: Yup.number().required("Household Size is required"),
     sex: Yup.string().required("sex is required"),
     phone: Yup.string().required("Phone Number is required"),
-    address: Yup.string().required("Home Address is required"),
-    workTypology: Yup.string().required("Work Typology is required"),
-    specialDisability: Yup.string().required("Special Disability is required"),
+    community: Yup.string().required("Community is required"),
+    workTypology: Yup.string().required("Work Sector is required"),
+    subWorkTypology: Yup.string().required("Work Typology is required"),
+    specialDisability: Yup.string().required("Special Ability is required"),
     householdHead: Yup.string().required("Head of House is required"),
   });
 
@@ -181,20 +192,24 @@ export default function EditEmployeeScreen() {
       sex: "",
       phone: "",
       address: "",
+      community: "",
       workTypology: "",
+      subWorkTypology: "",
+      // PPA: "",
       specialDisability: "",
       householdHead: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       if (!imageData) return toast.error("Headshot is required.");
+
       try {
         // Handle form submission here
         // Create a FormData object to send the image file
         setIsLoading(true);
         const formData = new FormData();
 
-        if (imageData.slice(-4) !== "webp") {
+        if (imageData.slice(-4) !== "webp" && imageData.slice(0, 5) !== "https") {
           formData.append("image", dataURLtoFile(imageData, "image.png"));
         }
 
@@ -211,7 +226,7 @@ export default function EditEmployeeScreen() {
           await supervisor.updateEmployeeProfile(
             formData,
             employee,
-            notificationId
+            // notificationId
           );
 
         toast.success(message);
@@ -221,12 +236,26 @@ export default function EditEmployeeScreen() {
           replace: true,
         });
       } catch (error) {
+        console.log(error)
         setIsLoading(false);
         toast.error(error);
         toast.error(error?.error);
       }
     },
   });
+
+  useEffect(() => {
+    if (isFetching) {
+      toast.info("Loading data... Please wait")
+    } else {
+      toast.dismiss()
+    }
+
+    return () => {
+      toast.dismiss()
+    }
+  }, [isFetching])
+
 
   const dataURLtoFile = (dataURL, filename) => {
     const arr = dataURL.split(",");
@@ -264,22 +293,7 @@ export default function EditEmployeeScreen() {
                     disabled
                   />
                 </div>
-                <div className="form-field my-4">
-                  <input
-                    autocomplete="new-phone"
-                    type="tel"
-                    name="phone"
-                    ref={inputRef}
-                    placeholder="05s50wdieew3234"
-                    disabled={true}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
 
-                  {formik.touched.phone && formik.errors.phone ? (
-                    <div className="error">{formik.errors.phone}</div>
-                  ) : null}
-                </div>
                 <div className="form-field my-4">
                   <input
                     autocomplete="new-accountnumber"
@@ -292,21 +306,23 @@ export default function EditEmployeeScreen() {
                       })
                     }
                     value={bankDetail.accountNumber}
-                    onBlur={verifyBankDetails}
+                    // onBlur={verifyBankDetails}
                     placeholder="Bank Account Number "
                     autoFocus
                     disabled
                   />
                 </div>
+
                 <div className="form-field my-4">
                   <select
                     name="ward"
-                    disabled={!isVerified}
+                    disabled={true}
                     type="text"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.ward}
                     placeholder="Select ward"
+
                   >
                     <option value="">Ward</option>
                     {wardList.map((item) => (
@@ -319,6 +335,45 @@ export default function EditEmployeeScreen() {
                     <div className="error">{formik.errors.ward}</div>
                   ) : null}
                 </div>
+                <div className="form-field my-4">
+                  <select
+                    name="workTypology"
+                    disabled={!isVerified}
+                    onChange={(e) => {
+                      console.log(e.target.value)
+                      formik.handleChange(e)
+                      fetchSubTypology(e.target.value)
+                    }}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.workTypology}
+                  >
+                    <option>Work Sector</option>
+                    {typologyList?.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                  {formik.touched.workTypology && formik.errors.workTypology ? (
+                    <div className="error">{formik.errors.workTypology}</div>
+                  ) : null}
+                </div>
+
+                {/* <div className="form-field my-4">
+                  <input
+                    type="text"
+                    name="PPA"
+                    placeholder="Enter Place of Assignment "
+                    disabled={!isVerified}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.PPA}
+                  />
+                  {formik.touched.PPA && formik.errors.PPA ? (
+                    <div className="error">{formik.errors.PPA}</div>
+                  ) : null}
+                </div> */}
+
                 <div className="form-field my-4">
                   <input
                     autocomplete="age"
@@ -348,7 +403,7 @@ export default function EditEmployeeScreen() {
                     <option value="divorce">Divorce</option>
                   </select>
                   {formik.touched.maritalStatus &&
-                  formik.errors.maritalStatus ? (
+                    formik.errors.maritalStatus ? (
                     <div className="error">{formik.errors.maritalStatus}</div>
                   ) : null}
                 </div>
@@ -365,7 +420,7 @@ export default function EditEmployeeScreen() {
                     value={formik.values.householdSize}
                   />
                   {formik.touched.householdSize &&
-                  formik.errors.householdSize ? (
+                    formik.errors.householdSize ? (
                     <div className="error">{formik.errors.householdSize}</div>
                   ) : null}
                 </div>
@@ -389,24 +444,23 @@ export default function EditEmployeeScreen() {
                 </div>
               </div>
               <div className="mx-3">
+
                 <div className="form-field my-4">
                   <input
-                    autocomplete="new-phone"
-                    type="tel"
-                    name="phone"
+                    // autocomplete="new-phone"
+                    type="text"
+                    name="uniqueID"
                     ref={inputRef}
-                    placeholder="Phone Number "
-                    disabled={!isVerified}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.phone}
+                    placeholder="Unique ID"
+                    disabled={true}
+                  // onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
                   />
 
-                  {formik.touched.phone && formik.errors.phone ? (
+                  {/* {formik.touched.phone && formik.errors.phone ? (
                     <div className="error">{formik.errors.phone}</div>
-                  ) : null}
+                  ) : null} */}
                 </div>
-
                 <div className="form-field my-4">
                   <select
                     name=""
@@ -431,31 +485,36 @@ export default function EditEmployeeScreen() {
                     ))}
                   </select>
                 </div>
+
                 <div className="form-field my-4">
                   <input
-                    autocomplete="new-address"
-                    type="text"
-                    name="address"
-                    placeholder="Home Address"
+                    autocomplete="new-phone"
+                    type="tel"
+                    name="phone"
+                    ref={inputRef}
+                    placeholder="Phone Number "
                     disabled={!isVerified}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.address}
+                    value={formik.values.phone}
                   />
-                  {formik.touched.address && formik.errors.address ? (
-                    <div className="error">{formik.errors.address}</div>
+
+                  {formik.touched.phone && formik.errors.phone ? (
+                    <div className="error">{formik.errors.phone}</div>
                   ) : null}
                 </div>
+
+
                 <div className="form-field my-4">
                   <select
-                    name="workTypology"
-                    disabled={!isVerified}
-                    onChange={formik.handleChange}
+                    disabled={!isFetchin}
+                    name="subWorkTypology"
+                    value={formik.values.subWorkTypology}
+                    onChange={(e) => formik.handleChange(e)}
                     onBlur={formik.handleBlur}
-                    value={formik.values.workTypology}
                   >
                     <option>Work Typology</option>
-                    {typologyList?.map((item) => (
+                    {workSectorData?.map((item) => (
                       <option key={item._id} value={item._id}>
                         {item.name}
                       </option>
@@ -465,23 +524,20 @@ export default function EditEmployeeScreen() {
                     <div className="error">{formik.errors.workTypology}</div>
                   ) : null}
                 </div>
-
                 <div className="form-field my-4">
-                  <select
+                  <input
+                    autocomplete="new-address"
+                    type="text"
+                    name="community"
+                    placeholder="Enter Community"
                     disabled={!isVerified}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                  >
-                    <option>Sub Sector</option>
-                    {workSectorData?.map((item) => (
-                      <option key={item._id} value={item._id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                  {/* {formik.touched.workTypology && formik.errors.workTypology ? (
-                    <div className="error">{formik.errors.workTypology}</div>
-                  ) : null} */}
+                    value={formik.values.community}
+                  />
+                  {formik.touched.community && formik.errors.community ? (
+                    <div className="error">{formik.errors.community}</div>
+                  ) : null}
                 </div>
 
                 <div className="form-field my-4">
@@ -506,7 +562,7 @@ export default function EditEmployeeScreen() {
                     <option value="speech">Speech impairment</option>
                   </select>
                   {formik.touched.specialDisability &&
-                  formik.errors.specialDisability ? (
+                    formik.errors.specialDisability ? (
                     <div className="error">
                       {formik.errors.specialDisability}
                     </div>
@@ -521,24 +577,27 @@ export default function EditEmployeeScreen() {
                     value={formik.values.householdHead}
                   >
                     <option>Head of House</option>
-                    <option value="womanhead">Women headed household</option>
+                    <option value="FATHER">Men headed household</option>
+                    <option value="WHH">Women headed household</option>
                     <option value="youthhead">Youth headed household</option>
                     <option value="idp">Internal displaced Persons</option>
                     <option value="aged">Aged</option>
                   </select>
                   {formik.touched.householdHead &&
-                  formik.errors.householdHead ? (
+                    formik.errors.householdHead ? (
                     <div className="error">{formik.errors.householdHead}</div>
                   ) : null}
                 </div>
 
+
+
                 <div className="d-flex align-items-center picture-upload-section">
-                  <div className="profile-img mx-3">
+                  <div className="profile-img edit-profile-img mx-3">
                     {imageData && <img src={imageData} alt="Captured" />}
 
                     {!imageData && <img src={profile} alt="" />}
                     <button
-                      className="camera"
+                      className="edit-camera"
                       onClick={(e) => {
                         e.preventDefault();
                         openModal();
@@ -547,7 +606,7 @@ export default function EditEmployeeScreen() {
                     >
                       <Icon
                         icon="heroicons-solid:camera"
-                        className="camera-icon"
+                        className="edit-camera-icon"
                       />
                     </button>
                   </div>

@@ -46,6 +46,7 @@ export default function AttendanceReportTable({ onRowClick }) {
 
   useEffect(() => {
     if (!data) return
+    console.log(data)
     setTableData(data)
 
 
@@ -187,6 +188,7 @@ export default function AttendanceReportTable({ onRowClick }) {
                   <TableCell>Time Sent</TableCell>
                   <TableCell>Present</TableCell>
                   <TableCell>Absent</TableCell>
+                  <TableCell>Absent With Reason</TableCell>
                   <TableCell>Location</TableCell>
                   <TableCell>Comment</TableCell>
                 </TableRow>
@@ -221,19 +223,27 @@ export default function AttendanceReportTable({ onRowClick }) {
                           {new Date(report.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
 
                         </TableCell>
-                        <TableCell>
+                        <TableCell style={{ textAlign: 'center' }}>
 
                           {report?.attendanceRecord
                             // .flatMap(obj => obj.attempt)
                             .filter(item => item.status === 'Present')
                             .length}
 
-                        </TableCell>
-                        <TableCell>
+                        </TableCell >
+                        <TableCell style={{ textAlign: 'center' }}>
 
                           {report?.attendanceRecord
                             // .flatMap(obj => obj.attempt)
-                            .filter(item => item.status === 'Absent')
+                            .filter(item => item.status === 'Absent' && !item.absentReason)
+                            .length}
+
+                        </TableCell>
+                        <TableCell style={{ textAlign: 'center' }}>
+
+                          {report?.attendanceRecord
+                            // .flatMap(obj => obj.attempt)
+                            .filter(item => item.absentReason)
                             .length}
 
                         </TableCell>

@@ -173,6 +173,12 @@ p .absent {
   font-weight: 600;
 }
 
+p.absent-reason,
+p .absent-reason {
+  color: #ff9900;
+  font-weight: 600;
+}
+
 .mobile-span {
   display: none;
 }

@@ -10,6 +10,7 @@ import supervisor from "../../../class/supervisor.class";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 
+
 export default function EmployeeProfilePage() {
   // const user = userData.user[0];
   const [isLoading, setIsLoading] = useState(false);
@@ -18,13 +19,13 @@ export default function EmployeeProfilePage() {
   const [modalType, setModalType] = useState("");
   const userData = location.state;
   const { offline } = useSelector((state) => state?.user);
-  console.log(userData);
 
   const navigate = useNavigate();
 
   const personalInfo = [
     { label: "Full Name", value: userData?.fullName },
     { label: "Phone Number", value: userData?.phone },
+    { label: "Community", value: userData?.community },
   ];
 
   const bankInfo = [
@@ -48,7 +49,7 @@ export default function EmployeeProfilePage() {
     setIsOpen(false);
   }
   const goBack = () => {
-    window.history.go(-1);
+    navigate(-1)
   };
 
   async function supervisorRequest(reason) {
@@ -113,7 +114,7 @@ export default function EmployeeProfilePage() {
                 {" "}
                 <span>Work Topology: </span>
                 {userData?.workTypology?.name}
-                {":"} {userData?.subWorkTypology?.name}
+                {":"} {(userData?.subWorkTypology?.name?.length > 45)? `${userData?.subWorkTypology?.name.substring(0, 45)}...`:userData?.subWorkTypology?.name}
               </p>
               <p>
                 <span>Ward:</span> {userData?.ward?.name}

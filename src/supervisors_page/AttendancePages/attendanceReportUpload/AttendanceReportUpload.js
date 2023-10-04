@@ -38,9 +38,17 @@ export default function AttendanceReportUpload() {
   useEffect(() => {
 
     const countByStatus = attendance.data.reduce((counts, item) => {
-      const { status } = item;
-      counts[status] = (counts[status] || 0) + 1;
-      return counts;
+      // console.log(item)
+      // const { status } = item;
+      if (item.absentReason) {
+        console.log("Absent")
+        counts["absentReason"] = (counts["absentReason"] || 0) + 1;
+        return counts;
+      } else {
+        counts[item.status] = (counts[item.status] || 0) + 1;
+        return counts;
+      }
+
     }, {});
 
     setAttendanceCount(countByStatus);
@@ -56,6 +64,7 @@ export default function AttendanceReportUpload() {
       attempt: item.attempt,
       date: attendance.date,
       status: item.status ? item.status : "Absent",
+      absentReason: item.absentReason && item.absentReason,
       zone: item.zone._id,
       lga: item.lga._id,
       ward: item.ward._id,
@@ -128,12 +137,23 @@ export default function AttendanceReportUpload() {
                 <h4>{attendance.date}</h4>
               </div>
             </div>
-         
+
 
             <div>
               <div className='d-flex flex-column align-items-center summary'>
                 <h1>{attendanceCount?.Absent || 0}</h1>
                 <p>Absent</p>
+              </div>
+              <div className="report mt-5">
+                <p>Report From:</p>
+                <h4>{attendance.data[0]?.lga?.name} LGA</h4>
+              </div>
+            </div>
+
+            <div>
+              <div className='d-flex flex-column align-items-center summary'>
+                <h1>{attendanceCount?.absentReason || 0}</h1>
+                <p>Absent With Reason</p>
               </div>
               <div className="report mt-5">
                 <p>Report From:</p>

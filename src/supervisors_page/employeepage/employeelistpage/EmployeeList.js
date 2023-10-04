@@ -46,7 +46,7 @@ export default function EmployeeListTable() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const [usersData, setUsersData] = useState([]);
@@ -108,7 +108,8 @@ export default function EmployeeListTable() {
       closeModal();
     }
   }
-  // const usersPerPage = usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const usersPerPage = usersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
 
   return (
     <>
@@ -145,7 +146,7 @@ export default function EmployeeListTable() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {usersData?.map((user, index) => (
+                  {usersPerPage?.map((user, index) => (
                     <TableRow
                       onClick={() =>
                         navigate(`/supervisor/employee-profile`, {
@@ -170,9 +171,9 @@ export default function EmployeeListTable() {
                 </TableBody>
               </Table>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
+                rowsPerPageOptions={[50, 75, 100]}
                 component="div"
-                count={usersData.length}
+                count={usersData.length} // Update this prop
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

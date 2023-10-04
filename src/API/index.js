@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "http://127.0.0.1:5000",
-  baseURL: "https://haraf-edm.onrender.com",
+  baseURL: "http://127.0.0.1:5000",
+  // baseURL: "https://haraf-edm.onrender.com",
   // baseURL:"https://desert-sand-jellyfish-garb.cyclic.app",
   headers: {
     "Content-Type": "application/json",
@@ -24,7 +24,6 @@ api.interceptors.request.use(
       : localStorage.getItem("persist:root")
       ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")).auth)?.token
       : undefined;
-      console.log(auth_token)
 
     if (auth_token) {
       config.headers["Authorization"] = `Bearer ${auth_token}`;

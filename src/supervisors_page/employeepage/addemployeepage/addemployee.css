@@ -101,6 +101,28 @@
   object-fit: cover;
 }
 
+.profile-img .edit-camera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 48rem;
+  left: 45rem;
+  background: #ffffff;
+  border: 1px solid rgba(68, 68, 68, 0.16);
+  border-radius: 231.25px;
+ 
+}
+
+.profile-img .edit-camera .edit-camera-icon {
+  height: 20px;
+  width: 20px;
+  color: #0173bc;
+
+}
+
 .profile-img .camera {
   display: flex;
   align-items: center;
@@ -108,7 +130,7 @@
   position: absolute;
   width: 30px;
   height: 30px;
-  top: 675px;
+  top: 7;
   left: 720px;
   background: #ffffff;
   border: 1px solid rgba(68, 68, 68, 0.16);
@@ -334,8 +356,9 @@
   .add-employee-content .form-field {
     width: 250px;
   }
+
   .profile-img {
     width: 55px;
     height: 55px;
-}
+  }
 }

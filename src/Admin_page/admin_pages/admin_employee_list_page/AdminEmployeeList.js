@@ -32,7 +32,7 @@ const fetchEmployeesList = async (key) => {
 
 export default function AdminEmployeeList() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [beneficiaries, setBeneficiaries] = useState([]);
   const navigate = useNavigate();
 
@@ -51,8 +51,8 @@ export default function AdminEmployeeList() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const usersPerPage = beneficiaries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-  console.log(beneficiaries);
   return (
     <>
       <div className="employees-table-section">
@@ -68,7 +68,7 @@ export default function AdminEmployeeList() {
               showOtherOption
             />
         }
-        {status === "loading" ? (
+        {/* {status === "loading" ? (
           <div className="d-flex align-items-center px-5 py-3">
             <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />{" "}
             <p style={{ color: "#0173bc" }}>Loading please wait...</p>
@@ -79,7 +79,7 @@ export default function AdminEmployeeList() {
             beneficiaries={beneficiaries}
             setBeneficiaries={setBeneficiaries}
           />
-        )}
+        )} */}
 
         <div>
           <div className="employee-list-table my-3">
@@ -99,21 +99,23 @@ export default function AdminEmployeeList() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {beneficiaries.map((user, index) => (
-                    <TableRow
-                      onClick={() =>
+                  {usersPerPage.map((user, index) => (
+                    <TableRow>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell onClick={() =>
                         navigate("/admins/home/employee-profile", {
                           state: user,
                         })
-                      }
-                    >
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>
+                      }>
                         <Avatar alt={user.name} src={user.photo} />
                       </TableCell>
-                      <TableCell>{user.fullName}</TableCell>
+                      <TableCell onClick={() =>
+                        navigate("/admins/home/employee-profile", {
+                          state: user,
+                        })
+                      }>{user.fullName}</TableCell>
                       <TableCell className="table-typology">{user.workTypology?.name}</TableCell>
-                      <TableCell>{user.subWorkTypology?.name}</TableCell>
+                      <TableCell>{(user.subWorkTypology?.name.length > 40) ? `${user.subWorkTypology?.name.slice(0, 40)}...` : user.subWorkTypology?.name}</TableCell>
                       <TableCell>{user.phone}</TableCell>
                       <TableCell>{user.ward?.name}</TableCell>
                       <TableCell>{user.age}</TableCell>
@@ -123,7 +125,7 @@ export default function AdminEmployeeList() {
                 </TableBody>
               </Table>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                rowsPerPageOptions={[50, 75, 100]}
                 component="div"
                 count={beneficiaries.length}
                 rowsPerPage={rowsPerPage}

@@ -4,12 +4,16 @@ import "./tablefilteroptions.css";
 import dataOBJs from "../../../class/data.class";
 import { useDispatch, useSelector } from "react-redux";
 import supervisor from "../../../class/supervisor.class";
+import { toast } from "react-toastify";
 
 const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   const [wardList, setWardList] = useState([]);
   const [typologyList, setTypologyList] = useState([]);
+
+  const [subWorkTypologyList, setSubWorkTypologyList] = useState([]);
   const [tempData, setTempData] = useState([]);
   const { user } = useSelector((state) => state?.user);
+  const [isFetchin, setIsFetching] = useState(false);
 
   async function fetchWards() {
     try {
@@ -27,6 +31,23 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
     setTypologyList(typology_list.workTypology);
     // setWardList(ward_list)
   }
+  const fetchSubTypology = async (id) => {
+    if (!id) {
+      setSubWorkTypologyList([])
+      return
+    };
+    try {
+      setIsFetching(true)
+      const res = await dataOBJs.getWorkSector(id);
+      setSubWorkTypologyList(res)
+      // return res;
+    } catch (error) {
+      toast.error(error?.error);
+    } finally {
+      setIsFetching(false)
+    }
+  };
+
   useEffect(() => {
     fetchWards();
     fetchTypology();
@@ -34,12 +55,19 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
   }, [allData]);
 
   function handleFilter(e) {
+    console.log(e.target.name)
     if (e.target.name === "workTypology") {
       const data =
         e.target.value === ""
           ? allData
           : allData?.filter((item) => item.workTypology._id === e.target.value);
       setTempData(data);
+      setUsersData(data);
+    } else if (e.target.name === "subWorkTypology") {
+      const data =
+        e.target.value === ""
+          ? tempData
+          : tempData?.filter((item) => item.subWorkTypology._id === e.target.value);
       setUsersData(data);
     } else if (e.target.name === "ward") {
       const data =
@@ -73,10 +101,26 @@ const EmployeeTableFilterOption = ({ allData, usersData, setUsersData }) => {
               onChange={(e) => handleFilter(e)}
             />
           </div>
+
+
           <div className="form-field topology mt-3 mx-2">
-            <select name="workTypology" onChange={(e) => handleFilter(e)}>
+            <select name="workTypology" onChange={(e) => {
+              handleFilter(e)
+              fetchSubTypology(e.target.value)
+            }}>
               <option value={""}>Work Sector</option>
               {typologyList?.map((item) => (
+                <option key={item._id} value={item._id}>
+                  {item?.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-field topology mt-3 mx-2">
+            <select name="subWorkTypology" disabled={isFetchin} onChange={(e) => handleFilter(e)}>
+              <option value={""}>Work Typology</option>
+              {subWorkTypologyList?.map((item) => (
                 <option key={item._id} value={item._id}>
                   {item?.name}
                 </option>

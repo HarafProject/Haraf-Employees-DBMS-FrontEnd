@@ -25,7 +25,7 @@ import { updateAttendance, attendanceRecord } from '../../../redux/reducers/atte
 export default function AttendanceTable({ attendance, onReasonSelect }) {
 
   const [record, setRecord] = useState([])
-  
+
   const [markAttendance, setMarkAttendance] = useState({})
   const [fireDispatch, setFireDispatch] = useState(false)
   const { user } = useSelector((state) => state?.user)
@@ -61,11 +61,6 @@ export default function AttendanceTable({ attendance, onReasonSelect }) {
     }));
   }
 
-
-
-
-
-
   useEffect(() => {
     if (fireDispatch) {
 
@@ -75,12 +70,26 @@ export default function AttendanceTable({ attendance, onReasonSelect }) {
     }
   }, [fireDispatch, dispatch, markAttendance]);
 
-  function handleSubmit(params) {
-    // Handle form submission if needed
+  function handleAbsent(value, index) {
+  
+    let updatedRecord = record.map((item, i) => {
+      if (i === index) {
+        return {
+          ...item,
+          absentReason: value
+        };
+      }
+      return item;
+    });
+ 
+    setRecord(updatedRecord);
+    setFireDispatch(true);
+    // setMarkAttendance((prevAttendance) => ({
+    //   ...prevAttendance,
+    //   [index]: value
+    // }));
   }
 
-  
-  
 
   return (
     <div className="px-4 py-2 mt-2">
@@ -97,7 +106,7 @@ export default function AttendanceTable({ attendance, onReasonSelect }) {
                 </TableCell>
                 <TableCell>
                   <Typography variant='subtitle2'>{row.fullName}</Typography>
-                  <Typography variant='body2'>{row.workTypology?.name} Typography - {row.ward?.name} Ward</Typography>
+                  <Typography variant='body2'>{row.workTypology?.name} Sector - {row.ward?.name} Ward</Typography>
                 </TableCell>
                 <TableCell>
                   <div className='d-flex align-items-center attendance-tick' onClick={() => attendance.saved ? null : handleTick("Present", index)}>
@@ -123,21 +132,21 @@ export default function AttendanceTable({ attendance, onReasonSelect }) {
                     <img src={row.status === "Absent" ? checkboxCancel : checkbox} alt="" className='table-icon' />
                   </div>
                 </TableCell>
-                {row.status === "Absent" && 
-                <TableCell className='table-select-field'>
-                  <div className="my-table-select">
-                     <select name="" id=""  >
-                    <option value="">select reason</option>
-                    <option value="sick">Sick</option>
-                    <option value="bereaved">Bereaved</option>
-                    <option value="maternity">Maternity</option>
-                    <option value="paternity">Paternity</option>
-                    <option value="others">Others</option>                    
-                  </select>
-                  </div>
-                 
-                </TableCell>
-}
+                {row.status === "Absent" &&
+                  <TableCell className='table-select-field'>
+                    <div className="my-table-select">
+                      <select name="" id="" disabled={attendance.saved} onChange={(e) => handleAbsent(e.target.value, index)} value={row?.absentReason} >
+                        <option value="">No reason</option>
+                        <option value="sick">Sick</option>
+                        <option value="bereaved">Bereaved</option>
+                        <option value="maternity">Maternity</option>
+                        <option value="paternity">Paternity</option>
+                        <option value="others">Others</option>
+                      </select>
+                    </div>
+
+                  </TableCell>
+                }
               </TableRow>
             ))}
           </TableBody>

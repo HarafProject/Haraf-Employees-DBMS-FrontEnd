@@ -145,7 +145,7 @@ export default function AttendanceDetailedPage() {
             <span>{receivedArray?.lga?.name}</span>
           </p>
           <p className="comment">
-          LGA Supervisor's Comment: {<br />}
+            LGA Supervisor's Comment: {<br />}
             <span>{receivedArray?.comment}</span>
           </p>
           {receivedArray?.reason && <p className="comment">
@@ -162,7 +162,7 @@ export default function AttendanceDetailedPage() {
             </div>
             <div className="form-field mx-2">
               <select name="workTypology" id="" onChange={handleFilter}>
-                <option value={""}>Work Typology</option>
+                <option value={""}>Work Sector</option>
                 {typologyList.map(item => <option key={item._id} value={item._id}>{item.name}</option>)}
               </select>
             </div>
@@ -190,6 +190,7 @@ export default function AttendanceDetailedPage() {
                 <TableCell>Headshot</TableCell>
                 <TableCell>Beneficiaries</TableCell>
                 <TableCell>Attendance Status</TableCell>
+                <TableCell>Absent Reason</TableCell>
                 <TableCell>Work Typology</TableCell>
                 <TableCell>Ward</TableCell>
                 {/* <TableCell>Ticked By</TableCell> */}
@@ -210,7 +211,11 @@ export default function AttendanceDetailedPage() {
                   <TableCell className="beneficiary-name">{beneficiary?.employee?.fullName}</TableCell>
                   <TableCell>
                     <div></div>
-                    {beneficiary?.status === "Present" ? (
+                    {beneficiary?.absentReason ? (
+                      <p className="absent-reason">
+                        Absent <Icon icon="charm:tick" className="absent-reason" />{" "}
+                      </p>
+                    ) : beneficiary?.status === "Present" ? (
                       <p className="present">
                         Present <Icon icon="charm:tick" className="present" />{" "}
                       </p>
@@ -220,6 +225,7 @@ export default function AttendanceDetailedPage() {
                       </p>
                     )}
                   </TableCell>
+                  <TableCell>{beneficiary?.absentReason ?? "No Reason"}</TableCell>
                   <TableCell>{beneficiary?.workTypology.name}</TableCell>
                   <TableCell>{beneficiary?.ward.name}</TableCell>
                   {/* <TableCell>{receivedArray?.submittedBy?.firstname}</TableCell> */}
