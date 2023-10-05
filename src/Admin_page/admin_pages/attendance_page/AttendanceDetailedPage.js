@@ -76,7 +76,7 @@ export default function AttendanceDetailedPage() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value));
     setPage(0);
   };
 
@@ -110,6 +110,14 @@ export default function AttendanceDetailedPage() {
       setAttendanceRecord(filteredData);
     }
   }
+
+// Calculate the start and end indices for the current page
+const startIndex = page * rowsPerPage;
+const endIndex = startIndex + rowsPerPage;
+const startSerialNumber = page * rowsPerPage + 1;
+
+// Create a slicedAttendanceRecord array based on the current page and rowsPerPage
+const slicedAttendanceRecord = attendanceRecord.slice(startIndex, endIndex);
 
 
 
@@ -197,11 +205,11 @@ export default function AttendanceDetailedPage() {
                 <TableCell>SP. Action</TableCell>
               </TableRow>
             </TableHead>
-            {attendanceRecord?.map((beneficiary, index) => {
+            {slicedAttendanceRecord?.map((beneficiary, index) => {
               console.log(beneficiary)
               return (
                 <TableRow key={beneficiary._id}>
-                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{startSerialNumber + index}</TableCell>
                   <TableCell>
                     <Avatar
                       alt={beneficiary?.employee?.fullName}
@@ -248,7 +256,8 @@ export default function AttendanceDetailedPage() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={receivedArray?.attendanceRecord?.length}
+            // count={receivedArray?.attendanceRecord?.length}
+            count={attendanceRecord.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

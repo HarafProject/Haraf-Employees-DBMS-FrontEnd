@@ -157,6 +157,8 @@ export default function ManageAdmins() {
     }
 
   }
+
+  const startSerialNumber = page * rowsPerPage + 1;
   //get supervisior details 
 
 
@@ -188,6 +190,7 @@ export default function ManageAdmins() {
     setPage(0);
   };
 
+  
 
   return (
     <>
@@ -230,7 +233,7 @@ export default function ManageAdmins() {
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((adminData, index) => (
                     <TableRow key={adminData.id}>
-                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{startSerialNumber + index}</TableCell>
 
                       <TableCell>
                         <p className="d-flex flex-column admin-name">

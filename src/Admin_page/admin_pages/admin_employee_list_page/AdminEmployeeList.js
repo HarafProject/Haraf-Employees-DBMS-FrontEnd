@@ -64,10 +64,11 @@ export default function AdminEmployeeList() {
               allData={data?.data}
               beneficiaries={beneficiaries}
               setBeneficiaries={setBeneficiaries}
-              showLastSelect={true}
+              showLastSelect={false}
               showOtherOption
             />
         }
+        {/* {status === "loading" ? (
         {/* {status === "loading" ? (
           <div className="d-flex align-items-center px-5 py-3">
             <RotatingLines width="50" strokeColor="#0173bc" strokeWidth="3" />{" "}
