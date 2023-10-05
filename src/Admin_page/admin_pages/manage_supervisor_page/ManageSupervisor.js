@@ -156,6 +156,8 @@ export default function ManageSupervisor() {
     }
 
   }
+
+  const startSerialNumber = page * rowsPerPage + 1;
   //get supervisior details 
 
 
@@ -295,7 +297,7 @@ export default function ManageSupervisor() {
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((supervisor, index) => (
                     <TableRow key={supervisor.id}>
-                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{startSerialNumber + index}</TableCell>
 
                       <TableCell>
                         <p className="d-flex flex-column admin-name">
@@ -305,7 +307,7 @@ export default function ManageSupervisor() {
                       </TableCell>
                       <TableCell>{supervisor.role}</TableCell>
                       <TableCell>{supervisor?.zone?.name}</TableCell>
-                      <TableCell>{supervisor.lga.name}</TableCell>
+                      <TableCell>{supervisor.lga?.name}</TableCell>
                       <TableCell>{supervisor.phone}</TableCell>
                       <TableCell>
                         <div className="d-flex">
