@@ -27,7 +27,7 @@ import mcrp from '../../../../assets/mcrp.jpg';
 export default function AnalyticAttendanceReport() {
   const { user } = useSelector((state) => state?.user)
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
   const [attendanceData, setAttendanceData] = useState([]);
   const [tempData, setTempData] = useState([]);
   const [type, setType] = useState("weekly");
@@ -149,7 +149,7 @@ export default function AnalyticAttendanceReport() {
     setPage(0);
   };
 
-
+  const usersPerPage = attendanceData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const handleExportExcel = async () => {
     setExportButtonClick(true)
@@ -193,7 +193,7 @@ export default function AnalyticAttendanceReport() {
             : user?.filter(item => item.status === 'Present')?.length,
           type === 'weekly' ? user.length : '',
           ...(type === 'monthly'
-            ? [user?.filter(item => item.status === 'Present')?.length * 1000,user[0]?.employee?.accountNumber, user[0]?.employee?.bankName]
+            ? [user?.filter(item => item.status === 'Present')?.length * 1000, user[0]?.employee?.accountNumber, user[0]?.employee?.bankName]
             : []),
         ]),
       ];
@@ -201,21 +201,21 @@ export default function AnalyticAttendanceReport() {
       const ws = XLSX.utils.aoa_to_sheet(excelData);
 
 
-      
+
 
       XLSX.utils.book_append_sheet(wb, ws, 'Attendance Report');
-      
+
 
       XLSX.writeFile(wb, 'attendance_report.xlsx');
     } catch (error) {
       console.error('Error exporting as Excel:', error);
     }
   };
- 
- 
- 
 
-  
+
+
+
+
 
 
 
@@ -356,7 +356,7 @@ export default function AnalyticAttendanceReport() {
                 {type === "weekly" ? <TableCell style={{ textAlign: "center" }}>Days Worked per Week</TableCell> : <TableCell className="ward">Days Worked per Month</TableCell>}
                 {type === "weekly" ? <TableCell className="ward">Total No. Days</TableCell> : ""}
                 {type === "monthly" && <>
-                <TableCell>Amount to be Paid(N)</TableCell>
+                  <TableCell>Amount to be Paid(N)</TableCell>
                   <TableCell>Account Number</TableCell>
                   <TableCell>Bank Name</TableCell>
                 </>}
@@ -366,7 +366,7 @@ export default function AnalyticAttendanceReport() {
             <TableBody>
               {<>
 
-                {attendanceData.map((user, index) => (
+                {usersPerPage.map((user, index) => (
                   <TableRow style={{ cursor: "pointer" }} onClick={() => navigate("/admins/home/employee-profile", { state: user[0]?.employee })}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell> {user[0]?.employee?.fullName} </TableCell>
@@ -382,8 +382,8 @@ export default function AnalyticAttendanceReport() {
                             <div className="days-worked mx-1" key={item?._id}>
                               <p className="mb-1">
                                 Day {i + 1}
-                                <span className={item.status === "Present" ? "tickgreen" : "tickred"}>
-                                  {item.status === "Present" ?
+                                <span className={(item.status === "Present" || item.absentReason) ? "tickgreen" : "tickred"}>
+                                  {(item.status === "Present" || item.absentReason) ?
                                     <Icon icon="mingcute:check-fill" /> :
                                     <Icon icon="octicon:x-12" />}
                                 </span>
@@ -399,14 +399,14 @@ export default function AnalyticAttendanceReport() {
 
                     <TableCell className="ward">
                       <p>
-                        {user?.filter(item => item.status === "Present")?.length}/10
+                        {user?.filter(item => item.status === "Present" || item.absentReason)?.length}/{type === "monthly" ? 10 : 3}
                       </p>
 
                     </TableCell>
                     {type === "monthly" && <>
-                    <TableCell>
-          {user?.filter(item => item.status === "Present")?.length * 1000}
-        </TableCell>
+                      <TableCell>
+                        {user?.filter(item => item.status === "Present" || item.absentReason)?.length * 1000}
+                      </TableCell>
                       <TableCell> {user[0]?.employee?.accountNumber} </TableCell>
                       <TableCell> {user[0]?.employee?.bankName}</TableCell>
                     </>}
@@ -419,7 +419,7 @@ export default function AnalyticAttendanceReport() {
             </TableBody>
           </Table>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25, 50, 100]}
+            rowsPerPageOptions={[100, 200, 300, 400]}
             component="div"
             count={attendanceData.length}
             rowsPerPage={rowsPerPage}

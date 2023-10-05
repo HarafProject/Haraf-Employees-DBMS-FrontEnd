@@ -268,7 +268,7 @@ export default function AttendanceGraphChart() {
 
                                 <div className="form-field mx-1">
                                     <select name="worktypology" onChange={handleTypology} value={typologyValue}>
-                                        <option value={""}>Work Typology</option>
+                                        <option value={""}>Work Sector</option>
                                         {
                                             typologyData?.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
                                         }

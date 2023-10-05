@@ -48,8 +48,30 @@ class dataOBJ {
     }
   };
 
-   // Get the total number of wards
-   getWardsCount = async () => {
+  getUniqueLgas = async (zoneId) => {
+    try {
+      const res = await api.get(`api/location/unique-lgas`);
+      if (res?.data?.status === "success") {
+        return res?.data?.uniqueLgas;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  getUniqueWards = async (zoneId) => {
+    try {
+      const res = await api.get(`api/location/unique-wards`);
+      if (res?.data?.status === "success") {
+        return res?.data?.uniqueWards;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  // Get the total number of wards
+  getWardsCount = async () => {
     try {
       const res = await api.get("api/location/wards/count");
       if (res?.data?.status === "success") {
@@ -84,8 +106,8 @@ class dataOBJ {
     }
   };
 
-   // Get the list of work sectors
-   getWorkSectors = async () => {
+  // Get the list of work sectors
+  getWorkSectors = async () => {
     try {
       const res = await api.get("api/supervisor/work-sectors");
       if (res?.data?.status === "success") {

@@ -14,29 +14,16 @@ import ChartComponent from "./DashboardAnalyticBarchart";
 
 
 
-const fetchDataSummary = async (key) => {
-
+const fetchData = async (key) => {
     try {
-
-        const res = await admin.getDataCount();
-
-
-        return res
-
-    } catch (error) {
-
-        toast.error(error?.error);
-    }
-};
-
-
-const fetchWardsData = async (key) => {
-    try {
-        const [wardData] = await Promise.all([
-
-            dataOBJs.getWards(),
+        const [beneficiaryData, lgaData, wardData] = await Promise.all([
+            admin.getDataCount(),
+            dataOBJs.getUniqueLgas(),
+            dataOBJs.getUniqueWards(),
         ]);
         return {
+            beneficiaryData,
+            lgaData,
             wardData,
         };
     } catch (error) {
@@ -48,8 +35,7 @@ const fetchWardsData = async (key) => {
 
 
 export default function DashboardAnalytics() {
-    const { data, status } = useQuery(['fetchDataSummary'], fetchDataSummary);
-
+    const { data, status } = useQuery(['fetchDataSummary'], fetchData);
 
     const maleCount = 250;
     const femaleCount = 350;
@@ -63,15 +49,15 @@ export default function DashboardAnalytics() {
             <div>
                 <div className="d-flex align-items-center justify-content-between summary-card">
                     <div className="card">
-                        <h1 className="number">{data?.data?.beneficiaryCount}</h1>
+                        <h1 className="number">{data?.beneficiaryData?.data?.beneficiaryCount}</h1>
                         <p>Total Beneficiaries</p>
                     </div>
                     <div className="card">
-                        <h1 className="number">{data?.data?.lgaCount}</h1>
+                        <h1 className="number">{data?.lgaData}</h1>
                         <p>Total LGA's</p>
                     </div>
                     <div className="card">
-                        <h1 className="number">2</h1>
+                        <h1 className="number">{data?.wardData}</h1>
                         <p>Total Wards</p>
                     </div>
                 </div>
@@ -84,7 +70,7 @@ export default function DashboardAnalytics() {
                         <AdminEmployeeFilterComponent showLastSelect={false} />
                     </div>
                     <div className="dashboard-analytic-barchart mt-5">
-                       <ChartComponent />
+                        <ChartComponent />
                     </div>
                 </div>
 

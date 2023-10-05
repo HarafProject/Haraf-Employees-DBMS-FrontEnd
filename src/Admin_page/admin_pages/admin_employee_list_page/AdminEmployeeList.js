@@ -93,9 +93,10 @@ export default function AdminEmployeeList() {
                     <TableCell>Sector</TableCell>
                     <TableCell>Work Typology</TableCell>
                     <TableCell>Phone Number</TableCell>
+                    <TableCell>LGA</TableCell>
                     <TableCell>Ward</TableCell>
                     <TableCell>Age</TableCell>
-                    <TableCell>Address</TableCell>
+                    <TableCell>Community</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -117,9 +118,10 @@ export default function AdminEmployeeList() {
                       <TableCell className="table-typology">{user.workTypology?.name}</TableCell>
                       <TableCell>{(user.subWorkTypology?.name.length > 40) ? `${user.subWorkTypology?.name.slice(0, 40)}...` : user.subWorkTypology?.name}</TableCell>
                       <TableCell>{user.phone}</TableCell>
+                      <TableCell>{user.lga?.name}</TableCell>
                       <TableCell>{user.ward?.name}</TableCell>
                       <TableCell>{user.age}</TableCell>
-                      <TableCell>{user.address}</TableCell>
+                      <TableCell>{user.community}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

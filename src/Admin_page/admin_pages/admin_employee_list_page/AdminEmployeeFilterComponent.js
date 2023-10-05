@@ -36,8 +36,6 @@ const fetchWorkSectorData = async (id) => {
   }
 };
 
-console.log(fetchWorkSectorData());
-
 function AdminEmployeeFilterComponent({
   allData,
   setBeneficiaries,
@@ -90,12 +88,12 @@ function AdminEmployeeFilterComponent({
     fetchData();
   }, [typologyList]);
 
-  console.log(tempData);
-
   function handleFilter(e) {
-    if (e.target.name === "zone") {
+
+    if (e.target?.name === "zone") {
+
       const datas =
-        e.target.value === ""
+        e.target?.value === ""
           ? allData
           : allData?.filter((item) => item.zone._id === e.target.value);
       let lga =
@@ -120,16 +118,23 @@ function AdminEmployeeFilterComponent({
           ? tempData
           : tempData?.filter((item) => item.ward._id === e.target.value);
       setBeneficiaries(data);
-    } else if (e.target.name === "workSector") {
-      const data =
-        e.target.value === ""
-          ? tempData
-          : tempData?.filter((item) => {
-              const workdata = item.subWorkTypology === e.target.value;
-              const filteredData = workdata ? workdata : null;
-              return filteredData;
-            });
+    } else if (e.target.name === "sector") {
+
+      const data = tempData?.filter((item) => {
+        const workdata = item.workTypology._id === e.target.value;
+        const filteredData = workdata ? workdata : null;
+        return filteredData;
+      });
       setBeneficiaries(data);
+    } else if (e.target.name === "typology") {
+
+      const data = tempData?.filter((item) => {
+        const workdata = item.subWorkTypology._id === e.target.value;
+        const filteredData = workdata ? workdata : null;
+        return filteredData;
+      });
+      setBeneficiaries(data);
+      setDisplayInnerDiv(false);
     } else {
       let lowercaseQuery = e.target.value.toLowerCase();
 
@@ -151,15 +156,15 @@ function AdminEmployeeFilterComponent({
     setSelectedLi(index === selectedLi ? null : index);
   };
 
-  const handleOptionClick = (itemId) => {
-    const data = tempData?.filter((item) => {
-      const workdata = item.subWorkTypology === itemId;
-      return workdata;
-    });
-    setSelectedOption(itemId);
-    setBeneficiaries(data);
-    setDisplayInnerDiv(false);
-  };
+  // const handleOptionClick = (itemId) => {
+  //   const data = tempData?.filter((item) => {
+  //     const workdata = item.subWorkTypology === itemId;
+  //     return workdata;
+  //   });
+  //   setSelectedOption(itemId);
+  //   setBeneficiaries(data);
+  //   setDisplayInnerDiv(false);
+  // };
 
   const toggleWorkSectorDropDown = () => {
     setIsDropDownOpen(!isDropDownOpen);
@@ -171,7 +176,7 @@ function AdminEmployeeFilterComponent({
         {showOtherOption && (
           <>
             {" "}
-            <div className="search-button px-2 mx-2">
+            <div className="search-button px-2 mx-2" onClick={() => setIsDropDownOpen(false)}>
               <Icon icon="eva:search-outline" className="me-2 search-icon" />
               <input
                 type="search"
@@ -180,7 +185,7 @@ function AdminEmployeeFilterComponent({
                 placeholder="Search Member"
               />
             </div>
-            <div className="form-field my-2">
+            <div className="form-field my-2" onClick={() => setIsDropDownOpen(false)}>
               <select name="zone" id="" onChange={handleFilter}>
                 <option value="">Zones</option>
                 {zoneList.map((item, i) => (
@@ -190,7 +195,7 @@ function AdminEmployeeFilterComponent({
                 ))}
               </select>
             </div>
-            <div className="form-field my-2">
+            <div className="form-field my-2" onClick={() => setIsDropDownOpen(false)}>
               <select name="lga" id="" onChange={handleFilter}>
                 <option value="">LGA's</option>
                 {lgaList?.map((a, i) => (
@@ -200,7 +205,7 @@ function AdminEmployeeFilterComponent({
                 ))}
               </select>
             </div>
-            <div className="form-field my-2">
+            <div className="form-field my-2" onClick={() => setIsDropDownOpen(false)}>
               <select name="ward" onChange={handleFilter}>
                 <option value="">Ward</option>
                 {wardList.map((item) => (
@@ -210,15 +215,14 @@ function AdminEmployeeFilterComponent({
                 ))}
               </select>
             </div>
-            <div className="search-button px-2 mx-2">
+            <div className="search-button px-4 mx-2" onClick={toggleWorkSectorDropDown}>
               <input
                 type="search"
-                onChange={handleFilter}
                 name="search"
                 placeholder="Work Typology"
                 disabled="true"
               />
-              <div onClick={toggleWorkSectorDropDown}>
+              <div >
                 <Icon icon="bxs:down-arrow" className="me-2 workSector-arrow" />
               </div>
             </div>
@@ -231,6 +235,7 @@ function AdminEmployeeFilterComponent({
                   <li
                     className="option-bold "
                     onClick={() => {
+                      handleFilter({ target: { name: "sector", value: item._id } })
                       handleLiClick(i);
                       setDisplayInnerDiv(true); // Show inner div when the li is clicked
                     }}
@@ -248,7 +253,9 @@ function AdminEmployeeFilterComponent({
                     {workSectorData[i]?.map((item, j) => (
                       <div
                         key={j}
-                        onClick={() => handleOptionClick(item._id)}
+                        onClick={() => {
+                          handleFilter({ target: { name: "typology", value: item._id } })
+                        }}
                         style={{ padding: "5px", cursor: "pointer" }}
                       >
                         {item.name}
