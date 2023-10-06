@@ -111,13 +111,13 @@ export default function AttendanceDetailedPage() {
     }
   }
 
-// Calculate the start and end indices for the current page
-const startIndex = page * rowsPerPage;
-const endIndex = startIndex + rowsPerPage;
-const startSerialNumber = page * rowsPerPage + 1;
+  // Calculate the start and end indices for the current page
+  const startIndex = page * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const startSerialNumber = page * rowsPerPage + 1;
 
-// Create a slicedAttendanceRecord array based on the current page and rowsPerPage
-const slicedAttendanceRecord = attendanceRecord.slice(startIndex, endIndex);
+  // Create a slicedAttendanceRecord array based on the current page and rowsPerPage
+  const slicedAttendanceRecord = attendanceRecord.slice(startIndex, endIndex);
 
 
 
@@ -199,7 +199,7 @@ const slicedAttendanceRecord = attendanceRecord.slice(startIndex, endIndex);
                 <TableCell>Beneficiaries</TableCell>
                 <TableCell>Attendance Status</TableCell>
                 <TableCell>Absent Reason</TableCell>
-                <TableCell>Work Typology</TableCell>
+                <TableCell>Work Sector</TableCell>
                 <TableCell>Ward</TableCell>
                 {/* <TableCell>Ticked By</TableCell> */}
                 <TableCell>SP. Action</TableCell>

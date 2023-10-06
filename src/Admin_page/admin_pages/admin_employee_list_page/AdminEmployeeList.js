@@ -47,10 +47,12 @@ export default function AdminEmployeeList() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  
   const usersPerPage = beneficiaries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
@@ -128,7 +130,7 @@ export default function AdminEmployeeList() {
                 </TableBody>
               </Table>
               <TablePagination
-                rowsPerPageOptions={[50, 75, 100]}
+                rowsPerPageOptions={[50, 100, 150]}
                 component="div"
                 count={beneficiaries.length}
                 rowsPerPage={rowsPerPage}
